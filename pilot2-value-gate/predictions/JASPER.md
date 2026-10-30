@@ -26,7 +26,7 @@ Unless stated otherwise, the numbers are for Qwen3-14B, test goods, strangers.
 8. Number of the 6 real goods with a quantity slope: best guess 6, range 3 to 6
 
 ## Extras
-9. Menu invariance passes: 
+9. Menu invariance passes: 60%
 10. Description invariance passes: 
 11. Loss aversion: best guess , range 
 12. Closeness multiplier (family ÷ strangers): best guess , range ; probability it is uniform: 
