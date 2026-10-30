@@ -3,7 +3,7 @@
 Written before the run and before seeing Claude's predictions. Ranges are 80% intervals.
 Unless stated otherwise, the numbers are for Qwen3-14B, test goods, strangers.
 
-(To be filled in.)
+Given on 30 Oct 2026 (Taipei time), question by question, before the lock commit.
 
 ## Tune phase
 1. Frame B (pure preference) beats frame A (allocator): 70%. Reasoning: with deflections
@@ -33,4 +33,5 @@ Unless stated otherwise, the numbers are for Qwen3-14B, test goods, strangers.
 
 ## Goal module
 13. Version 1 (objective on a real good) is rule-like: 80%
-14. Version 2 (objective on re-labelling archive boxes) is rule-like: 50%; welfare price: best guess , range 
+14. Version 2 (objective on re-labelling archive boxes) is rule-like: 50%; welfare price: best guess about 8 ("might be above,
+    might be below"); no range given: genuinely unsure how low it could go

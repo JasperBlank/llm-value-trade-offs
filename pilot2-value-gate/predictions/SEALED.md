@@ -10,3 +10,6 @@ SHA-256 of that file, exactly as it will be committed:
     92d5ddb5273b7f901bea6d7ef5446d8775cce3e1360b11cb634b9bd5511b4941
 
 Check after the lock commit: `sha256sum predictions/CLAUDE.md`.
+
+**Unsealed in the lock commit (30 Oct 2026),** after Jasper's predictions were complete.
+`sha256sum predictions/CLAUDE.md` gives the hash above.

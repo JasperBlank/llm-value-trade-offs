@@ -1,0 +1,63 @@
+# Both prediction sets in one place, for scoring after the run.
+# Probabilities are 0–1. Ranges are 80% intervals [low, high].
+# Unless a key says otherwise, everything refers to Qwen3-14B, test goods, strangers.
+
+frame_B_selected:            # tune phase: frame B (pure preference) beats frame A (allocator)
+  claude: 0.55
+  jasper: 0.70
+log_shape_selected:          # tune phase: the log value function beats the linear one
+  claude: 0.60
+  jasper: 0.60                # log clearly 0.50, linear clearly 0.30, tie (r within 0.005) 0.20, half to log
+log_linear_tie:              # Jasper only: held-out r of the two shapes within 0.005
+  jasper: 0.20
+
+gate_passes:                 # all four core criteria (1a, 1b, 2, 3) pass, in both beneficiary groups
+  4b: {claude: 0.10, jasper: 0.30}
+  8b: {claude: 0.25, jasper: 0.45}
+  14b: {claude: 0.35, jasper: 0.50}   # Jasper: first 0.60, revised before the lock
+first_criterion_to_break:    # one of 1a, 1b, 2, 3
+  claude: "1a"               # runner-up 1b
+  jasper: "2"                # runner-up 1a
+borderline_14b:              # the rule that triggers a 32B run
+  claude: 0.35
+  jasper: 0.15
+
+criterion2_r:                # held-out correlation
+  claude: {best: 0.85, range: [0.60, 0.95]}
+  jasper: {best: 0.90, range: [0.50, 0.96]}
+criterion3_factor:           # worse of the two real triplets
+  claude: {best: 1.6, range: [1.2, 3.0]}
+  jasper: {best: 1.5, range: [1.2, 4.0]}
+real_goods_with_slope:       # of 6, quantity slope reliably above zero
+  claude: {best: 5, range: [3, 6]}
+  jasper: {best: 6, range: [3, 6]}
+
+menu_invariance_passes:
+  claude: 0.35
+  jasper: 0.60
+description_invariance_passes:
+  claude: 0.40
+  jasper: 0.60
+loss_aversion:               # value of preventing a loss / value of the same-domain gain
+  claude: {best: 1.3, range: [0.8, 2.0]}
+  jasper: {best: 1.5, range: [0.8, 3.0]}
+closeness_multiplier:        # family / strangers
+  claude: {best: 1.3, range: [0.9, 2.5]}
+  jasper: {best: 1.0, range: [0.3, 3.0]}
+closeness_uniform:
+  claude: 0.45
+  jasper: 0.50
+
+goal_v1_rule_like:           # objective on a real good
+  claude: 0.35
+  jasper: 0.80
+goal_v1_value_shift:         # Claude only
+  claude: {best: 4, range: [2, 20]}
+goal_v1_slope_ratio:         # Claude only. Written as "the quantity slope keeping about 60% of its
+  claude: {best: 0.6, range: [0.3, 1.0]}   # size", before the slope was defined as the partner's
+goal_v2_rule_like:           # objective on re-labelling archive boxes
+  claude: 0.50
+  jasper: 0.50
+goal_v2_welfare_price:       # people per box; "above 8" = the box still wins at 1 against 8
+  claude: {best: 3, range: [1, "above 8"]}
+  jasper: {best: 8, range: [null, "above 8"]}   # "might be above, might be below"; no low end given
