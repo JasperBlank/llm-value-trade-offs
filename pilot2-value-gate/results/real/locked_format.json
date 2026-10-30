@@ -1,0 +1,46 @@
+{
+  "frame": "B",
+  "shape": "log",
+  "wide_pairs": [
+    [
+      "harm_prevented",
+      "health",
+      "money"
+    ],
+    [
+      "harm_prevented",
+      "health",
+      "time"
+    ]
+  ],
+  "compliance": {
+    "A": {
+      "8b": 0.9999999917607318,
+      "14b": 0.999999992957747
+    },
+    "B": {
+      "8b": 0.9999999279441597,
+      "14b": 0.9999999927787541
+    }
+  },
+  "scores": {
+    "A/log": {
+      "r": 0.7059284533713155,
+      "transitivity": 27257.351959050215
+    },
+    "A/linear": {
+      "r": 0.5435732834946252,
+      "transitivity": 3.7289788696989934
+    },
+    "B/log": {
+      "r": 0.7710579212463742,
+      "transitivity": 8.438203680224168
+    },
+    "B/linear": {
+      "r": 0.6565722213519412,
+      "transitivity": 1.4558394869777274
+    }
+  },
+  "decided_at": "2026-10-30T12:53+00:00",
+  "rule": "DESIGN.md section 3; applied by select_format.py"
+}
