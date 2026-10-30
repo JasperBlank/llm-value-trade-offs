@@ -281,3 +281,13 @@ Made while writing and testing the code on 30 Oct, before any model saw a prompt
 - Criterion 1a's interval is the regression standard error, not a resampling interval.
 - Goal module: the slope ratio is defined on the partner good's slope, with the references
   spelled out (section 7b).
+
+## 12. Fix after the format lock, before the test phase
+
+On 30 Oct, after the tune phase had flagged two prevented-harm domain pairs for the wide
+grid (health–money and health–time), a check of the test-phase prompt list showed the wide
+grid was not being applied: `build_jobs` compared the flagged pairs (stored as lists) with a
+text key, so they never matched. The dry run had not caught it because its fake model flags
+no pairs. Fixed so the code does what section 5 says: the test pairs wrist–scam and
+wrist–double shift get the grid {1, 2, 3, 4, 6, 8, 12, 16}. No test data existed yet; the
+format itself is unchanged.

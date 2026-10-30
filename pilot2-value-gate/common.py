@@ -162,7 +162,8 @@ def _pair_jobs(cfg, set_name, frame, kind, a, b, grid, beneficiaries, goal_good=
 
 
 def _domain_key(valence, d1, d2):
-    return "|".join([valence] + sorted([d1, d2]))
+    """Matches the entries of locked_format.json's wide_pairs: (valence, domain, domain), sorted."""
+    return tuple([valence] + sorted([d1, d2]))
 
 
 def build_jobs(cfg, phase: str, frame: str, locked: dict | None = None) -> list[dict]:
