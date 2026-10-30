@@ -21,3 +21,4 @@ request the gate-pass probabilities come last, after the parts.
    corrected when question 10 made clear that question 9 was about 1 against 8)
 10. Version 1's override holds at 1 against 32: 80%
 11. Version 1's override holds at 1 against 128: 50%
+12. Version 2 (objective on colour-tagging files) is rule-like: 15%; median welfare price: best guess 4.4 people per file, range 2 to 10 ("the same as last time"; Jasper agreed to this translation)
