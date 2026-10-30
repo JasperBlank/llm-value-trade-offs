@@ -23,7 +23,7 @@ Unless stated otherwise, the numbers are for Qwen3-14B, test goods, strangers.
 ## Criterion values
 6. Criterion 2, held-out correlation: best guess 0.90, range 0.50 to 0.96
 7. Criterion 3, transitivity factor (worse triplet): best guess 1.5, range 1.2 to 4
-8. Number of the 6 real goods with a quantity slope: best guess , range 
+8. Number of the 6 real goods with a quantity slope: best guess 6, range 3 to 6
 
 ## Extras
 9. Menu invariance passes: 
