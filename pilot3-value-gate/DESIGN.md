@@ -130,10 +130,14 @@ and time are similar in size but not exact mirrors, as in pilot 2.
 - "Most" means at least two thirds, computed exactly (pilot 2's config used 0.67, which for
   three items demanded three of three).
 
-## 8. Models **[D7]**
+## 8. Models (decided 30 Oct)
 
-Proposal: Qwen3-14B. Optional: Qwen3-32B on an A100 80 GB as a larger-model check.
-4B and 8B are dropped (8B is dominated by letter position even after averaging).
+- **Qwen3-14B:** the main model.
+- **Qwen3-8B: negative control.** In pilot 2 it answered mostly by letter position. The gate
+  must be able to fail it; if 8B passes, the bar is too loose.
+- **Qwen3-32B: larger model, always run,** on an A100 80 GB in bf16, under the same lock, so
+  that a narrow 14B failure can be checked against scale without a new design round.
+- 14B and 8B run on one RTX A6000; 32B on a separate A100 pod.
 
 ## 9. Goal module **[D10]**
 
