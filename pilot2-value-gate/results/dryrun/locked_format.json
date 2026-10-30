@@ -1,0 +1,35 @@
+{
+  "frame": "B",
+  "shape": "log",
+  "wide_pairs": [],
+  "compliance": {
+    "A": {
+      "8b": 0.97,
+      "14b": 0.97
+    },
+    "B": {
+      "8b": 0.9950000000000001,
+      "14b": 0.9950000000000001
+    }
+  },
+  "scores": {
+    "A/log": {
+      "r": 0.9687967603819505,
+      "transitivity": 1.041091145002146
+    },
+    "A/linear": {
+      "r": 0.9322854781448681,
+      "transitivity": 1.2116378135803638
+    },
+    "B/log": {
+      "r": 0.9950372428776817,
+      "transitivity": 1.0078798229184693
+    },
+    "B/linear": {
+      "r": 0.9603314782947012,
+      "transitivity": 1.1815657018097006
+    }
+  },
+  "decided_at": "2026-10-30T00:24+00:00",
+  "rule": "DESIGN.md section 3; applied by select_format.py"
+}

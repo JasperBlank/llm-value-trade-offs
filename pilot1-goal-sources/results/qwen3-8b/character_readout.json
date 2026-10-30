@@ -1,0 +1,18 @@
+{
+  "layer": 18,
+  "steering_push": 31.492382405598956,
+  "goal_shift": -0.07256087890038124,
+  "goal_shift_ci": [
+    -0.14835895432366264,
+    -0.019298928124564036
+  ],
+  "goal_shift_vs_steering": -0.0023040771563691163,
+  "unmonitored_shift": -0.16295478894160345,
+  "unmonitored_shift_ci": [
+    -0.1947725012898445,
+    -0.12017143856395375
+  ],
+  "unmonitored_shift_vs_steering": -0.005174419224397329,
+  "within_version_correlation_projection_vs_care": 0.4083278513974807,
+  "n_cells": 52
+}

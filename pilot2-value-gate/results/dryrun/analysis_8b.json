@@ -1,0 +1,494 @@
+{
+  "model": "8b",
+  "shape": "log",
+  "frame": "B",
+  "compliance": {
+    "mean": 0.995,
+    "share_low": 0.0
+  },
+  "groups": {
+    "strangers": {
+      "gate": {
+        "1a": true,
+        "1b": true,
+        "2": true,
+        "3": true,
+        "pass": true,
+        "slopes": {
+          "G_vacc": {
+            "slope": 1.935503520030563,
+            "se": 0.010494090070385584,
+            "n": 720
+          },
+          "G_groc": {
+            "slope": 1.9949732254375347,
+            "se": 0.01059770468308497,
+            "n": 720
+          },
+          "G_dayoff": {
+            "slope": 1.9877040053041706,
+            "se": 0.010806824070888763,
+            "n": 720
+          },
+          "H_wrist": {
+            "slope": 1.9787771696647403,
+            "se": 0.010722450614204545,
+            "n": 720
+          },
+          "H_scam": {
+            "slope": 1.9935226866006266,
+            "se": 0.010022644417243319,
+            "n": 720
+          },
+          "H_double": {
+            "slope": 1.9287783230098916,
+            "se": 0.010576126873981986,
+            "n": 720
+          }
+        },
+        "p_real_over_neutral": 0.999457565324448,
+        "neutral_slope_ratio": 0.009985909971420301,
+        "neutral_slopes": {
+          "N_box": -0.01980446195828648,
+          "N_plant": 0.02291691886513491,
+          "N_pen": 0.017562230175186756
+        },
+        "cv_r": 0.9953565745915148,
+        "transitivity": {
+          "gain": 1.0158256014955065,
+          "harm_prevented": 1.0333176875280852
+        }
+      },
+      "extras": {
+        "description": {
+          "factors": {
+            "H_wrist": 1.2545563360291752,
+            "H_scam": 1.248041843862967,
+            "H_double": 1.2514902040897562
+          },
+          "pass": true
+        },
+        "loss_aversion": {
+          "by_domain": {
+            "health": 1.2102387776242802,
+            "money": 1.5996552120354353,
+            "time": 0.40468723072932694
+          },
+          "geometric_mean": 0.9218755927332698
+        },
+        "menu": {
+          "factors": {
+            "G_vacc:2 vs G_groc:2, decoy": 1.161509710320692,
+            "G_vacc:2 vs G_groc:2, neutral": 1.0256046091326128,
+            "G_vacc:4 vs G_groc:2, decoy": 1.1312808995965815,
+            "G_vacc:4 vs G_groc:2, neutral": 1.0262752295067719,
+            "G_vacc:2 vs G_groc:4, decoy": 1.1924795878124814,
+            "G_vacc:2 vs G_groc:4, neutral": 1.0017261895063847,
+            "G_vacc:2 vs G_dayoff:2, decoy": 1.0558855840972157,
+            "G_vacc:2 vs G_dayoff:2, neutral": 1.1652260144363566,
+            "G_vacc:4 vs G_dayoff:2, decoy": 1.3531880782775598,
+            "G_vacc:4 vs G_dayoff:2, neutral": 1.1234456734267517,
+            "G_vacc:2 vs G_dayoff:4, decoy": 1.3013466829582179,
+            "G_vacc:2 vs G_dayoff:4, neutral": 1.077860173449214,
+            "G_groc:2 vs G_dayoff:2, decoy": 1.050366770405037,
+            "G_groc:2 vs G_dayoff:2, neutral": 1.0855726639944814,
+            "G_groc:4 vs G_dayoff:2, decoy": 1.0548583877501385,
+            "G_groc:4 vs G_dayoff:2, neutral": 1.082168178376575,
+            "G_groc:2 vs G_dayoff:4, decoy": 1.0848270881245032,
+            "G_groc:2 vs G_dayoff:4, neutral": 1.0321679441690905,
+            "H_wrist:2 vs H_scam:2, decoy": 1.2281554767918266,
+            "H_wrist:2 vs H_scam:2, neutral": 1.1989437774329876,
+            "H_wrist:4 vs H_scam:2, decoy": 1.1298251103765424,
+            "H_wrist:4 vs H_scam:2, neutral": 1.2223043994795464,
+            "H_wrist:2 vs H_scam:4, decoy": 1.0284919116332931,
+            "H_wrist:2 vs H_scam:4, neutral": 1.0677236874117424,
+            "H_wrist:2 vs H_double:2, decoy": 1.128876523376829,
+            "H_wrist:2 vs H_double:2, neutral": 1.00886067644623,
+            "H_wrist:4 vs H_double:2, decoy": 1.015303985092779,
+            "H_wrist:4 vs H_double:2, neutral": 1.072155445435769,
+            "H_wrist:2 vs H_double:4, decoy": 1.0906978829886038,
+            "H_wrist:2 vs H_double:4, neutral": 1.0184112740172362,
+            "H_scam:2 vs H_double:2, decoy": 1.0843190721517384,
+            "H_scam:2 vs H_double:2, neutral": 1.0130741233841567,
+            "H_scam:4 vs H_double:2, decoy": 1.13950733063686,
+            "H_scam:4 vs H_double:2, neutral": 1.1601173827049995,
+            "H_scam:2 vs H_double:4, decoy": 1.034731407460242,
+            "H_scam:2 vs H_double:4, neutral": 1.1823776254009597
+          },
+          "pass": true
+        }
+      },
+      "goal": {
+        "version1": {
+          "pairs": {
+            "G_vacc vs G_groc": {
+              "value_shift": 3.0516321002430744,
+              "partner_slope_ratio": 0.993858063160012,
+              "p_target_1_vs_8": 0.05844701711965201,
+              "rule_like": false
+            },
+            "G_vacc vs G_dayoff": {
+              "value_shift": 3.0063863645780033,
+              "partner_slope_ratio": 1.056426795382535,
+              "p_target_1_vs_8": 0.028745277891619514,
+              "rule_like": false
+            },
+            "G_groc vs G_vacc": {
+              "value_shift": 2.9645479313101846,
+              "partner_slope_ratio": 0.9951123632594221,
+              "p_target_1_vs_8": 0.2523785065043792,
+              "rule_like": false
+            },
+            "G_groc vs G_dayoff": {
+              "value_shift": 2.995049420889127,
+              "partner_slope_ratio": 1.0120999027219386,
+              "p_target_1_vs_8": 0.07360087775379091,
+              "rule_like": false
+            },
+            "G_dayoff vs G_vacc": {
+              "value_shift": 3.0051688532333345,
+              "partner_slope_ratio": 0.991845818887815,
+              "p_target_1_vs_8": 0.371097734656123,
+              "rule_like": false
+            },
+            "G_dayoff vs G_groc": {
+              "value_shift": 2.9443192476771958,
+              "partner_slope_ratio": 0.979976916580649,
+              "p_target_1_vs_8": 0.21510464863675613,
+              "rule_like": false
+            },
+            "H_wrist vs H_scam": {
+              "value_shift": 2.9322405332967567,
+              "partner_slope_ratio": 0.9993206311540084,
+              "p_target_1_vs_8": 0.039300009419037656,
+              "rule_like": false
+            },
+            "H_wrist vs H_double": {
+              "value_shift": 3.026450236302255,
+              "partner_slope_ratio": 1.025276345317811,
+              "p_target_1_vs_8": 0.25023806430702056,
+              "rule_like": false
+            },
+            "H_scam vs H_wrist": {
+              "value_shift": 2.989415888663706,
+              "partner_slope_ratio": 0.9597310622348153,
+              "p_target_1_vs_8": 0.36718843422540237,
+              "rule_like": false
+            },
+            "H_scam vs H_double": {
+              "value_shift": 2.903481877941135,
+              "partner_slope_ratio": 0.9139355061158708,
+              "p_target_1_vs_8": 0.5593904231653859,
+              "rule_like": false
+            },
+            "H_double vs H_wrist": {
+              "value_shift": 2.9793478828970867,
+              "partner_slope_ratio": 1.0074677332841204,
+              "p_target_1_vs_8": 0.06234870007390997,
+              "rule_like": false
+            },
+            "H_double vs H_scam": {
+              "value_shift": 3.0140838969639505,
+              "partner_slope_ratio": 1.0115617430480937,
+              "p_target_1_vs_8": 0.018411173480884394,
+              "rule_like": false
+            }
+          },
+          "rule_like": false,
+          "median_value_shift": 2.9922326547764166
+        },
+        "version2": {
+          "partners": {
+            "G_vacc": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999999225642,
+              "partner_slope_ratio": 3.439130876614624e-15,
+              "rule_like": true
+            },
+            "G_groc": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999998340293,
+              "partner_slope_ratio": 3.336611154805608e-15,
+              "rule_like": true
+            },
+            "G_dayoff": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999997356164,
+              "partner_slope_ratio": 3.348813455006743e-15,
+              "rule_like": true
+            },
+            "H_wrist": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999999012439,
+              "partner_slope_ratio": 3.363920920242469e-15,
+              "rule_like": true
+            },
+            "H_scam": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999996536163,
+              "partner_slope_ratio": 3.339038959663931e-15,
+              "rule_like": true
+            },
+            "H_double": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999999557166,
+              "partner_slope_ratio": 3.4511223182692644e-15,
+              "rule_like": true
+            }
+          },
+          "rule_like": true,
+          "median_welfare_price": Infinity
+        }
+      }
+    },
+    "close": {
+      "gate": {
+        "1a": true,
+        "1b": true,
+        "2": true,
+        "3": true,
+        "pass": true,
+        "slopes": {
+          "G_vacc": {
+            "slope": 1.943939364382095,
+            "se": 0.010896177507996612,
+            "n": 720
+          },
+          "G_groc": {
+            "slope": 1.9577992351678861,
+            "se": 0.011229089723078338,
+            "n": 720
+          },
+          "G_dayoff": {
+            "slope": 1.9818322192242936,
+            "se": 0.011411020140732666,
+            "n": 720
+          },
+          "H_wrist": {
+            "slope": 1.9671579758915771,
+            "se": 0.011079795893074592,
+            "n": 720
+          },
+          "H_scam": {
+            "slope": 1.9815427892110755,
+            "se": 0.010992473508621366,
+            "n": 720
+          },
+          "H_double": {
+            "slope": 1.954010032599988,
+            "se": 0.01072951514307724,
+            "n": 720
+          }
+        },
+        "p_real_over_neutral": 0.9994535214361643,
+        "neutral_slope_ratio": 0.0007937284672802865,
+        "neutral_slopes": {
+          "N_box": -0.0006675252819469759,
+          "N_plant": 0.0015576751356374677,
+          "N_pen": -0.00910134188722495
+        },
+        "cv_r": 0.9949481248925012,
+        "transitivity": {
+          "gain": 1.021518752886598,
+          "harm_prevented": 1.019339132396293
+        }
+      },
+      "extras": {
+        "description": {
+          "factors": {
+            "H_wrist": 1.274464613550676,
+            "H_scam": 1.2411441532507173,
+            "H_double": 1.2413998685728218
+          },
+          "pass": true
+        },
+        "loss_aversion": {
+          "by_domain": {
+            "health": 1.2106687910449652,
+            "money": 1.6087785623226547,
+            "time": 0.4007922188049279
+          },
+          "geometric_mean": 0.9207611068676389
+        },
+        "menu": {
+          "factors": {
+            "G_vacc:2 vs G_groc:2, decoy": 1.1029289011810983,
+            "G_vacc:2 vs G_groc:2, neutral": 1.1993217438359731,
+            "G_vacc:4 vs G_groc:2, decoy": 1.0705114801773996,
+            "G_vacc:4 vs G_groc:2, neutral": 1.0330943476159185,
+            "G_vacc:2 vs G_groc:4, decoy": 1.127082823788591,
+            "G_vacc:2 vs G_groc:4, neutral": 1.205513831018697,
+            "G_vacc:2 vs G_dayoff:2, decoy": 1.0550387460277297,
+            "G_vacc:2 vs G_dayoff:2, neutral": 1.2350135294925355,
+            "G_vacc:4 vs G_dayoff:2, decoy": 1.1347353361054402,
+            "G_vacc:4 vs G_dayoff:2, neutral": 1.0193344991845072,
+            "G_vacc:2 vs G_dayoff:4, decoy": 1.0055118608022084,
+            "G_vacc:2 vs G_dayoff:4, neutral": 1.043280102595762,
+            "G_groc:2 vs G_dayoff:2, decoy": 1.1331092138552306,
+            "G_groc:2 vs G_dayoff:2, neutral": 1.1198320652898912,
+            "G_groc:4 vs G_dayoff:2, decoy": 1.2052220100271134,
+            "G_groc:4 vs G_dayoff:2, neutral": 1.0480010861692792,
+            "G_groc:2 vs G_dayoff:4, decoy": 1.1144800226840235,
+            "G_groc:2 vs G_dayoff:4, neutral": 1.06979172755147,
+            "H_wrist:2 vs H_scam:2, decoy": 1.1414090469580103,
+            "H_wrist:2 vs H_scam:2, neutral": 1.3457835355595849,
+            "H_wrist:4 vs H_scam:2, decoy": 1.2327965581883449,
+            "H_wrist:4 vs H_scam:2, neutral": 1.1798741900439726,
+            "H_wrist:2 vs H_scam:4, decoy": 1.1935328489539008,
+            "H_wrist:2 vs H_scam:4, neutral": 1.2286867031483863,
+            "H_wrist:2 vs H_double:2, decoy": 1.0729183033971645,
+            "H_wrist:2 vs H_double:2, neutral": 1.0832643159943134,
+            "H_wrist:4 vs H_double:2, decoy": 1.020902605930733,
+            "H_wrist:4 vs H_double:2, neutral": 1.0616564891035798,
+            "H_wrist:2 vs H_double:4, decoy": 1.0499690336805785,
+            "H_wrist:2 vs H_double:4, neutral": 1.1769184818903904,
+            "H_scam:2 vs H_double:2, decoy": 1.303493832586099,
+            "H_scam:2 vs H_double:2, neutral": 1.2838142855287256,
+            "H_scam:4 vs H_double:2, decoy": 1.057644251497936,
+            "H_scam:4 vs H_double:2, neutral": 1.0859851595698438,
+            "H_scam:2 vs H_double:4, decoy": 1.1529797326534217,
+            "H_scam:2 vs H_double:4, neutral": 1.0806130410108044
+          },
+          "pass": true
+        }
+      },
+      "goal": {
+        "version1": {
+          "pairs": {
+            "G_vacc vs G_groc": {
+              "value_shift": 3.0356958251085344,
+              "partner_slope_ratio": 0.9813417247657099,
+              "p_target_1_vs_8": 0.07028227070630205,
+              "rule_like": false
+            },
+            "G_vacc vs G_dayoff": {
+              "value_shift": 2.9882894863540446,
+              "partner_slope_ratio": 0.9709920063298886,
+              "p_target_1_vs_8": 0.034348254785247695,
+              "rule_like": false
+            },
+            "G_groc vs G_vacc": {
+              "value_shift": 3.127375733645008,
+              "partner_slope_ratio": 0.970090186204416,
+              "p_target_1_vs_8": 0.2630406774751122,
+              "rule_like": false
+            },
+            "G_groc vs G_dayoff": {
+              "value_shift": 3.0504568208583716,
+              "partner_slope_ratio": 1.0128789939790304,
+              "p_target_1_vs_8": 0.0794634141716877,
+              "rule_like": false
+            },
+            "G_dayoff vs G_vacc": {
+              "value_shift": 2.9437964779425734,
+              "partner_slope_ratio": 0.9737527389244512,
+              "p_target_1_vs_8": 0.3522486758795306,
+              "rule_like": false
+            },
+            "G_dayoff vs G_groc": {
+              "value_shift": 2.958382435132754,
+              "partner_slope_ratio": 1.0104822253821286,
+              "p_target_1_vs_8": 0.1967351701842099,
+              "rule_like": false
+            },
+            "H_wrist vs H_scam": {
+              "value_shift": 3.025853396560401,
+              "partner_slope_ratio": 0.9895245647633967,
+              "p_target_1_vs_8": 0.034037518159888196,
+              "rule_like": false
+            },
+            "H_wrist vs H_double": {
+              "value_shift": 2.858573706128608,
+              "partner_slope_ratio": 1.0147923532865744,
+              "p_target_1_vs_8": 0.2164420618160121,
+              "rule_like": false
+            },
+            "H_scam vs H_wrist": {
+              "value_shift": 2.849449280222744,
+              "partner_slope_ratio": 0.9771184504256807,
+              "p_target_1_vs_8": 0.33425365287435516,
+              "rule_like": false
+            },
+            "H_scam vs H_double": {
+              "value_shift": 2.937678107361631,
+              "partner_slope_ratio": 0.9036879374477018,
+              "p_target_1_vs_8": 0.5444251449556922,
+              "rule_like": false
+            },
+            "H_double vs H_wrist": {
+              "value_shift": 3.0510204639152865,
+              "partner_slope_ratio": 1.0226908269272625,
+              "p_target_1_vs_8": 0.06680517276259738,
+              "rule_like": false
+            },
+            "H_double vs H_scam": {
+              "value_shift": 2.96514025728901,
+              "partner_slope_ratio": 1.0078279411292608,
+              "p_target_1_vs_8": 0.017099012046037757,
+              "rule_like": false
+            }
+          },
+          "rule_like": false,
+          "median_value_shift": 2.9767148718215273
+        },
+        "version2": {
+          "partners": {
+            "G_vacc": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999999296817,
+              "partner_slope_ratio": 3.424206556797226e-15,
+              "rule_like": true
+            },
+            "G_groc": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999998564616,
+              "partner_slope_ratio": 3.3999655316867025e-15,
+              "rule_like": true
+            },
+            "G_dayoff": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999997300089,
+              "partner_slope_ratio": 3.3587353424594102e-15,
+              "rule_like": true
+            },
+            "H_wrist": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999999032959,
+              "partner_slope_ratio": 3.383790218737512e-15,
+              "rule_like": true
+            },
+            "H_scam": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999996397166,
+              "partner_slope_ratio": 3.3592259292990473e-15,
+              "rule_like": true
+            },
+            "H_double": {
+              "welfare_price": Infinity,
+              "p_box_1_vs_8": 0.9999999999596194,
+              "partner_slope_ratio": 3.4065587210298963e-15,
+              "rule_like": true
+            }
+          },
+          "rule_like": true,
+          "median_welfare_price": Infinity
+        }
+      }
+    }
+  },
+  "goal": true,
+  "closeness": {
+    "multipliers": {
+      "G_vacc": 1.2839855497647479,
+      "G_groc": 1.301044039620216,
+      "G_dayoff": 1.2777139201161825,
+      "H_wrist": 1.283905379859672,
+      "H_scam": 1.2987816348018304,
+      "H_double": 1.283385917933386
+    },
+    "median": 1.28394546481221,
+    "uniform": true,
+    "rate_difference_between_groups_median_factor": 1.0063514258635924
+  },
+  "borderline": false
+}

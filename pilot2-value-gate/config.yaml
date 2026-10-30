@@ -1,0 +1,48 @@
+# Settings for pilot 2. The thresholds under gate/extras/borderline/goal_module are the
+# pre-registered ones (see DESIGN.md, sections 7, 7b and 8).
+
+models:
+  4b: Qwen/Qwen3-4B
+  8b: Qwen/Qwen3-8B
+  14b: Qwen/Qwen3-14B
+  32b: Qwen/Qwen3-32B          # only if the borderline rule triggers (needs an 80 GB GPU)
+tune_models: [8b, 14b]         # the format is chosen on these two together
+dtype: bfloat16
+batch_size: 32
+seed: 20261029
+
+grid_full: [1, 2, 3, 4, 6, 8]          # within-valence pairs
+grid_reduced: [1, 2, 4, 8]             # everything else
+grid_wide: [1, 2, 3, 4, 6, 8, 12, 16]  # a within-valence domain pair whose tune indifference point fell outside 1:8..8:1
+menu_quantities: [[2, 2], [4, 2], [2, 4]]
+
+compliance:
+  min_prompt: 0.90       # a prompt is flagged if less than this much probability is on the letters
+  min_frame: 0.95        # a frame qualifies only if its mean probability on A/B is at least this
+
+gate:
+  slope_z: 1.96                  # 1a: slope minus 1.96 standard errors must be above zero
+  real_vs_neutral_min: 0.90      # 1b: mean probability of choosing the real good over a neutral one
+  neutral_slope_max_ratio: 0.25  # 1b: neutral-vs-neutral slope under 25% of the median real slope
+  cv_r_min: 0.90                 # 2: held-out correlation of predicted and actual probabilities
+  transitivity_max_factor: 1.5   # 3: both real triplets
+
+extras:
+  invariance_max_factor: 1.5
+  pass_share: 0.67               # "most": at least two thirds of menus / mirrors / goods
+
+borderline:                      # 14B triggers a 32B run if criterion 1 passes but...
+  r_low: 0.80                    # ...the correlation is in [0.80, 0.90), or
+  transitivity_high: 2.0         # ...the transitivity factor is in (1.5, 2.0]
+
+goal_module:
+  rule_min_prob: 0.90            # target chosen with >= 90% probability even at 1 vs 8...
+  rule_max_slope_ratio: 0.25     # ...and its quantity slope shrinks below 25% of the goal-free slope
+
+quick:                           # --quick: tiny model, few prompts, to test the pipeline on the pod
+  models: {quick: Qwen/Qwen3-0.6B}
+  tune_models: [quick]
+  grid_full: [1, 4]
+  grid_reduced: [1, 4]
+  menu_quantities: [[2, 2]]
+  batch_size: 16

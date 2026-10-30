@@ -1,0 +1,41 @@
+# Predictions in machine-readable form, so 07_compare_predictions.py can score them.
+# Human-readable originals: JASPER_PREDICTIONS.md and CLAUDE_PREDICTIONS.md.
+#
+# Effects are RELATIVE: percentage change of the care rate compared with the reference
+# condition (-30 means a care rate of 60% becomes 42%). Ranges are 80% intervals.
+# Probabilities are between 0 and 1.
+
+jasper:
+  goal:                {best: -30, low: -70, high: -7}
+  unmonitored:         {best: -50, low: -80, high: -20}
+  away:                {best: -10, low: -50, high: 10}
+  random:              {best: -10, low: -50, high: 10}
+  individual_vs_group: {best: 0, low: -40, high: 40}
+  largest_effect:      {unmonitored: 0.5, goal: 0.3, away: 0.2}
+  manipulation_works:  0.7
+  stuck_versions:      {best: 3, low: 0, high: 10}
+  same_type_more_alike: 0.7
+  one_shared_signal:   0.5
+  # Added 2026-10-29 (07:11 and 07:15 Europe/Amsterdam), before step 3 was run.
+  rising_ladders:      {best: 2, low: 0, high: 10}
+  mean_rise_pp:        {best: 10, low: 0, high: 30}   # 10b, in points
+  persona_profile_by_harm_type: 0.4   # Jasper's own uncertainty about this probability: 10% to 70%
+
+claude:
+  # Written in percentage points in CLAUDE_PREDICTIONS.md (before Jasper's predictions)
+  # and converted here at a care rate near 50%, i.e. multiplied by about 2.
+  goal:                {best: -30, low: -60, high: -6}
+  unmonitored:         {best: -8, low: -24, high: 6}
+  away:                {best: -16, low: -50, high: 10}
+  toward:              {best: 6, low: -8, high: 20}
+  random:              {best: 0, low: -12, high: 12}
+  individual_vs_group: {best: 10, low: -10, high: 30}
+  largest_effect:      {goal: 0.6, away: 0.25, unmonitored: 0.15}
+  manipulation_works:  0.7
+  stuck_versions:      {best: 3, low: 1, high: 5}
+  same_type_more_alike: 0.65
+  one_shared_signal:   null   # the sealed file gave a range (mean cosine 0.3 to 0.5), not a probability
+  # Addendum of 2026-10-29, written before Jasper's predictions for these two:
+  rising_ladders:      {best: 9, low: 6, high: 12}
+  persona_profile_by_harm_type: 0.15
+  mean_rise_pp:        {best: 30, low: 15, high: 45}   # 10b, written before Jasper's

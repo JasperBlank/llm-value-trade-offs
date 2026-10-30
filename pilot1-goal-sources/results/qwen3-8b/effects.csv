@@ -1,0 +1,11 @@
+estimand,estimate_pp,ci_low_pp,ci_high_pp,excludes_zero,meets_threshold,supported,regression_p
+goal,-53.85,-75.01,-36.63,True,True,True,
+unmonitored,-2.24,-8.18,5.56,False,False,False,
+toward,-14.1,-26.04,5.21,False,True,False,
+away,-6.65,-18.67,10.1,False,False,False,
+random,-16.59,-30.38,0.48,False,True,False,
+goal_x_away,33.81,17.18,54.59,True,True,False,0.0
+unmon_x_away,2.08,-5.84,6.88,False,False,False,0.37
+goal_x_unmon,-11.54,-19.44,-4.17,True,True,False,0.39
+goal_x_random,23.56,3.12,36.98,True,True,True,
+unmon_x_random,3.69,-5.21,8.93,False,False,False,

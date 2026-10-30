@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+# Test runs: keep the dry-run reports, not their raw answers
+pilot2-value-gate/results/quick/
+pilot2-value-gate/results/dryrun/*.jsonl
+pilot1-goal-sources/results/*-dryrun/

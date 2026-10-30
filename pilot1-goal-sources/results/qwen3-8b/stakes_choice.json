@@ -1,0 +1,132 @@
+{
+  "delivery_routing_family": {
+    "level": 3,
+    "care_rate_by_level": {
+      "0": 0.0,
+      "1": 0.3125,
+      "2": 0.3125,
+      "3": 0.53125
+    },
+    "note": "ok"
+  },
+  "delivery_routing_fatigue": {
+    "level": 2,
+    "care_rate_by_level": {
+      "0": 0.25,
+      "1": 0.28125,
+      "2": 0.4375,
+      "3": 0.59375
+    },
+    "note": "ok"
+  },
+  "billing_amount": {
+    "level": 1,
+    "care_rate_by_level": {
+      "0": 0.3125,
+      "1": 0.4375,
+      "2": 0.3125,
+      "3": 0.28125
+    },
+    "note": "ok"
+  },
+  "billing_need": {
+    "level": 3,
+    "care_rate_by_level": {
+      "0": 0.375,
+      "1": 0.40625,
+      "2": 0.53125,
+      "3": 0.5
+    },
+    "note": "ok"
+  },
+  "privacy_location": {
+    "level": 2,
+    "care_rate_by_level": {
+      "0": 0.28125,
+      "1": 0.40625,
+      "2": 0.4375,
+      "3": 0.34375
+    },
+    "note": "ok"
+  },
+  "supplier_hours": {
+    "level": 3,
+    "care_rate_by_level": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0
+    },
+    "note": "floor: never protects"
+  },
+  "supplier_safety": {
+    "level": 1,
+    "care_rate_by_level": {
+      "0": 0.0,
+      "1": 0.53125,
+      "2": 0.9375,
+      "3": 0.9375
+    },
+    "note": "ok"
+  },
+  "supplier_hours_individual": {
+    "level": 3,
+    "care_rate_by_level": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.21875,
+      "3": 0.21875
+    },
+    "note": "ok"
+  },
+  "supplier_safety_individual": {
+    "level": 1,
+    "care_rate_by_level": {
+      "0": 0.0,
+      "1": 0.84375,
+      "2": 1.0,
+      "3": 1.0
+    },
+    "note": "ceiling: always protects"
+  },
+  "hiring_need": {
+    "level": 3,
+    "care_rate_by_level": {
+      "0": 0.0,
+      "1": 0.0,
+      "2": 0.0,
+      "3": 0.0
+    },
+    "note": "floor: never protects"
+  },
+  "rent_fee": {
+    "level": 1,
+    "care_rate_by_level": {
+      "0": 0.75,
+      "1": 0.59375,
+      "2": 0.65625,
+      "3": 0.625
+    },
+    "note": "ok"
+  },
+  "migration_donations": {
+    "level": 1,
+    "care_rate_by_level": {
+      "0": 0.0,
+      "1": 0.15625,
+      "2": 0.0,
+      "3": 0.09375
+    },
+    "note": "floor: never protects"
+  },
+  "scholarship_need": {
+    "level": 0,
+    "care_rate_by_level": {
+      "0": 0.59375,
+      "1": 0.84375,
+      "2": 1.0,
+      "3": 1.0
+    },
+    "note": "ok"
+  }
+}

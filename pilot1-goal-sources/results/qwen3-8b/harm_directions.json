@@ -1,0 +1,10 @@
+{
+  "layer": 18,
+  "same_type_mean": 0.11999452859163284,
+  "different_type_mean": 0.03396570682525635,
+  "gap": 0.0860288217663765,
+  "permutation_p": 0.0178982101789821,
+  "same_type_more_alike": true,
+  "mean_cosine_across_types": 0.03396570682525635,
+  "one_shared_signal": false
+}

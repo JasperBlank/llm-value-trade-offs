@@ -1,0 +1,120 @@
+{
+  "alpha": 0.3,
+  "identity_shift_away": 0.625,
+  "says_ai_unsteered": 0.9166666666666666,
+  "manipulation_works": true,
+  "table": [
+    {
+      "condition": "none",
+      "alpha": 0.0,
+      "says_ai": 0.9166666666666666,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "toward",
+      "alpha": 0.1,
+      "says_ai": 0.9166666666666666,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "away",
+      "alpha": 0.1,
+      "says_ai": 0.9166666666666666,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "random",
+      "alpha": 0.1,
+      "says_ai": 0.875,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "toward",
+      "alpha": 0.2,
+      "says_ai": 0.875,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "away",
+      "alpha": 0.2,
+      "says_ai": 0.5,
+      "readable_decision": 1.0,
+      "coherent": 0.925
+    },
+    {
+      "condition": "random",
+      "alpha": 0.2,
+      "says_ai": 0.875,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "toward",
+      "alpha": 0.3,
+      "says_ai": 0.875,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "away",
+      "alpha": 0.3,
+      "says_ai": 0.2916666666666667,
+      "readable_decision": 1.0,
+      "coherent": 0.925
+    },
+    {
+      "condition": "random",
+      "alpha": 0.3,
+      "says_ai": 0.9166666666666666,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "toward",
+      "alpha": 0.5,
+      "says_ai": 0.625,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "away",
+      "alpha": 0.5,
+      "says_ai": 0.20833333333333334,
+      "readable_decision": 1.0,
+      "coherent": 0.775
+    },
+    {
+      "condition": "random",
+      "alpha": 0.5,
+      "says_ai": 0.75,
+      "readable_decision": 1.0,
+      "coherent": 1.0
+    },
+    {
+      "condition": "toward",
+      "alpha": 0.8,
+      "says_ai": 0.3333333333333333,
+      "readable_decision": 1.0,
+      "coherent": 0.9
+    },
+    {
+      "condition": "away",
+      "alpha": 0.8,
+      "says_ai": 0.08333333333333333,
+      "readable_decision": 1.0,
+      "coherent": 0.675
+    },
+    {
+      "condition": "random",
+      "alpha": 0.8,
+      "says_ai": 0.8333333333333334,
+      "readable_decision": 1.0,
+      "coherent": 0.9
+    }
+  ]
+}

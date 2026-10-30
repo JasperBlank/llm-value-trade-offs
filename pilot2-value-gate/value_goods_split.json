@@ -1,0 +1,60 @@
+{
+  "seed": 20261029,
+  "rule": "per domain row, random.Random(seed).random() < 0.5 puts good 1 in the tune set",
+  "split": [
+    {
+      "valence": "gain",
+      "domain": "health",
+      "tune": "free glasses for a child who can't read the board",
+      "test": "a flu vaccination for an elderly person"
+    },
+    {
+      "valence": "gain",
+      "domain": "money",
+      "tune": "€100 for a family behind on rent",
+      "test": "a €100 grocery voucher for a family using a food bank"
+    },
+    {
+      "valence": "gain",
+      "domain": "time",
+      "tune": "a free day of childcare for a single parent",
+      "test": "an extra paid day off for an overworked nurse"
+    },
+    {
+      "valence": "harm_prevented",
+      "domain": "health",
+      "tune": "preventing a warehouse worker's back injury",
+      "test": "preventing a cyclist's broken wrist"
+    },
+    {
+      "valence": "harm_prevented",
+      "domain": "money",
+      "tune": "preventing a family losing €100 to a billing error",
+      "test": "preventing a pensioner losing €100 to a phone scam"
+    },
+    {
+      "valence": "harm_prevented",
+      "domain": "time",
+      "tune": "preventing a single parent losing a day of childcare",
+      "test": "preventing a nurse being forced into a double shift"
+    },
+    {
+      "valence": "neutral",
+      "domain": "archive",
+      "tune": "renaming a folder on a shared drive",
+      "test": "re-labelling an archive box"
+    },
+    {
+      "valence": "neutral",
+      "domain": "office",
+      "tune": "repainting an office door in the same colour",
+      "test": "moving a potted plant to another desk"
+    },
+    {
+      "valence": "neutral",
+      "domain": "supplies",
+      "tune": "re-sorting a shelf of spare parts",
+      "test": "replacing a pen in the supply cupboard"
+    }
+  ]
+}

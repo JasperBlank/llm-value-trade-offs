@@ -1,0 +1,39 @@
+{
+  "none|monitoring": {
+    "accuracy_yes_condition": 1.0,
+    "accuracy_no_condition": 1.0,
+    "registered": true,
+    "unreadable": 0
+  },
+  "none|goal": {
+    "accuracy_yes_condition": 1.0,
+    "accuracy_no_condition": 0.8846153846153846,
+    "registered": true,
+    "unreadable": 0
+  },
+  "away|monitoring": {
+    "accuracy_yes_condition": 0.8846153846153846,
+    "accuracy_no_condition": 1.0,
+    "registered": true,
+    "unreadable": 0
+  },
+  "away|goal": {
+    "accuracy_yes_condition": 0.6153846153846154,
+    "accuracy_no_condition": 1.0,
+    "registered": false,
+    "unreadable": 0
+  },
+  "random|monitoring": {
+    "accuracy_yes_condition": 0.8269230769230769,
+    "accuracy_no_condition": 1.0,
+    "registered": true,
+    "unreadable": 0
+  },
+  "random|goal": {
+    "accuracy_yes_condition": 0.6346153846153846,
+    "accuracy_no_condition": 1.0,
+    "registered": false,
+    "unreadable": 0
+  },
+  "rule": "registered if both accuracies >= 80% (unsteered rows decide)"
+}
