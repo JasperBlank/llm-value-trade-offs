@@ -13,3 +13,4 @@ request the gate-pass probabilities come last, after the parts.
 ## Extras
 5. Menu invariance passes: 50%
 6. Description invariance passes: 60%
+7. Loss aversion: strangers best guess 1.58, range 1.18 to 1.98; family best guess 2.45, range 2.05 to 2.85 (pilot 2's values, ranges of width 0.8 centred on them)
