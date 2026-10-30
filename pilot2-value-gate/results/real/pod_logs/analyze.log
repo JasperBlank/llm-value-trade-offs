@@ -1,0 +1,14 @@
+[13:14:05] Analysing 4b (11976 prompts)
+/workspace/llm-value-trade-offs/pilot2-value-gate/fit.py:103: RuntimeWarning: overflow encountered in exp
+  return float(np.exp((ux - uy) / self.b)) if abs(self.b) > 1e-6 else float("nan")
+[13:14:06] Analysing 8b (11976 prompts)
+[13:14:07] Analysing 14b (11976 prompts)
+# Pilot 2: summary over models
+
+Locked format: frame B, log value function.
+
+| model | gate (strangers) | gate (family) | r (strangers) | transitivity (strangers) | borderline | goal: real good rule-like | goal: boxes rule-like |
+|---|---|---|---|---|---|---|---|
+| 4b | fail | fail | 0.65 | 190 | no | yes | no |
+| 8b | fail | fail | 0.36 | 29.53 | no | no | no |
+| 14b | fail | fail | 0.75 | 1.58 | no | yes | no |
