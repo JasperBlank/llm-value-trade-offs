@@ -7,3 +7,4 @@ request the gate-pass probabilities come last, after the parts.
 ## Criterion values
 1. Criterion 2, median held-out exchange-rate miss: best guess ×1.64, range ×1.3 to ×1.8
 2. Criterion 2, pairs within ×2: best guess 10 of 15, range 7 to 13
+3. Criterion 3, transitivity factor of the worse triplet: best guess 1.4, range 1.2 to 1.6
