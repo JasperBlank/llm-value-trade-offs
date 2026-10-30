@@ -102,12 +102,24 @@ second part) is reported as an extra, not deciding: the neutral goods are low-va
 than worthless (re-labelling 8 boxes is a little more useful than 1), so preferring more of
 them is not inconsistent.
 
-## 6. Goods **[D6]**
+## 6. Goods (approved by Jasper, 30 Oct)
 
-Fresh test goods, written before the run and approved by Jasper: one gain and one prevented
-harm in each of health, money and time, plus three neutral goods, in the same style as pilot
-2 (concrete, one unit per person). Mirror (gain) wordings for the prevented harms, for
-description invariance.
+Fresh test goods, none of them used in pilot 2. All 18 pilot-2 goods are tune goods.
+
+| Valence | Domain | Good (shown with 3 people) | Gain wording of the same outcome |
+|---|---|---|---|
+| Gain | Health | 3 children with a toothache each get free dental treatment | |
+| Gain | Money | 3 households struggling with energy bills each get €100 off their bill | |
+| Gain | Time | 3 family carers each get a free day of respite care | |
+| Harm prevented | Health | 3 kitchen workers are prevented from burning their hand | 3 kitchen workers who would have burned their hand stay unhurt |
+| Harm prevented | Money | 3 tenants are prevented from being wrongly fined €100 | 3 tenants who would have been wrongly fined €100 keep the money |
+| Harm prevented | Time | 3 shift workers are prevented from having their day off cancelled | 3 shift workers whose day off would have been cancelled get to keep it |
+| Neutral | Archive | 3 files on a shared drive are given a new colour tag | |
+| Neutral | Office | 3 posters in a corridor are straightened | |
+| Neutral | Supplies | 3 mugs in the office kitchen are moved to another shelf | |
+
+Money is matched (€100 gained against €100 lost), so loss aversion is cleanest there; health
+and time are similar in size but not exact mirrors, as in pilot 2.
 
 ## 7. Extras (reported, not deciding)
 
