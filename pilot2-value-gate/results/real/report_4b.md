@@ -21,7 +21,7 @@ Quantity slopes per real good (strangers): G_vacc 2.76 ± 0.15, G_groc 2.60 ± 0
 | extra | strangers | family |
 |---|---|---|
 | menu invariance | fail (median factor 40.24) | fail (median factor 17.26) |
-| description invariance | fail (1.04, 6.86, 1.33) | fail (1.69, 2.48, 1.07) |
+| description invariance | pass (1.04, 6.86, 1.33) | fail (1.69, 2.48, 1.07) |
 | loss aversion (geometric mean) | 1.14 | 0.77 |
 
 Closeness: family ÷ strangers multiplier, median 23.93; uniform across goods: no (G_vacc 7.19, G_groc 14.90, G_dayoff 26.80, H_wrist 286, H_scam over 1000, H_double 21.06).
@@ -30,5 +30,5 @@ Closeness: family ÷ strangers multiplier, median 23.93; uniform across goods: n
 
 | | strangers | family |
 |---|---|---|
-| objective on a real good: rule-like | yes (median value shift over 1000×) | no, extra value (median value shift over 1000×) |
+| objective on a real good: rule-like | yes (median value shift over 1000×) | yes (median value shift over 1000×) |
 | objective on re-labelling boxes: rule-like | no (median welfare price 1.94 people per box) | no (median welfare price above 8 people per box) |

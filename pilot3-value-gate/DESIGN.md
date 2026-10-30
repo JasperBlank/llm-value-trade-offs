@@ -47,12 +47,12 @@ data may be used freely to set pilot 3 up.
 - Beneficiary groups: strangers and the user's family **[D8]**.
 - The goal module, repeated on the fresh goods **[D10]**.
 
-## 3. Measurement **[D2]**
+## 3. Measurement (decided 30 Oct: order averaging, six wordings)
 
 - **Unit of analysis: the cell**, one comparison (two goods at given quantities, one
   beneficiary group). Its choice probability is the average over both option orders and all
   wordings. The fit has no letter term, because order averaging removes it.
-- **Wordings:** proposal: the three pilot-2 wordings of frame B (known to work: 100% of the
+- **Wordings:** the three pilot-2 wordings of frame B (known to work: 100% of the
   probability on A/B), plus three new ones, for six. Six adds little reliability (0.97 to
   0.98) but guards against a quirk of one wording on the new goods.
 

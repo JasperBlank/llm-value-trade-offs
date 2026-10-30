@@ -291,3 +291,20 @@ text key, so they never matched. The dry run had not caught it because its fake 
 no pairs. Fixed so the code does what section 5 says: the test pairs wrist–scam and
 wrist–double shift get the grid {1, 2, 3, 4, 6, 8, 12, 16}. No test data existed yet; the
 format itself is unchanged.
+
+## 13. After the results: "two thirds" computed exactly
+
+The design says "most" means at least two thirds (sections 7 and 7b). The config wrote this
+as 0.67 and the analysis checked count ≥ 0.67 × total. For three items that is 2.01, so two
+of three counted as a fail: the code demanded three of three. Found on 30 Oct, after the
+results; Jasper decided to follow the written rule. The analysis now compares exactly
+(`most()` in `analyze.py`, `pass_share: "2/3"`).
+
+The outputs exactly as the pod produced them are kept in `results/real/as_run_on_pod/`.
+The gate (criteria 1a–3) does not use this threshold and is unchanged. Four verdicts change,
+all outside the gate:
+- 4B strangers, description invariance: fail → pass (2 of 3 wordings within ×1.5)
+- 4B family, goal version 1: not rule-like → rule-like (8 of 12 pairs)
+- 8B family, goal version 1: not rule-like → rule-like (8 of 12 pairs)
+- 14B strangers, description invariance: fail → pass (2 of 3); this one is scored, which
+  moves the mean Brier scores from Jasper 0.176 / Claude 0.167 to Jasper 0.160 / Claude 0.185.

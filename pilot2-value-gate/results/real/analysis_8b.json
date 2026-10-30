@@ -428,7 +428,7 @@
               "rule_like": true
             }
           },
-          "rule_like": false,
+          "rule_like": true,
           "median_value_shift": 965.0079988222933
         },
         "version2": {

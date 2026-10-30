@@ -14,14 +14,14 @@ Results: real run. Probabilities are scored with the Brier score (lower is bette
 | gate passes, 14b | no | 50% | 0.250 | 35% | 0.122 |
 | 32B rule triggers | no | 15% | 0.022 | 35% | 0.122 |
 | menu invariance passes | no | 60% | 0.360 | 35% | 0.122 |
-| description invariance passes | no | 60% | 0.360 | 40% | 0.160 |
+| description invariance passes | yes | 60% | 0.160 | 40% | 0.360 |
 | closeness is uniform | no | 50% | 0.250 | 45% | 0.203 |
 | goal v1 (real good) rule-like | yes | 80% | 0.040 | 35% | 0.423 |
 | goal v2 (boxes) rule-like | no | 50% | 0.250 | 50% | 0.250 |
 
 | | Jasper | Claude |
 |---|---|---|
-| mean Brier score | 0.176 (12 predictions) | 0.167 (11 predictions) |
+| mean Brier score | 0.160 (12 predictions) | 0.185 (11 predictions) |
 
 ## Numbers
 

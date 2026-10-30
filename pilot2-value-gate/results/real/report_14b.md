@@ -21,7 +21,7 @@ Quantity slopes per real good (strangers): G_vacc 3.94 ± 0.15, G_groc 5.24 ± 0
 | extra | strangers | family |
 |---|---|---|
 | menu invariance | fail (median factor 265) | fail (median factor 169) |
-| description invariance | fail (1.11, 6.63, 1.19) | fail (1.61, 19.02, 1.19) |
+| description invariance | pass (1.11, 6.63, 1.19) | fail (1.61, 19.02, 1.19) |
 | loss aversion (geometric mean) | 1.58 | 2.45 |
 
 Closeness: family ÷ strangers multiplier, median 2.08; uniform across goods: no (G_vacc 1.98, G_groc 1.65, G_dayoff 1.92, H_wrist 2.19, H_scam 3.27, H_double 2.93).

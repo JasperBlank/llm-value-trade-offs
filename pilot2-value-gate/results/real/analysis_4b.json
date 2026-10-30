@@ -66,7 +66,7 @@
             "H_scam": 6.857498277357506,
             "H_double": 1.3308910715648632
           },
-          "pass": false
+          "pass": true
         },
         "loss_aversion": {
           "by_domain": {
@@ -428,7 +428,7 @@
               "rule_like": false
             }
           },
-          "rule_like": false,
+          "rule_like": true,
           "median_value_shift": 2053178.7531955522
         },
         "version2": {

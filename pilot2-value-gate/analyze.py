@@ -16,6 +16,7 @@ For each model with test results, and separately for each beneficiary group
 Writes analysis_<model>.json, report_<model>.md, and summary.md over all models.
 """
 import itertools
+from fractions import Fraction
 
 import numpy as np
 
@@ -43,6 +44,11 @@ def p_choose(recs, target, q_t, other, q_o):
         elif r["y"] == target and r["x"] == other and r["qy"] == q_t and r["qx"] == q_o:
             ps.append(1 - r["p"])
     return float(np.mean(ps)) if ps else float("nan")
+
+
+def most(n, total, cfg):
+    """'Most' = at least the pass share (two thirds), compared exactly: 2 of 3 counts."""
+    return total > 0 and Fraction(int(n)) >= Fraction(str(cfg["extras"]["pass_share"])) * total
 
 
 def gate(cfg, T, ben, shape):
@@ -83,8 +89,8 @@ def extras(cfg, T, rows, ben, shape):
     recs = [r for r in T if r["kind"] in ("within", "cross", "mirror") and r["beneficiary"] == ben]
     fit = UtilityFit(recs, shape)
     desc = {h["id"]: factor(fit.rate(h["id"] + "~gainword", h["id"])) for h in harms}
-    out["description"] = {"factors": desc, "pass": sum(v <= E["invariance_max_factor"] for v in desc.values())
-                          >= E["pass_share"] * len(desc)}
+    out["description"] = {"factors": desc, "pass": most(sum(v <= E["invariance_max_factor"] for v in desc.values()),
+                                                        len(desc), cfg)}
     # Loss aversion: preventing a harm versus giving a gain, matched by domain.
     fit0 = UtilityFit([r for r in recs if r["kind"] != "mirror"], shape)
     by_dom = {h["domain"]: fit0.rate(h["id"], next(g["id"] for g in gains if g["domain"] == h["domain"])) for h in harms}
@@ -106,8 +112,8 @@ def extras(cfg, T, rows, ben, shape):
         p2 = p_choose(within, a, qa, b, qb)
         if np.isfinite(p2) and 0 < p2 < 1:
             m_fac[f"{a}:{qa} vs {b}:{qb}, {tt}"] = float(np.exp(abs(np.log(geo_mean(ratios)) - np.log(p2 / (1 - p2)))))
-    out["menu"] = {"factors": m_fac, "pass": bool(m_fac) and sum(v <= E["invariance_max_factor"] for v in m_fac.values())
-                   >= E["pass_share"] * len(m_fac)}
+    out["menu"] = {"factors": m_fac, "pass": most(sum(v <= E["invariance_max_factor"] for v in m_fac.values()),
+                                                  len(m_fac), cfg)}
     return out
 
 
@@ -163,10 +169,9 @@ def goal_module(cfg, T, gate_res, rows_goal, ben, shape):
         v2[p["id"]] = {"welfare_price": float("inf") if p_box > 0.5 else price, "p_box_1_vs_8": p_box,
                        "partner_slope_ratio": ratio,
                        "rule_like": bool(p_box >= GM["rule_min_prob"] and ratio < GM["rule_max_slope_ratio"])}
-    share = cfg["extras"]["pass_share"]
-    return {"version1": {"pairs": v1, "rule_like": sum(v["rule_like"] for v in v1.values()) >= share * len(v1),
+    return {"version1": {"pairs": v1, "rule_like": most(sum(v["rule_like"] for v in v1.values()), len(v1), cfg),
                          "median_value_shift": float(np.nanmedian([v["value_shift"] for v in v1.values()]))},
-            "version2": {"partners": v2, "rule_like": sum(v["rule_like"] for v in v2.values()) >= share * len(v2),
+            "version2": {"partners": v2, "rule_like": most(sum(v["rule_like"] for v in v2.values()), len(v2), cfg),
                          "median_welfare_price": float(np.median([v["welfare_price"] for v in v2.values()]))}}
 
 

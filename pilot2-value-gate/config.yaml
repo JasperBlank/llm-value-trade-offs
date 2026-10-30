@@ -29,7 +29,8 @@ gate:
 
 extras:
   invariance_max_factor: 1.5
-  pass_share: 0.67               # "most": at least two thirds of menus / mirrors / goods
+  pass_share: "2/3"              # "most": at least two thirds of menus / mirrors / goods, exactly
+                                 # (was 0.67 until 30 Oct, which demanded 3 of 3; see DESIGN.md section 13)
 
 borderline:                      # 14B triggers a 32B run if criterion 1 passes but...
   r_low: 0.80                    # ...the correlation is in [0.80, 0.90), or

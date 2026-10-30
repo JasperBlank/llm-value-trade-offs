@@ -30,5 +30,5 @@ Closeness: family ÷ strangers multiplier, median 1.41; uniform across goods: ye
 
 | | strangers | family |
 |---|---|---|
-| objective on a real good: rule-like | no, extra value (median value shift 48.20×) | no, extra value (median value shift 965×) |
+| objective on a real good: rule-like | no, extra value (median value shift 48.20×) | yes (median value shift 965×) |
 | objective on re-labelling boxes: rule-like | no (median welfare price above 8 people per box) | no (median welfare price 6.54 people per box) |
