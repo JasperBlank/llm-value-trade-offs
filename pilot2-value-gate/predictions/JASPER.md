@@ -33,4 +33,4 @@ Unless stated otherwise, the numbers are for Qwen3-14B, test goods, strangers.
 
 ## Goal module
 13. Version 1 (objective on a real good) is rule-like: 80%
-14. Version 2 (objective on re-labelling archive boxes) is rule-like: ; welfare price: best guess , range 
+14. Version 2 (objective on re-labelling archive boxes) is rule-like: 50%; welfare price: best guess , range 
