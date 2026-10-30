@@ -1,0 +1,6 @@
+# torch is NOT listed: use the one that comes with the RunPod PyTorch template,
+# so it matches the GPU drivers. (For a dry run on a laptop you don't need torch at all.)
+transformers>=4.56,<6   # tested with 5.21.0
+pyyaml
+numpy
+scipy

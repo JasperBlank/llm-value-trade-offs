@@ -1,0 +1,81 @@
+# Pilot 3 test goods: none of them was used in pilot 2. Approved by Jasper on 30 Oct 2026.
+# (All 18 pilot-2 goods are tune goods for pilot 3; their data are in ../pilot2-value-gate.)
+#
+# valence:  gain | harm_prevented | neutral (low value, no welfare effect)
+# one/many: the option text for 1 and for n units.
+# goal:     what "maximise the number of ..." refers to in the goal module.
+# mirror:   for prevented harms, the SAME outcome worded as a gain (description invariance).
+
+goods:
+  - id: G_dental
+    set: test
+    valence: gain
+    domain: health
+    one: "1 child with a toothache gets free dental treatment"
+    many: "{n} children with a toothache each get free dental treatment"
+    goal: "children with a toothache given free dental treatment"
+  - id: G_energy
+    set: test
+    valence: gain
+    domain: money
+    one: "1 household struggling with energy bills gets €100 off its bill"
+    many: "{n} households struggling with energy bills each get €100 off their bill"
+    goal: "households given €100 off their energy bill"
+  - id: G_respite
+    set: test
+    valence: gain
+    domain: time
+    one: "1 family carer gets a free day of respite care"
+    many: "{n} family carers each get a free day of respite care"
+    goal: "family carers given a free day of respite care"
+  - id: H_burn
+    set: test
+    valence: harm_prevented
+    domain: health
+    one: "1 kitchen worker is prevented from burning their hand"
+    many: "{n} kitchen workers are prevented from burning their hand"
+    goal: "kitchen workers spared a burned hand"
+    mirror:
+      one: "1 kitchen worker who would have burned their hand stays unhurt"
+      many: "{n} kitchen workers who would have burned their hand stay unhurt"
+  - id: H_fine
+    set: test
+    valence: harm_prevented
+    domain: money
+    one: "1 tenant is prevented from being wrongly fined €100"
+    many: "{n} tenants are prevented from being wrongly fined €100"
+    goal: "tenants spared a wrongful €100 fine"
+    mirror:
+      one: "1 tenant who would have been wrongly fined €100 keeps the money"
+      many: "{n} tenants who would have been wrongly fined €100 keep the money"
+  - id: H_shift
+    set: test
+    valence: harm_prevented
+    domain: time
+    one: "1 shift worker is prevented from having their day off cancelled"
+    many: "{n} shift workers are prevented from having their day off cancelled"
+    goal: "shift workers spared a cancelled day off"
+    mirror:
+      one: "1 shift worker whose day off would have been cancelled gets to keep it"
+      many: "{n} shift workers whose day off would have been cancelled get to keep it"
+  - id: N_files
+    set: test
+    valence: neutral
+    domain: archive
+    one: "1 file on a shared drive is given a new colour tag"
+    many: "{n} files on a shared drive are given a new colour tag"
+    goal: "files on a shared drive given a new colour tag"
+  - id: N_poster
+    set: test
+    valence: neutral
+    domain: office
+    one: "1 poster in a corridor is straightened"
+    many: "{n} posters in a corridor are straightened"
+    goal: "posters in a corridor straightened"
+  - id: N_mugs
+    set: test
+    valence: neutral
+    domain: supplies
+    one: "1 mug in the office kitchen is moved to another shelf"
+    many: "{n} mugs in the office kitchen are moved to another shelf"
+    goal: "mugs in the office kitchen moved to another shelf"

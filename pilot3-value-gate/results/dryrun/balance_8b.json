@@ -1,0 +1,98 @@
+{
+  "G_dental|G_energy": {
+    "strangers": 1.6579192255489954,
+    "close": 1.6608261276657994
+  },
+  "G_dental|G_respite": {
+    "strangers": 0.5945245248129385,
+    "close": 0.6084556527149833
+  },
+  "G_energy|G_respite": {
+    "strangers": 1.945991583219194,
+    "close": 1.9559592988087902
+  },
+  "H_burn|H_fine": {
+    "strangers": 0.33253708011088323,
+    "close": 0.31940290324547044
+  },
+  "H_burn|H_shift": {
+    "strangers": 2.633746093982897,
+    "close": 2.6324335064215965
+  },
+  "H_fine|H_shift": {
+    "strangers": 3.419457727312768,
+    "close": 3.548131901921212
+  },
+  "G_dental|H_burn": {
+    "strangers": 2.079457656353484,
+    "close": 2.1339397635998414
+  },
+  "G_dental|H_fine": {
+    "strangers": 0.10930507135566901,
+    "close": 0.11134014111245726
+  },
+  "G_dental|H_shift": {
+    "strangers": 2.164322571284698,
+    "close": 2.335374349490395
+  },
+  "G_energy|H_burn": {
+    "strangers": 2.40807565915421,
+    "close": 2.5911853167872203
+  },
+  "G_energy|H_fine": {
+    "strangers": 0.5621971553226713,
+    "close": 0.6118511759773871
+  },
+  "G_energy|H_shift": {
+    "strangers": 1.954182016222186,
+    "close": 1.9236328236386786
+  },
+  "G_respite|H_burn": {
+    "strangers": 3.3316445317182244,
+    "close": 3.4025809641480156
+  },
+  "G_respite|H_fine": {
+    "strangers": 0.2438175817767868,
+    "close": 0.24945482553933243
+  },
+  "G_respite|H_shift": {
+    "strangers": 2.1384704529961764,
+    "close": 2.088460191575312
+  },
+  "H_burn~gainword|G_dental": {
+    "strangers": 0.43692478955096276,
+    "close": 0.4334848489520338
+  },
+  "H_burn~gainword|G_energy": {
+    "strangers": 0.354854908988431,
+    "close": 0.35241444204051825
+  },
+  "H_burn~gainword|G_respite": {
+    "strangers": 0.27375226863290103,
+    "close": 0.2991342090566298
+  },
+  "H_fine~gainword|G_dental": {
+    "strangers": 8.696476097335433,
+    "close": 8.786816390285022
+  },
+  "H_fine~gainword|G_energy": {
+    "strangers": 1.4157825191714986,
+    "close": 1.4360507183430709
+  },
+  "H_fine~gainword|G_respite": {
+    "strangers": 3.734700654266797,
+    "close": 3.6424904803080955
+  },
+  "H_shift~gainword|G_dental": {
+    "strangers": 0.4083463736246025,
+    "close": 0.3961246367518769
+  },
+  "H_shift~gainword|G_energy": {
+    "strangers": 0.4414464774703121,
+    "close": 0.45610673136717184
+  },
+  "H_shift~gainword|G_respite": {
+    "strangers": 0.4289142877055303,
+    "close": 0.4118249575198195
+  }
+}

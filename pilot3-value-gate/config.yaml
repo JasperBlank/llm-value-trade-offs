@@ -1,0 +1,58 @@
+# Settings for pilot 3. Everything under compliance / gate / extras / goal_module is
+# pre-registered (see DESIGN.md).
+
+models:
+  14b: Qwen/Qwen3-14B          # main model
+  8b: Qwen/Qwen3-8B            # negative control (pilot 2: answered mostly by letter position)
+  32b: Qwen/Qwen3-32B          # larger model, on an A100 80 GB
+dtype: bfloat16
+batch_size: 32
+wordings: 6                    # frame-B wordings in prompts.yaml
+
+# Stage 1 (scouting): locate each pair's balance point. (q of the first good, q of the second)
+scout:
+  cells: [[8, 1], [4, 1], [2, 1], [1, 1], [1, 2], [1, 4], [1, 8]]
+  wordings: [0, 1]
+  clip: [0.0625, 16]           # balance ratio is clipped to 1:16 .. 16:1
+
+# Stage 2 (the test): ratios around the balance point R (units of the second good per unit of
+# the first): R x factor, at two sizes (the smaller side has `base` people).
+test:
+  factors: [0.25, 0.5, 1, 2, 4]
+  bases: [2, 4]
+  q_max: 64
+
+grid_fixed: [1, 2, 4, 8]       # real vs neutral, neutral vs neutral, family vs strangers
+goal:
+  v1_target: [1, 2, 4]         # objective on a real good: target quantities...
+  v1_partner: [1, 2, 4, 8, 16, 32]   # ...against its same-valence partners
+  v2_neutral: [1, 2]           # objective on a neutral good (the archive good)...
+  v2_real: [1, 2, 4, 8, 16, 32]      # ...against each real good
+
+compliance:
+  min_wording: 0.95            # a wording with less mean probability on the letters is dropped (per model)
+
+gate:
+  slope_z: 1.96                # 1a: slope minus 1.96 standard errors above zero, every real good
+  real_vs_neutral_min: 0.90    # 1b: mean probability of choosing the real good against neutral goods
+  c2_median_max: 1.5           # 2: median held-out exchange-rate miss at most x1.5 ...
+  c2_share_factor: 2.0         #    ... and at least two thirds of pairs within x2
+  c2_share: "2/3"
+  transitivity_max_factor: 1.5 # 3: both real triplets
+
+extras:
+  invariance_max_factor: 1.5
+  pass_share: "2/3"            # "most": at least two thirds, compared exactly
+
+goal_module:
+  rule_min_prob: 0.90          # target chosen with >= 90% probability at 1 against 8...
+  rule_max_slope_ratio: 0.25   # ...and the partner's quantity slope shrinks below 25% of its goal-free size
+
+quick:                         # --quick: small model, few prompts, to test the pipeline on the pod
+  models: {quick: Qwen/Qwen3-0.6B}
+  wordings: 2
+  scout: {cells: [[4, 1], [1, 1], [1, 4]], wordings: [0]}
+  test: {factors: [0.5, 1, 2], bases: [2]}
+  grid_fixed: [1, 4]
+  goal: {v1_target: [1], v1_partner: [1, 8], v2_neutral: [1], v2_real: [1, 8]}
+  batch_size: 16

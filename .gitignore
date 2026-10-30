@@ -5,3 +5,5 @@ __pycache__/
 pilot2-value-gate/results/quick/
 pilot2-value-gate/results/dryrun/*.jsonl
 pilot1-goal-sources/results/*-dryrun/
+pilot3-value-gate/results/quick/
+pilot3-value-gate/results/dryrun/*.jsonl
