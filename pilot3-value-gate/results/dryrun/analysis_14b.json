@@ -301,84 +301,96 @@
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999930882,
               "p_target_1_vs_32": 0.9999999998632504,
-              "partner_slope_ratio": 6.051500216256251e-16,
+              "p_target_1_vs_128": 0.9999999957249673,
+              "partner_slope_ratio": -3.0041129848580974e-16,
               "rule_like": true
             },
             "G_dental vs G_respite": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999870224,
               "p_target_1_vs_32": 0.9999999996568133,
-              "partner_slope_ratio": 5.93541515994138e-16,
+              "p_target_1_vs_128": 0.9999999916868876,
+              "partner_slope_ratio": -2.9464855185173243e-16,
               "rule_like": true
             },
             "G_energy vs G_dental": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999972482,
               "p_target_1_vs_32": 0.9999999999358138,
-              "partner_slope_ratio": 5.8764266725138e-16,
+              "p_target_1_vs_128": 0.999999998116028,
+              "partner_slope_ratio": -2.9172021879867735e-16,
               "rule_like": true
             },
             "G_energy vs G_respite": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999875638,
               "p_target_1_vs_32": 0.9999999996264184,
-              "partner_slope_ratio": 5.93541515994138e-16,
+              "p_target_1_vs_128": 0.9999999932740966,
+              "partner_slope_ratio": -2.9464855185173243e-16,
               "rule_like": true
             },
             "G_respite vs G_dental": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999975149,
               "p_target_1_vs_32": 0.9999999999363004,
-              "partner_slope_ratio": 5.8764266725138e-16,
+              "p_target_1_vs_128": 0.9999999985343746,
+              "partner_slope_ratio": -2.9172021879867735e-16,
               "rule_like": true
             },
             "G_respite vs G_energy": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999930436,
               "p_target_1_vs_32": 0.99999999984689,
-              "partner_slope_ratio": 6.051500216256251e-16,
+              "p_target_1_vs_128": 0.9999999970450201,
+              "partner_slope_ratio": -3.0041129848580974e-16,
               "rule_like": true
             },
             "H_burn vs H_fine": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999818897,
               "p_target_1_vs_32": 0.9999999995418213,
-              "partner_slope_ratio": 6.001737399205728e-16,
+              "p_target_1_vs_128": 0.9999999877967397,
+              "partner_slope_ratio": -2.9794095031556585e-16,
               "rule_like": true
             },
             "H_burn vs H_shift": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.999999999998349,
               "p_target_1_vs_32": 0.9999999999694335,
-              "partner_slope_ratio": 5.981132032389183e-16,
+              "p_target_1_vs_128": 0.9999999989632139,
+              "partner_slope_ratio": -2.9691804941827987e-16,
               "rule_like": true
             },
             "H_fine vs H_burn": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999928401,
               "p_target_1_vs_32": 0.9999999998571052,
-              "partner_slope_ratio": 5.833712884014669e-16,
+              "p_target_1_vs_128": 0.9999999962760379,
+              "partner_slope_ratio": -2.8959980167767946e-16,
               "rule_like": true
             },
             "H_fine vs H_shift": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999981135,
               "p_target_1_vs_32": 0.9999999999527888,
-              "partner_slope_ratio": 5.981132032389183e-16,
+              "p_target_1_vs_128": 0.9999999991820204,
+              "partner_slope_ratio": -2.9691804941827987e-16,
               "rule_like": true
             },
             "H_shift vs H_burn": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999943138,
               "p_target_1_vs_32": 0.9999999998412713,
-              "partner_slope_ratio": 5.833712884014669e-16,
+              "p_target_1_vs_128": 0.9999999962654296,
+              "partner_slope_ratio": -2.8959980167767946e-16,
               "rule_like": true
             },
             "H_shift vs H_fine": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999764856,
               "p_target_1_vs_32": 0.9999999995195891,
-              "partner_slope_ratio": 6.001737399205728e-16,
+              "p_target_1_vs_128": 0.9999999901613145,
+              "partner_slope_ratio": -2.9794095031556585e-16,
               "rule_like": true
             }
           },
@@ -388,50 +400,56 @@
         "version2": {
           "goods": {
             "G_dental": {
-              "welfare_price": 2.955119497288388,
+              "welfare_price": 2.952910213787137,
               "p_neutral_1_vs_8": 0.12237821152077288,
               "p_neutral_1_vs_32": 0.005326045834251225,
-              "partner_slope_ratio": 1.0035154022130977,
+              "p_neutral_1_vs_128": 0.0003177693547803395,
+              "partner_slope_ratio": 0.9915697942135847,
               "rule_like": false
             },
             "G_energy": {
-              "welfare_price": 1.967329894506961,
+              "welfare_price": 1.9668446117250502,
               "p_neutral_1_vs_8": 0.04429976704220795,
               "p_neutral_1_vs_32": 0.002111336173198919,
-              "partner_slope_ratio": 1.053986109155353,
+              "p_neutral_1_vs_128": 9.910946138902421e-05,
+              "partner_slope_ratio": 0.9670815768703998,
               "rule_like": false
             },
             "G_respite": {
-              "welfare_price": 1.4625450485091749,
+              "welfare_price": 1.4626149216847772,
               "p_neutral_1_vs_8": 0.022257480048389233,
               "p_neutral_1_vs_32": 0.001426328743325489,
-              "partner_slope_ratio": 1.0230243456232229,
+              "p_neutral_1_vs_128": 4.21872138653967e-05,
+              "partner_slope_ratio": 0.9009813948050632,
               "rule_like": false
             },
             "H_burn": {
-              "welfare_price": 2.137402759987777,
+              "welfare_price": 2.1363134414750693,
               "p_neutral_1_vs_8": 0.06167164622198673,
               "p_neutral_1_vs_32": 0.002608784874105763,
-              "partner_slope_ratio": 0.9998383164620147,
+              "p_neutral_1_vs_128": 9.607722953941522e-05,
+              "partner_slope_ratio": 0.9416482091656668,
               "rule_like": false
             },
             "H_fine": {
-              "welfare_price": 1.2497253463332516,
+              "welfare_price": 1.2498480788644126,
               "p_neutral_1_vs_8": 0.019062565517918517,
               "p_neutral_1_vs_32": 0.0009157393133772951,
-              "partner_slope_ratio": 1.0448021580741107,
+              "p_neutral_1_vs_128": 3.381889969034102e-05,
+              "partner_slope_ratio": 0.8789597641483983,
               "rule_like": false
             },
             "H_shift": {
-              "welfare_price": 3.827939878469055,
+              "welfare_price": 3.825728536003522,
               "p_neutral_1_vs_8": 0.18135881527363595,
               "p_neutral_1_vs_32": 0.010340631046060866,
-              "partner_slope_ratio": 1.0438917758059068,
+              "p_neutral_1_vs_128": 0.00042289629361658143,
+              "partner_slope_ratio": 1.0316941082551085,
               "rule_like": false
             }
           },
           "rule_like": false,
-          "median_welfare_price": 2.052366327247369
+          "median_welfare_price": 2.0515790266000598
         }
       }
     },
@@ -719,84 +737,96 @@
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.999999999982799,
               "p_target_1_vs_32": 0.99999999955174,
-              "partner_slope_ratio": 5.963996236320506e-16,
+              "p_target_1_vs_128": 0.9999999903853122,
+              "partner_slope_ratio": -2.9606738651426956e-16,
               "rule_like": true
             },
             "G_dental vs G_respite": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999694094,
               "p_target_1_vs_32": 0.9999999993535132,
-              "partner_slope_ratio": 5.909010532961472e-16,
+              "p_target_1_vs_128": 0.9999999803385778,
+              "partner_slope_ratio": -2.933377614702401e-16,
               "rule_like": true
             },
             "G_energy vs G_dental": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999932107,
               "p_target_1_vs_32": 0.9999999998368152,
-              "partner_slope_ratio": 6.008817764292261e-16,
+              "p_target_1_vs_128": 0.9999999963868766,
+              "partner_slope_ratio": -2.9829243698719896e-16,
               "rule_like": true
             },
             "G_energy vs G_respite": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999721437,
               "p_target_1_vs_32": 0.9999999991684048,
-              "partner_slope_ratio": 5.909010532961472e-16,
+              "p_target_1_vs_128": 0.999999979365575,
+              "partner_slope_ratio": -2.933377614702401e-16,
               "rule_like": true
             },
             "G_respite vs G_dental": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999935247,
               "p_target_1_vs_32": 0.9999999998222107,
-              "partner_slope_ratio": 6.008817764292261e-16,
+              "p_target_1_vs_128": 0.9999999957571869,
+              "partner_slope_ratio": -2.9829243698719896e-16,
               "rule_like": true
             },
             "G_respite vs G_energy": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999821666,
               "p_target_1_vs_32": 0.9999999995092815,
-              "partner_slope_ratio": 5.963996236320506e-16,
+              "p_target_1_vs_128": 0.9999999911506575,
+              "partner_slope_ratio": -2.9606738651426956e-16,
               "rule_like": true
             },
             "H_burn vs H_fine": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999609507,
               "p_target_1_vs_32": 0.9999999988405747,
-              "partner_slope_ratio": 5.927454447834318e-16,
+              "p_target_1_vs_128": 0.9999999676596528,
+              "partner_slope_ratio": -2.942533625969209e-16,
               "rule_like": true
             },
             "H_burn vs H_shift": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999967176,
               "p_target_1_vs_32": 0.9999999999028418,
-              "partner_slope_ratio": 5.930373970476087e-16,
+              "p_target_1_vs_128": 0.9999999975518867,
+              "partner_slope_ratio": -2.943982948544488e-16,
               "rule_like": true
             },
             "H_fine vs H_burn": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999873054,
               "p_target_1_vs_32": 0.9999999996495749,
-              "partner_slope_ratio": 6.012012709629679e-16,
+              "p_target_1_vs_128": 0.9999999927489127,
+              "partner_slope_ratio": -2.9845104190219614e-16,
               "rule_like": true
             },
             "H_fine vs H_shift": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.999999999995897,
               "p_target_1_vs_32": 0.9999999998862913,
-              "partner_slope_ratio": 5.930373970476087e-16,
+              "p_target_1_vs_128": 0.999999997671878,
+              "partner_slope_ratio": -2.943982948544488e-16,
               "rule_like": true
             },
             "H_shift vs H_burn": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999846384,
               "p_target_1_vs_32": 0.9999999996695021,
-              "partner_slope_ratio": 6.012012709629679e-16,
+              "p_target_1_vs_128": 0.9999999918612099,
+              "partner_slope_ratio": -2.9845104190219614e-16,
               "rule_like": true
             },
             "H_shift vs H_fine": {
               "value_shift": Infinity,
               "p_target_1_vs_8": 0.9999999999500039,
               "p_target_1_vs_32": 0.9999999989446663,
-              "partner_slope_ratio": 5.927454447834318e-16,
+              "p_target_1_vs_128": 0.9999999655098496,
+              "partner_slope_ratio": -2.942533625969209e-16,
               "rule_like": true
             }
           },
@@ -806,50 +836,56 @@
         "version2": {
           "goods": {
             "G_dental": {
-              "welfare_price": 1.985105381177318,
+              "welfare_price": 1.9849541462136713,
               "p_neutral_1_vs_8": 0.04987294104170126,
               "p_neutral_1_vs_32": 0.0029248093758282856,
-              "partner_slope_ratio": 1.0321692584260853,
+              "p_neutral_1_vs_128": 9.260906304631167e-05,
+              "partner_slope_ratio": 0.9602890543514974,
               "rule_like": false
             },
             "G_energy": {
-              "welfare_price": 1.325713656104967,
+              "welfare_price": 1.325728686061559,
               "p_neutral_1_vs_8": 0.02300302006963051,
               "p_neutral_1_vs_32": 0.0010885306844342635,
-              "partner_slope_ratio": 1.0455228024186334,
+              "p_neutral_1_vs_128": 3.5547603225438706e-05,
+              "partner_slope_ratio": 0.8849815764824895,
               "rule_like": false
             },
             "G_respite": {
-              "welfare_price": 0.9936036594947194,
+              "welfare_price": 0.9937463102138009,
               "p_neutral_1_vs_8": 0.011043978466408366,
               "p_neutral_1_vs_32": 0.000393460953692526,
-              "partner_slope_ratio": 1.016907588172804,
+              "p_neutral_1_vs_128": 2.0673818248329034e-05,
+              "partner_slope_ratio": 0.8148130067157078,
               "rule_like": false
             },
             "H_burn": {
-              "welfare_price": 1.3901893708816486,
+              "welfare_price": 1.3902591969805054,
               "p_neutral_1_vs_8": 0.022645498601532865,
               "p_neutral_1_vs_32": 0.0009653850182483881,
-              "partner_slope_ratio": 1.0552906896636356,
+              "p_neutral_1_vs_128": 4.646075032876951e-05,
+              "partner_slope_ratio": 0.9073463904724044,
               "rule_like": false
             },
             "H_fine": {
-              "welfare_price": 0.8251753614956655,
+              "welfare_price": 0.8255183808309985,
               "p_neutral_1_vs_8": 0.007115431741850919,
               "p_neutral_1_vs_32": 0.0002994865977360428,
-              "partner_slope_ratio": 0.9973747527541644,
+              "p_neutral_1_vs_128": 1.2418901980448815e-05,
+              "partner_slope_ratio": 0.7766507652726649,
               "rule_like": false
             },
             "H_shift": {
-              "welfare_price": 2.465673867995062,
+              "welfare_price": 2.464634563066984,
               "p_neutral_1_vs_8": 0.08506308152394604,
               "p_neutral_1_vs_32": 0.003625636742683902,
-              "partner_slope_ratio": 1.0247921102926936,
+              "p_neutral_1_vs_128": 0.00015645477680237274,
+              "partner_slope_ratio": 0.9857526053421599,
               "rule_like": false
             }
           },
           "rule_like": false,
-          "median_welfare_price": 1.3579515134933078
+          "median_welfare_price": 1.3579939415210323
         }
       }
     }

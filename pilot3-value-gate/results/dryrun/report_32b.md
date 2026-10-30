@@ -42,4 +42,4 @@ Closeness: family ÷ strangers multiplier, median 1.50; uniform: yes (G_dental 1
 | objective on a real good: rule-like | yes (median value shift infinite×) | yes (median value shift infinite×) |
 | objective on the archive good: rule-like | no (median welfare price 2.05 people per file) | no (median welfare price 1.36 people per file) |
 
-Welfare price per real good (strangers; people one file is worth): G_dental 2.96, G_energy 1.97, G_respite 1.46, H_burn 2.14, H_fine 1.25, H_shift 3.83
+Welfare price per real good (strangers; people one file is worth): G_dental 2.95, G_energy 1.97, G_respite 1.46, H_burn 2.14, H_fine 1.25, H_shift 3.83

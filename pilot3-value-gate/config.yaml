@@ -25,9 +25,9 @@ test:
 grid_fixed: [1, 2, 4, 8]       # real vs neutral, neutral vs neutral, family vs strangers
 goal:
   v1_target: [1, 2, 4]         # objective on a real good: target quantities...
-  v1_partner: [1, 2, 4, 8, 16, 32]   # ...against its same-valence partners
+  v1_partner: [1, 2, 4, 8, 16, 32, 64, 128]   # ...against its same-valence partners (to 128: Jasper, 30 Oct)
   v2_neutral: [1, 2]           # objective on a neutral good (the archive good)...
-  v2_real: [1, 2, 4, 8, 16, 32]      # ...against each real good
+  v2_real: [1, 2, 4, 8, 16, 32, 64, 128]      # ...against each real good
 
 compliance:
   min_wording: 0.95            # a wording with less mean probability on the letters is dropped (per model)

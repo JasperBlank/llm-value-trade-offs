@@ -17,4 +17,6 @@ request the gate-pass probabilities come last, after the parts.
 8. Closeness multiplier (family ÷ strangers): best guess 2.08, range 1.68 to 2.48 (pilot 2's value, range of width 0.8); uniform: 10%
 
 ## Goal module
-9. Version 1 (objective on a real good) is rule-like: 80%
+9. Version 1 (objective on a real good) is rule-like (at 1 against 8): 95% (first given as 80%,
+   corrected when question 10 made clear that question 9 was about 1 against 8)
+10. Version 1's override holds at 1 against 32: 80%

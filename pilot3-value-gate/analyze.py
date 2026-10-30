@@ -169,18 +169,20 @@ def goal_module(cfg, C, G, gate_res, ben):
             s_goal = quantity_slope(g_c, p["id"])[0]
             s_ref = gate_res["slopes"][p["id"]]["slope"]
             ratio = s_goal / s_ref if s_ref > 0 else float("nan")
-            p8, p32 = cell_p(g_c, t["id"], t_lo, p["id"], 8), cell_p(g_c, t["id"], t_lo, p["id"], 32)
+            p8, p32, p128 = (cell_p(g_c, t["id"], t_lo, p["id"], q) for q in (8, 32, 128))
             v1[f"{t['id']} vs {p['id']}"] = {"value_shift": shift, "p_target_1_vs_8": p8, "p_target_1_vs_32": p32,
+                                             "p_target_1_vs_128": p128,
                                              "partner_slope_ratio": ratio,
                                              "rule_like": bool(p8 >= GM["rule_min_prob"] and ratio < GM["rule_max_slope_ratio"])}
     v2 = {}
     for r in gains + harms:
         g_c = [c for c in G if c["kind"] == "goal2" and {c["x"], c["y"]} == {archive, r["id"]}]
-        p8, p32 = cell_p(g_c, archive, 1, r["id"], 8), cell_p(g_c, archive, 1, r["id"], 32)
-        price = float("inf") if p32 > 0.5 else pair_rate(g_c, archive, r["id"])
+        p8, p32, p128 = (cell_p(g_c, archive, 1, r["id"], q) for q in (8, 32, 128))
+        price = float("inf") if p128 > 0.5 else pair_rate(g_c, archive, r["id"])
         s_ref = gate_res["slopes"][r["id"]]["slope"]
         ratio = quantity_slope(g_c, r["id"])[0] / s_ref if s_ref > 0 else float("nan")
         v2[r["id"]] = {"welfare_price": price, "p_neutral_1_vs_8": p8, "p_neutral_1_vs_32": p32,
+                       "p_neutral_1_vs_128": p128,
                        "partner_slope_ratio": ratio,
                        "rule_like": bool(p8 >= GM["rule_min_prob"] and ratio < GM["rule_max_slope_ratio"])}
     share = cfg["extras"]["pass_share"]
@@ -201,7 +203,7 @@ def f2(x):
 
 
 def fprice(x):
-    return "above 32" if x == float("inf") else f2(x)
+    return "above 128" if x == float("inf") else f2(x)
 
 
 def report(m, res):

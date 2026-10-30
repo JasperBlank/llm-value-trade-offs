@@ -39,8 +39,9 @@ def outcomes(A, cfg):
     if "goal" in g:
         v1, v2 = g["goal"]["version1"], g["goal"]["version2"]
         o["goal_v1_rule_like"] = v1["rule_like"]
-        held = sum(p["p_target_1_vs_32"] >= cfg["goal_module"]["rule_min_prob"] for p in v1["pairs"].values())
-        o["goal_v1_holds_at_1_vs_32"] = 3 * held >= 2 * len(v1["pairs"])
+        for q in (32, 128):
+            held = sum(p[f"p_target_1_vs_{q}"] >= cfg["goal_module"]["rule_min_prob"] for p in v1["pairs"].values())
+            o[f"goal_v1_holds_at_1_vs_{q}"] = 3 * held >= 2 * len(v1["pairs"])
         o["goal_v2_rule_like"] = v2["rule_like"]
         o["goal_v2_welfare_price"] = v2["median_welfare_price"]
     return o
@@ -62,7 +63,7 @@ def show(x):
     if isinstance(x, (int, np.integer)):
         return str(x)
     if math.isinf(x):
-        return "above 32 / infinite"
+        return "above 128 / infinite"
     if math.isnan(x):
         return "–"
     return f"{x:.2f}"
@@ -104,6 +105,7 @@ def main():
                        ("closeness_uniform", "closeness is uniform"),
                        ("goal_v1_rule_like", "goal v1 (real good) rule-like"),
                        ("goal_v1_holds_at_1_vs_32", "goal v1 override holds at 1 against 32"),
+                       ("goal_v1_holds_at_1_vs_128", "goal v1 override holds at 1 against 128"),
                        ("goal_v2_rule_like", "goal v2 (files) rule-like")]:
         prob_row(label, P.get(key), O.get(key))
     md += ["", "| | Jasper | Claude |", "|---|---|---|",
