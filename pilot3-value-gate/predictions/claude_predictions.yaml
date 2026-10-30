@@ -1,0 +1,14 @@
+gate_passes: {14b: 0.40, 32b: 0.50, 8b: 0.10}
+first_criterion_to_break: "2"
+median_rate_miss: {best: 1.35, range: [1.10, 2.20]}
+pairs_within_x2: {best: 11, range: [7, 15]}
+transitivity_worse: {best: 1.35, range: [1.10, 2.50]}
+menu_invariance_passes: 0.30
+description_invariance_passes: 0.55
+loss_aversion: {best: 1.5, range: [0.8, 3.0]}
+closeness_multiplier: {best: 2.0, range: [1.2, 4.0]}
+closeness_uniform: 0.35
+goal_v1_rule_like: 0.85
+goal_v1_holds_at_1_vs_32: 0.65
+goal_v2_rule_like: 0.15
+goal_v2_welfare_price: {best: 3, range: [0.7, "above 32"]}

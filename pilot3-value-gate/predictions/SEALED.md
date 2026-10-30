@@ -14,3 +14,6 @@ Re-sealed a few minutes after the first hash (commit d9253d4), before Jasper had
 anything: the time stated inside CLAUDE.md had been read from the machine's local clock
 (UTC+8) and said 21:20 UTC instead of about 14:15 UTC. Only that time changed; the
 predictions did not (the hash of claude_predictions.yaml is unchanged).
+
+**Unsealed in the lock commit (30 Oct 2026),** after Jasper's predictions were complete.
+`sha256sum predictions/CLAUDE.md predictions/claude_predictions.yaml` gives the hashes above.

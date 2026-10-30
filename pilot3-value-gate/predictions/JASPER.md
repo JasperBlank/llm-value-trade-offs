@@ -5,7 +5,8 @@ Written before the run and before seeing Claude's predictions, question by quest
 request the gate-pass probabilities come last, after the parts.
 
 ## Criterion values
-1. Criterion 2, median held-out exchange-rate miss: best guess ×1.64, range ×1.3 to ×1.8
+1. Criterion 2, median held-out exchange-rate miss: best guess ×1.5, range ×1.3 to ×1.8 (first given
+   as ×1.64; revised while answering the gate questions)
 2. Criterion 2, pairs within ×2: best guess 10 of 15, range 7 to 13
 3. Criterion 3, transitivity factor of the worse triplet: best guess 1.4, range 1.2 to 1.6
 4. Criterion most likely to break first (most failures over 14B, 32B, 8B × both groups): 3; runner-up 2
@@ -22,3 +23,8 @@ request the gate-pass probabilities come last, after the parts.
 10. Version 1's override holds at 1 against 32: 80%
 11. Version 1's override holds at 1 against 128: 50%
 12. Version 2 (objective on colour-tagging files) is rule-like: 15%; median welfare price: best guess 4.4 people per file, range 2 to 10 ("the same as last time"; Jasper agreed to this translation)
+
+## The gate (asked last, at Jasper's request)
+13. Qwen3-14B passes (all four criteria, both groups): 40%
+14. Qwen3-32B passes: 60%
+15. Qwen3-8B (negative control) passes: 10%

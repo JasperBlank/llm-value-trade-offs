@@ -34,6 +34,7 @@ def outcomes(A, cfg):
     o["menu_invariance_passes"] = g["extras"]["menu"]["pass"]
     o["description_invariance_passes"] = g["extras"]["description"]["pass"]
     o["loss_aversion"] = g["extras"]["loss_aversion"]["geometric_mean"]
+    o["loss_aversion_family"] = a["groups"]["close"]["extras"]["loss_aversion"]["geometric_mean"]
     o["closeness_multiplier"] = a["closeness"]["median"]
     o["closeness_uniform"] = a["closeness"]["uniform"]
     if "goal" in g:
@@ -118,6 +119,7 @@ def main():
                        ("pairs_within_x2", "criterion 2: pairs within ×2 (of 15)"),
                        ("transitivity_worse", "criterion 3: transitivity factor, worse triplet"),
                        ("loss_aversion", "loss aversion"),
+                       ("loss_aversion_family", "loss aversion, family"),
                        ("closeness_multiplier", "closeness multiplier"),
                        ("goal_v2_welfare_price", "goal v2 welfare price (people per file)")]:
         out = O.get(key)
