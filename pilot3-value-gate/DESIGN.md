@@ -75,17 +75,25 @@ ratios around each monkey's indifference point.
 |---|---|---|
 | 1a | Quantity sensitivity | As pilot 2, on cell probabilities: every real good's choice rises with its number of people |
 | 1b | Numbers alone don't pull | Real goods chosen with ≥ 90% probability on average against neutral goods, including at 1 against 8 **[D5]** |
-| 2 | One scale fits | **[D4]** |
+| 2 | One scale fits | Held-out exchange rates: median miss ≤ ×1.5, and at least two thirds of pairs within ×2 (decided 30 Oct) |
 | 3 | Transitivity | As pilot 2 (within ×1.5 for both real triplets), on cell probabilities |
 
-**[D4] Criterion 2.** With the stage-2 grid near indifference, a correlation is a harder test
-than in pilot 2, because the easy 0-or-1 cells are gone. Options:
-- (a) Held-out correlation ≥ 0.9 over cells, as before.
-- (b) Monkey-style: predict each held-out pair's exchange rate from one value per good fitted
-  on the other pairs; the prediction must be within ×1.5 of the pair's own rate for at least
-  two thirds of the pairs. This measures exactly what "one common scale" means and does not
-  depend on where the grid sits.
-- Proposal: (b) decides; (a) is reported.
+**Criterion 2 (decided 30 Oct).** For each of the 15 real pairs (within and across
+valences), fit one value per good on the other 14 pairs and predict the held-out pair's
+exchange rate; compare it with the rate fitted from that pair's own cells. The miss is the
+factor between the two. The gate needs the median miss ≤ ×1.5 and at least two thirds of
+pairs within ×2. The held-out correlation is reported, not deciding.
+
+Why not a correlation: in pilot 2 (re-analysed with order averaging), 4B reached the same
+held-out r as 14B (0.85) despite a transitivity factor of 190, because the correlation is
+carried mostly by "more people is more likely", which every model shows. With the stage-2
+grid near indifference a correlation would also depend on where the grid sits.
+
+How the bar was chosen, stated openly: with pilot 2's data in view (now tune data), so that
+the bar can still fail a model known to be inconsistent. In that exploratory re-analysis,
+14B strangers would pass (median ×1.35; 11 of 15 within ×2), while 14B family (×1.70), 8B
+(×1.64; 8 of 15) and 4B (×2.38; 4 of 15) would fail. Pilot 2's grid made these rates noisy;
+the two-stage grid should make them more precise.
 
 **[D5] Neutral goods.** Proposal: keep neutral goods as the control for "numbers alone pull"
 (real must beat 8 neutral units), and report the neutral-versus-neutral slope as an extra
