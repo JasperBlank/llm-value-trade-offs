@@ -25,6 +25,7 @@ enters that valuation as extra value or overrides it like a rule.
 | `run.py` | Runs one phase (`tune`, `test` or `goal`) on one model |
 | `select_format.py` | After the tune phase: picks frame and value-function shape by the pre-registered rule |
 | `analyze.py` | The gate, the extras, closeness, the goal module, the 32B rule; one report per model plus a summary |
+| `score_predictions.py` | After `analyze.py`: scores both prediction sets (Brier scores, 80% ranges, which criterion breaks first) |
 | `pod.ipynb` | The notebook for the GPU pod: three cells that beep when done |
 | `predictions/` | Jasper's predictions and Claude's (sealed until Jasper's are in; until then only their hash, in `SEALED.md`) |
 | `results/dryrun/` | Reports from the dry run: the analysis finding the fake model's known values again |
