@@ -32,5 +32,5 @@ Unless stated otherwise, the numbers are for Qwen3-14B, test goods, strangers.
 12. Closeness multiplier (family ÷ strangers): best guess 1.0, range 0.3 to 3; probability it is uniform: 50%
 
 ## Goal module
-13. Version 1 (objective on a real good) is rule-like: 
+13. Version 1 (objective on a real good) is rule-like: 80%
 14. Version 2 (objective on re-labelling archive boxes) is rule-like: ; welfare price: best guess , range 
