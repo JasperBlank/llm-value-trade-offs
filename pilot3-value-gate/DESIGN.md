@@ -56,9 +56,9 @@ data may be used freely to set pilot 3 up.
   probability on A/B), plus three new ones, for six. Six adds little reliability (0.97 to
   0.98) but guards against a quirk of one wording on the new goods.
 
-## 4. Quantities **[D3]**
+## 4. Quantities (decided 30 Oct: two stages)
 
-Proposal: put the comparisons where the decisions happen, as Padoa-Schioppa placed the juice
+Put the comparisons where the decisions happen, as Padoa-Schioppa placed the juice
 ratios around each monkey's indifference point.
 - **Stage 1 (scouting), in the same pod run:** for each test pair, the ratios 1:8 to 8:1
   (quantities 1, 2, 4, 8 on one side against 1 on the other, both ways), two wordings, both
@@ -68,7 +68,6 @@ ratios around each monkey's indifference point.
 - The procedure is fixed in advance and run automatically, so no one chooses quantities after
   seeing the test goods' data.
 
-Alternative: pilot 2's fixed grid, widened to 1:16 (simpler, but most cells stay at 0 or 1).
 
 ## 5. The gate (14B; all must hold in both groups)
 
