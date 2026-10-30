@@ -12,3 +12,4 @@ request the gate-pass probabilities come last, after the parts.
 
 ## Extras
 5. Menu invariance passes: 50%
+6. Description invariance passes: 60%
