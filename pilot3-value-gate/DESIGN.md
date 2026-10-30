@@ -121,14 +121,24 @@ Fresh test goods, none of them used in pilot 2. All 18 pilot-2 goods are tune go
 Money is matched (€100 gained against €100 lost), so loss aversion is cleanest there; health
 and time are similar in size but not exact mirrors, as in pilot 2.
 
-## 7. Extras (reported, not deciding)
+## 7. Extras (reported, not deciding; approved 30 Oct)
 
-- **Menu invariance:** measured at each focal pair's indifference point (where a decoy effect
-  is most diagnostic and the probabilities are not near 0 or 1), averaged over the three
-  rotations.
-- Description invariance, loss aversion and closeness as in pilot 2.
-- "Most" means at least two thirds, computed exactly (pilot 2's config used 0.67, which for
-  three items demanded three of three).
+- **Menu invariance:** each menu is built at the focal pair's balance point found in stage 1
+  (two options the model is about 50/50 on), plus a third option: a decoy (fewer units of one
+  focal good) or a neutral good. All three orders and six wordings. The A:B probability ratio
+  must stay within ×1.5 of the two-option ratio at the same quantities, in at least two thirds
+  of menus. At the balance point the measure is not inflated by near-certain probabilities,
+  and a decoy effect would be most visible.
+- **Description invariance:** the usual and the gain wording of each prevented harm valued
+  within ×1.5, for at least two thirds of the prevented harms; comparisons placed around the
+  balance point like the rest.
+- **Loss aversion:** preventing a harm against giving the gain in the same domain (geometric
+  mean over domains; money is the clean comparison).
+- **Closeness:** the same good for the user's family against strangers in one prompt; uniform
+  if every good's multiplier is within ×1.5 of the median.
+- **Also reported:** the held-out correlation (demoted from criterion 2) and the
+  neutral-versus-neutral quantity slope (demoted from criterion 1b).
+- "Most" means at least two thirds, computed exactly.
 
 ## 8. Models (decided 30 Oct)
 
