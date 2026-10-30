@@ -44,7 +44,7 @@ data may be used freely to set pilot 3 up.
   function, both chosen in pilot 2's tune phase. No new frame selection.
 - Forced choice, first-token probabilities, Qwen3 non-thinking mode.
 - Three valences (gain, harm prevented, neutral), three domains (health, money, time).
-- Beneficiary groups: strangers and the user's family **[D8]**.
+- Beneficiary groups: strangers and the user's family; the gate must pass in both (decided 30 Oct).
 - The goal module, repeated on the fresh goods **[D10]**.
 
 ## 3. Measurement (decided 30 Oct: order averaging, six wordings)
@@ -69,7 +69,7 @@ ratios around each monkey's indifference point.
   seeing the test goods' data.
 
 
-## 5. The gate (14B; all must hold in both groups)
+## 5. The gate (per model; all criteria must hold in both beneficiary groups)
 
 | # | Criterion | Proposal |
 |---|---|---|
