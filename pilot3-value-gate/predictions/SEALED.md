@@ -7,5 +7,10 @@ committed in the lock commit as `predictions/CLAUDE.md`, with the numbers in
 
 SHA-256 of those two files, exactly as they will be committed:
 
-    CLAUDE.md                 6ae7eab85c10d305998ba685d60d3a36a9fe11b6682bd4eab20fec9c67a7dbd0
+    CLAUDE.md                 d29bd69a61797ae67f7900f427835fd0017856988a167942f8f9370c78b8a06a
     claude_predictions.yaml   cc56b3c16f200b0530b3825a1450d1cb8ef0f0ef3c2975a9eafc7dfd4c76f269
+
+Re-sealed a few minutes after the first hash (commit d9253d4), before Jasper had written
+anything: the time stated inside CLAUDE.md had been read from the machine's local clock
+(UTC+8) and said 21:20 UTC instead of about 14:15 UTC. Only that time changed; the
+predictions did not (the hash of claude_predictions.yaml is unchanged).
