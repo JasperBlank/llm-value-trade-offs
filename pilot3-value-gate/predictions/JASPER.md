@@ -20,3 +20,4 @@ request the gate-pass probabilities come last, after the parts.
 9. Version 1 (objective on a real good) is rule-like (at 1 against 8): 95% (first given as 80%,
    corrected when question 10 made clear that question 9 was about 1 against 8)
 10. Version 1's override holds at 1 against 32: 80%
+11. Version 1's override holds at 1 against 128: 50%
