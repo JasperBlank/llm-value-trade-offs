@@ -74,7 +74,7 @@ ratios around each monkey's indifference point.
 | # | Criterion | Proposal |
 |---|---|---|
 | 1a | Quantity sensitivity | As pilot 2, on cell probabilities: every real good's choice rises with its number of people |
-| 1b | Numbers alone don't pull | Real goods chosen with ≥ 90% probability on average against neutral goods, including at 1 against 8 **[D5]** |
+| 1b | Numbers alone don't pull | Real goods chosen with ≥ 90% probability on average against neutral goods, including at 1 against 8 (decided 30 Oct) |
 | 2 | One scale fits | Held-out exchange rates: median miss ≤ ×1.5, and at least two thirds of pairs within ×2 (decided 30 Oct) |
 | 3 | Transitivity | As pilot 2 (within ×1.5 for both real triplets), on cell probabilities |
 
@@ -95,9 +95,12 @@ the bar can still fail a model known to be inconsistent. In that exploratory re-
 (×1.64; 8 of 15) and 4B (×2.38; 4 of 15) would fail. Pilot 2's grid made these rates noisy;
 the two-stage grid should make them more precise.
 
-**[D5] Neutral goods.** Proposal: keep neutral goods as the control for "numbers alone pull"
-(real must beat 8 neutral units), and report the neutral-versus-neutral slope as an extra
-instead of a criterion. Alternative: write neutral goods that are explicitly worthless.
+**Neutral goods (decided 30 Oct).** Criterion 1b is only its first part: real goods are
+chosen with at least 90% probability on average against neutral goods, including when the
+neutral side has 8 times as many units. The neutral-versus-neutral quantity slope (pilot 2's
+second part) is reported as an extra, not deciding: the neutral goods are low-value rather
+than worthless (re-labelling 8 boxes is a little more useful than 1), so preferring more of
+them is not inconsistent.
 
 ## 6. Goods **[D6]**
 
