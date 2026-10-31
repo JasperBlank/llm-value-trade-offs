@@ -188,6 +188,22 @@ def main():
         out["number_baseline_r2"][tgt] = r2_score(Y[tgt], p, torch)
     log(f"Number-only baseline R2: {out['number_baseline_r2']}")
 
+    gains = {k for k in set(ka + kb) if k.startswith("G_")}
+    harms = {k for k in set(ka + kb) if k.startswith("H_") and "~" not in k}
+    money = {"G_energy", "H_fine", "H_fine~gainword"}
+    splits = {
+        "gains_to_harms": ([(a in gains and b in gains) for a, b in zip(ka, kb)], [a in harms for a in ka]),
+        "harms_to_gains": ([(a in harms and b in harms) for a, b in zip(ka, kb)], [a in gains for a in ka]),
+        "nonmoney_to_money": ([(a not in money and b not in money) for a, b in zip(ka, kb)], [a in money for a in ka]),
+    }
+    cur = {name: {"r2": [], "u_error": []} for name in splits}  # u_error: partial r on the test kind
+    cos = {"gains_vs_harms": [], "money_vs_nonmoney": []}
+    pa_end = names.index("a_end")
+    sub = {"gains": [(a in gains and b in gains) for a, b in zip(ka, kb)],
+           "harms": [(a in harms and b in harms) for a, b in zip(ka, kb)],
+           "money": [(a in money or b in money) for a, b in zip(ka, kb)],
+           "nonmoney": [(a not in money and b not in money) for a, b in zip(ka, kb)]}
+
     # ------------------------------------------------------------------ value probes
     dirs = {}
     for li in range(L):
@@ -212,9 +228,32 @@ def main():
                 if names[pj] == pos:
                     w, xm, ym = ridge.fit(X, Y[tgt], best_c[(tgt, li, pj)])
                     dirs[f"{tgt}@{pos}"] = dirs.get(f"{tgt}@{pos}", []) + [(li, w.cpu().numpy(), xm.cpu().numpy(), float(ym))]
+        # One currency or several, at the end of option A's line (uses the block already in memory).
+        X = Xl[:, pa_end]
+        for name, (tr, te) in splits.items():
+            tr_t, te_t = torch.tensor(tr, device=dev), torch.tensor(te, device=dev)
+            if tr_t.sum() < 10 or te_t.sum() < 3:
+                cur[name]["r2"].append(float("nan"))
+                cur[name]["u_error"].append(float("nan"))
+                continue
+            w, xm, ym = ridge.fit(X[tr_t], Y["v_a"][tr_t], best_c[("v_a", li, pa_end)])
+            p = (X[te_t] - xm) @ w + ym
+            cur[name]["r2"].append(r2_score(Y["v_a"][te_t], p, torch))
+            keys_te = [k for k, m in zip(ka, te) if m]
+            q = lab["log_qa"][ti][np.array(te)]
+            cur[name]["u_error"].append(u_recovery((p - ym).cpu().numpy(), q, keys_te, b_val, u)["r_all"])
+        wsub = {}
+        for nm, m in sub.items():
+            m_t = torch.tensor(m, device=dev)
+            if m_t.sum() >= 10:
+                wsub[nm] = ridge.fit(X[m_t], Y["v_a"][m_t], best_c[("v_a", li, pa_end)])[0]
+        cs_ = torch.nn.functional.cosine_similarity
+        cos["gains_vs_harms"].append(float(cs_(wsub["gains"], wsub["harms"], dim=0)) if {"gains", "harms"} <= set(wsub) else float("nan"))
+        cos["money_vs_nonmoney"].append(float(cs_(wsub["money"], wsub["nonmoney"], dim=0)) if {"money", "nonmoney"} <= set(wsub) else float("nan"))
         log(f"  layer {li}: best R2 v_a {np.nanmax(r2['v_a'][li]):.2f}, v_b {np.nanmax(r2['v_b'][li]):.2f}, "
             f"dv {np.nanmax(r2['dv'][li]):.2f}, choice {np.nanmax(r2['choice'][li]):.2f}; "
             f"u recovery (real goods) at a_end {urec['v_a_real'][li, names.index('a_end')]:.2f}")
+    out["currency"] = {"transfer": cur, "cosine": cos, "position": "a_end", "target": "v_a"}
     out["r2"] = {k: v.tolist() for k, v in r2.items()}
     out["u_recovery_r"] = {k: v.tolist() for k, v in urec.items()}
     out["best_c"] = {f"{k[0]}|{k[1]}|{names[k[2]]}": v for k, v in best_c.items()}
@@ -223,52 +262,6 @@ def main():
              **{f"{name}_mean": np.stack([x[2] for x in v]) for name, v in dirs.items()},
              **{f"{name}_ymean": np.array([x[3] for x in v]) for name, v in dirs.items()},
              layers=np.arange(L))
-
-    # ------------------------------------------------------------------ one currency or several
-    log("Currency splits ...")
-    gains = {k for k in set(ka + kb) if k.startswith("G_")}
-    harms = {k for k in set(ka + kb) if k.startswith("H_") and "~" not in k}
-    money = {"G_energy", "H_fine", "H_fine~gainword"}
-    splits = {
-        "gains_to_harms": ([(a in gains and b in gains) for a, b in zip(ka, kb)], [a in harms for a in ka]),
-        "harms_to_gains": ([(a in harms and b in harms) for a, b in zip(ka, kb)], [a in gains for a in ka]),
-        "nonmoney_to_money": ([(a not in money and b not in money) for a, b in zip(ka, kb)], [a in money for a in ka]),
-    }
-    cur = {name: {"r2": [], "u_error": []} for name in splits}  # u_error: partial r on the test kind
-    cos = {"gains_vs_harms": [], "money_vs_nonmoney": []}
-    pa_end = names.index("a_end")
-    for li in range(L):
-        X = torch.tensor(np.asarray(resid[ti, li, pa_end], dtype=np.float32), device=dev)
-        ws = {}
-        for name, (tr, te) in splits.items():
-            tr_t, te_t = torch.tensor(tr, device=dev), torch.tensor(te, device=dev)
-            if tr_t.sum() < 10 or te_t.sum() < 3:
-                cur[name]["r2"].append(float("nan"))
-                cur[name]["u_error"].append(float("nan"))
-                continue
-            c = best_c[("v_a", li, pa_end)]
-            w, xm, ym = ridge.fit(X[tr_t], Y["v_a"][tr_t], c)
-            ws[name] = w
-            p = (X[te_t] - xm) @ w + ym
-            cur[name]["r2"].append(r2_score(Y["v_a"][te_t], p, torch))
-            keys_te = [k for k, m in zip(ka, te) if m]
-            q = lab["log_qa"][ti][np.array(te)]
-            rec = u_recovery(p.cpu().numpy(), q, keys_te, b_val, u)
-            cur[name]["u_error"].append(rec["r_all"])
-        # Directions learned on separate subsets, compared.
-        sub = {"gains": [(a in gains and b in gains) for a, b in zip(ka, kb)],
-               "harms": [(a in harms and b in harms) for a, b in zip(ka, kb)],
-               "money": [(a in money or b in money) for a, b in zip(ka, kb)],
-               "nonmoney": [(a not in money and b not in money) for a, b in zip(ka, kb)]}
-        wsub = {}
-        for nm, m in sub.items():
-            m_t = torch.tensor(m, device=dev)
-            if m_t.sum() >= 10:
-                wsub[nm] = ridge.fit(X[m_t], Y["v_a"][m_t], best_c[("v_a", li, pa_end)])[0]
-        cs = torch.nn.functional.cosine_similarity
-        cos["gains_vs_harms"].append(float(cs(wsub["gains"], wsub["harms"], dim=0)) if {"gains", "harms"} <= set(wsub) else float("nan"))
-        cos["money_vs_nonmoney"].append(float(cs(wsub["money"], wsub["nonmoney"], dim=0)) if {"money", "nonmoney"} <= set(wsub) else float("nan"))
-    out["currency"] = {"transfer": cur, "cosine": cos, "position": "a_end", "target": "v_a"}
 
     # ------------------------------------------------------------------ the objective
     log("Objective: goal prompts against their twins ...")
@@ -289,21 +282,22 @@ def main():
                "objective_direction_cos_value": [], "objective_direction_cos_dv": [], "objective_direction_norm_ratio": [],
                "toward_target_direction_cos_dv": []}
         for li in range(L):
-            def readout(name, rows_idx, pos):
+            BG = np.asarray(resid[gi, li], dtype=np.float32)       # (n, P, d), read once per layer
+            BW = np.asarray(resid[wi, li], dtype=np.float32)
+
+            def readout(name, block, pos):
                 w = dirs[name][li][1]
                 xm, ym = dirs[name][li][2], dirs[name][li][3]
-                X = np.asarray(resid[rows_idx, li, names.index(pos)], dtype=np.float32)
-                return (X - xm) @ w + ym
-            va_g, va_w = readout("v_a@a_end", gi, "a_end"), readout("v_a@a_end", wi, "a_end")
-            vb_g, vb_w = readout("v_b@b_end", gi, "b_end"), readout("v_b@b_end", wi, "b_end")
+                return (block[:, names.index(pos)] - xm) @ w + ym
+            va_g, va_w = readout("v_a@a_end", BG, "a_end"), readout("v_a@a_end", BW, "a_end")
+            vb_g, vb_w = readout("v_b@b_end", BG, "b_end"), readout("v_b@b_end", BW, "b_end")
             t_shift = np.where(tslot == 0, va_g - va_w, vb_g - vb_w)
             p_shift = np.where(tslot == 0, vb_g - vb_w, va_g - va_w)
-            dv_g, dv_w = readout("dv@t-1", gi, "t-1"), readout("dv@t-1", wi, "t-1")
+            dv_g, dv_w = readout("dv@t-1", BG, "t-1"), readout("dv@t-1", BW, "t-1")
             res["target_value_readout_shift"].append(float(np.mean(t_shift)))
             res["partner_value_readout_shift"].append(float(np.mean(p_shift)))
             res["dv_readout_shift_toward_target"].append(float(np.mean((dv_g - dv_w) * sign)))
-            Xg = np.asarray(resid[gi, li, names.index("t-1")], dtype=np.float32)
-            Xw = np.asarray(resid[wi, li, names.index("t-1")], dtype=np.float32)
+            Xg, Xw = BG[:, names.index("t-1")], BW[:, names.index("t-1")]
             od = (Xg - Xw).mean(0)
             wv, wd = dirs["v_a@a_end"][li][1], dirs["dv@t-1"][li][1]
             res["objective_direction_cos_value"].append(float(od @ wv / (np.linalg.norm(od) * np.linalg.norm(wv) + 1e-12)))
@@ -328,20 +322,20 @@ def main():
         ya = torch.tensor(lab["v_a"][full_rows], dtype=torch.float32, device=dev)
         yb = torch.tensor(lab["v_b"][full_rows], dtype=torch.float32, device=dev)
         tm = {"regions": REGIONS, "v_a": np.full((L, len(REGIONS)), np.nan), "v_b": np.full((L, len(REGIONS)), np.nan)}
+        pooled = np.zeros((len(full_rows), L, len(REGIONS), d), np.float16)
+        has = np.zeros((len(full_rows), len(REGIONS)), bool)
+        for k in range(len(full_rows)):
+            h = np.asarray(resid_full[off[k]:off[k + 1]], dtype=np.float32)        # (T, L, d), one read
+            rg = regs[off[k]:off[k + 1]]
+            for ri in range(len(REGIONS)):
+                m = rg == ri
+                if m.any():
+                    pooled[k, :, ri], has[k, ri] = h[m].mean(0), True
         for li in range(L):
-            pooled = np.zeros((len(full_rows), len(REGIONS), d), np.float32)
-            has = np.zeros((len(full_rows), len(REGIONS)), bool)
-            for k in range(len(full_rows)):
-                h = np.asarray(resid_full[off[k]:off[k + 1], li], dtype=np.float32)
-                rg = regs[off[k]:off[k + 1]]
-                for ri in range(len(REGIONS)):
-                    m = rg == ri
-                    if m.any():
-                        pooled[k, ri], has[k, ri] = h[m].mean(0), True
             for ri in range(len(REGIONS)):
                 if not has[:, ri].all():
                     continue
-                X = torch.tensor(pooled[:, ri], device=dev)
+                X = torch.tensor(pooled[:, li, ri].astype(np.float32), device=dev)
                 tm["v_a"][li, ri] = r2_score(ya, ridge.cv(X, ya, f_folds)[0], torch)
                 tm["v_b"][li, ri] = r2_score(yb, ridge.cv(X, yb, f_folds_b)[0], torch)
         tm = {k: (v.tolist() if isinstance(v, np.ndarray) else v) for k, v in tm.items()}
