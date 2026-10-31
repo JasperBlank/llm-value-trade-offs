@@ -48,9 +48,9 @@ on the log scale: the value of an option is `V = u_good + b × log(number)`, wit
 Because value = identity + number, the design can tell a value code apart from a code for
 the number alone (log of people) or for the good alone.
 
-## 3. Prompts **[D1]**
+## 3. Prompts (decided 31 Oct)
 
-Proposal: every **strangers** prompt from pilot 3 (the family group is set aside because of
+Every **strangers** prompt from pilot 3 (the family group is set aside because of
 the family-carer confound), about 11,500 prompts:
 - the gate prompts: within- and across-valence pairs (1,800), gain wordings (1,080), real
   against neutral (3,456), neutral against neutral (576);
