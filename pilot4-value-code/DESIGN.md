@@ -74,12 +74,17 @@ Storage is cheap, and three fixed points are a guess about where value lives, so
   (running sums per neuron), enough for the Padoa-Schioppa style classification.
 - Pod volume disk: about 150 GB.
 
-## 5. Where the analysis runs **[D3]**
+## 5. Where the analysis runs (decided 31 Oct)
 
-Proposal: on the pod, by scripts in this folder, in the same session as the recording. Only
-the results come back (tables, figures, the value directions at the best layers, a small
-sample of activations): tens of megabytes, which you download and send as before.
-Recomputing the activations later takes about 10–15 minutes, so nothing large has to be kept.
+GPU time is the cost that matters; storage and transfers are cheap. So:
+- Everything is recorded once, onto a RunPod **network volume** (about 100 GB, Secure Cloud,
+  $0.07/GB/month, deleted when the experiments are done; planned for one afternoon).
+- **Session 1 (RTX A6000):** record, then run the whole exploration battery on the GPU in the
+  same session. Results (tens of MB) come back as before.
+- **Later rounds that only reread stored activations** use the cheapest pod that can attach
+  the volume, with no re-recording.
+- **Only experiments that change activations** (steering, the confirmatory causal test) need
+  the A6000 again.
 
 ## 6. The exploration battery **[D4]**
 
