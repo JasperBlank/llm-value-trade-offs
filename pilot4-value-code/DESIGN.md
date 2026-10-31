@@ -60,15 +60,19 @@ the family-carer confound), about 11,500 prompts:
 
 The model's own answer probabilities are recomputed in the same pass.
 
-## 4. What to record **[D2]**
+## 4. What to record (decided 31 Oct)
 
-Proposal:
-- **Residual stream** after every layer (40 layers plus the embeddings, width 5,120) at three
-  positions: the last token of option A's line, the last token of option B's line, and the
-  final position where the answer is read. In float16 that is about 15 GB, kept on the pod.
-- **MLP neurons** (17,408 per layer) at the same positions: too large to store, so their
-  relation to the variables is computed on the fly (running sums for each neuron), which is
-  enough for the Padoa-Schioppa style classification.
+Storage is cheap, and three fixed points are a guess about where value lives, so:
+- **All ~16,000 prompts, every layer** (embeddings plus 40 layers, width 5,120), float16, at
+  about 10 positions: each option's **number token** and **line end** (4), the **end of the
+  reply instruction**, and the **last 5 tokens** before the answer (the chat template's tail,
+  ending at the position where the answer is read). About 65 GB on the pod.
+- **A subset of 500 prompts at every token and every layer** (about 30 GB), to map token by
+  token where value information appears, in case it lives somewhere not sampled above.
+- **MLP neurons** (17,408 per layer) at the option-line ends, the number tokens and the final
+  position: not stored, but their relation to the variables is accumulated on the fly
+  (running sums per neuron), enough for the Padoa-Schioppa style classification.
+- Pod volume disk: about 150 GB.
 
 ## 5. Where the analysis runs **[D3]**
 
