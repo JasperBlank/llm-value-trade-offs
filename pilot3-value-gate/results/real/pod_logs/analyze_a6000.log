@@ -1,0 +1,8 @@
+[07:49:52] Analysing 14b (15720 test prompts, 9216 goal prompts)
+[07:49:52] Analysing 8b (15612 test prompts, 9216 goal prompts)
+# Pilot 3: summary over models
+
+| model | gate (strangers) | gate (family) | median rate miss (strangers) | transitivity (strangers) | goal: real good rule-like | goal: welfare price (strangers) |
+|---|---|---|---|---|---|---|
+| 14b | fail | fail | ×1.38 | 1.88 | yes | above 128 |
+| 8b | fail | fail | ×1.83 | 2.74 | no | above 128 |
