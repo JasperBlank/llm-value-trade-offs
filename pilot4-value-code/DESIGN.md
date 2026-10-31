@@ -1,8 +1,7 @@
-# Pilot 4 (DRAFT): where does Qwen3-14B compute its trade-offs?
+# Pilot 4: where does Qwen3-14B compute its trade-offs?
 
-Status: draft of 31 Oct 2026. **Exploratory** (decided by Jasper: explore first, then
-pre-register a causal test). Open decisions are marked **[D1]**–**[D5]**, each with a
-proposal.
+Designed by Jasper and Claude on 31 Oct 2026. **Exploratory** (decided by Jasper: explore
+first, then pre-register a causal test). Code in this folder; settings in `config.yaml`.
 
 ## 1. Why, and what counts as interesting
 
@@ -86,37 +85,82 @@ GPU time is the cost that matters; storage and transfers are cheap. So:
 - **Only experiments that change activations** (steering, the confirmatory causal test) need
   the A6000 again.
 
-## 6. The exploration battery **[D4]**
+## 6. The control: the same network with random weights (added 31 Oct, during testing)
 
-1. **Value probes.** For every layer and position, a ridge regression from the residual
-   stream to: the option's value at its own position (A at A's line, B at B's line); the
-   value difference and the choice at the final position. Cross-validated by leaving one good
-   out at a time, so a probe can only score well by reading value, not by recognising goods.
-   Baselines: probes for the number of people alone and for good identity alone.
-2. **One currency or several.** Train the value probe on gains, test it on prevented harms
-   (and the reverse); train without money goods, test on money goods; compare the probe
-   directions (cosine) across these splits.
-3. **Neurons, the monkey way.** For each MLP neuron, how strongly it tracks offer value A,
-   offer value B, chosen value and the choice; classify each neuron by its best variable and
-   count them per layer.
-4. **A first causal look (exploratory).** Add the value direction at option A's position, at
-   the best layer and a few strengths, and measure how P(A) moves on held-out prompts, against
-   the shift the probe predicts. The confirmatory version comes later.
-5. **The objective.** For each objective prompt and its twin: does the target's value readout
-   rise (extra value)? Does the final decision depart from the value difference read out at
-   the final position (a bypass)? And what is the "objective present" direction (mean
-   difference between twins) at each layer, and how does it relate to the value direction?
+Testing the code showed that a network with **random weights** already "reads out" value from
+the activations: probes reach R² up to about 0.5, and their estimate of unseen goods' value
+correlates about 0.3 with the truth. The reason is the words: money goods share "€100" and
+are both valuable, and the stage-2 grids give less valuable goods larger numbers. So every
+measure is also computed for **Qwen3-14B's architecture with random weights** (seeded), on
+the 6,912 test prompts, and **only what the real model shows above this control counts as
+learned**. Two more built-in floors: the value of option A read at A's *number* token (the
+good has not been read yet, so a true value code cannot be there), and, for neurons, a
+shuffle control.
 
-## 7. Model and cost **[D5]**
+## 7. The exploration battery (approved 31 Oct)
 
-Qwen3-14B in bf16 on one RTX A6000 (as in pilots 2 and 3). About 16,000 forward passes with
-hidden states (10–15 minutes), the neuron statistics and the steering runs: roughly one hour
-in total, about $0.60, one notebook cell that beeps when done.
+1. **Token map** (`probes.py`; the 500 full prompts): for each part of the prompt (mean over
+   its tokens) and layer, how well a ridge probe predicts option A's and B's value, tested on
+   goods it never saw.
+2. **Value probes** (`probes.py`; all test prompts, every layer, all 10 positions): ridge
+   regressions to the value of A, the value of B, the value difference, the choice and the
+   number of people. Cross-validation leaves out one option (or a group of pairs) at a time.
+   Reported per layer and position: held-out R²; **unseen goods' value**, the partial
+   correlation between the probe's held-out prediction (relative to its training mean) and
+   the true value with the number of people removed (0 for a probe that only counts people);
+   number-only baselines.
+3. **One currency or several** (`probes.py`; at the end of option A's line, every layer): a
+   probe trained on gains tested on prevented harms and back, trained without money goods
+   tested on money goods; cosines between directions learned on separate subsets.
+4. **Neurons the monkey way** (`neurons.py`): every MLP neuron's correlation with offer value
+   A and B (number removed), the number of people, chosen value and the choice; classified by
+   its best variable. Then the stricter criterion at the option positions, over prompts with
+   a real good: a **value neuron** follows the number of people with the good held fixed AND
+   the good's value with the number held fixed (partial correlations ≥ 0.2, same sign), in
+   about the right mix (sensitivity to log(number) ÷ sensitivity to value within a factor 2
+   of b = 1.46). Compared with 50 shuffles of the goods' values (shuffles uncorrelated with
+   the true order) and with the random network.
+5. **A first causal look** (`steer.py`, exploratory): at the layer where the real model best
+   reads unseen goods' value (layers 4–36), the value probe is refitted without 400 held-out
+   prompts the model is undecided about, and its direction is added to every token of option
+   A's line at strengths −2, −1, 0, +1, +2 value units (so the readout moves by that much). If
+   the model uses this direction as value, the log-odds of choosing A should move with slope
+   about 1. Control: a random direction of the same length.
+6. **The objective** (`probes.py`): each goal-module prompt against its twin: shift in the
+   target's value readout at its line end; shift in the value-difference readout at the final
+   position; the actual shift in the choice; the "objective present" direction and the "push
+   towards the target" direction at the final position, and their cosines with the value
+   directions. Extra value: the target's readout moves about as much as the choice. Bypass:
+   the choice moves, the value readouts do not.
+7. **Comparison** (`compare.py`): every key measure for the real model against the random
+   control, with the layer where the gap is largest.
 
-## 8. After the exploration
+## 8. Model and cost
+
+Qwen3-14B in bf16 on one RTX A6000, Secure Cloud, with a 200 GB network volume (recordings
+about 135 GB with the control, plus the model cache). One notebook cell, about 75 minutes:
+a two-minute test on Qwen3-0.6B, recording (real and control), the battery, packing the
+results.
+
+## 9. Tests before the run
+
+- **Planted code** (`tests/make_synthetic.py`): synthetic activations with a value direction
+  at one layer, a value-difference code at the end, an "extra value" objective and a "bypass"
+  objective, value neurons and number-only neurons. The battery finds each at the right layer
+  and position; unseen-goods value is 0.97 at the planted layer and about 0 elsewhere; it
+  separates the two objectives (the target's readout moves by the planted 3 units in one, 0
+  in the other); it finds exactly the 10 planted value neurons and 10 number neurons, with 0
+  false ones on average under the shuffles.
+- **Tiny model:** the recording, batched with padding, matches a single unpadded forward pass
+  (within float16 rounding); token positions land on the number, the line ends, the reply's
+  full stop and the chat template's last tokens; every script runs end to end. Its random
+  weights also showed the lexical effect behind section 6.
+
+## 10. After the exploration
 
 1. Read the results together; decide what the value code looks like (if any).
 2. Pre-register a causal test on fresh prompts: the layer, direction and strengths, and the
    predicted shift in exchange rates, fixed before it runs; both of us predict.
-3. If no value code appears: report that (a consistent-looking behaviour without a linear
-   value code is a finding too) and decide whether to look at nonlinear readouts or attention.
+3. If no value code appears above the control: report that (a consistent-looking behaviour
+   without a linear value code is a finding too) and decide whether to look at nonlinear
+   readouts or attention.

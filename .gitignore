@@ -7,3 +7,5 @@ pilot2-value-gate/results/dryrun/*.jsonl
 pilot1-goal-sources/results/*-dryrun/
 pilot3-value-gate/results/quick/
 pilot3-value-gate/results/dryrun/*.jsonl
+pilot4-value-code/results/quick*/
+pilot4-value-code/results/tinyfull*/

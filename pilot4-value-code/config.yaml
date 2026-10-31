@@ -1,0 +1,28 @@
+# Pilot 4 settings (exploratory; see DESIGN.md).
+model: Qwen/Qwen3-14B
+dtype: bfloat16
+batch_size: 16
+acts_dir: /workspace/acts          # on the network volume (about 100 GB)
+results_dir: results/real
+
+# Residual-stream positions recorded for every prompt (all layers).
+positions: [a_num, a_end, b_num, b_end, reply_end, t-5, t-4, t-3, t-2, t-1]
+# Positions where MLP neurons are summarised (running sums, not stored).
+neuron_positions: [a_num, a_end, b_num, b_end, t-1]
+
+probes:
+  ridge_c: [0.001, 0.01, 0.1, 1.0]   # ridge penalty, as a multiple of the mean eigenvalue of X'X
+  pair_folds: 8                      # folds of whole pairs of goods, for the value difference and the choice
+
+steering:
+  strengths: [-2, -1, 0, 1, 2]       # added value, in the probe's units (log-value; 1 unit = a factor exp(1/b) in people)
+  n_prompts: 400                     # held-out prompts near the balance point
+  layer_range: [4, 36]               # where the best layer is searched
+
+quick:                               # --quick: small model and few prompts, to test the pipeline on the pod
+  model: Qwen/Qwen3-0.6B
+  acts_dir: /workspace/acts_quick
+  results_dir: results/quick
+  limit: 240
+  full_subset: 12
+  batch_size: 8
