@@ -215,3 +215,12 @@ The reasoning fallback, as agreed: does consistency appear when the model may th
 1. This design, the code and both prediction sets (Claude's sealed first): the lock commit.
 2. Pod 1 (A6000): 14B and 8B. Pod 2 (A100): 32B. Results are not shown on the pod.
 3. Results committed, then opened together and scored (`score_predictions.py`).
+
+## 13. After the 14B and 8B results: 32B not run
+
+On 31 Oct, after seeing the 14B and 8B results, Jasper decided not to run Qwen3-32B and to
+move to the interpretability phase on Qwen3-14B instead: 14B came within one criterion of
+passing for strangers (criterion 2 passed; criterion 3 missed on the prevented-harms triplet,
+×1.88), which he judged consistent enough to look for internal structure. The 32B
+predictions (Jasper 60%, Claude 50%) are therefore not scored. The gate result for pilot 3
+stands as run: 14B and 8B fail.
