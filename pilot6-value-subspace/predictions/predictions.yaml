@@ -1,0 +1,17 @@
+# Jasper's predictions for pilot 6, given one by one on 2 Nov 2026 (12:37-12:51 Amsterdam time),
+# before any result was seen (the run's outputs were hidden on the pod). Final values after the
+# consistency check; the values before it are in JASPER.md.
+q1_quantity_half_layer: {best: 20, range80: [10, 30]}       # changed from 5 [2, 20] before question 2
+q2_weight_half_layer: {best: 22, range80: [12, 32]}
+q3_quantity_top20_transfer: {best: 0.65, range80: [0.4, 0.8]}
+q4_weight_top20_transfer: {best: 0.65, range80: [0.4, 0.8]}
+q5_das_k1_share_28: {best: 0.5, range80: [0.1, 0.9]}
+q6_smallest_k_for_0.9: 8
+q7_probe_swap_share_28: {best: 0.5, range80: [0.1, 0.9]}
+q8_abs_cos_learned_probe_28: {best: 0.0, range80: [0.0, 0.5]}   # given as 0, -0.5 to 0.5 (signed)
+q9_corr_learned_va_heldout_28: {best: 0.5, range80: [0.3, 0.8]}  # after the consistency check (was 0, [-0.5, 0.5])
+q10_push_ratio_learned_over_probe_28: {best: 3, range80: [0.5, 4]}   # after the check (was 2)
+q11a_p1_verdict: {generic: 0.30, value_specific: 0.20, mixed: 0.50}  # after the check (was 0.30 / 0.40 / 0.30)
+q11b_p2_pass: 0.50                     # after the check (was 0.60)
+q11c_p3_pass: 0.50                     # after the check (was 0.60)
+q11d_p4_pass: 0.50                     # after the check (was 0.60)
