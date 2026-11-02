@@ -1,0 +1,15 @@
+# Test configuration: the tiny random Qwen3 (10 blocks) used for pilots 5 and 6.
+models:
+  tiny: {path: TINY, map_layers: [2, 4, 6, 8, 10]}
+dtype: float32
+batch_size: 8
+results_dir: RES
+acts_dir: ACTS
+map: {n_pairs: 24, sites: [A_end, A_nl, newlines, B_line, B_end, B_nl, reply, template, after_B, between, after_A, last],
+      a_sites: [A_end, A_nl], b_sites: [B_nl, reply, template, after_B], seed: 7}
+das: {k: 1, epochs: 2, batch_size: 16, lr: 0.01, seed: 7, max_train_pairs: 96}
+fit: {ridge: 0.01}
+prereg: {arrival_min: 0.5, one_currency_min: 0.5, exchange_rate_factor: 1.5, magnitude_max: 0.3,
+         magnitude_site_min: 0.2, decision_rho: 0.5, decision_site_min: 0.2,
+         a_site_floor: 0.1, usable_min_corr: 0.5}
+limit: {good_train: 96, number_train: 96, good_test: 64, number_test: 64, bnumber_test: 64, quantity: 32, weight: 32}

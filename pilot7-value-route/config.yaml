@@ -1,0 +1,47 @@
+# Pilot 7 settings. Everything under `prereg` is PRE-REGISTERED (DESIGN.md, section 4).
+models:
+  qwen:  {path: Qwen/Qwen3-14B, map_layers: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]}
+  llama: {path: meta-llama/Llama-3.1-8B-Instruct, map_layers: [4, 8, 12, 16, 20, 24, 28, 32]}
+dtype: bfloat16
+batch_size: 16
+results_dir: results/real
+acts_dir: /workspace/acts7
+
+map:
+  n_pairs: 128                   # per swap type (A good, A number, B number, apples, weight), held-out wordings
+  sites: [A_end, A_nl, newlines, B_line, B_end, B_nl, reply, template, after_B, between, after_A, last]
+  a_sites: [A_end, A_nl]                                  # before B's line: cannot depend on B
+  b_sites: [B_nl, reply, template, after_B]               # after B's line, before the answer position
+  seed: 7
+
+das:
+  k: 1
+  epochs: 2
+  batch_size: 32
+  lr: 0.002
+  seed: 7
+  max_train_pairs: 1440
+
+fit:
+  ridge: 0.01                    # tiny ridge on the per-good values (identifiability)
+
+prereg:
+  arrival_min: 0.5               # arrival layer: first layer where the last position carries >= 0.5 of a good swap
+  one_currency_min: 0.5          # V2: the good-trained direction carries >= 0.5 of the site's number-swap effect (and of its good-swap effect)
+  exchange_rate_factor: 1.5      # V3: coordinate change per value unit, number swaps / good swaps, within this factor
+  magnitude_max: 0.3             # V4: the value direction carries < 0.3 of the site's quantity-swap effect ...
+  magnitude_site_min: 0.2        # ... where the site carries at least 0.2 of the quantity swap (else: not testable)
+  decision_rho: 0.5              # V5: coordinate per unit of B's value / per unit of A's: <= -0.5 the comparison, >= 0.5 a shared code, between: A's own value ...
+  decision_site_min: 0.2         # ... where the site carries at least 0.2 of a B swap (else: not testable)
+  a_site_floor: 0.1              # the A site counts only if its whole swap carries at least 0.1 of a good swap
+  usable_min_corr: 0.5           # a model's verdicts count only if its fitted values predict held-out choices with r >= 0.5
+
+quick:
+  models:
+    qwen: {path: Qwen/Qwen3-0.6B, map_layers: [4, 8, 12, 16, 20, 24, 28]}
+  acts_dir: /workspace/acts7_quick
+  results_dir: results/quick
+  batch_size: 8
+  map: {n_pairs: 24}
+  das: {epochs: 1, batch_size: 16, max_train_pairs: 96}
+  limit: {good_train: 96, number_train: 96, good_test: 64, number_test: 64, bnumber_test: 64, quantity: 32, weight: 32}
