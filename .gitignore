@@ -10,3 +10,4 @@ pilot3-value-gate/results/dryrun/*.jsonl
 pilot4-value-code/results/quick*/
 pilot4-value-code/results/tinyfull*/
 pilot5-value-circuit/results/quick*/
+pilot5-value-circuit/results/formats_run/*.npz

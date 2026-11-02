@@ -6,8 +6,10 @@ from pathlib import Path
 
 res = Path(sys.argv[1] if len(sys.argv) > 1 else "results/real")
 print((res / "report.md").read_text())
-for name in ("verdicts.json", "steering.json", "directions.json", "formats.json", "patching.json", "readers.json",
-             "objective.json", "record_check.json", "circuit_identity.json", "circuit.json"):
+names = [a for a in sys.argv[2:] if a != "report.md"] or [
+    "verdicts.json", "steering.json", "directions.json", "formats.json", "patching.json", "readers.json",
+    "objective.json", "record_check.json", "circuit_identity.json", "circuit.json"]
+for name in names:
     p = res / name
     if not p.exists():
         continue
