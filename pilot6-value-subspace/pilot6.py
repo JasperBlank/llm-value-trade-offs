@@ -482,9 +482,9 @@ def stage_steer(ctx):
         c = float(np.polyfit(va[real], states[:nt, j][real] @ e, 1)[0])     # coordinate change per natural value unit
         return e * c, c                                                     # push per value unit = e * c
     r = Sx[f"W_{L}_whole_k1"][0]
-    vec_r, c_r = calibrated(r)
-    if c_r < 0:
-        vec_r, c_r = -vec_r, -c_r
+    vec_r, c_r = calibrated(r)          # e * c already points the way A's value moves the state, whatever the
+    #                                     sign of r (fix, 2 Nov: the first run also flipped it when c < 0,
+    #                                     which reversed the learned push; see report.md)
     w = PW[f"w_{L}"]
     vec_w, c_w = calibrated(w)
     g = np.random.default_rng(int(S["seed"]))
@@ -520,6 +520,22 @@ def stage_steer(ctx):
            "push_length_per_unit": {"learned": float(np.linalg.norm(vec_r)), "probe": float(np.linalg.norm(vec_w)),
                                     "random": float(np.linalg.norm(vec_rand))},
            "behaviour_slope_logit_diff_per_value_unit": float(np.polyfit(dv, base_all, 1)[0]), "directions": {}}
+    # exploratory (not pre-registered): is the learned direction the answer itself (the decision)?
+    Hte = states[nt:, j]
+    ru = vec_r / np.linalg.norm(vec_r)
+    wu = vec_w / np.linalg.norm(vec_w)
+    WU = model.lm_head.weight
+    u = (WU[ia] - WU[ib]).float()
+    gam = model.model.norm.weight.float()
+    ug = (u * gam).cpu().numpy()
+    u = u.cpu().numpy()
+    cos = lambda a, b: float(a @ b / np.linalg.norm(a) / np.linalg.norm(b))
+    out["decision_check"] = {
+        "learned_corr_with_models_logit_diff": float(np.corrcoef(Hte @ ru, base_all)[0, 1]),
+        "probe_corr_with_models_logit_diff": float(np.corrcoef(Hte @ wu, base_all)[0, 1]),
+        "learned_cos_with_unembedding_A_minus_B": cos(ru, u), "learned_cos_with_norm_scaled_unembedding": cos(ru, ug),
+        "probe_cos_with_unembedding_A_minus_B": cos(wu, u), "probe_cos_with_norm_scaled_unembedding": cos(wu, ug)}
+    log("  decision check: " + ", ".join(f"{k} {v:+.3f}" for k, v in out["decision_check"].items()))
     b0, l0 = base_all[near], lo_all[near]
     for name, vec, strengths in (("learned", vec_r, S["strengths"]), ("probe", vec_w, S["strengths"]),
                                  ("random", vec_rand, [-2, 2])):
@@ -623,7 +639,17 @@ def stage_report(ctx):
             x = St["directions"][k]
             lines.append(f"| {k} | {x['slope_logit_diff']:+.3f} [{x['ci95'][0]:+.3f}, {x['ci95'][1]:+.3f}] | {x['slope_logodds']:+.3f} | "
                          f"{St['push_length_per_unit'][k]:.2f} |")
-        lines += ["", f"**P3: {'pass' if V['P3']['pass'] else 'fail'}.**"]
+        lines += ["", f"**P3: {'pass' if V['P3']['pass'] else 'fail'}.**", "",
+                  f"Calibration (coordinate change per natural value unit, before orienting): learned {St['calibration']['learned']:+.3f}, "
+                  f"probe {St['calibration']['probe']:+.3f}. A sign error in the first run's steer stage reversed the learned push "
+                  "when this was negative; the stage was fixed and rerun (DESIGN.md, section 8)."]
+        if "decision_check" in St:
+            dc = St["decision_check"]
+            lines += ["", "Exploratory, not pre-registered: is the learned direction the decision itself? Over the held-out prompts its "
+                      f"coordinate correlates {dc['learned_corr_with_models_logit_diff']:+.2f} with the model's own logit difference "
+                      f"(probe: {dc['probe_corr_with_models_logit_diff']:+.2f}); its cosine with the unembedding difference "
+                      f"A - B is {dc['learned_cos_with_unembedding_A_minus_B']:+.3f} ({dc['learned_cos_with_norm_scaled_unembedding']:+.3f} "
+                      f"after the final norm's scale; probe: {dc['probe_cos_with_unembedding_A_minus_B']:+.3f})."]
     (R / "report.md").write_text("\n".join(lines) + "\n")
     save_json(V, R / "verdicts6.json")
     log("report done: " + json.dumps({k: (v.get("verdict") or v.get("pass")) for k, v in V.items()}))

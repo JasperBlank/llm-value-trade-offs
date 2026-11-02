@@ -128,3 +128,16 @@ monkey-study sense by itself.
 
 One 80 GB GPU, about 90 minutes in total (download, a quick test on Qwen3-0.6B, the run). The pod
 starts immediately and keeps the results hidden until both prediction sets are committed.
+
+## 8. Deviation after the run (2 Nov, written before the rerun's result was seen)
+
+The first run's steer stage had a sign error: the push along the learned direction is e · c, which
+already points the way A's value moves the state whatever the sign of c, but the code also flipped
+it when c was negative. The learned push came out at −0.52 logit difference per value unit with
+the probe at +0.06, which is what that error would produce if c was negative. The stage was fixed
+(the flip removed; the raw c is now recorded) and rerun on the same pod with the same subspaces,
+states and prompts; nothing else changed, and the P3 criterion is as pre-registered. The first
+run's steer6.json is kept as `results/real/steer6_first_run_sign_error.json`. Added at the same
+time, exploratory and not pre-registered: whether the learned direction is the decision itself
+(its correlation with the model's own logit difference, and its cosine with the unembedding
+difference between "A" and "B").
