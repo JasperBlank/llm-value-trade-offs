@@ -149,4 +149,8 @@ good's words, a number-only head, a good-only MLP) are found with the right rati
 ## 7. Predictions
 
 Claude's predictions are sealed first (only their hash is committed), then Jasper answers the
-same questions one by one, the overall verdict probabilities last. Questions: `predictions/QUESTIONS.md`.
+same questions one by one, the overall verdict probabilities last. **Run before Jasper's answers
+(2 Nov, Jasper: no idle GPU):** the pod runs everything as soon as it is up and keeps the outputs
+on its disk; its log shows only progress lines (stage names, prompt counts), and the report is
+printed only after both prediction sets and their hashes are committed (`run_pod.sh`). Claude's
+predictions were sealed before the run started; neither of us sees a result before Jasper's are in. Questions: `predictions/QUESTIONS.md`.
