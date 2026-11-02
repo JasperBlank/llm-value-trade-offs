@@ -1,0 +1,53 @@
+{
+ "per_layer": {
+  "24": {
+   "verdict": "an effect, but not specific to value (controls failed)",
+   "causal": true,
+   "random_ok": true,
+   "shuffled_ok": false,
+   "size_ok": false
+  },
+  "28": {
+   "verdict": "an effect, but not specific to value (controls failed)",
+   "causal": true,
+   "random_ok": true,
+   "shuffled_ok": false,
+   "size_ok": false
+  },
+  "32": {
+   "verdict": "an effect, but not specific to value (controls failed)",
+   "causal": true,
+   "random_ok": true,
+   "shuffled_ok": false,
+   "size_ok": false
+  },
+  "36": {
+   "verdict": "used, but not at full size",
+   "causal": true,
+   "random_ok": true,
+   "shuffled_ok": true,
+   "size_ok": false
+  }
+ },
+ "main": "an effect, but not specific to value (controls failed)",
+ "full_size_at_any_layer": false,
+ "currency": {
+  "gain_worded_vs_harm_worded": true,
+  "money_vs_nonmoney": true
+ },
+ "cos_wa_wb_primary": 0.009560849517583847,
+ "exploratory": {
+  "mlp_share_a": 0.4454476224541576,
+  "pieces_for_half_a": 7,
+  "letter_heads": [
+   "head 38.24",
+   "head 38.22",
+   "head 34.6",
+   "head 34.35",
+   "head 28.21",
+   "head 38.35"
+  ],
+  "first_layer_half_transfer": 28,
+  "top20_transfer": 0.6541964759074592
+ }
+}
