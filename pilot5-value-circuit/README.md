@@ -20,8 +20,14 @@ which attention heads and MLPs write it and which turn it into the answer. **Rea
 | `tests/` | Mechanics checks on a small model; a tiny-model configuration |
 | `predictions/` | Sealed predictions |
 | `pod.ipynb` | One cell for the pod; it beeps when done |
+| `run_pod.sh` | The same without a notebook, as the pod's start command |
 
 ## On the pod
+
+**Through the Runpod connection (2 Nov):** Claude creates the pod with a start command that runs
+`run_pod.sh`: install, the quick test, then it waits until both prediction sets are committed,
+runs everything, packs `/workspace/pilot5_results.tar.gz` and prints the report to the pod's log.
+Claude reads the log and terminates the pod. **By hand (as in pilot 4):**
 
 1. Deploy a **48 GB GPU** pod (L40S or RTX A6000), Secure Cloud, in **US-TX-3** with the network
    volume attached (it mounts at `/workspace`), PyTorch template.
