@@ -13,8 +13,11 @@
 | q11a_qwen_a_site_one_currency | False | 15%; Brier 0.02 | 40%; Brier 0.16 |
 | q11b_qwen_b_site_one_currency | False | 50%; Brier 0.25 | 40%; Brier 0.16 |
 | q11c_qwen_b_site_v5 | comparison | 50% on it; Brier 0.38 | 30% on it; Brier 0.68 |
+| q9_llama_usable | True | 60%; Brier 0.16 | – |
+| q10_llama_arrival_fraction | 0.5 | 0.65 [0.45, 0.85] hit, off by 0.15 | – |
+| q11d_llama_same_b_headline | True | 60%; Brier 0.16 | 70%; Brier 0.09 |
 
-Mean Brier over the probability questions each answered (lower is better): Claude 0.219 (3 questions), Jasper 0.333 (3 questions)
-On the probability questions both answered (3): Claude 0.217, Jasper 0.333
-- Claude: 5 of 7 80% ranges contain the result
+Mean Brier over the probability questions each answered (lower is better): Claude 0.195 (5 questions), Jasper 0.273 (4 questions)
+On the probability questions both answered (4): Claude 0.203, Jasper 0.273
+- Claude: 6 of 8 80% ranges contain the result
 - Jasper: 1 of 1 80% ranges contain the result
