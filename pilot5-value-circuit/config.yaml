@@ -1,0 +1,63 @@
+# Pilot 5 settings. The `steering` block is PRE-REGISTERED (see DESIGN.md, section 3);
+# everything under `circuit` is exploratory.
+model: Qwen/Qwen3-14B
+dtype: bfloat16
+batch_size: 16
+acts_dir: /workspace/acts5            # recordings of this pilot (network volume)
+pilot4_acts: /workspace/acts          # pilot 4's recordings, if still there (only for a consistency check)
+results_dir: results/real
+
+# The value directions: ridge probes for the value of option A and of option B, read at the last
+# position, fitted on pilot 4's 6,912 test prompts. Penalty (a multiple of the mean eigenvalue of
+# X'X): 1.0, pilot 4's cross-validated choice for both at layers 28-36 (behind its result); at
+# layer 24 pilot 4 picked 0.1 (A) and 0.001 (B), but one penalty keeps A, B and the layers comparable.
+layers: [24, 28, 32, 36]
+primary_layer: 28
+penalty:
+  v_a: {24: 1.0, 28: 1.0, 32: 1.0, 36: 1.0}
+  v_b: {24: 1.0, 28: 1.0, 32: 1.0, 36: 1.0}
+
+steering:                             # pre-registered
+  strengths: [-2, -1, 0, 1, 2]        # value units added to the readout (1 unit = people x exp(1/b))
+  control_strengths: [-2, 2]
+  window: [0.2, 0.8]                  # fresh prompts the model is undecided about: P(A) in this range
+  max_prompts: 800
+  min_prompts: 300
+  seed: 20261102
+  shuffles: 2                         # control directions: goods' values shuffled
+  shuffle_max_abs_corr: 0.1
+  bootstrap: 2000
+  criteria:
+    min_slope: 0.5                    # "full size": A's slope in [0.5, 2] and B's in [-2, -0.5]
+    max_slope: 2.0
+    control_max_ratio: 0.3            # random and shuffled directions: |slope| < 0.3 x A's slope
+    currency_ratio: 1.5               # slopes of two kinds of goods within a factor 1.5
+
+circuit:                              # exploratory
+  source_directions: [v_a, v_b]       # per-token sources traced for these at the primary layer (plus the logit)
+  patch_layers: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+  topk: [5, 10, 20, 50]
+  n_pairs: 600
+  pair_max_abs_logodds: 4.0
+  n_readers: 10
+  reader_steer_prompts: 100
+  letter_head_corr: 0.5
+  seed: 5
+
+quick:                                # --quick: small model and few prompts, to test the pipeline
+  model: Qwen/Qwen3-0.6B              # 28 layers
+  acts_dir: /workspace/acts5_quick
+  results_dir: results/quick
+  batch_size: 8
+  layers: [12, 16, 20, 24]
+  primary_layer: 16
+  penalty:
+    v_a: {12: 1.0, 16: 1.0, 20: 1.0, 24: 1.0}
+    v_b: {12: 1.0, 16: 1.0, 20: 1.0, 24: 1.0}
+  limit: {test: 400, goal: 40, fresh: 160}
+  steering: {max_prompts: 120, min_prompts: 60, bootstrap: 200}
+  circuit:
+    patch_layers: [4, 8, 16, 24, 28]
+    topk: [5, 10]
+    n_pairs: 60
+    reader_steer_prompts: 20
