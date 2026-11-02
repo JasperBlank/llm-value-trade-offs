@@ -22,3 +22,16 @@
 Mean Brier over the probability questions (lower is better): Claude 0.323 (8 questions), Jasper 0.399 (8 questions)
 - Claude: 4 of 7 80% ranges contain the result
 - Jasper: 6 of 8 80% ranges contain the result
+
+# The formats extension
+
+| question | result | Claude | Jasper |
+|---|---|---|---|
+| f1_rating_behaviour_corr | 0.614 | 0.55 [0.2, 0.85] hit, off by 0.064 | 0.5 [0.1, 0.9] hit, off by 0.11 |
+| f2_rating_option_r | 0.549 | 0.55 [0.0, 0.9] hit, off by 0.00096 | 0.2 [0.05, 0.6] hit, off by 0.35 |
+| f3_numbered_relative_to_ab | 0.815 | 0.7 [0.2, 1.3] hit, off by 0.12 | 0.2 [0.1, 0.5] miss, off by 0.62 |
+| f4_should_push_raises_yes | True | 70%; Brier 0.09 | 30%; Brier 0.49 |
+| f5_rating_push_raises_rating | False | 60%; Brier 0.36 | 50%; Brier 0.25 |
+| f6_writers_overlap_top20 | 15 | 13 [7, 18] hit, off by 2 | 5 [1, 18] hit, off by 10 |
+
+Mean Brier (F4, F5): Claude 0.225, Jasper 0.370
