@@ -1,0 +1,41 @@
+{
+ "qwen": {
+  "a_site": {
+   "site": "A_end",
+   "layer": 12,
+   "site_share_of_good_swap": 0.357403103900769,
+   "headline": "no single value here",
+   "V2_one_currency": false,
+   "good_share": 0.6304528576281895,
+   "number_share": 0.29493087557603687,
+   "V3_exchange_rate": false,
+   "exchange_ratio": -0.018958246197663474,
+   "V4": "not testable",
+   "quantity_share": 0.1029143897996357,
+   "quantity_site_share": 0.0070778920053729075,
+   "V5": "A's own value (the site comes before B's line)",
+   "b_to_a_coord_ratio": 0.0,
+   "bnumber_share": NaN,
+   "bnumber_site_share": 0.0
+  },
+  "b_site": {
+   "site": "after_B",
+   "layer": 24,
+   "site_share_of_good_swap": 0.7215286381397122,
+   "headline": "no single value here",
+   "V2_one_currency": true,
+   "good_share": 1.0155202829096586,
+   "number_share": 0.764668379548506,
+   "V3_exchange_rate": false,
+   "exchange_ratio": 2.064866562826411,
+   "V4": "value-specific",
+   "quantity_share": 0.11453485752054197,
+   "quantity_site_share": 0.23011330425111015,
+   "V5": "the comparison (A minus B)",
+   "b_to_a_coord_ratio": -2.4665772695948953,
+   "bnumber_share": 0.7826200338862459,
+   "bnumber_site_share": 0.851549208985814
+  },
+  "usable": true
+ }
+}
