@@ -1,0 +1,17 @@
+# Claude's predictions for pilot 5 (sealed before Jasper's; see QUESTIONS.md for the questions).
+q1_a_slope_28: {best: 0.55, range80: [0.15, 1.3]}
+q2_b_slope_28: {best: -0.45, range80: [-1.2, -0.1]}
+q3_controls_specific_28: 0.65
+q4a_layer_largest_a_slope: 32          # probabilities: 24 0.15, 28 0.25, 32 0.32, 36 0.28
+q4b_full_size_any_layer: 0.45
+q5_cos_wa_wb_28: {best: 0.3, range80: [-0.4, 0.8]}
+q6a_currency_gain_vs_harm: 0.55
+q6b_currency_money_vs_other: 0.5
+q7_mlp_share_a_28: {best: 0.5, range80: [0.2, 0.8], p_above_half: 0.5}
+q8_pieces_for_half: {best: 12, range80: [4, 60]}
+q9_first_layer_half_transfer: 28
+q10_top20_transfer: {best: 0.25, range80: [0.05, 0.6]}
+q11_letter_head: 0.6
+q12_number_and_good_in_one_piece: 0.6
+q13_goal1_fraction_28: {best: 0.12, range80: [0.02, 0.45]}
+q14_verdict_28: {full_size: 0.32, used_not_full: 0.38, not_specific: 0.18, not_shown: 0.12}

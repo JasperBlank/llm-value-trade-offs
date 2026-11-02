@@ -1,0 +1,6 @@
+f1_rating_behaviour_corr: {best: 0.55, range80: [0.2, 0.85]}
+f2_rating_option_r: {best: 0.55, range80: [0.0, 0.9]}
+f3_numbered_relative_to_ab: {best: 0.7, range80: [0.2, 1.3]}
+f4_should_push_raises_yes: 0.70
+f5_rating_push_raises_rating: 0.60
+f6_writers_overlap_top20: {best: 13, range80: [7, 18]}
