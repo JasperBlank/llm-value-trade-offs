@@ -20,7 +20,7 @@ objective enters. **Read [`DESIGN.md`](DESIGN.md) first.**
 ## On the pod
 
 1. In RunPod, create a **network volume** of 200 GB (Secure Cloud).
-2. Deploy an **RTX A6000** pod in the same data centre with that volume attached (it mounts at
+2. Deploy a **48 GB GPU** pod (L40S, about $1.09/h, or RTX A6000) in the same data centre with that volume attached (it mounts at
    `/workspace`), PyTorch template.
 3. In JupyterLab: File → New → Terminal, then
    `cd /workspace && git clone https://github.com/JasperBlank/llm-value-trade-offs.git`

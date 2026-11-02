@@ -137,7 +137,7 @@ shuffle control.
 
 ## 8. Model and cost
 
-Qwen3-14B in bf16 on one RTX A6000, Secure Cloud, with a 200 GB network volume (recordings
+Qwen3-14B in bf16 on one 48 GB GPU (L40S or RTX A6000), Secure Cloud, with a 200 GB network volume (recordings
 about 135 GB with the control, plus the model cache). One notebook cell, about 75 minutes:
 a two-minute test on Qwen3-0.6B, recording (real and control), the battery, packing the
 results.
