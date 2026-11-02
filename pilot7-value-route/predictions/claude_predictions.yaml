@@ -1,0 +1,15 @@
+# Claude's predictions for pilot 7 (sealed before Jasper's; see QUESTIONS.md for the questions).
+q1_after_A_half_layer: {best: 16, range80: [8, 24]}
+q2_a_site_share: {best: 0.20, range80: [0.03, 0.60]}
+q3_b_site: after_B                    # probabilities: after_B 0.80, template 0.10, B_nl 0.05, reply 0.05
+q4_a_site_number_share: {best: 0.35, range80: [0.05, 0.80]}
+q5_b_site_number_share: {best: 0.70, range80: [0.30, 0.95]}
+q6_b_site_exchange_ratio: {best: 1.0, range80: [0.6, 1.6]}
+q7_b_site_rho: {best: -0.6, range80: [-1.2, 0.3]}
+q8_b_site_apples_share: {best: 0.50, range80: [0.10, 0.90]}
+q9_llama_usable: 0.60
+q10_llama_arrival_fraction: {best: 0.65, range80: [0.45, 0.85]}
+q11a_qwen_a_site_one_currency: 0.15
+q11b_qwen_b_site_one_currency: 0.50
+q11c_qwen_b_site_v5: {comparison: 0.50, shared_code: 0.07, a_own_value: 0.35, not_testable: 0.08}
+q11d_llama_same_b_headline: 0.60

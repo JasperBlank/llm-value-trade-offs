@@ -1,0 +1,8 @@
+# Jasper's predictions for pilot 7, 2 Nov 2026 (16:23-16:28 Amsterdam time), before any result was
+# seen (the run's outputs were hidden on the pod). At his request he answered a short set of the
+# questions (the five in JASPER.md); the others are scored for Claude only.
+q8_b_site_apples_share: {best: 0.5, range80: [0.1, 0.9]}
+q11a_qwen_a_site_one_currency: 0.40
+q11b_qwen_b_site_one_currency: 0.40
+q11c_qwen_b_site_v5: {comparison: 0.30, a_own_value: 0.30, shared_code: 0.30, not_testable: 0.10}   # after the check (was 0.50 / 0.10 / 0.10 / 0.30)
+q11d_llama_same_b_headline: 0.70
