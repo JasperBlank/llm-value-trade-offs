@@ -133,6 +133,31 @@ def run(ctx):
                          f"at layer {P} the target's value readout moves {y['target_value_shift']:+.2f}, the partner's "
                          f"{y['partner_value_shift']:+.2f}, their difference {y['difference_shift_toward_target']:+.2f} "
                          f"({(y['fraction_of_choice_shift'] or 0):.0%} of the choice's move).")
+    fo = load(res, "formats.json")
+    if fo:
+        Pp = str(fo["primary_layer"])
+        lines += ["", "## Extension: other answer formats (the A/B arrows, applied elsewhere)", "",
+                  "| format | behaviour | A's arrow readable (option-level r) | push A (slope, 95%) | relative to the format's behaviour | push B | random |",
+                  "|---|---|---|---|---|---|---|"]
+        for fm, x in fo["formats"].items():
+            bh = x["behaviour"]
+            beh = (f"corr with value {bh['corr_with_value_real']:.2f}" if fm == "rating"
+                   else f"corr with value difference {bh['corr_with_value_difference']:.2f}")
+            c = x["causal"]
+            f = lambda k: (f"{c[k]['slope']:+.3f} [{c[k]['ci95'][0]:+.3f}, {c[k]['ci95'][1]:+.3f}]" if k in c else "")
+            rel = c[f"a@{Pp}"].get("relative_to_behaviour")
+            lines.append(f"| {fm} | {beh} | {x['readable'][Pp]['a_option_r']:.2f} | {f(f'a@{Pp}')} | "
+                         f"{'' if rel is None else round(rel, 2)} | {f(f'b@{Pp}')} | {f(f'random@{Pp}')} |")
+        w = fo.get("writers_numbered", {})
+        lines += ["", f"Writers of A's value in the numbered format: {w.get('overlap_top20')} of the A/B top 20 also in its top 20; "
+                  f"correlation of all pieces' shares with the A/B format: {w.get('corr_all_shares_with_ab')}; "
+                  f"MLP share {w.get('mlps_share', float('nan')):.0%}."]
+        rn = fo["formats"]["numbered"]["causal"][f"a@{Pp}"].get("relative_to_ab_slope")
+        V["formats"] = {fm: {"a_option_r": x["readable"][Pp]["a_option_r"],
+                             "push_a_slope": x["causal"][f"a@{Pp}"]["slope"],
+                             "push_a_ci": x["causal"][f"a@{Pp}"]["ci95"]} for fm, x in fo["formats"].items()}
+        V["formats"]["numbered_relative_to_ab"] = rn
+        V["formats"]["writers_overlap_top20"] = w.get("overlap_top20")
     (Path(res) / "report.md").write_text("\n".join(lines) + "\n")
     save_json(V, Path(res) / "verdicts.json")
     log(f"analyze done: main verdict: {V.get('main')}")

@@ -55,6 +55,7 @@ quick:                                # --quick: small model and few prompts, to
     v_a: {12: 1.0, 16: 1.0, 20: 1.0, 24: 1.0}
     v_b: {12: 1.0, 16: 1.0, 20: 1.0, 24: 1.0}
   limit: {test: 400, goal: 40, fresh: 160}
+  formats_limit: 40
   steering: {max_prompts: 120, min_prompts: 60, bootstrap: 200}
   circuit:
     patch_layers: [4, 8, 16, 24, 28]

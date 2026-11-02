@@ -46,6 +46,22 @@ step of u, = the number of people times e^(1/1.46) ≈ 2). If the model uses the
     the choice's move towards the target that shows up in the value-difference readout at layer
     28. Best guess and 80% range. (Pilot 4, with the weaker codes: about 7%.)
 
+## The extension: other answer formats (DESIGN.md, section 8; asked before question 14)
+
+F1. **Rating, behaviour:** the correlation between the model's expected rating (1-9) of a single
+    outcome and its A/B value, over the 9 real options × 7 numbers of people × 2 wordings. Best
+    guess and 80% range.
+F2. **Rating, readable:** the option-level correlation of A's arrow (layer 28, fitted on A/B
+    prompts) with the 9 goods' values in the rating format (A/B format, pilot 4: 0.92). Best guess
+    and 80% range.
+F3. **Numbered, causal:** A's push slope at layer 28 in the numbered format as a fraction of the
+    A/B slope at layer 28 (1 = works just as well). Best guess and 80% range. (Dropped if the A/B
+    slope is not above 0.)
+F4. **Yes/no, causal:** probability that pushing A's arrow raises "Yes" (95% interval above 0).
+F5. **Rating, causal:** probability that pushing A's arrow raises the rating (95% interval above 0).
+F6. **Writers:** of the top 20 writers of A's value in the A/B format, how many are also in the
+    numbered format's top 20? Best guess and 80% range.
+
 ## Last: the verdict at layer 28
 
 14. Probabilities, adding up to 100%: **used as value, at full size** / **used, but not at full

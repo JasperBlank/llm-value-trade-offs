@@ -2,9 +2,9 @@
 # Pilot 5 without a notebook: the pod's start command copies this script to /tmp and runs it.
 # Steps: install; quick test on Qwen3-0.6B (skipped if it already passed on this pod); the REAL RUN
 # straight away (no idle GPU), with its output kept in /workspace/log_pilot5.txt and only progress
-# lines shown in the pod's log; pack the results; then, once BOTH prediction sets are committed
-# (pre-registration: nobody sees a result before that), print the report and the results
-# (JSON, base64 tar) to the pod's log for Claude to read.
+# lines shown in the pod's log; pack the results; on a later start, the formats extension; then,
+# once BOTH prediction sets are committed (pre-registration: nobody sees a result before that),
+# print the report and the main JSON files to the pod's log for Claude to read.
 set -o pipefail
 export HF_HOME=/workspace/hf
 REPO=/workspace/llm-value-trade-offs
@@ -40,6 +40,20 @@ else
   echo "PILOT5 RUN FINISHED $(date -u +%FT%TZ): results packed ($(du -h /workspace/pilot5_results.tar.gz | cut -f1))"
 fi
 
+# The formats extension (added 2 Nov): run on the next start of the pod, after the predictions.
+if [ ! -f results/real/formats.json ]; then
+  echo "PILOT5 FORMATS: quick test"
+  python3 pipeline.py --quick --stages formats > /workspace/log_pilot5_formats_quick.txt 2>&1 \
+    || { tail -30 /workspace/log_pilot5_formats_quick.txt; echo "PILOT5 FAILED: formats quick test"; exit 1; }
+  echo "PILOT5 FORMATS: real run $(date -u +%FT%TZ) (results hidden until both prediction sets are committed)"
+  python3 pipeline.py --stages formats,analyze 2>&1 | tee /workspace/log_pilot5_formats.txt \
+    | grep --line-buffered -E "===== stage|Traceback|Error"
+  [ -f results/real/formats.json ] || { echo "PILOT5 FAILED: formats (see /workspace/log_pilot5_formats.txt)"; exit 1; }
+  cp /workspace/log_pilot5_formats.txt /workspace/log_pilot5_formats_quick.txt results/real/
+  tar czf /workspace/pilot5_results.tar.gz -C $P5/results real
+  echo "PILOT5 FORMATS FINISHED $(date -u +%FT%TZ)"
+fi
+
 # Pre-registration: results are shown only once both prediction sets are in the repo.
 for i in $(seq 1 360); do
   cd $REPO && git fetch -q origin main && git reset -q --hard origin/main
@@ -49,12 +63,7 @@ for i in $(seq 1 360); do
 done
 cd $P5
 sha256sum -c predictions/hashes.sha256 || { echo "PILOT5 FAILED: predictions missing or hashes do not match"; exit 1; }
-mkdir -p /tmp/p5out && tar xzf /workspace/pilot5_results.tar.gz -C /tmp/p5out
 echo "PILOT5 REPORT BEGIN"
-cat /tmp/p5out/real/report.md
+python3 print_results.py results/real
 echo "PILOT5 REPORT END"
-(cd /tmp/p5out/real && tar czf /tmp/p5_json.tar.gz *.json *.md log_pilot5.txt 2>/dev/null)
-echo "PILOT5 BLOB BEGIN $(du -b /tmp/p5_json.tar.gz | cut -f1) bytes"
-base64 -w 400 /tmp/p5_json.tar.gz
-echo "PILOT5 BLOB END"
 echo "PILOT5 DONE $(date -u +%FT%TZ)"

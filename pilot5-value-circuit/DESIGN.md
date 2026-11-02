@@ -154,3 +154,33 @@ same questions one by one, the overall verdict probabilities last. **Run before 
 on its disk; its log shows only progress lines (stage names, prompt counts), and the report is
 printed only after both prediction sets and their hashes are committed (`run_pod.sh`). Claude's
 predictions were sealed before the run started; neither of us sees a result before Jasper's are in. Questions: `predictions/QUESTIONS.md`.
+
+## 8. Extension: other answer formats (added 2 Nov, after the main run, before anyone saw a result)
+
+Jasper's question: are we finding the value computation, or machinery of the "A or B" letter
+format? The answer-writing heads (4.5) are format-specific by design; the open question is the value
+arrow. So the arrows fitted on the A/B prompts are tested in three other formats (`make_formats.py`,
+`formats.jsonl`; strangers, both orders, pilot 3's grid around each pair's balance point, two
+wordings each):
+- **numbered** (960 prompts): "1) ... 2) ... Reply with only the number 1 or 2." The same comparison
+  without letters.
+- **should** (960): "The town council has money for only one of two projects. In the first project,
+  ... In the second project, ... Should the council choose the first project? Reply with only Yes or
+  No." A situation, a different question and a different answer.
+- **rating** (168): ONE outcome, no choice: "How good would this outcome be? ... Reply with only a
+  single digit from 1 (slightly good) to 9 (extremely good)." The 9 real options and the 3 neutral
+  goods at 1, 2, 4, ..., 64 people; the answer is the expected digit.
+
+Per format (`formats.py`): (a) **behaviour**: does the answer follow the same values (log-odds of
+"1"/"Yes" against V_first - V_second; the expected rating against V)? (b) **readable**: A's arrow
+(and B's), never trained on this format, read at the last position: option-level correlation with
+the 9 goods' values. (c) **causal**: the steering test's pushes at the last position (A's arrow at
+layer 28: -2, -1, +1, +2; at layer 36: -2, +2; B's arrow and a random direction at 28: -2, +2) on
+up to 300 prompts with 0.2 < P(first) < 0.8 (all 168 rating prompts): slope per value unit, also
+relative to the format's own behavioural slope (1 = the push acts like that much real value) and,
+numbered format, relative to the A/B slope. (d) **writers** in the numbered format: the exact
+decomposition of A's readout at layer 28; overlap of the top 20 pieces with the A/B top 20, and the
+correlation of all pieces' shares. Descriptive summary: the arrow is **format-general** in a format
+if it is readable there (option-level r ≥ 0.67, p < 0.05 with 9 goods) and the push moves the answer
+the right way (95% interval excluding 0). It runs on the next start of the pod, after both
+prediction sets (including the extension questions F1-F6) are committed.

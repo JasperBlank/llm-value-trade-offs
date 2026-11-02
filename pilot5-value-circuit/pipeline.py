@@ -5,7 +5,7 @@
   python pipeline.py --stages steer,analyze
 
 Stages: record, directions, steer (THE PRE-REGISTERED TEST), circuit, circuit_analyze, patch,
-readers, objective, analyze. See DESIGN.md.
+readers, objective, formats (the extension: other answer formats), analyze. See DESIGN.md.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ import time
 
 from common import encode_rows, load_config, load_model, load_prompts, log, parse_args
 
-STAGES = ["record", "directions", "steer", "circuit", "circuit_analyze", "patch", "readers", "objective", "analyze"]
+STAGES = ["record", "directions", "steer", "circuit", "circuit_analyze", "patch", "readers", "objective", "formats", "analyze"]
 
 
 class Ctx:

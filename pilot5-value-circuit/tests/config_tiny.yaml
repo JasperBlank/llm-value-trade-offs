@@ -11,6 +11,7 @@ penalty:
   v_a: {4: 1.0, 5: 1.0, 6: 1.0, 8: 1.0}
   v_b: {4: 1.0, 5: 1.0, 6: 1.0, 8: 1.0}
 limit: {test: 300, goal: 20, fresh: 120}
+formats_limit: 30
 steering:
   strengths: [-2, -1, 0, 1, 2]
   control_strengths: [-2, 2]
