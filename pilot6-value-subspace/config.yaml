@@ -1,0 +1,55 @@
+# Pilot 6 settings. Everything under `prereg` is PRE-REGISTERED (DESIGN.md, section 3).
+model: Qwen/Qwen3-14B
+dtype: bfloat16
+batch_size: 16
+results_dir: results/real
+acts_dir: /workspace/acts6
+
+layers: [28, 32]                 # where the subspace is searched (Jasper, 2 Nov: both)
+primary_layer: 28
+probe_penalty: 1.0               # pilot 5's ridge penalty for the probe of A's value
+
+control:                         # rival hypothesis: a generic comparator
+  patch_layers: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]
+  top_writers_from: ../pilot5-value-circuit/results/real/patching.json   # pilot 5's top-20 (and top-50) pieces
+  random_seed: 6
+
+das:                             # the subspace search (distributed alignment search)
+  ks: [1, 2, 4, 8, 16]           # Jasper, 2 Nov: all five
+  donor_target_ks: [1, 4]        # option B: the "other prompt's answer" target only for these
+  epochs: 2
+  batch_size: 32
+  lr: 0.002
+  seed: 6
+
+writers_pca: {n_prompts: 1500, n_components: 64}
+
+steering:
+  strengths: [-2, -1, 0, 1, 2]
+  window: [0.2, 0.8]
+  max_prompts: 800
+  min_prompts: 300
+  seed: 20261102
+  bootstrap: 2000
+
+prereg:
+  control_t20_ratio: 0.5         # generic comparator: a control's top-20 transfer >= 0.5 x the value task's ...
+  control_layer_tolerance: 4     # ... and its half-transfer layer within 4 layers of the value task's
+  das_k1_min_fraction: 0.5       # P2: the 1-direction swap recovers >= half of the whole-state swap (held out)
+  steer_min_ratio: 3.0           # P3: push along the learned direction >= 3 x the probe's push ...
+  steer_random_max_ratio: 0.3    # ... and the random push < 0.3 x the learned direction's push
+  illusion_min_corr: 0.5         # P4: the learned coordinate tracks A's value on held-out prompts ...
+  illusion_min_share_ratio: 5.0  # ... and lies inside what the top writers write (>= 5 x a random direction)
+
+quick:
+  model: Qwen/Qwen3-0.6B         # 28 blocks
+  acts_dir: /workspace/acts6_quick
+  results_dir: results/quick
+  batch_size: 8
+  layers: [16, 20]
+  primary_layer: 16
+  limit: {value_train: 96, value_test: 64, quantity: 32, weight: 32, test_rows: 200}
+  control: {patch_layers: [4, 12, 16, 24, 28]}
+  das: {ks: [1, 4], donor_target_ks: [1], epochs: 1, batch_size: 16}
+  writers_pca: {n_prompts: 100, n_components: 16}
+  steering: {max_prompts: 60, min_prompts: 30, bootstrap: 200}

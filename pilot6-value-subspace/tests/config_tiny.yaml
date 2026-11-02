@@ -1,0 +1,16 @@
+# Test configuration: the tiny random Qwen3 (10 blocks, 4 heads) from pilot 5's tests.
+model: TINY
+dtype: float32
+batch_size: 8
+results_dir: RES
+acts_dir: ACTS
+layers: [5, 6]
+primary_layer: 5
+probe_penalty: 1.0
+control: {patch_layers: [2, 4, 5, 6, 8, 10], top_writers_from: none, random_seed: 6}
+das: {ks: [1, 4], donor_target_ks: [1], epochs: 2, batch_size: 16, lr: 0.01, seed: 6}
+writers_pca: {n_prompts: 60, n_components: 8}
+steering: {strengths: [-2, -1, 0, 1, 2], window: [0.2, 0.8], max_prompts: 40, min_prompts: 20, seed: 20261102, bootstrap: 200}
+prereg: {control_t20_ratio: 0.5, control_layer_tolerance: 4, das_k1_min_fraction: 0.5, steer_min_ratio: 3.0,
+         steer_random_max_ratio: 0.3, illusion_min_corr: 0.5, illusion_min_share_ratio: 5.0}
+limit: {value_train: 96, value_test: 64, quantity: 32, weight: 32, test_rows: 120}
