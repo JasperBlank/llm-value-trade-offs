@@ -17,7 +17,6 @@ python3 -m pip install -q --break-system-packages -r requirements.txt || python3
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
 if [ ! -f $RES/formats.json ]; then
   mkdir -p $RES && cp results/real/steering.json results/real/circuit.json $RES/
-  python3 pipeline.py --quick --stages formats > /workspace/log_formats_quick.txt 2>&1 || true   # needs quick results; skipped if absent
   python3 pipeline.py --results-dir $RES --stages record,directions,circuit,formats,analyze 2>&1 | tee /workspace/log_formats.txt \
     | grep --line-buffered -E "===== stage|prompts \(|option-level|Traceback|Error"
   [ -f $RES/formats.json ] || { echo "PILOT5F FAILED (see /workspace/log_formats.txt)"; exit 1; }
