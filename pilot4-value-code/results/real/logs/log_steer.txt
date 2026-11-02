@@ -1,0 +1,12 @@
+[05:49:45] Steering layer 23: unseen-goods partial r 0.54, held-out R2 0.38
+[05:49:56] Direction length 3.99 (mean residual length 188)
+[05:49:56] Loading Qwen/Qwen3-14B ...
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights:  16%|█▌        | 69/443 [00:00<00:00, 605.87it/s]Loading weights:  29%|██▉       | 130/443 [00:00<00:00, 544.65it/s]Loading weights:  42%|████▏     | 185/443 [00:00<00:00, 446.97it/s]Loading weights:  56%|█████▌    | 248/443 [00:00<00:00, 500.36it/s]Loading weights:  68%|██████▊   | 300/443 [00:00<00:00, 434.08it/s]Loading weights:  82%|████████▏ | 362/443 [00:00<00:00, 477.71it/s]Loading weights:  95%|█████████▌| 422/443 [00:00<00:00, 494.93it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 506.43it/s]
+[05:53:09]   value direction x -2: log-odds of A shift -0.274
+[05:53:15]   value direction x -1: log-odds of A shift -0.141
+[05:53:15]   value direction x +0: log-odds of A shift +0.000
+[05:53:20]   value direction x +1: log-odds of A shift +0.141
+[05:53:26]   value direction x +2: log-odds of A shift +0.278
+[05:53:31]   random direction x -2: log-odds of A shift +0.036
+[05:53:37]   random direction x +2: log-odds of A shift -0.029
+[05:53:37] Slope: value direction 0.139 (predicted about 1), random -0.016

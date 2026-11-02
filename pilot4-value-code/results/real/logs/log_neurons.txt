@@ -1,0 +1,20 @@
+[05:49:08]   a_num: offer value A (number removed): 0, number of people A: 324139
+[05:49:08]   a_end: offer value A (number removed): 319685, number of people A: 1841
+[05:49:08]   b_num: offer value B (number removed): 146, number of people B: 198356, offer value A (number removed): 135267
+[05:49:08]   b_end: offer value B (number removed): 305578, number of people B: 1112, offer value A (number removed): 1369
+[05:49:08]   t-1: offer value A (number removed): 74369, offer value B (number removed): 77346, chosen value: 66365, choice: 77348
+[05:49:12]   monkey criterion at a_num: value neurons 1576 (shuffled goods: 0.2 on average, 95th percentile 2), number only 167598, good's value only 344
+[05:49:14]   monkey criterion at a_end: value neurons 9548 (shuffled goods: 13651.9 on average, 95th percentile 17542), number only 3341, good's value only 132676
+[05:49:16]   monkey criterion at b_num: value neurons 1567 (shuffled goods: 6.4 on average, 95th percentile 37), number only 153121, good's value only 657
+[05:49:18]   monkey criterion at b_end: value neurons 8113 (shuffled goods: 11778.3 on average, 95th percentile 14936), number only 2954, good's value only 131650
+[05:49:19] Done: /workspace/llm-value-trade-offs/pilot4-value-code/results/real/neurons.json
+[05:49:21]   a_num: offer value A (number removed): 0, number of people A: 32825
+[05:49:21]   a_end: offer value A (number removed): 18766, number of people A: 8
+[05:49:21]   b_num: offer value B (number removed): 0, number of people B: 3184, offer value A (number removed): 629
+[05:49:21]   b_end: offer value B (number removed): 5617, number of people B: 2, offer value A (number removed): 43
+[05:49:21]   t-1: offer value A (number removed): 922, offer value B (number removed): 1352, chosen value: 4824, choice: 67
+[05:49:27]   monkey criterion at a_num: value neurons 0 (shuffled goods: 0.0 on average, 95th percentile 0), number only 48766, good's value only 0
+[05:49:30]   monkey criterion at a_end: value neurons 178 (shuffled goods: 239.2 on average, 95th percentile 451), number only 45, good's value only 36622
+[05:49:32]   monkey criterion at b_num: value neurons 2 (shuffled goods: 0.0 on average, 95th percentile 0), number only 5296, good's value only 0
+[05:49:34]   monkey criterion at b_end: value neurons 48 (shuffled goods: 87.4 on average, 95th percentile 193), number only 21, good's value only 10990
+[05:49:35] Done: /workspace/llm-value-trade-offs/pilot4-value-code/results/real_random/neurons.json

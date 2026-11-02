@@ -1,0 +1,18 @@
+[04:35:51] Loading Qwen/Qwen3-14B on cuda ...
+[04:42:18] Random-weights control model built from the config
+[04:42:35] 6912 prompts, 40 layers, width 5120, letter tokens [[32, 362], [33, 425]]
+[04:42:35]   positions of prompt 0: {'a_num': '8', 'a_end': ' treatment', 'b_num': '2', 'b_end': ' bill', 'reply_end': '.', 't-5': '\n', 't-4': '<think>', 't-3': '\n\n', 't-2': '</think>', 't-1': '\n\n'}
+[04:42:35]   positions of prompt 1: {'a_num': '8', 'a_end': ' treatment', 'b_num': '2', 'b_end': ' bill', 'reply_end': '.', 't-5': '\n', 't-4': '<think>', 't-3': '\n\n', 't-2': '</think>', 't-1': '\n\n'}
+[04:42:35]   positions of prompt 2: {'a_num': '8', 'a_end': ' treatment', 'b_num': '2', 'b_end': ' bill', 'reply_end': '.', 't-5': '\n', 't-4': '<think>', 't-3': '\n\n', 't-2': '</think>', 't-1': '\n\n'}
+[04:42:37] Allocated 29.0 GB + 0.0 GB in /workspace/acts/random
+[04:42:39]   16/6912 prompts (6.9/s, about 17 min left)
+[04:43:29]   816/6912 prompts (15.7/s, about 6 min left)
+[04:44:23]   1616/6912 prompts (15.2/s, about 6 min left)
+[04:45:19]   2416/6912 prompts (14.9/s, about 5 min left)
+[04:46:16]   3216/6912 prompts (14.6/s, about 4 min left)
+[04:47:12]   4016/6912 prompts (14.6/s, about 3 min left)
+[04:48:12]   4816/6912 prompts (14.3/s, about 2 min left)
+[04:49:12]   5616/6912 prompts (14.2/s, about 2 min left)
+[04:50:13]   6416/6912 prompts (14.0/s, about 1 min left)
+[04:50:54]   6912/6912 prompts (13.9/s, about 0 min left)
+[04:50:56] Done. Probability on A/B: mean 0.000, min 0.000. Files in /workspace/acts/random

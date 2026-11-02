@@ -1,0 +1,10 @@
+[05:49:35]   unseen goods' value, option A (end of line): best excess over random +0.50 at layer 3 (real 0.32, random -0.19)
+[05:49:35]   unseen goods' value, option B (end of line): best excess over random +0.63 at layer 40 (real 0.68, random 0.05)
+[05:49:35]   same at A's number (good not yet read: should be ~0): best excess over random -0.00 at layer 0 (real 0.03, random 0.03)
+[05:49:35]   R² value of A (end of line): best excess over random +0.88 at layer 40 (real 0.62, random -0.26)
+[05:49:35]   R² value difference (final position): best excess over random +0.42 at layer 40 (real 0.99, random 0.57)
+[05:49:35]   value neurons at a_num: {'real': 1576, 'shuffled_mean': 0.18, 'shuffled_95th': 2.0, 'random_network': 0}
+[05:49:35]   value neurons at a_end: {'real': 9548, 'shuffled_mean': 13651.88, 'shuffled_95th': 17541.55, 'random_network': 178}
+[05:49:35]   value neurons at b_num: {'real': 1567, 'shuffled_mean': 6.36, 'shuffled_95th': 36.999999999999886, 'random_network': 2}
+[05:49:35]   value neurons at b_end: {'real': 8113, 'shuffled_mean': 11778.26, 'shuffled_95th': 14936.4, 'random_network': 48}
+[05:49:36] Done: /workspace/llm-value-trade-offs/pilot4-value-code/results/real/summary.json

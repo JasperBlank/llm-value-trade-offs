@@ -1,0 +1,32 @@
+[04:13:33] Loading Qwen/Qwen3-14B on cuda ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:06<00:46,  6.59s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:12<00:37,  6.32s/it]Fetching 8 files:  38%|███▊      | 3/8 [00:14<00:21,  4.25s/it]Fetching 8 files:  50%|█████     | 4/8 [00:18<00:16,  4.00s/it]Fetching 8 files:  62%|██████▎   | 5/8 [00:22<00:12,  4.02s/it]Fetching 8 files:  75%|███████▌  | 6/8 [00:23<00:06,  3.03s/it]Fetching 8 files:  88%|████████▊ | 7/8 [00:23<00:02,  2.11s/it]Fetching 8 files: 100%|██████████| 8/8 [00:24<00:00,  1.65s/it]Fetching 8 files: 100%|██████████| 8/8 [00:24<00:00,  3.02s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 8395.35it/s]
+[04:14:06] 16128 prompts, 40 layers, width 5120, letter tokens [[32, 362], [33, 425]]
+[04:14:06]   positions of prompt 0: {'a_num': '8', 'a_end': ' treatment', 'b_num': '2', 'b_end': ' bill', 'reply_end': '.', 't-5': '\n', 't-4': '<think>', 't-3': '\n\n', 't-2': '</think>', 't-1': '\n\n'}
+[04:14:06]   positions of prompt 1: {'a_num': '8', 'a_end': ' treatment', 'b_num': '2', 'b_end': ' bill', 'reply_end': '.', 't-5': '\n', 't-4': '<think>', 't-3': '\n\n', 't-2': '</think>', 't-1': '\n\n'}
+[04:14:06]   positions of prompt 2: {'a_num': '8', 'a_end': ' treatment', 'b_num': '2', 'b_end': ' bill', 'reply_end': '.', 't-5': '\n', 't-4': '<think>', 't-3': '\n\n', 't-2': '</think>', 't-1': '\n\n'}
+[04:14:11] Allocated 67.7 GB + 16.2 GB in /workspace/acts
+[04:14:14]   16/16128 prompts (5.3/s, about 50 min left)
+[04:15:11]   816/16128 prompts (13.6/s, about 19 min left)
+[04:16:13]   1616/16128 prompts (13.2/s, about 18 min left)
+[04:17:18]   2416/16128 prompts (12.9/s, about 18 min left)
+[04:18:25]   3216/16128 prompts (12.7/s, about 17 min left)
+[04:19:31]   4016/16128 prompts (12.5/s, about 16 min left)
+[04:20:43]   4816/16128 prompts (12.3/s, about 15 min left)
+[04:22:00]   5616/16128 prompts (12.0/s, about 15 min left)
+[04:23:17]   6416/16128 prompts (11.7/s, about 14 min left)
+[04:24:28]   7216/16128 prompts (11.7/s, about 13 min left)
+[04:25:24]   8016/16128 prompts (11.9/s, about 11 min left)
+[04:26:19]   8816/16128 prompts (12.1/s, about 10 min left)
+[04:27:14]   9616/16128 prompts (12.3/s, about 9 min left)
+[04:28:12]   10416/16128 prompts (12.4/s, about 8 min left)
+[04:29:13]   11216/16128 prompts (12.4/s, about 7 min left)
+[04:30:13]   12016/16128 prompts (12.5/s, about 5 min left)
+[04:31:13]   12816/16128 prompts (12.5/s, about 4 min left)
+[04:32:15]   13616/16128 prompts (12.6/s, about 3 min left)
+[04:33:16]   14416/16128 prompts (12.6/s, about 2 min left)
+[04:34:22]   15216/16128 prompts (12.6/s, about 1 min left)
+[04:35:32]   16016/16128 prompts (12.5/s, about 0 min left)
+[04:35:42]   16128/16128 prompts (12.5/s, about 0 min left)
+[04:35:44] Done. Probability on A/B: mean 1.000, min 1.000. Files in /workspace/acts

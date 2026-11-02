@@ -1,0 +1,45 @@
+[04:51:08] Number-only baseline R2: {'v_a': -0.03716564178466797, 'v_b': -0.03716552257537842, 'dv': 0.04325401782989502, 'choice': 0.019212663173675537}
+[04:51:48]   layer 0: best R2 v_a 0.01, v_b 0.01, dv 0.45, choice 0.40; u recovery (real goods) at a_end 0.50
+[04:52:14]   layer 1: best R2 v_a 0.62, v_b 0.31, dv 0.98, choice 0.73; u recovery (real goods) at a_end 0.24
+[04:52:51]   layer 2: best R2 v_a 0.56, v_b 0.38, dv 0.99, choice 0.74; u recovery (real goods) at a_end 0.28
+[04:53:36]   layer 3: best R2 v_a 0.60, v_b 0.45, dv 0.99, choice 0.78; u recovery (real goods) at a_end 0.32
+[04:54:07]   layer 4: best R2 v_a 0.69, v_b 0.45, dv 0.99, choice 0.77; u recovery (real goods) at a_end 0.13
+[04:54:35]   layer 5: best R2 v_a 0.68, v_b 0.41, dv 0.99, choice 0.78; u recovery (real goods) at a_end 0.10
+[04:55:11]   layer 6: best R2 v_a 0.66, v_b 0.53, dv 0.99, choice 0.79; u recovery (real goods) at a_end 0.30
+[04:55:48]   layer 7: best R2 v_a 0.73, v_b 0.51, dv 0.99, choice 0.79; u recovery (real goods) at a_end 0.10
+[04:56:18]   layer 8: best R2 v_a 0.71, v_b 0.59, dv 0.99, choice 0.80; u recovery (real goods) at a_end 0.01
+[04:56:47]   layer 9: best R2 v_a 0.72, v_b 0.59, dv 0.99, choice 0.79; u recovery (real goods) at a_end 0.25
+[04:57:21]   layer 10: best R2 v_a 0.69, v_b 0.57, dv 0.99, choice 0.79; u recovery (real goods) at a_end 0.10
+[04:57:56]   layer 11: best R2 v_a 0.69, v_b 0.60, dv 0.99, choice 0.80; u recovery (real goods) at a_end 0.05
+[04:58:25]   layer 12: best R2 v_a 0.66, v_b 0.60, dv 0.99, choice 0.81; u recovery (real goods) at a_end -0.07
+[04:58:55]   layer 13: best R2 v_a 0.80, v_b 0.60, dv 0.99, choice 0.82; u recovery (real goods) at a_end 0.20
+[04:59:30]   layer 14: best R2 v_a 0.78, v_b 0.69, dv 0.99, choice 0.82; u recovery (real goods) at a_end 0.21
+[05:00:05]   layer 15: best R2 v_a 0.80, v_b 0.70, dv 0.99, choice 0.82; u recovery (real goods) at a_end 0.27
+[05:00:35]   layer 16: best R2 v_a 0.80, v_b 0.69, dv 0.99, choice 0.83; u recovery (real goods) at a_end 0.39
+[05:01:04]   layer 17: best R2 v_a 0.81, v_b 0.70, dv 0.99, choice 0.83; u recovery (real goods) at a_end 0.49
+[05:01:39]   layer 18: best R2 v_a 0.81, v_b 0.69, dv 1.00, choice 0.83; u recovery (real goods) at a_end 0.49
+[05:02:14]   layer 19: best R2 v_a 0.82, v_b 0.71, dv 0.99, choice 0.83; u recovery (real goods) at a_end 0.52
+[05:02:45]   layer 20: best R2 v_a 0.82, v_b 0.80, dv 0.99, choice 0.84; u recovery (real goods) at a_end 0.51
+[05:03:16]   layer 21: best R2 v_a 0.82, v_b 0.77, dv 0.99, choice 0.86; u recovery (real goods) at a_end 0.53
+[05:03:53]   layer 22: best R2 v_a 0.80, v_b 0.78, dv 0.99, choice 0.87; u recovery (real goods) at a_end 0.50
+[05:04:28]   layer 23: best R2 v_a 0.79, v_b 0.79, dv 0.99, choice 0.88; u recovery (real goods) at a_end 0.54
+[05:04:59]   layer 24: best R2 v_a 0.81, v_b 0.80, dv 0.99, choice 0.89; u recovery (real goods) at a_end 0.48
+[05:05:32]   layer 25: best R2 v_a 0.84, v_b 0.85, dv 0.99, choice 0.93; u recovery (real goods) at a_end 0.42
+[05:06:09]   layer 26: best R2 v_a 0.85, v_b 0.87, dv 0.99, choice 0.95; u recovery (real goods) at a_end 0.45
+[05:06:43]   layer 27: best R2 v_a 0.85, v_b 0.88, dv 0.99, choice 0.98; u recovery (real goods) at a_end 0.41
+[05:07:14]   layer 28: best R2 v_a 0.86, v_b 0.88, dv 0.99, choice 0.99; u recovery (real goods) at a_end 0.33
+[05:07:49]   layer 29: best R2 v_a 0.86, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.29
+[05:08:26]   layer 30: best R2 v_a 0.86, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.25
+[05:09:00]   layer 31: best R2 v_a 0.86, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.33
+[05:09:30]   layer 32: best R2 v_a 0.87, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.45
+[05:10:00]   layer 33: best R2 v_a 0.87, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.40
+[05:10:31]   layer 34: best R2 v_a 0.87, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.39
+[05:11:05]   layer 35: best R2 v_a 0.87, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.39
+[05:11:35]   layer 36: best R2 v_a 0.87, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.40
+[05:12:05]   layer 37: best R2 v_a 0.87, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.43
+[05:12:38]   layer 38: best R2 v_a 0.86, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.45
+[05:13:13]   layer 39: best R2 v_a 0.86, v_b 0.89, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.47
+[05:13:45]   layer 40: best R2 v_a 0.86, v_b 0.88, dv 0.99, choice 1.00; u recovery (real goods) at a_end 0.46
+[05:13:45] Objective: goal prompts against their twins ...
+[05:22:52] Token map on the full prompts ...
+[05:25:40] Done: /workspace/llm-value-trade-offs/pilot4-value-code/results/real/probes.json
