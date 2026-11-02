@@ -18,7 +18,13 @@ python3 -m pip install -q --break-system-packages -r requirements.txt || python3
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
 df -h /workspace | tail -1
 
-if [ -f /workspace/pilot5_results.tar.gz ]; then
+if ! python3 -c "import torch, sys; sys.exit(0 if torch.cuda.is_available() else 1)"; then
+  echo "PILOT5 NO GPU on this start (zero-GPU start): no runs, only printing what is stored"
+  NOGPU=1
+fi
+if [ -n "$NOGPU" ]; then
+  :
+elif [ -f /workspace/pilot5_results.tar.gz ]; then
   echo "PILOT5 results already on this pod: not running again"
 else
   if grep -q "ALL OK" /workspace/log_pilot5_quick.txt 2>/dev/null; then
@@ -41,7 +47,7 @@ else
 fi
 
 # The formats extension (added 2 Nov): run on the next start of the pod, after the predictions.
-if [ ! -f results/real/formats.json ]; then
+if [ -z "$NOGPU" ] && [ ! -f results/real/formats.json ]; then
   echo "PILOT5 FORMATS: quick test"
   python3 pipeline.py --quick --stages formats > /workspace/log_pilot5_formats_quick.txt 2>&1 \
     || { tail -30 /workspace/log_pilot5_formats_quick.txt; echo "PILOT5 FAILED: formats quick test"; exit 1; }
