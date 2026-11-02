@@ -1,0 +1,40 @@
+{
+ "P1": {
+  "verdict": "generic comparator: the non-value comparisons use the same stage and the same pieces",
+  "value": {
+   "top20": 0.6394528090973874,
+   "half_layer": 28
+  },
+  "quantity": {
+   "top20": 0.5449121457499496,
+   "half_layer": 28,
+   "same_pieces": true,
+   "same_stage": true
+  },
+  "weight": {
+   "top20": 0.3851243047932829,
+   "half_layer": 28,
+   "same_pieces": true,
+   "same_stage": true
+  }
+ },
+ "P2": {
+  "k1_fraction": 0.9853263168138214,
+  "ci95": [
+   0.9799767886161824,
+   0.9902679641204069
+  ],
+  "pass": true
+ },
+ "P4": {
+  "corr_heldout": 0.5188313426472683,
+  "writer_share_ratio": 25.84749698638916,
+  "pass": true
+ },
+ "P3": {
+  "learned": 0.5155833333333334,
+  "probe": 0.06,
+  "random": 0.0020833333333333333,
+  "pass": true
+ }
+}

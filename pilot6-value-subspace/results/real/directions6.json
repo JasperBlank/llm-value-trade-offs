@@ -1,0 +1,90 @@
+{
+ "writer_space_dims": 64,
+ "random_share": 0.0125,
+ "28|whole_k1": {
+  "probe_in_subspace": 0.00854161661118269,
+  "writer_share": 0.3230937123298645,
+  "cos_with_probe": 0.09242086857557297,
+  "corr_with_va_train_real": 0.08424656264039501,
+  "corr_with_va_heldout": 0.5188313426472683,
+  "corr_with_dv_heldout": 0.6694619768271712,
+  "calibration_slope": 1.05965873120787
+ },
+ "28|whole_k2": {
+  "probe_in_subspace": 0.009326673112809658,
+  "writer_share": 0.19461801648139954
+ },
+ "28|whole_k4": {
+  "probe_in_subspace": 0.004732928704470396,
+  "writer_share": 0.13307395577430725
+ },
+ "28|whole_k8": {
+  "probe_in_subspace": 0.009976720437407494,
+  "writer_share": 0.10225438326597214
+ },
+ "28|whole_k16": {
+  "probe_in_subspace": 0.008085642009973526,
+  "writer_share": 0.07395798712968826
+ },
+ "28|donor_k1": {
+  "probe_in_subspace": 0.01584399677813053,
+  "writer_share": 0.38883495330810547,
+  "cos_with_probe": 0.12587293982505798,
+  "corr_with_va_train_real": 0.1285226069644997,
+  "corr_with_va_heldout": 0.5567136378714641,
+  "corr_with_dv_heldout": 0.6926749365569536,
+  "calibration_slope": 1.6633333453582815
+ },
+ "28|donor_k4": {
+  "probe_in_subspace": 0.013262065127491951,
+  "writer_share": 0.1558467447757721
+ },
+ "28|probe": {
+  "corr_with_va_heldout": 0.8518502332944873,
+  "corr_with_dv_heldout": 0.6020763474944479,
+  "writer_share": 0.03341054171323776
+ },
+ "32|whole_k1": {
+  "probe_in_subspace": 0.0084527637809515,
+  "writer_share": 0.14963515102863312,
+  "cos_with_probe": 0.09193891286849976,
+  "corr_with_va_train_real": 0.12145535428943889,
+  "corr_with_va_heldout": 0.5489943091504844,
+  "corr_with_dv_heldout": 0.7110566698076731,
+  "calibration_slope": 3.31345885002105
+ },
+ "32|whole_k2": {
+  "probe_in_subspace": 0.004343156237155199,
+  "writer_share": 0.10641589760780334
+ },
+ "32|whole_k4": {
+  "probe_in_subspace": 0.004985219798982143,
+  "writer_share": 0.0505184568464756
+ },
+ "32|whole_k8": {
+  "probe_in_subspace": 0.008075802586972713,
+  "writer_share": 0.0346357524394989
+ },
+ "32|whole_k16": {
+  "probe_in_subspace": 0.015678992494940758,
+  "writer_share": 0.02654132805764675
+ },
+ "32|donor_k1": {
+  "probe_in_subspace": 0.009084477089345455,
+  "writer_share": 0.15352848172187805,
+  "cos_with_probe": 0.09531252086162567,
+  "corr_with_va_train_real": 0.12548236373269717,
+  "corr_with_va_heldout": 0.550154719594262,
+  "corr_with_dv_heldout": 0.7107651878834448,
+  "calibration_slope": 3.4680254744246226
+ },
+ "32|donor_k4": {
+  "probe_in_subspace": 0.006205365061759949,
+  "writer_share": 0.05165383219718933
+ },
+ "32|probe": {
+  "corr_with_va_heldout": 0.8529908050948649,
+  "corr_with_dv_heldout": 0.5921107031222902,
+  "writer_share": 0.023091448470950127
+ }
+}
