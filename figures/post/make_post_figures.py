@@ -652,7 +652,7 @@ def hero():
         return pct(p).replace("> ", "&gt;&#8239;")
 
     def lane(cls, a_html, b_html, w_a, w_b, ghost, sign, winner, p_win):
-        ghost_div = f"<div class='ghost' style='width:{ghost}%'></div>" if ghost else ""
+        ghost_div = f"<div class='ghost' style='width:{ghost}%'><span>with “brief”</span></div>" if ghost else ""
         win_col = "a" if winner == "A" else "b"
         return f"""
         <div class='lane {cls}'>
@@ -677,19 +677,19 @@ def hero():
     #fig.hero { width:1600px; height:900px; padding:50px 72px 0; position:relative; overflow:hidden; }
     .hero .eyebrow { font-size:18px; margin-bottom:12px; }
     .hero h1 { font-size:84px; letter-spacing:-.022em; line-height:1.0; }
-    .hero .sub { font-size:28px; line-height:1.38; margin-top:16px; max-width:1420px; color:var(--ink2); }
+    .hero .sub { font-size:27px; line-height:1.36; margin-top:14px; max-width:1420px; color:var(--ink2); }
     .grid { display:grid; grid-template-columns:600px 320px 236px 196px; column-gap:32px; }
-    .heads { margin-top:34px; align-items:end; }
+    .heads { margin-top:28px; align-items:end; }
     .h { font-size:15px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
     .h b { display:block; font-size:25px; letter-spacing:-.005em; text-transform:none; color:var(--ink); font-weight:750;
            margin-top:4px; }
     .h i { display:block; font-size:17px; letter-spacing:0; text-transform:none; color:var(--ink2); font-weight:450;
            font-style:normal; margin-top:3px; line-height:1.3; }
-    .h .ctx { display:block; font-size:16px; text-transform:none; letter-spacing:0; color:var(--muted);
-            font-weight:450; margin-bottom:6px; }
+    .h .ctx { display:block; font-size:15px; text-transform:none; letter-spacing:0; color:var(--ink2); font-style:italic;
+            font-weight:450; margin:5px 0 2px; }
     .h .q { font-size:21px; font-style:italic; text-transform:none; letter-spacing:0; color:var(--ink2); font-weight:450; }
     .lane { display:grid; grid-template-columns:600px 320px 236px 196px; column-gap:32px; align-items:center;
-            background:var(--card); border:1px solid var(--grid); border-radius:20px; padding:20px 22px 20px 22px;
+            background:var(--card); border:1px solid var(--grid); border-radius:20px; padding:17px 22px 17px 22px;
             margin-left:-22px; width:calc(100% + 44px); box-shadow:0 3px 14px rgba(11,11,11,.05); }
     .lane.l1 { margin-top:14px; }
     .opts { display:flex; flex-direction:column; gap:10px; }
@@ -707,7 +707,9 @@ def hero():
     .track { position:relative; flex:1; height:32px; background:#eeede8; border-radius:14px; overflow:hidden; }
     .fill { position:absolute; left:0; top:0; height:100%; border-radius:14px; }
     .fill.a { background:var(--blue); } .fill.b { background:var(--orange); }
-    .ghost { position:absolute; left:0; top:0; height:100%; border-radius:14px; border:2px dashed var(--axis); z-index:2; }
+    .ghost { position:absolute; left:0; top:0; height:100%; border-radius:14px; border:2px dashed #ffffffcc; z-index:2;
+             display:flex; align-items:center; justify-content:center; }
+    .ghost span { color:#fff; font-size:14px; font-weight:650; white-space:nowrap; }
     .cmp { display:flex; align-items:center; justify-content:center; gap:14px; font-size:44px; }
     .cmp .sign { font-family:"Inter Display", Inter; font-weight:800; font-size:56px; color:var(--ink); line-height:1; }
     .ans { display:flex; align-items:center; gap:13px; }
@@ -716,12 +718,12 @@ def hero():
     .circle.a { background:var(--blue); } .circle.b { background:var(--orange); }
     .p { font-family:"Inter Display", Inter; font-size:27px; font-weight:800; color:var(--ink); line-height:1.1;
          font-variant-numeric:tabular-nums; }
-    .cut { position:relative; height:52px; display:flex; align-items:center; }
+    .cut { position:relative; height:48px; display:flex; align-items:center; }
     .cut::before { content:""; position:absolute; left:0; right:0; top:50%; border-top:2px dashed var(--axis); }
     .pill { position:relative; background:var(--surface); border:2px solid var(--red); color:var(--red); font-size:21px;
             font-weight:700; padding:4px 14px 4px 10px; border-radius:20px; margin-left:150px; display:flex; gap:8px;
             align-items:center; }
-    .foot { position:absolute; left:72px; right:72px; bottom:26px; font-size:17px; color:var(--muted);
+    .foot { position:absolute; left:72px; right:72px; bottom:22px; font-size:15.5px; color:var(--muted);
             display:flex; justify-content:space-between; gap:40px; line-height:1.4; }
     """
     body = f"""
@@ -730,15 +732,16 @@ def hero():
     <div class='sub'>It gets a gut feeling for how big a deal each option is, from its exact words. Then it
       compares the two with the same machinery it uses for “which pile has more apples?”</div>
     <div class='grid heads'>
-      <div class='h'><span class='ctx'>{esc(CONTEXT)}</span><span class='q'>“{esc(QUESTION)}”</span></div>
+      <div class='h'>What the AI is asked<span class='ctx'>“{esc(CONTEXT)}</span><span class='q'>{esc(QUESTION)}”</span></div>
       <div class='h'>Step 1<b>Vibe check</b><i>How big a deal is each?</i></div>
-      <div class='h'>Step 2<b>Which is bigger?</b><i>The same check as for piles of apples <span class='emo'>🍎</span></i></div>
-      <div class='h'>Answer<i>and its probability</i></div>
+      <div class='h'>Step 2<b>Which is bigger?</b><i>Same internal parts as for piles of apples <span class='emo'>🍎</span></i></div>
+      <div class='h'>Answer<i>and how likely the AI is to give it</i></div>
     </div>
     {lanes}
-    <div class='foot'><span>Answers: Qwen3-14B (Qwen3-32B flips too; Llama 3.1 8B already picks the stars). Bars are a
-      sketch. The shared “which is bigger?” step: Qwen3-14B, Qwen3-32B and Llama 3.1 8B.</span>
-      <span style='white-space:nowrap'>forced choices · word deletions · activation patching</span></div>
+    <div class='foot'><span>Percentages: measured answers of the AI model Qwen3-14B (a bigger Qwen switches too; Llama 3.1 8B picks the
+      stars with or without “brief”). Bars only sketch the comparison. Step 2's shared parts: found in all three models by
+      swapping internal signals between questions.</span>
+      <span style='white-space:nowrap'>Methods: forced choices · deleting words<br>· swapping internal signals</span></div>
     """
     return ("<!doctype html><html><head><meta charset='utf-8'><style>" + CSS + css + "</style></head><body>"
             "<div id='fig' class='hero'>" + body + "</div></body></html>")
