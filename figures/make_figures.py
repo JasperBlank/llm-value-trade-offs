@@ -14,7 +14,7 @@ fig8_vibe_check.png         pilot 9: the direct 'how good' rating of each senten
 fig9_full_range.png         pilot 10: rating against menu over the full range of goodness, and the log-scale readout
 fig10_vibe_direction.png    pilot 11: where the price direction can be read, and what pushing along it does
 fig11_recipes.png           pilot 12: the disagreement is readable from the sentence, and pushing it moves the rating beyond the choice
-fig12_recipe_in_words.png   pilot 13: the two recipes in named features, how well they price outcomes, and the pushes against random ones
+fig12_recipe_in_words.png   pilot 13: the two recipes in named features, how well each predictor prices outcomes, the pushes against random ones
 """
 import json
 from pathlib import Path
@@ -559,57 +559,67 @@ def lovo_ols(F, y, groups):
 
 
 def fig12(p13=None):
-    """Pilot 13: the choice recipe in words. Which named features the price and the stated rating weigh, how well the
-    recipe prices outcomes, and the pushes against 20 random directions."""
+    """Pilot 13: the choice recipe in words. The two recipes (features rated blind by Claude; exploratory), how well
+    each predictor prices Qwen's outcomes, and the pushes at layer 20 against 20 random directions."""
     p13 = Path(p13) if p13 else P13
     V = load(p13 / "verdicts13.json")
+    E = load(p13 / "external_ratings.json")
     D = load(p13 / "features13.json")
-    words = list(V["weights_words"])
-    fig, axs = plt.subplots(1, 3, figsize=(16, 5.6), gridspec_kw={"width_ratios": [1.0, 1.0, 1.1]})
-    fig.subplots_adjust(left=0.115, right=0.985, top=0.78, bottom=0.14, wspace=0.32)
-    # A: the two recipes
+    fig, axs = plt.subplots(1, 3, figsize=(16.5, 5.8), gridspec_kw={"width_ratios": [1.0, 1.05, 1.1]})
+    fig.subplots_adjust(left=0.105, right=0.985, top=0.77, bottom=0.15, wspace=0.55)
+    # A: the two recipes, features rated blind by Claude
     ax = axs[0]
+    W = E["claude"]["weights"]
+    words = list(W)
     y = np.arange(len(words))[::-1]
     for yi, n in zip(y, words):
-        w = V["weights_words"][n]
+        w = W[n]
         ax.plot([w["price"], w["rating"]], [yi, yi], color=AXIS, linewidth=1.6, zorder=1)
         ax.plot([w["price"]], [yi], "o", color=BLUE, markersize=7, zorder=2, label="the choice (price)" if yi == y[0] else None)
         ax.plot([w["rating"]], [yi], "o", color=ORANGE, markersize=7, zorder=2, label="the stated rating" if yi == y[0] else None)
         lo, hi = w["diff_ci95"]
         if lo > 0 or hi < 0:
-            ax.text(max(w["price"], w["rating"]) + 0.04, yi, "*", va="center", fontsize=12, color=INK)
+            ax.text(max(w["price"], w["rating"]) + 0.03, yi, "*", va="center", fontsize=12, color=INK)
     ax.set_yticks(y, [LABELS13[n] for n in words])
     ax.tick_params(axis="y", length=0)
     ax.axvline(0, color=AXIS, linewidth=0.8)
     ax.set_ylim(-0.6, len(words) + 0.5)
-    ax.set_xlabel("Standardised weight (fitted together)")
-    ax.set_title("The two recipes in words")
+    ax.set_xlabel("Standardised weight (nine features fitted together)")
+    ax.set_title("The two recipes\n(features rated blind by Claude)")
     ax.legend(loc="upper center", ncol=2, handletextpad=0.2, columnspacing=1.0)
-    # B: the recipe prices outcomes, held out
+    ax.grid(axis="x", color=GRID, linewidth=0.6)
+    ax.set_axisbelow(True)
+    # B: how well each predictor prices Qwen's outcomes
     ax = axs[1]
     old = [d for d in D if d["set"] == "old"]
-    new = [d for d in D if d["set"] == "new"]
-    Fo = np.array([[d["features"][n] for n in words] for d in old])
-    uo = np.array([d["u"] for d in old])
-    vals = sorted({d["value"] for d in old})
-    pred_o = lovo_ols(Fo, uo, np.array([vals.index(d["value"]) for d in old]))
-    ax.plot(pred_o, uo, "o", color=BLUE_LIGHT, markersize=5, label=f"pilot 10's {len(old)} (one value left out): r {V['P1']['r']:.2f}")
-    ax.plot([d["u_from_words"] for d in new], [d["u"] for d in new], "o", color=ORANGE, markersize=6,
-            label=f"{len(new)} new sentences: r {V['P4']['r']:.2f}")
-    lim = [min(pred_o.min(), uo.min()) - 0.5, max(pred_o.max(), uo.max()) + 0.5]
-    ax.plot(lim, lim, color=AXIS, linewidth=1, linestyle="--")
-    ax.set_xlim(lim)
-    ax.set_ylim(lim)
-    ax.set_xlabel("Price predicted from the nine features")
-    ax.set_ylabel("Measured price (menu)")
-    ax.set_title("The recipe in words prices outcomes\nit was not fitted on")
-    ax.legend(loc="upper left")
+    r_rating_old = float(np.corrcoef([d["Rbar"] for d in old], [d["u"] for d in old])[0, 1])
+    o = V["P4"]["other_predictors_r"]
+    rows = [("nine features, Qwen's own answers", V["P1"]["r"], V["P4"]["r"]),
+            ("nine features, rated blind by Claude", E["claude"]["P1_r"], E["claude"]["P4_r"]),
+            ("one question: how big a difference", V["P1"]["r_F1_alone"], o["F1_alone"]),
+            ("Qwen's states at layer 20 (ridge)", V["P4"]["ridge_heldout_r_on_old"], o[[k for k in o if k.startswith("states_ridge")][0]]),
+            ("Qwen's stated 'how good' rating", r_rating_old, o["how_good_rating"])]
+    yb = np.arange(len(rows))[::-1] * 1.0
+    h = 0.36
+    ax.barh(yb + h / 2, [r[1] for r in rows], height=h, color=BLUE, label=f"pilot 10's {len(old)} (held out by value)")
+    ax.barh(yb - h / 2, [r[2] for r in rows], height=h, color=ORANGE, label=f"the {V['n_new']} new sentences")
+    for yi, r in zip(yb, rows):
+        ax.text(r[1] + 0.01, yi + h / 2, f"{r[1]:.2f}", va="center", fontsize=9, color=INK)
+        ax.text(r[2] + 0.01, yi - h / 2, f"{r[2]:.2f}", va="center", fontsize=9, color=INK)
+    ax.set_yticks(yb, [r[0] for r in rows])
+    ax.tick_params(axis="y", length=0)
+    ax.set_xlim(0, 1)
+    ax.set_ylim(-0.7, len(rows) - 0.3 + 0.9)
+    ax.set_xlabel("r with Qwen's measured price")
+    ax.set_title("Every predictor gets about 0.8 on the old\nsentences and about 0.7 on new ones")
+    ax.legend(loc="upper center", ncol=2, handletextpad=0.3, columnspacing=1.0, fontsize=8.5)
+    ax.grid(axis="x", color=GRID, linewidth=0.6)
+    ax.set_axisbelow(True)
     # C: pushes along each direction against 20 random ones
     ax = axs[2]
     P = V["pushes"]
     sr = V["rating_per_logit_price_direction"]
     xs = [v["choice_logit_per_push"] for v in P.values()]
-    ys = [v["rating_points_per_push"] for v in P.values()]
     x0, x1 = min(xs + [0]) - 0.05, max(xs) * 1.12 + 0.05
     ax.plot([x0, x1], [sr * x0, sr * x1], color=AXIS, linewidth=1.2, linestyle="--")
     rnd = [v for k, v in P.items() if k.startswith("random:")]
@@ -617,33 +627,32 @@ def fig12(p13=None):
             label="20 random directions")
     feats = {k: v for k, v in P.items() if k.startswith("feature:")}
     ax.plot([v["choice_logit_per_push"] for v in feats.values()], [v["rating_points_per_push"] for v in feats.values()], "o",
-            color=AQUA, markersize=5, label="a feature's direction")
-    for k, v in feats.items():
-        ax.annotate(LABELS13[k.split(":")[1]], (v["choice_logit_per_push"], v["rating_points_per_push"]), xytext=(5, -3),
-                    textcoords="offset points", fontsize=7.5, color=INK2)
-    for k, col, lab, off in (("price", BLUE, "price", (8, -12)), ("rating", INK2, "rating", (-8, 6)),
+            color=AQUA, markersize=5, label="the ten features' directions")
+    for k, off in (("feature:concreteness", (-6, -3)), ("feature:health_safety", (5, -11))):
+        v = feats[k]
+        ax.annotate(LABELS13[k.split(":")[1]], (v["choice_logit_per_push"], v["rating_points_per_push"]), xytext=off,
+                    textcoords="offset points", fontsize=8, color=INK2, ha="right" if off[0] < 0 else "left")
+    for k, col, lab, off in (("price", BLUE, "price", (6, -13)), ("rating", INK2, "rating", (-8, 5)),
                              ("disagreement", ORANGE, "disagreement (pilot 12)", (8, 4))):
         ax.plot([P[k]["choice_logit_per_push"]], [P[k]["rating_points_per_push"]], "o", color=col, markersize=8)
         ax.annotate(lab, (P[k]["choice_logit_per_push"], P[k]["rating_points_per_push"]), xytext=off, textcoords="offset points",
                     fontsize=9, color=INK, ha="right" if off[0] < 0 else "left")
     ax.axhline(0, color=AXIS, linewidth=0.8)
     ax.set_xlim(x0, x1)
-    ax.set_xlabel("Change in the choice (logit of picking the sentence), per push")
+    ax.set_xlabel("Change in the choice (logit), per push")
     ax.set_ylabel("Change in the stated rating (points), per push")
     ax.set_title("Pushes at layer 20, all by the same distance")
     ax.legend(loc="upper left")
-    for a in axs[1:]:
-        a.grid(color=GRID, linewidth=0.6)
-        a.set_axisbelow(True)
-    axs[0].grid(axis="x", color=GRID, linewidth=0.6)
-    axs[0].set_axisbelow(True)
-    p2, p3 = V["P2"], V["P3"]
+    ax.grid(color=GRID, linewidth=0.6)
+    ax.set_axisbelow(True)
+    q = E["qwen"]["halo_mean_r_among_F2_F10"]
+    c = E["claude"]["halo_mean_r_among_F2_F10"]
     suptitle(fig, "Why the model picks what it picks, in words",
-             f"Pilot 13, Qwen3-14B. Features: the model's own 0-9 answers to nine descriptive questions. "
-             f"Moral weighs {p2['moral_rating_minus_price']:+.2f} more in the rating than in the choice [{p2['ci95'][0]:+.2f}, {p2['ci95'][1]:+.2f}]; "
-             f"the disagreement push {'beats' if p3['pass'] else 'does not beat'} all 20 random directions.")
-    note(fig, "* the rating and the choice weigh this feature differently (95% bootstrap interval excludes 0). Dashed line, right: "
-              "every push that changes only the shared price would lie on it.")
+             f"Pilot 13, Qwen3-14B. Pre-registered: P1 r {V['P1']['r']:.2f} (bar 0.8, fail); P2 fail; P3 pass; P4 r {V['P4']['r']:.2f} (bar 0.7, pass). "
+             f"Qwen's own feature answers are entangled (mean r between features {q:.2f}; Claude's blind ratings {c:.2f}),\n"
+             "so panel A uses the blind ratings (exploratory, planned before the results).")
+    note(fig, "* the stated rating and the choice weigh this feature differently (95% bootstrap interval excludes 0). Middle: the rating's r on the "
+              "old sentences is a plain correlation (nothing fitted). Right: a push that changes only the shared price lands on the dashed line.")
     fig.savefig(OUT / "fig12_recipe_in_words.png", dpi=200)
     plt.close(fig)
 

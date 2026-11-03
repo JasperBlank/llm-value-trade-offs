@@ -18,3 +18,4 @@ Drawn by `make_figures.py` straight from the committed result files of pilots 6 
 | `fig9_full_range.png` | Pilot 10: the 'how good' rating against the menu price over the full range of goodness (96 sentences), and pilot 9's sentences on a log scale |
 | `fig10_vibe_direction.png` | Pilot 11: where the price direction can be read from a sentence (held out), and what pushing along it does to the choice and the rating |
 | `fig11_recipes.png` | Pilot 12: where the rating disagrees with the price can be read from the sentence, and pushing along it moves the rating beyond what a shared variable would |
+| `fig12_recipe_in_words.png` | Pilot 13: the choice's and the stated rating's recipes in named features (rated blind by Claude), how well each predictor prices Qwen's outcomes, and the pushes at layer 20 against 20 random directions |

@@ -1,0 +1,438 @@
+{
+ "model": "Qwen/Qwen3-14B",
+ "n_old": 96,
+ "n_new": 24,
+ "n_new_tradeoffs": 13824,
+ "P1": {
+  "r": 0.7900926331707642,
+  "pass": false,
+  "r_with_F1": 0.7963636956882593,
+  "r_F1_alone": 0.7947212790714557,
+  "rating_from_words_r": 0.8592253684419942
+ },
+ "P2": {
+  "moral_rating_minus_price": -0.041530846196643684,
+  "ci95": [
+   -0.221675135449839,
+   0.1491979792347948
+  ],
+  "pass": false
+ },
+ "P3": {
+  "disagreement_excess": 0.00640385671774015,
+  "ci95_over_sentences": [
+   0.00494916639226142,
+   0.007915868670088982
+  ],
+  "random_excess": [
+   0.001428162652090973,
+   -0.00225336565886314,
+   -0.0013792939603006673,
+   0.002017054668543023,
+   -0.0030562142037819633,
+   0.003284962808992378,
+   0.0010263736733277023,
+   -0.00531990725848481,
+   -0.0034502752304389006,
+   0.002743420723644525,
+   0.001329237123366024,
+   0.00038365845887108636,
+   0.00200807639908597,
+   0.0016560778526690393,
+   -0.005516350714361311,
+   -0.00036741442627663415,
+   -0.00617300799708752,
+   -0.0015557875060957264,
+   0.0018692774592458342,
+   0.004974163564042991
+  ],
+  "rank_p": 0.047619047619047616,
+  "pass": true
+ },
+ "P4": {
+  "r": 0.7143912837956152,
+  "pass": true,
+  "other_predictors_r": {
+   "recipe_in_words": 0.7143912837956152,
+   "with_F1": 0.6714540625618473,
+   "F1_alone": 0.5498224678148967,
+   "states_ridge_layer20": 0.7395936200111011,
+   "how_good_rating": 0.7386447795865045
+  },
+  "ridge_heldout_r_on_old": 0.8404557041489717,
+  "ridge_penalty_scale": 0.1
+ },
+ "weights_words": {
+  "severity": {
+   "price": -0.20003740330744704,
+   "rating": -0.053107457835351146,
+   "rating_minus_price": 0.1469299454720959,
+   "diff_ci95": [
+    -0.11993018849243643,
+    0.35389453994781783
+   ]
+  },
+  "duration": {
+   "price": 0.359287199764345,
+   "rating": -0.1136126802840477,
+   "rating_minus_price": -0.4728998800483927,
+   "diff_ci95": [
+    -0.6542459028201247,
+    -0.19841106106131248
+   ]
+  },
+  "health_safety": {
+   "price": 0.02518259757109058,
+   "rating": 0.009064855829619009,
+   "rating_minus_price": -0.01611774174147157,
+   "diff_ci95": [
+    -0.1293265878808802,
+    0.12307285554668729
+   ]
+  },
+  "moral": {
+   "price": 0.09537155704845922,
+   "rating": 0.053840710851815535,
+   "rating_minus_price": -0.041530846196643684,
+   "diff_ci95": [
+    -0.221675135449839,
+    0.1491979792347948
+   ]
+  },
+  "relationships": {
+   "price": 0.08429484346294486,
+   "rating": 0.15556414913299232,
+   "rating_minus_price": 0.07126930567004747,
+   "diff_ci95": [
+    -0.11445841642954224,
+    0.2638522281817092
+   ]
+  },
+  "meaning": {
+   "price": 0.6496084046542059,
+   "rating": 0.6549977340225361,
+   "rating_minus_price": 0.0053893293683302534,
+   "diff_ci95": [
+    -0.35380307668142014,
+    0.33177503405419195
+   ]
+  },
+  "pleasure": {
+   "price": 0.017501069087050167,
+   "rating": 0.15099869644597208,
+   "rating_minus_price": 0.1334976273589219,
+   "diff_ci95": [
+    0.011715911848091993,
+    0.27583232540086894
+   ]
+  },
+  "legacy": {
+   "price": -0.13522100573613552,
+   "rating": 0.14212002879179403,
+   "rating_minus_price": 0.2773410345279296,
+   "diff_ci95": [
+    -0.030692354052577926,
+    0.5817524547531638
+   ]
+  },
+  "concreteness": {
+   "price": 0.010682835743916402,
+   "rating": -0.06104786182111546,
+   "rating_minus_price": -0.07173069756503186,
+   "diff_ci95": [
+    -0.19585866070690822,
+    0.03160153175517017
+   ]
+  }
+ },
+ "weights_with_F1": {
+  "size": {
+   "price": 0.38073292934727737,
+   "rating": 0.2905870852519939
+  },
+  "severity": {
+   "price": -0.22111005538536543,
+   "rating": -0.06919075421937979
+  },
+  "duration": {
+   "price": 0.29081444304222603,
+   "rating": -0.1658731948372829
+  },
+  "health_safety": {
+   "price": 0.028708743980903853,
+   "rating": 0.011756119254498182
+  },
+  "moral": {
+   "price": 0.05596723708995975,
+   "rating": 0.023766121551889126
+  },
+  "relationships": {
+   "price": 0.117154080478601,
+   "rating": 0.1806433297658666
+  },
+  "meaning": {
+   "price": 0.31269272913540186,
+   "rating": 0.3978533249677174
+  },
+  "pleasure": {
+   "price": 0.03682108053685311,
+   "rating": 0.16574432358113514
+  },
+  "legacy": {
+   "price": -0.08890584169680185,
+   "rating": 0.17746918691224112
+  },
+  "concreteness": {
+   "price": 0.016313531070172846,
+   "rating": -0.05675034191495934
+  }
+ },
+ "feature_r": {
+  "size": {
+   "price": 0.8092206062888494,
+   "rating": 0.834099598173976
+  },
+  "severity": {
+   "price": 0.590797237426666,
+   "rating": 0.6723881836433722
+  },
+  "duration": {
+   "price": 0.7543024446161074,
+   "rating": 0.6648956576396474
+  },
+  "health_safety": {
+   "price": 0.346724366821028,
+   "rating": 0.39857712893656466
+  },
+  "moral": {
+   "price": 0.5925727144201284,
+   "rating": 0.6360374278692535
+  },
+  "relationships": {
+   "price": 0.609180278739842,
+   "rating": 0.7096878942257421
+  },
+  "meaning": {
+   "price": 0.8044838103091414,
+   "rating": 0.8808355399803453
+  },
+  "pleasure": {
+   "price": 0.4126638374897461,
+   "rating": 0.5591776277497318
+  },
+  "legacy": {
+   "price": 0.7497696635585467,
+   "rating": 0.8388874247616798
+  },
+  "concreteness": {
+   "price": 0.07596058686840411,
+   "rating": 0.04230306392214355
+  }
+ },
+ "pushes": {
+  "price": {
+   "choice_logit_per_push": 0.7714843749999999,
+   "rating_points_per_push": 0.11178369108214377,
+   "excess_per_residual_unit": 0.0,
+   "cos_with_price_direction": 0.9999999999998881
+  },
+  "rating": {
+   "choice_logit_per_push": 0.7294921875,
+   "rating_points_per_push": 0.12640475998627534,
+   "excess_per_residual_unit": 0.0032688696297484138,
+   "cos_with_price_direction": 0.908627982242602
+  },
+  "disagreement": {
+   "choice_logit_per_push": 0.1025390625,
+   "rating_points_per_push": 0.05542028977509865,
+   "excess_per_residual_unit": 0.00640385671774015,
+   "cos_with_price_direction": 0.05414450131996285
+  },
+  "feature:size": {
+   "choice_logit_per_push": 0.6126302083333333,
+   "rating_points_per_push": 0.1116949544577432,
+   "excess_per_residual_unit": 0.003619797681601214,
+   "cos_with_price_direction": 0.8500621187761502
+  },
+  "feature:severity": {
+   "choice_logit_per_push": 0.5104166666666666,
+   "rating_points_per_push": 0.08683458130112352,
+   "excess_per_residual_unit": 0.0020331255147693576,
+   "cos_with_price_direction": 0.7188960279517203
+  },
+  "feature:duration": {
+   "choice_logit_per_push": 0.564453125,
+   "rating_points_per_push": 0.09920739003350955,
+   "excess_per_residual_unit": 0.002750386169641912,
+   "cos_with_price_direction": 0.8638941142119934
+  },
+  "feature:health_safety": {
+   "choice_logit_per_push": 0.5120442708333334,
+   "rating_points_per_push": 0.05222818162007155,
+   "excess_per_residual_unit": -0.0034675733904696807,
+   "cos_with_price_direction": 0.4648469542954077
+  },
+  "feature:moral": {
+   "choice_logit_per_push": 0.6276041666666666,
+   "rating_points_per_push": 0.09867485044369682,
+   "excess_per_residual_unit": 0.0012217245788891454,
+   "cos_with_price_direction": 0.7072407407857836
+  },
+  "feature:relationships": {
+   "choice_logit_per_push": 0.5472005208333334,
+   "rating_points_per_push": 0.0931122692328589,
+   "excess_per_residual_unit": 0.0021827774171670113,
+   "cos_with_price_direction": 0.709487329471552
+  },
+  "feature:meaning": {
+   "choice_logit_per_push": 0.5543619791666667,
+   "rating_points_per_push": 0.10118078956414212,
+   "excess_per_residual_unit": 0.003292771685908507,
+   "cos_with_price_direction": 0.8594406824015295
+  },
+  "feature:pleasure": {
+   "choice_logit_per_push": 0.6201171875,
+   "rating_points_per_push": 0.1061030616267361,
+   "excess_per_residual_unit": 0.0025657150306608555,
+   "cos_with_price_direction": 0.5575933460094621
+  },
+  "feature:legacy": {
+   "choice_logit_per_push": 0.5641276041666666,
+   "rating_points_per_push": 0.10030795029432059,
+   "excess_per_residual_unit": 0.002931582871738659,
+   "cos_with_price_direction": 0.8273323694105419
+  },
+  "feature:concreteness": {
+   "choice_logit_per_push": 0.4534505208333333,
+   "rating_points_per_push": 0.03577326637735178,
+   "excess_per_residual_unit": -0.00472504591936638,
+   "cos_with_price_direction": 0.17909708011471034
+  },
+  "random:0": {
+   "choice_logit_per_push": -0.20084635416666666,
+   "rating_points_per_push": -0.020055301748741067,
+   "excess_per_residual_unit": 0.001428162652090973,
+   "cos_with_price_direction": -0.0070822717165746184
+  },
+  "random:1": {
+   "choice_logit_per_push": 0.25390625,
+   "rating_points_per_push": 0.022516422025478603,
+   "excess_per_residual_unit": -0.00225336565886314,
+   "cos_with_price_direction": -0.016571535332732347
+  },
+  "random:2": {
+   "choice_logit_per_push": 0.13541666666666666,
+   "rating_points_per_push": 0.01088445418939207,
+   "excess_per_residual_unit": -0.0013792939603006673,
+   "cos_with_price_direction": 0.01851076252949217
+  },
+  "random:3": {
+   "choice_logit_per_push": -0.05924479166666668,
+   "rating_points_per_push": 0.004192086047809428,
+   "excess_per_residual_unit": 0.002017054668543023,
+   "cos_with_price_direction": 0.02249219341218924
+  },
+  "random:4": {
+   "choice_logit_per_push": 0.034830729166666664,
+   "rating_points_per_push": -0.01431173289371914,
+   "excess_per_residual_unit": -0.0030562142037819633,
+   "cos_with_price_direction": -0.007553480267780657
+  },
+  "random:5": {
+   "choice_logit_per_push": -0.3343098958333333,
+   "rating_points_per_push": -0.027632165261923716,
+   "excess_per_residual_unit": 0.003284962808992378,
+   "cos_with_price_direction": 0.023363649149467494
+  },
+  "random:6": {
+   "choice_logit_per_push": 0.0478515625,
+   "rating_points_per_push": 0.01343461956457223,
+   "excess_per_residual_unit": 0.0010263736733277023,
+   "cos_with_price_direction": -0.0005163698141863547
+  },
+  "random:7": {
+   "choice_logit_per_push": 0.20149739583333331,
+   "rating_points_per_push": -0.004501244755838925,
+   "excess_per_residual_unit": -0.00531990725848481,
+   "cos_with_price_direction": -0.008704175753867357
+  },
+  "random:8": {
+   "choice_logit_per_push": -0.07649739583333334,
+   "rating_points_per_push": -0.03293858410808316,
+   "excess_per_residual_unit": -0.0034502752304389006,
+   "cos_with_price_direction": -0.003674930703245694
+  },
+  "random:9": {
+   "choice_logit_per_push": 0.11002604166666667,
+   "rating_points_per_push": 0.03331937420585659,
+   "excess_per_residual_unit": 0.002743420723644525,
+   "cos_with_price_direction": 0.014848980739535502
+  },
+  "random:10": {
+   "choice_logit_per_push": -0.21712239583333334,
+   "rating_points_per_push": -0.023040216214972504,
+   "excess_per_residual_unit": 0.001329237123366024,
+   "cos_with_price_direction": -0.026111613562283493
+  },
+  "random:11": {
+   "choice_logit_per_push": 0.11881510416666666,
+   "rating_points_per_push": 0.019645780461449304,
+   "excess_per_residual_unit": 0.00038365845887108636,
+   "cos_with_price_direction": 0.007240965333094764
+  },
+  "random:12": {
+   "choice_logit_per_push": 0.326171875,
+   "rating_points_per_push": 0.05997989580446696,
+   "excess_per_residual_unit": 0.00200807639908597,
+   "cos_with_price_direction": 0.005385614741693494
+  },
+  "random:13": {
+   "choice_logit_per_push": -0.21419270833333331,
+   "rating_points_per_push": -0.020545464270452937,
+   "excess_per_residual_unit": 0.0016560778526690393,
+   "cos_with_price_direction": 0.017979177856070016
+  },
+  "random:14": {
+   "choice_logit_per_push": 0.3050130208333333,
+   "rating_points_per_push": 0.009253278076759172,
+   "excess_per_residual_unit": -0.005516350714361311,
+   "cos_with_price_direction": 0.0075611056086427285
+  },
+  "random:15": {
+   "choice_logit_per_push": -0.007486979166666669,
+   "rating_points_per_push": -0.0034120772683424983,
+   "excess_per_residual_unit": -0.00036741442627663415,
+   "cos_with_price_direction": 0.004353399218759432
+  },
+  "random:16": {
+   "choice_logit_per_push": 0.17805989583333334,
+   "rating_points_per_push": -0.013300869666484048,
+   "excess_per_residual_unit": -0.00617300799708752,
+   "cos_with_price_direction": -0.017989810524635462
+  },
+  "random:17": {
+   "choice_logit_per_push": -0.0869140625,
+   "rating_points_per_push": -0.02244793782886503,
+   "excess_per_residual_unit": -0.0015557875060957264,
+   "cos_with_price_direction": 0.009012101591304635
+  },
+  "random:18": {
+   "choice_logit_per_push": -0.0013020833333333298,
+   "rating_points_per_push": 0.01165161198074433,
+   "excess_per_residual_unit": 0.0018692774592458342,
+   "cos_with_price_direction": -0.004119043746173759
+  },
+  "random:19": {
+   "choice_logit_per_push": -0.24381510416666669,
+   "rating_points_per_push": -0.003820341170741396,
+   "excess_per_residual_unit": 0.004974163564042991,
+   "cos_with_price_direction": 0.011319615827487481
+  }
+ },
+ "push_layer": 20,
+ "delta_residual": 6.334146051835415,
+ "rating_per_logit_price_direction": 0.14489430337736103,
+ "feature_pushes_choice_vs_price_r_spearman": 0.4424242424242424,
+ "feature_excess_vs_weight_difference_spearman": 0.3666666666666667,
+ "minutes": 13.293408103783925
+}
