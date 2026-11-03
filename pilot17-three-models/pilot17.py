@@ -35,7 +35,7 @@ MODELS = {"llama8": "meta-llama/Llama-3.1-8B-Instruct", "qwen14": "Qwen/Qwen3-14
 FRACS = [0.4, 0.5, 0.6, 0.7, 0.8]
 RESID_FRACS = [0.4, 0.5, 0.6, 0.65, 0.7, 0.75, 0.8, 0.9]
 TOP_K, N_RANDOM, N_CONTROL, GAP = 20, 3, 120, 2.0
-Q1_MIN, Q2_MIN, Q3_MIN, RANDOM_MAX = 0.9, 0.5, 0.3, 0.1
+Q1_MIN, Q2_MIN, Q3_MIN, RANDOM_MAX, Q2B_MIN = 0.9, 0.5, 0.3, 0.1, 0.4
 
 
 def encode_plain(tok, user):
@@ -84,6 +84,45 @@ class Runner17(p16.Runner16):
         return C
 
 
+def direct_dir(M, encs, vec, n_blocks, bs=8):
+    """Each head's and MLP's contribution along `vec` at the last position, blocks 0..n_blocks-1: (n, n_blocks, H + 1)."""
+    torch = M.torch
+    v = torch.tensor(vec, dtype=torch.float32, device=M.dev)
+    with torch.no_grad():
+        Mv = [(blk.self_attn.o_proj.weight.float().T @ v).view(M.H, M.hd) for blk in M.blocks[:n_blocks]]
+    n = len(encs)
+    C = np.zeros((n, n_blocks, M.H + 1), dtype=np.float32)
+    for ch in batches(n, bs):
+        ids, att, _ = M._batch_roles(encs, ch)
+        cap = {}
+        hooks = []
+        for l, blk in enumerate(M.blocks[:n_blocks]):
+            hooks.append(blk.self_attn.o_proj.register_forward_pre_hook(lambda m, i, l=l: cap.__setitem__(("z", l), i[0][:, -1].float())))
+            hooks.append(blk.mlp.register_forward_hook(lambda m, i, o, l=l: cap.__setitem__(("m", l), o[:, -1].float())))
+        try:
+            with torch.no_grad():
+                forward(M.model, ids, att, torch)
+        finally:
+            for h in hooks:
+                h.remove()
+        with torch.no_grad():
+            for l in range(n_blocks):
+                z = cap[("z", l)].view(len(ch), M.H, M.hd)
+                C[ch, l, :M.H] = torch.einsum("bhd,hd->bh", z, Mv[l]).cpu().numpy()
+                C[ch, l, M.H] = (cap[("m", l)] @ v).cpu().numpy()
+    return C
+
+
+def top_by_slope(Cr, Cd, eff, sel, H, k=TOP_K):
+    """Pieces ranked by how much of a swap's change in the logit their own change carries (slope through zero)."""
+    dC = (Cd - Cr)[sel]
+    score = (dC * eff[sel][:, None, None]).sum(0) / (eff[sel] ** 2).sum()
+    nb_ = Cr.shape[1]
+    parts = [("head", l, h) for l in range(nb_) for h in range(H)] + [("mlp", l) for l in range(nb_)]
+    sc = {p: float(score[p[1], p[2]] if p[0] == "head" else score[p[1], H]) for p in parts}
+    return sorted(parts, key=lambda p: -sc[p])[:k], sc
+
+
 def order_flips(L, gap=GAP, cap=None):
     rev = tot = 0
     for i in range(L.shape[0]):
@@ -127,9 +166,9 @@ def random_like(top, H, rng, n_blocks=None):
     return out
 
 
-def run(key, quick):
+def run(key, quick, out="real"):
     t0 = time.time()
-    res = HERE / "results" / ("quick" if quick else "real") / key
+    res = HERE / "results" / ("quick" if quick else out) / key
     res.mkdir(parents=True, exist_ok=True)
     S = p11.items(quick)
     vals = sorted({s["value"] for s in S})
@@ -207,23 +246,38 @@ def run(key, quick):
     base_r, base_d = L_int[:, mid], L_int[donors, mid]
     eff = base_d - base_r
     sel = groups % 2 == 0
-    dC = (C_d - C_r)[sel]
-    score = (dC * eff[sel][:, None, None]).sum(0) / (eff[sel] ** 2).sum()
-    parts = [("head", l, h) for l in range(nL) for h in range(M.H)] + [("mlp", l) for l in range(nL)]
-    sc = {p: float(score[p[1], p[2]] if p[0] == "head" else score[p[1], M.H]) for p in parts}
-    top = sorted(parts, key=lambda p: -sc[p])[:TOP_K]
+    test = np.where(~sel)[0]
+    top, sc = top_by_slope(C_r, C_d, eff, sel, M.H)
     rsets = [random_like(top, M.H, np.random.default_rng(1701 + k), nL) for k in range(N_RANDOM)]
     resid_layers = sorted({max(1, round(f * nL)) for f in RESID_FRACS})
-    conds = [("resid", "END", L) for L in resid_layers] + [("pieces", top)] + [("pieces", r) for r in rsets]
-    test = np.where(~sel)[0]
-    br, bd, obs = M.patch([enc_r[i] for i in test], [enc_d[i] for i in test], conds)
+    rc = [("resid", "END", L) for L in resid_layers]
+    br, bd, obs = M.patch([enc_r[i] for i in test], [enc_d[i] for i in test], rc)
     eff_t = bd - br
-    T = {f"END@{c[2]}": p15.transfer(obs[ci], eff_t) for ci, c in enumerate(conds) if c[0] == "resid"}
-    top_t = p15.transfer(obs[len(resid_layers)], eff_t)
-    rand_t = [p15.transfer(obs[len(resid_layers) + 1 + k], eff_t)["transfer"] for k in range(N_RANDOM)]
+    T = {f"END@{c[2]}": p15.transfer(obs[ci], eff_t) for ci, c in enumerate(rc)}
+    # the decision writers: pieces before the layer where the decision reaches the answer position, writing the
+    # decision's direction there (as pilots 5-6 found theirs), chosen on the same half of the values
+    Lstar = next((L for L in resid_layers if T[f"END@{L}"]["transfer"] >= 0.5), resid_layers[-1])
+    Xs, _ = M.read_sel(enc_r, [Lstar])
+    vdec = pb.dom_direction(Xs[:, p16.POS.index("END"), 0].astype(np.float64), base_r)
+    W_r, W_d = direct_dir(M, enc_r, vdec, Lstar), direct_dir(M, enc_d, vdec, Lstar)
+    topw, scw = top_by_slope(W_r, W_d, eff, sel, M.H)
+    rsetsw = [random_like(topw, M.H, np.random.default_rng(1711 + k), Lstar) for k in range(N_RANDOM)]
+    sets = {"logit_writers": top, **{f"logit_random_{k + 1}": r for k, r in enumerate(rsets)},
+            "decision_writers": topw, **{f"decision_random_{k + 1}": r for k, r in enumerate(rsetsw)}}
+    p5p = None
+    if key in ("qwen14",):
+        p5p = [p15.parse_piece(x) for x in json.load(open(ROOT / "pilot5-value-circuit/results/real/patching.json"))["pieces"]["top-20"]]
+        sets["pilot5_pieces"] = p5p
+    pc = [("pieces", v) for v in sets.values()]
+    _, _, obp = M.patch([enc_r[i] for i in test], [enc_d[i] for i in test], pc)
+    sentT = {k: p15.transfer(obp[ci], eff_t) for ci, k in enumerate(sets)}
+    top_t, rand_t = sentT["logit_writers"], [sentT[f"logit_random_{k + 1}"]["transfer"] for k in range(N_RANDOM)]
+    topw_t, randw_t = sentT["decision_writers"], [sentT[f"decision_random_{k + 1}"]["transfer"] for k in range(N_RANDOM)]
     q2 = bool(top_t["transfer"] >= Q2_MIN and max(rand_t) <= RANDOM_MAX)
-    log(f"{key} comparator: top {TOP_K} carry {top_t['transfer']:.2f} of held-out sentence swaps (random {', '.join(f'{x:.2f}' for x in rand_t)}); "
-        f"answer position: " + ", ".join(f"{k} {v['transfer']:.2f}" for k, v in T.items()))
+    q2b = bool(topw_t["transfer"] >= Q2B_MIN and max(randw_t) <= RANDOM_MAX)
+    log(f"{key} comparator: decision reaches the answer position at layer {Lstar}; logit writers carry {top_t['transfer']:.2f} "
+        f"(random {', '.join(f'{x:.2f}' for x in rand_t)}); decision writers (blocks < {Lstar}) carry {topw_t['transfer']:.2f} "
+        f"(random {', '.join(f'{x:.2f}' for x in randw_t)}); answer position: " + ", ".join(f"{k} {v['transfer']:.2f}" for k, v in T.items()))
     P6 = [json.loads(l) for l in open(ROOT / "pilot6-value-subspace/pairs.jsonl")]
     generic = {}
     for task in ("quantity", "weight"):
@@ -231,27 +285,36 @@ def run(key, quick):
         rows = [rows[i] for i in np.random.default_rng(1702).choice(len(rows), size=min(N_CONTROL if not quick else 24, len(rows)), replace=False)]
         er = [encode_plain(M.tok, r["user"]) for r in rows]
         ed = [encode_plain(M.tok, r["donor_user"]) for r in rows]
-        br_, bd_, ob_ = M.patch(er, ed, conds)
+        br_, bd_, ob_ = M.patch(er, ed, rc + pc)
         e_ = bd_ - br_
-        generic[task] = {"top": p15.transfer(ob_[len(resid_layers)], e_)["transfer"],
-                         "random": [p15.transfer(ob_[len(resid_layers) + 1 + k], e_)["transfer"] for k in range(N_RANDOM)],
-                         "answer_position": {f"END@{c[2]}": p15.transfer(ob_[ci], e_)["transfer"] for ci, c in enumerate(conds) if c[0] == "resid"},
+        tr_ = {k: p15.transfer(ob_[len(rc) + ci], e_)["transfer"] for ci, k in enumerate(sets)}
+        generic[task] = {"top": tr_["logit_writers"], "random": [tr_[f"logit_random_{k + 1}"] for k in range(N_RANDOM)],
+                         "decision_writers": tr_["decision_writers"], "decision_random": [tr_[f"decision_random_{k + 1}"] for k in range(N_RANDOM)],
+                         "pilot5_pieces": tr_.get("pilot5_pieces"),
+                         "answer_position": {f"END@{c[2]}": p15.transfer(ob_[ci], e_)["transfer"] for ci, c in enumerate(rc)},
                          "n_pairs": len(rows), "mean_abs_effect": float(np.abs(e_).mean())}
-        log(f"{key} {task}: top {TOP_K} carry {generic[task]['top']:.2f} (random {', '.join(f'{x:.2f}' for x in generic[task]['random'])})")
+        log(f"{key} {task}: logit writers {generic[task]['top']:.2f}, decision writers {generic[task]['decision_writers']:.2f} "
+            f"(random {', '.join(f'{x:.2f}' for x in generic[task]['decision_random'])})")
     q3 = bool(all(generic[t]["top"] >= Q3_MIN and max(generic[t]["random"]) <= RANDOM_MAX for t in generic))
+    q3b = bool(all(generic[t]["decision_writers"] >= Q3_MIN and max(generic[t]["decision_random"]) <= RANDOM_MAX for t in generic))
     p5 = None
-    if key == "qwen14":
-        names = json.load(open(ROOT / "pilot5-value-circuit/results/real/patching.json"))["pieces"]["top-20"]
-        p5p = [p15.parse_piece(x) for x in names]
-        _, _, ob5 = M.patch([enc_r[i] for i in test], [enc_d[i] for i in test], [("pieces", p5p)])
-        p5 = {"sentences": p15.transfer(ob5[0], eff_t)["transfer"],
-              "overlap_with_top20": len(set(p5p) & set(top))}
+    if p5p is not None:
+        p5 = {"sentences": sentT["pilot5_pieces"]["transfer"], "overlap_with_top20": len(set(p5p) & set(top)),
+              "overlap_with_decision_writers": len(set(p5p) & set(topw)), "method_check_pass": len(set(p5p) & set(topw)) >= 5,
+              "apples": generic["quantity"]["pilot5_pieces"], "weight": generic["weight"]["pilot5_pieces"]}
+        log(f"{key} method check: {p5['overlap_with_decision_writers']} of pilot 5's 20 pieces among the decision writers "
+            f"(logit writers: {p5['overlap_with_top20']}); pilot 5's pieces carry {p5['sentences']:.2f}")
 
     V = {"model": MODELS[key], "blocks": nL, "heads": M.H, "layers_read": layers, "B": Bs,
          "Q1": {"common_share_words": cs_words, "common_share_outcomes": cs_out, "pass": q1},
          "Q2": {"top_transfer": top_t["transfer"], "ci95": top_t["ci95"], "random": rand_t, "pass": q2},
          "Q3": {"apples": generic["quantity"]["top"], "weight": generic["weight"]["top"],
                 "random_apples": generic["quantity"]["random"], "random_weight": generic["weight"]["random"], "pass": q3},
+         "decision_layer": Lstar,
+         "Q2b": {"transfer": topw_t["transfer"], "ci95": topw_t["ci95"], "random": randw_t, "pass": q2b},
+         "Q3b": {"apples": generic["quantity"]["decision_writers"], "weight": generic["weight"]["decision_writers"],
+                 "random_apples": generic["quantity"]["decision_random"], "random_weight": generic["weight"]["decision_random"], "pass": q3b},
+         "decision_writers": [piece_name(p) + f" ({scw[p]:+.3f})" for p in topw],
          "without_extreme_Bs": {"words": p16.common_share(dl[:, keep]), "outcomes": p16.common_share(L_int[:, keep])},
          "order_flips": flips, "order_flip_pairs": nflip, "order_flips_within_8": flips8, "cycles_margin2": cyc, "share_logits_beyond_10": sat,
          "inside_common_share": inside, "price_before_B": before, "price_before_B_best": {"where": best_a, "r": before[best_a]["halfB"]},
@@ -259,8 +322,9 @@ def run(key, quick):
          "top20": [piece_name(p) + f" ({sc[p]:+.3f})" for p in top], "random_sets": [[piece_name(p) for p in r] for r in rsets],
          "pilot5_pieces": p5, "minutes": (time.time() - t0) / 60}
     json.dump(V, open(res / "verdicts17.json", "w"), indent=1)
-    np.savez_compressed(res / "effects17.npz", logits_intact=L_int, logits_deleted=L_del, dl=dl, C_r=C_r, C_d=C_d, donors=np.array(donors))
-    log(f"{key} done in {V['minutes']:.1f} min: Q1 {'fixed' if q1 else 'relative'}, Q2 {q2}, Q3 {q3}")
+    np.savez_compressed(res / "effects17.npz", logits_intact=L_int, logits_deleted=L_del, dl=dl, C_r=C_r, C_d=C_d, W_r=W_r, W_d=W_d,
+                        donors=np.array(donors), vdec=vdec.astype(np.float32))
+    log(f"{key} done in {V['minutes']:.1f} min: Q1 {'fixed' if q1 else 'relative'}, Q2 {q2}, Q3 {q3}, Q2b {q2b}, Q3b {q3b}")
     del M
     import gc
     gc.collect()
@@ -281,6 +345,9 @@ def report(Vs, res):
         "| **Q1** fixed price? (words / outcomes; bar 0.9) | " + get(lambda v: f"{ok(v['Q1']['pass'])}: {v['Q1']['common_share_words']:.2f} / {v['Q1']['common_share_outcomes']:.2f}") + " |",
         "| **Q2** compact comparator? (top 20 on held-out sentence swaps; bar 0.5) | " + get(lambda v: f"{ok(v['Q2']['pass'])}: {v['Q2']['top_transfer']:.2f} (random ≤ {max(v['Q2']['random']):.2f})") + " |",
         "| **Q3** generic? (apples / weight; bar 0.3) | " + get(lambda v: f"{ok(v['Q3']['pass'])}: {v['Q3']['apples']:.2f} / {v['Q3']['weight']:.2f}") + " |",
+        "| layer where the decision reaches the answer position (whole-state swap ≥ 0.5) | " + get(lambda v: str(v.get("decision_layer", ""))) + " |",
+        "| **Q2b** decision writers before that layer (held-out sentence swaps; bar 0.4) | " + get(lambda v: "" if "Q2b" not in v else f"{ok(v['Q2b']['pass'])}: {v['Q2b']['transfer']:.2f} (random ≤ {max(v['Q2b']['random']):.2f})") + " |",
+        "| **Q3b** the same on apples / weight (bar 0.3) | " + get(lambda v: "" if "Q3b" not in v else f"{ok(v['Q3b']['pass'])}: {v['Q3b']['apples']:.2f} / {v['Q3b']['weight']:.2f} (random ≤ {max(v['Q3b']['random_apples'] + v['Q3b']['random_weight']):.2f})") + " |",
         "", "## Also", "",
         "| | " + " | ".join(Vs) + " |", "|---" * (len(Vs) + 1) + "|",
         "| without the two extreme alternatives (words / outcomes) | " + get(lambda v: f"{v['without_extreme_Bs']['words']:.2f} / {v['without_extreme_Bs']['outcomes']:.2f}") + " |",
@@ -294,7 +361,8 @@ def report(Vs, res):
         "| decision at the answer position: whole-state swap by layer (sentences) | " + get(lambda v: ", ".join(f"{k.split('@')[1]}: {x:.2f}" for k, x in v["answer_position_sentences"].items())) + " |",
         "| the same for apples | " + get(lambda v: ", ".join(f"{k.split('@')[1]}: {x:.2f}" for k, x in v["generic"]["quantity"]["answer_position"].items())) + " |",
         "| top 20 pieces | " + get(lambda v: "; ".join(v["top20"][:8]) + " …") + " |",
-        "| pilot 5's 20 pieces (qwen14 only) | " + get(lambda v: "" if not v["pilot5_pieces"] else f"{v['pilot5_pieces']['sentences']:.2f} on sentences; {v['pilot5_pieces']['overlap_with_top20']} shared with the top 20") + " |",
+        "| pilot 5's 20 pieces (qwen14 only): transfer on sentences / apples / weight; shared with the logit writers / decision writers | " + get(lambda v: "" if not v["pilot5_pieces"] else f"{v['pilot5_pieces']['sentences']:.2f} / {v['pilot5_pieces'].get('apples') or 0:.2f} / {v['pilot5_pieces'].get('weight') or 0:.2f}; {v['pilot5_pieces']['overlap_with_top20']} / {v['pilot5_pieces'].get('overlap_with_decision_writers', '')}") + " |",
+        "| decision writers | " + get(lambda v: "; ".join(v.get("decision_writers", [])[:8]) + " …") + " |",
         "| run time (min) | " + get(lambda v: f"{v['minutes']:.1f}") + " |"]
     (res / "report.md").write_text("\n".join(rows) + "\n")
 
@@ -303,12 +371,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True, help="comma-separated keys: " + ", ".join(MODELS))
     ap.add_argument("--quick", action="store_true")
+    ap.add_argument("--out", default="real")
     a = ap.parse_args()
-    res = HERE / "results" / ("quick" if a.quick else "real")
+    res = HERE / "results" / ("quick" if a.quick else a.out)
     Vs = {}
     for key in a.model.split(","):
         try:
-            Vs[key] = run(key, a.quick)
+            Vs[key] = run(key, a.quick, a.out)
         except Exception as e:  # keep going with the next model
             import traceback
             traceback.print_exc()
@@ -319,8 +388,9 @@ def main():
         if not a.quick:                     # free the disk for the next model
             import os
             import shutil
-            hub = Path(os.environ.get("HF_HOME", Path.home() / ".cache/huggingface")) / "hub"
-            shutil.rmtree(hub / ("models--" + MODELS[key].replace("/", "--")), ignore_errors=True)
+            hf = Path(os.environ.get("HF_HOME", Path.home() / ".cache/huggingface"))
+            shutil.rmtree(hf / "hub" / ("models--" + MODELS[key].replace("/", "--")), ignore_errors=True)
+            shutil.rmtree(hf / "xet", ignore_errors=True)       # the chunk cache (pilot 17's first run filled the disk)
 
 
 if __name__ == "__main__":

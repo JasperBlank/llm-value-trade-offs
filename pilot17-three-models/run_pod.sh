@@ -13,10 +13,10 @@ exec > >(tee -a $LOG) 2>&1
 source $REPO/tools/pod_ship.sh
 finish() {  # STATUS [PATH...]
   local status=$1; shift
-  mkdir -p $P17/results/real && cp $LOG $P17/results/real/log_pod.txt
+  mkdir -p $P17/results/real2 && cp $LOG $P17/results/real2/log_pod.txt
   ship_and_stop "$status" "$@"
 }
-fail() { echo "PILOT17 FAILED: $1"; [ -n "$2" ] && tail -40 "$2"; finish FAILED pilot17-three-models/results/real/log_pod.txt; }
+fail() { echo "PILOT17 FAILED: $1"; [ -n "$2" ] && tail -40 "$2"; finish FAILED pilot17-three-models/results/real2/log_pod.txt; }
 echo "PILOT17 START $(date -u +%FT%TZ)"
 cd $P17 || fail "no repo"
 REQ=$REPO/pilot5-value-circuit/requirements.txt
@@ -26,18 +26,18 @@ df -h /workspace | tail -1
 cd $REPO && git fetch -q origin main && git reset -q --hard origin/main && cd $P17
 git log -1 --format='PILOT17 commit %h: %s'
 if python3 -c "from huggingface_hub import hf_hub_download as d; d('meta-llama/Llama-3.1-8B-Instruct', 'config.json')" >/dev/null 2>&1; then
-  MODELS=llama8,qwen14,qwen32; echo "PILOT17 Llama access OK: $MODELS"
+  MODELS=qwen32,qwen14,llama8; echo "PILOT17 Llama access OK: $MODELS"
 else
-  MODELS=qwen14,qwen32; echo "PILOT17 no Llama access: $MODELS"
+  MODELS=qwen32,qwen14; echo "PILOT17 no Llama access: $MODELS"
 fi
 echo "PILOT17 QUICK TEST (Qwen3-0.6B) $(date -u +%FT%TZ)"
 python3 pilot17.py --model qwen06 --quick > /workspace/log_p17_quick.txt 2>&1 || fail "quick test" /workspace/log_p17_quick.txt
 grep -E "price:|comparator:|done in|FAILED" /workspace/log_p17_quick.txt
 echo "PILOT17 REAL RUN $(date -u +%FT%TZ)"
-python3 pilot17.py --model $MODELS 2>&1 | tee /workspace/log_p17_real.txt | grep --line-buffered -E "blocks,|price:|comparator:|quantity:|weight:|done in|FAILED|Error|Traceback"
-[ -f results/real/report.md ] || fail "real run" /workspace/log_p17_real.txt
-cp /workspace/log_p17_real.txt results/real/log_real.txt
+python3 pilot17.py --model $MODELS --out real2 2>&1 | tee /workspace/log_p17_real.txt | grep --line-buffered -E "blocks,|price:|comparator:|quantity:|weight:|method check|done in|FAILED|Error|Traceback"
+[ -f results/real2/report.md ] || fail "real run" /workspace/log_p17_real.txt
+cp /workspace/log_p17_real.txt results/real2/log_real.txt
 echo "PILOT17 REPORT BEGIN"
-cat results/real/report.md
+cat results/real2/report.md
 echo "PILOT17 REPORT END"
-finish FINISHED pilot17-three-models/results/real
+finish FINISHED pilot17-three-models/results/real2

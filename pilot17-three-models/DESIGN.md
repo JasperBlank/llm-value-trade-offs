@@ -58,3 +58,26 @@ Each model is run separately; thinking is off for the Qwen models.
 - **Llama access:** Llama is gated. The pod checks access first and skips it if the Hugging Face token has none.
 - The pod pushes its results to `pod-results/pilot17` and stops itself. The watcher checks every minute.
 - **Predictions:** no prediction gate. The bars above are fixed before any result.
+
+## 6. Addendum after the first run (3 Nov 2026, 14:35 Amsterdam time; before the rerun)
+
+**What happened.**
+- **Qwen3-32B did not run.** The disk filled up: the cleanup between models missed Hugging Face's chunk cache.
+- **The method check failed on Qwen3-14B.** The pieces chosen by their direct contribution to logit(A) − logit(B) sit in the last blocks (34-39 of 40, counted from 0). They are the pieces that write the letter. They carry 0.96 of held-out sentence swaps, and 0.94 and 0.96 of apples and weight. But any A-or-B question passes through them, so "generic" is close to automatic for them. They share 1 piece with pilot 5's 20 comparator pieces (blocks 20-27), which carry 0.58 here.
+
+The first run's results stand as reported, in `results/real/`.
+
+**The rerun** (`results/real2/`, all three models, Qwen3-32B first, with both caches cleared after each model) adds the comparator as pilots 5-6 found it:
+1. **The decision layer** L* is the first layer at which swapping the whole state at the answer position carries at least half of a sentence swap.
+2. **The decision direction** at L*: the difference of means of the answer position's state between the highest- and lowest-logit thirds of the 96 menus.
+3. **Each piece in the blocks before L*** gets its contribution along that direction at the answer position. The pieces are scored as before (the slope of their change on the swap's change in the logit) on half the values. The top 20 are the **decision writers**.
+
+**Pre-registered for the rerun (bars fixed now):**
+
+| | Question | Measure | Pass |
+|---|---|---|---|
+| **Method check** (Qwen3-14B) | Does the new method find pilot 5's comparator? | Pilot 5's 20 pieces among the 20 decision writers | ≥ 5 |
+| **Q2b** | Do the decision writers carry the choice? | Their transfer on held-out sentence swaps | ≥ 0.4, every random set ≤ 0.1 |
+| **Q3b** | Are they the generic "which is bigger" machine? | Their transfer on apples and on weight swaps | both ≥ 0.3, every random set ≤ 0.1 |
+
+Q1, Q2 and Q3 are measured again as before. Q2b and Q3b are the comparator questions that matter. Q2 and Q3 are about the pieces that write the letter.

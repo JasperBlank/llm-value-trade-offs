@@ -1,0 +1,54 @@
+PILOT17 START 2026-11-03T13:19:52Z
+NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB
+mfs#eur-is-1-2.runpod.net:9421  837T  329T  508T  40% /workspace
+PILOT17 commit 85b895b: Pilot 17: delete each model from disk after its run (a 100 GB volume is enough)
+PILOT17 Llama access OK: llama8,qwen14,qwen32
+PILOT17 QUICK TEST (Qwen3-0.6B) 2026-11-03T13:20:13Z
+[13:20:30] qwen06 price: common share words 0.620, outcomes 0.807; order flips 0.02 (85 pairs; 0.02 within ±8); cycles 0; |logit| > 10 in 0%
+[13:20:31] qwen06 comparator: top 20 carry 1.01 of held-out sentence swaps (random 0.10, -0.01, 0.04); answer position: END@11 -0.00, END@14 0.01, END@17 0.02, END@18 0.44, END@20 0.51, END@21 0.52, END@22 0.91, END@25 1.05
+[13:20:33] qwen06 done in 0.3 min: Q1 relative, Q2 True, Q3 False
+PILOT17 REAL RUN 2026-11-03T13:20:34Z
+[13:20:52] llama8 (meta-llama/Llama-3.1-8B-Instruct, 32 blocks, 32 heads): 96 outcomes, 994 deletions, 9 alternatives; layers [13, 16, 19, 22, 26]
+[13:21:59] llama8 price: common share words 0.785, outcomes 0.698; order flips 0.22 (3945 pairs; 0.17 within ±8); cycles 0; |logit| > 10 in 4%
+[13:22:13] llama8 comparator: top 20 carry 0.82 of held-out sentence swaps (random -0.01, 0.00, 0.07); answer position: END@13 0.03, END@16 0.47, END@19 0.90, END@21 0.91, END@22 0.92, END@24 0.94, END@26 0.94, END@29 0.96
+[13:22:23] llama8 quantity: top 20 carry 0.86 (random -0.02, 0.00, 0.03)
+[13:22:32] llama8 weight: top 20 carry 0.88 (random -0.03, -0.00, 0.07)
+[13:22:32] llama8 done in 2.0 min: Q1 relative, Q2 True, Q3 True
+[13:22:51] qwen14 (Qwen/Qwen3-14B, 40 blocks, 40 heads): 96 outcomes, 994 deletions, 9 alternatives; layers [16, 20, 24, 28, 32]
+[13:24:24] qwen14 price: common share words 0.754, outcomes 0.768; order flips 0.35 (4558 pairs; 0.40 within ±8); cycles 93; |logit| > 10 in 55%
+[13:24:40] qwen14 comparator: top 20 carry 0.96 of held-out sentence swaps (random -0.01, 0.04, -0.02); answer position: END@16 -0.00, END@20 -0.00, END@24 0.01, END@26 0.20, END@28 0.73, END@30 0.81, END@32 0.90, END@36 0.95
+[13:24:52] qwen14 quantity: top 20 carry 0.94 (random -0.00, 0.02, -0.02)
+[13:25:04] qwen14 weight: top 20 carry 0.96 (random -0.01, 0.02, -0.01)
+[13:25:06] qwen14 done in 2.6 min: Q1 relative, Q2 True, Q3 True
+Traceback (most recent call last):
+RuntimeError: Task error: File reconstruction error: IO Error: Disk quota exceeded (os error 122)
+[13:26:00] qwen32 FAILED: RuntimeError('Task error: File reconstruction error: IO Error: Disk quota exceeded (os error 122)')
+PILOT17 REPORT BEGIN
+# Pilot 17 results
+
+## The questions, per model
+
+| | llama8 (Llama-3.1-8B-Instruct) | qwen14 (Qwen3-14B) |
+|---|---|---|
+| **Q1** fixed price? (words / outcomes; bar 0.9) | no: 0.78 / 0.70 | no: 0.75 / 0.77 |
+| **Q2** compact comparator? (top 20 on held-out sentence swaps; bar 0.5) | yes: 0.82 (random ≤ 0.07) | yes: 0.96 (random ≤ 0.04) |
+| **Q3** generic? (apples / weight; bar 0.3) | yes: 0.86 / 0.88 | yes: 0.94 / 0.96 |
+
+## Also
+
+| | llama8 | qwen14 |
+|---|---|---|
+| without the two extreme alternatives (words / outcomes) | 0.79 / 0.73 | 0.79 / 0.81 |
+| order flips (clear pairs; within ±8 logits) | 0.22 (3945); 0.17 | 0.35 (4558); 0.40 |
+| cycles (all gaps > 2 logits) | 0 | 93 |
+| menus with \|logit\| > 10 | 4% | 55% |
+| inside: common share at the line break after B, by layer | 13: 0.77, 16: 0.76, 19: 0.72, 22: 0.70, 26: 0.64 | 16: 0.73, 20: 0.79, 24: 0.76, 28: 0.73, 32: 0.68 |
+| check: line break after A (must be 1) | 1.000, 1.000, 0.999, 0.999, 0.999 | 1.000, 0.999, 0.999, 0.999, 0.999 |
+| price before B is read: best line break after A (held out) | A_nl@13 r 0.45 | A_nl@20 r 0.53 |
+| price at the line break after B (mid B), by layer | 13: 0.81, 16: 0.78, 19: 0.70, 22: 0.68, 26: 0.71 | 16: 0.42, 20: 0.76, 24: 0.85, 28: 0.82, 32: 0.73 |
+| decision at the answer position: whole-state swap by layer (sentences) | 13: 0.03, 16: 0.47, 19: 0.90, 21: 0.91, 22: 0.92, 24: 0.94, 26: 0.94, 29: 0.96 | 16: -0.00, 20: -0.00, 24: 0.01, 26: 0.20, 28: 0.73, 30: 0.81, 32: 0.90, 36: 0.95 |
+| the same for apples | 13: -0.03, 16: 0.58, 19: 0.90, 21: 0.91, 22: 0.93, 24: 0.95, 26: 0.94, 29: 0.96 | 16: -0.00, 20: -0.00, 24: 0.00, 26: 0.04, 28: 0.79, 30: 0.86, 32: 0.93, 36: 0.95 |
+| top 20 pieces | MLP 29 (+0.486); head 30.27 (+0.366); MLP 28 (+0.167); head 30.26 (+0.154); head 31.1 (+0.135); MLP 26 (+0.134); MLP 22 (+0.101); head 24.24 (+0.097) … | MLP 35 (+0.314); MLP 38 (+0.199); MLP 39 (+0.123); head 38.24 (+0.106); head 39.10 (+0.095); head 38.22 (+0.060); MLP 36 (+0.059); head 39.25 (+0.056) … |
+| pilot 5's 20 pieces (qwen14 only) |  | 0.58 on sentences; 1 shared with the top 20 |
+| run time (min) | 2.0 | 2.6 |
+PILOT17 REPORT END
