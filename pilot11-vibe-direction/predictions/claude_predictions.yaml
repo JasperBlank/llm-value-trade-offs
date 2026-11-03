@@ -1,0 +1,4 @@
+# Claude's predictions for pilot 11 (one direction for both?), sealed before Jasper's and before any result.
+q1_readable_r: {best: 0.75, range80: [0.50, 0.88]}
+q2_overlap_prob: 0.35
+q3_used_for_both_prob: 0.30

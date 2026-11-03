@@ -1,0 +1,4 @@
+# Jasper's predictions for pilot 11, 3 Nov 2026 08:41 Amsterdam time, before any result.
+q1_readable_r: {best: 0.4, range80: [0.1, 0.7]}
+q2_overlap_prob: 0.65
+q3_used_for_both_prob: 0.64
