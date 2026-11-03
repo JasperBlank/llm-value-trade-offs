@@ -345,32 +345,60 @@ def fig8(p9=None):
     sent = {(s["value"], s["phrasing"]): s for s in ex["sentences"]}
     rate = {(v, p): x for (v, p, n, w), x in zip(R["keys"], R["rating"]) if n == 4 and w == 0}
     names = sorted({k[0] for k in rate})
-    fig, ax = plt.subplots(figsize=(9.5, 6.4))
-    fig.subplots_adjust(left=0.09, right=0.97, top=0.84, bottom=0.14)
-    for v in names:
-        xs = [sent[(v, p)]["u"] for p in (0, 1)]
-        ys = [rate[(v, p)] for p in (0, 1)]
-        ax.plot(xs, ys, color=GRID, linewidth=1, zorder=1)
+    t = V["per_wording"]["W0 how good"]
+    at7 = np.mean([abs(x - 7) < 0.1 for (v, p, n, w), x in zip(R["keys"], R["rating"]) if w == 0])
+    fig, axs = plt.subplots(1, 2, figsize=(12.5, 5.6), gridspec_kw={"width_ratios": [1.25, 1]})
+    fig.subplots_adjust(left=0.065, right=0.98, top=0.8, bottom=0.15, wspace=0.22)
+    # left: every sentence
+    ax = axs[0]
+    ax.axhspan(6.9, 7.1, color=BLUE_LIGHT, alpha=0.35, linewidth=0, zorder=0)
+    ax.text(-3.9, 7.2, f"'7': {at7:.0%} of all answers", fontsize=8.5, color=INK2)
     x = np.array([sent[k]["u"] for k in rate])
     y = np.array([rate[k] for k in rate])
     ax.plot(x, y, "o", color=BLUE, markersize=6, zorder=2)
-    for k, lab in ((("Non-suffering", 0), "spared a week of pain"), (("Non-suffering", 1), "relieved of a painful condition for a week")):
-        ax.plot(sent[k]["u"], rate[k], "o", color=ORANGE, markersize=8, zorder=3)
-        right = sent[k]["u"] > 1.5
-        ax.annotate(lab, (sent[k]["u"], rate[k]), xytext=(-8 if right else 8, -12 if k[1] else 6), textcoords="offset points",
-                    fontsize=8.5, color=INK2, ha="right" if right else "left")
-    ax.set_xlabel("Menu price of the sentence (log-odds per person, from 13,248 choices in pilot 8)")
+    labels = {("Longevity", 0): "live a year longer", ("Protection", 0): "kept safe from a danger",
+              ("Respect", 1): "receive the recognition they deserve", ("Happiness", 0): "feel happier for a week"}
+    for k, lab in labels.items():
+        right = sent[k]["u"] > 1.5 or k == ("Respect", 1)
+        ax.annotate(lab, (sent[k]["u"], rate[k]), xytext=(-7 if right else 7, -3 if k[0] != "Respect" else 4),
+                    textcoords="offset points", fontsize=8.5, color=INK2, ha="right" if right else "left",
+                    va="top" if k[0] != "Respect" else "center")
+    ax.set_xlim(-4, 3.5)
+    ax.set_xlabel("Menu price of the sentence (log-odds per person, pilot 8)")
     ax.set_ylabel("'How good would it be if …?' (0-9, 4 people)")
-    ax.grid(color=GRID, linewidth=0.6)
-    ax.set_axisbelow(True)
-    t = V["per_wording"]["W0 how good"]
-    suptitle(fig, "Asked directly, does the model's 'how good' match the prices it pays in choices?",
-             f"Pilot 9, Qwen3-14B, 48 sentences: r = {t['t1_r']:.2f}; the rating picks the same sentence of a value as the menu in "
-             f"{t['t2_same']} of 24 values.")
-    note(fig, "Grey lines join the two sentences written for the same value. Orange: the pain pair.")
+    ax.set_title(f"Each of the 48 sentences: r = {t['t1_r']:.2f}")
+    # right: the two sentences of each value
+    ax = axs[1]
+    du = np.array([sent[(v, 0)]["u"] - sent[(v, 1)]["u"] for v in names])
+    dr = np.array([rate[(v, 0)] - rate[(v, 1)] for v in names])
+    lim_u, lim_r = 5.2, 2.0
+    ax.fill_between([0, lim_u], 0, lim_r, color=AQUA, alpha=0.08, linewidth=0)
+    ax.fill_between([-lim_u, 0], -lim_r, 0, color=AQUA, alpha=0.08, linewidth=0)
+    ax.axhline(0, color=AXIS, linewidth=1)
+    ax.axvline(0, color=AXIS, linewidth=1)
+    agree = np.sign(du) == np.sign(dr)
+    ax.plot(du[agree], dr[agree], "o", color=BLUE, markersize=6.5)
+    ax.plot(du[~agree], dr[~agree], "o", color=ORANGE, markersize=6.5)
+    for v in ("Respect", "Beauty", "Nurturing", "Longevity", "Non-suffering", "Diversity"):
+        i = names.index(v)
+        ns = v == "Non-suffering"
+        ax.annotate(v + (" (the pain pair)" if ns else ""), (du[i], dr[i]), xytext=(-6 if ns else 6, 6 if ns else 4),
+                    textcoords="offset points", fontsize=8.5, color=INK2, ha="right" if ns else "left")
+    ax.set_xlim(-lim_u, lim_u)
+    ax.set_ylim(-lim_r, lim_r)
+    ax.set_xlabel("Menu: price of a value's 1st sentence minus its 2nd")
+    ax.set_ylabel("Rating: 1st sentence minus 2nd")
+    ax.set_title(f"Within each value: the same sentence wins in {t['t2_same']} of 24")
+    for a in axs:
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    suptitle(fig, "Asked directly, the model shares the menu's wording quirks, but its ratings are squashed towards 7",
+             "Pilot 9, Qwen3-14B. Pre-registered: T1 failed (r 0.55, bar 0.7); T2 passed (20 of 24, bar 17); "
+             "8 people rated only +0.43 above 2 people.")
+    note(fig, "Right: shaded quarters = rating and menu prefer the same sentence (blue); orange = they disagree. "
+              "Many within-value rating differences are small because most answers sit at 7.")
     fig.savefig(OUT / "fig8_vibe_check.png", dpi=200)
     plt.close(fig)
-
 
 if __name__ == "__main__":
     fig1()

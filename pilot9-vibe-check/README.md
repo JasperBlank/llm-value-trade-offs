@@ -1,6 +1,6 @@
 # Pilot 9: the vibe check
 
-Pilot 8 found that Qwen3-14B prices each sentence, not each value. If the model does a per-sentence "vibe check" that then feeds the comparison circuit, asking it directly "How good would it be if [sentence]?" should give ratings that track the menu prices, including the quirks of the exact wording. **Read [`DESIGN.md`](DESIGN.md) first.**
+Pilot 8 found that Qwen3-14B prices each sentence, not each value. If the model does a per-sentence "vibe check" that then feeds the comparison circuit, asking it directly "How good would it be if [sentence]?" should give ratings that track the menu prices, including the quirks of the exact wording. **Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/real/README.md`](results/real/README.md) (run 3 Nov 2026).
 
 | File | What it does |
 |---|---|
