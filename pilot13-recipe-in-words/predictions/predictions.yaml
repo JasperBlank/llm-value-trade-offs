@@ -1,0 +1,5 @@
+# Jasper's predictions for pilot 13, 3 Nov 2026 10:23 Amsterdam time, before any result.
+p1_features_r: {best: 0.5, range80: [0.1, 0.9]}
+p2_moral_rating_prob: 0.80
+p3_beats_random_prob: 0.80
+p4_new_sentences_r: {best: 0.5, range80: [0.1, 0.9]}

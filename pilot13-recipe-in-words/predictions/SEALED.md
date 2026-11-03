@@ -6,3 +6,5 @@ Only the hash is committed here; the file is added after Jasper has answered (`s
 | File | SHA-256 |
 |---|---|
 | `claude_predictions.yaml` | `f84692c36fcfdb92944f0a3def3afff6d69490d85fc87e9ce1e39af1506d45ff` |
+
+Added to the repo on 3 Nov 2026 after Jasper answered (10:23 Amsterdam time); the hash matches.
