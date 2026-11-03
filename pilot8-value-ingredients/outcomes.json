@@ -1,441 +1,225 @@
 {
  "outcomes": [
   {
-   "id": "money|gain|small|adults|none",
+   "id": "money|0",
    "domain": "money",
-   "frame": "gain",
-   "size": "small",
-   "who": "adults",
-   "need": "none"
+   "rank": 0,
+   "phrase": "€2",
+   "amount": 2,
+   "unit": "euro"
   },
   {
-   "id": "money|gain|small|adults|poverty",
+   "id": "money|1",
    "domain": "money",
-   "frame": "gain",
-   "size": "small",
-   "who": "adults",
-   "need": "poverty"
+   "rank": 1,
+   "phrase": "€5",
+   "amount": 5,
+   "unit": "euro"
   },
   {
-   "id": "money|gain|small|children|none",
+   "id": "money|2",
    "domain": "money",
-   "frame": "gain",
-   "size": "small",
-   "who": "children",
-   "need": "none"
+   "rank": 2,
+   "phrase": "€20",
+   "amount": 20,
+   "unit": "euro"
   },
   {
-   "id": "money|gain|small|children|poverty",
+   "id": "money|3",
    "domain": "money",
-   "frame": "gain",
-   "size": "small",
-   "who": "children",
-   "need": "poverty"
+   "rank": 3,
+   "phrase": "€50",
+   "amount": 50,
+   "unit": "euro"
   },
   {
-   "id": "money|gain|large|adults|none",
+   "id": "money|4",
    "domain": "money",
-   "frame": "gain",
-   "size": "large",
-   "who": "adults",
-   "need": "none"
+   "rank": 4,
+   "phrase": "€200",
+   "amount": 200,
+   "unit": "euro"
   },
   {
-   "id": "money|gain|large|adults|poverty",
+   "id": "money|5",
    "domain": "money",
-   "frame": "gain",
-   "size": "large",
-   "who": "adults",
-   "need": "poverty"
+   "rank": 5,
+   "phrase": "€1,000",
+   "amount": 1000,
+   "unit": "euro"
   },
   {
-   "id": "money|gain|large|children|none",
+   "id": "money|6",
    "domain": "money",
-   "frame": "gain",
-   "size": "large",
-   "who": "children",
-   "need": "none"
+   "rank": 6,
+   "phrase": "€5,000",
+   "amount": 5000,
+   "unit": "euro"
   },
   {
-   "id": "money|gain|large|children|poverty",
+   "id": "money|7",
    "domain": "money",
-   "frame": "gain",
-   "size": "large",
-   "who": "children",
-   "need": "poverty"
+   "rank": 7,
+   "phrase": "€20,000",
+   "amount": 20000,
+   "unit": "euro"
   },
   {
-   "id": "money|loss|small|adults|none",
-   "domain": "money",
-   "frame": "loss",
-   "size": "small",
-   "who": "adults",
-   "need": "none"
-  },
-  {
-   "id": "money|loss|small|adults|poverty",
-   "domain": "money",
-   "frame": "loss",
-   "size": "small",
-   "who": "adults",
-   "need": "poverty"
-  },
-  {
-   "id": "money|loss|small|children|none",
-   "domain": "money",
-   "frame": "loss",
-   "size": "small",
-   "who": "children",
-   "need": "none"
-  },
-  {
-   "id": "money|loss|small|children|poverty",
-   "domain": "money",
-   "frame": "loss",
-   "size": "small",
-   "who": "children",
-   "need": "poverty"
-  },
-  {
-   "id": "money|loss|large|adults|none",
-   "domain": "money",
-   "frame": "loss",
-   "size": "large",
-   "who": "adults",
-   "need": "none"
-  },
-  {
-   "id": "money|loss|large|adults|poverty",
-   "domain": "money",
-   "frame": "loss",
-   "size": "large",
-   "who": "adults",
-   "need": "poverty"
-  },
-  {
-   "id": "money|loss|large|children|none",
-   "domain": "money",
-   "frame": "loss",
-   "size": "large",
-   "who": "children",
-   "need": "none"
-  },
-  {
-   "id": "money|loss|large|children|poverty",
-   "domain": "money",
-   "frame": "loss",
-   "size": "large",
-   "who": "children",
-   "need": "poverty"
-  },
-  {
-   "id": "time|gain|small|adults|none",
+   "id": "time|0",
    "domain": "time",
-   "frame": "gain",
-   "size": "small",
-   "who": "adults",
-   "need": "none"
+   "rank": 0,
+   "phrase": "10 minutes of free time",
+   "amount": 0.16666666666666666,
+   "unit": "hour"
   },
   {
-   "id": "time|gain|small|adults|poverty",
+   "id": "time|1",
    "domain": "time",
-   "frame": "gain",
-   "size": "small",
-   "who": "adults",
-   "need": "poverty"
+   "rank": 1,
+   "phrase": "an hour of free time",
+   "amount": 1,
+   "unit": "hour"
   },
   {
-   "id": "time|gain|small|children|none",
+   "id": "time|2",
    "domain": "time",
-   "frame": "gain",
-   "size": "small",
-   "who": "children",
-   "need": "none"
+   "rank": 2,
+   "phrase": "an afternoon of free time",
+   "amount": 4,
+   "unit": "hour"
   },
   {
-   "id": "time|gain|small|children|poverty",
+   "id": "time|3",
    "domain": "time",
-   "frame": "gain",
-   "size": "small",
-   "who": "children",
-   "need": "poverty"
+   "rank": 3,
+   "phrase": "a day of free time",
+   "amount": 24,
+   "unit": "hour"
   },
   {
-   "id": "time|gain|large|adults|none",
+   "id": "time|4",
    "domain": "time",
-   "frame": "gain",
-   "size": "large",
-   "who": "adults",
-   "need": "none"
+   "rank": 4,
+   "phrase": "a week of free time",
+   "amount": 168,
+   "unit": "hour"
   },
   {
-   "id": "time|gain|large|adults|poverty",
+   "id": "time|5",
    "domain": "time",
-   "frame": "gain",
-   "size": "large",
-   "who": "adults",
-   "need": "poverty"
+   "rank": 5,
+   "phrase": "a month of free time",
+   "amount": 720,
+   "unit": "hour"
   },
   {
-   "id": "time|gain|large|children|none",
+   "id": "time|6",
    "domain": "time",
-   "frame": "gain",
-   "size": "large",
-   "who": "children",
-   "need": "none"
+   "rank": 6,
+   "phrase": "half a year of free time",
+   "amount": 4380,
+   "unit": "hour"
   },
   {
-   "id": "time|gain|large|children|poverty",
+   "id": "time|7",
    "domain": "time",
-   "frame": "gain",
-   "size": "large",
-   "who": "children",
-   "need": "poverty"
+   "rank": 7,
+   "phrase": "a year of free time",
+   "amount": 8760,
+   "unit": "hour"
   },
   {
-   "id": "time|loss|small|adults|none",
-   "domain": "time",
-   "frame": "loss",
-   "size": "small",
-   "who": "adults",
-   "need": "none"
-  },
-  {
-   "id": "time|loss|small|adults|poverty",
-   "domain": "time",
-   "frame": "loss",
-   "size": "small",
-   "who": "adults",
-   "need": "poverty"
-  },
-  {
-   "id": "time|loss|small|children|none",
-   "domain": "time",
-   "frame": "loss",
-   "size": "small",
-   "who": "children",
-   "need": "none"
-  },
-  {
-   "id": "time|loss|small|children|poverty",
-   "domain": "time",
-   "frame": "loss",
-   "size": "small",
-   "who": "children",
-   "need": "poverty"
-  },
-  {
-   "id": "time|loss|large|adults|none",
-   "domain": "time",
-   "frame": "loss",
-   "size": "large",
-   "who": "adults",
-   "need": "none"
-  },
-  {
-   "id": "time|loss|large|adults|poverty",
-   "domain": "time",
-   "frame": "loss",
-   "size": "large",
-   "who": "adults",
-   "need": "poverty"
-  },
-  {
-   "id": "time|loss|large|children|none",
-   "domain": "time",
-   "frame": "loss",
-   "size": "large",
-   "who": "children",
-   "need": "none"
-  },
-  {
-   "id": "time|loss|large|children|poverty",
-   "domain": "time",
-   "frame": "loss",
-   "size": "large",
-   "who": "children",
-   "need": "poverty"
-  },
-  {
-   "id": "health|gain|small|adults|none",
+   "id": "health|0",
    "domain": "health",
-   "frame": "gain",
-   "size": "small",
-   "who": "adults",
-   "need": "none"
+   "rank": 0,
+   "phrase": "10 minutes of good health",
+   "amount": 0.16666666666666666,
+   "unit": "hour"
   },
   {
-   "id": "health|gain|small|adults|poverty",
+   "id": "health|1",
    "domain": "health",
-   "frame": "gain",
-   "size": "small",
-   "who": "adults",
-   "need": "poverty"
+   "rank": 1,
+   "phrase": "an hour of good health",
+   "amount": 1,
+   "unit": "hour"
   },
   {
-   "id": "health|gain|small|children|none",
+   "id": "health|2",
    "domain": "health",
-   "frame": "gain",
-   "size": "small",
-   "who": "children",
-   "need": "none"
+   "rank": 2,
+   "phrase": "an afternoon of good health",
+   "amount": 4,
+   "unit": "hour"
   },
   {
-   "id": "health|gain|small|children|poverty",
+   "id": "health|3",
    "domain": "health",
-   "frame": "gain",
-   "size": "small",
-   "who": "children",
-   "need": "poverty"
+   "rank": 3,
+   "phrase": "a day of good health",
+   "amount": 24,
+   "unit": "hour"
   },
   {
-   "id": "health|gain|large|adults|none",
+   "id": "health|4",
    "domain": "health",
-   "frame": "gain",
-   "size": "large",
-   "who": "adults",
-   "need": "none"
+   "rank": 4,
+   "phrase": "a week of good health",
+   "amount": 168,
+   "unit": "hour"
   },
   {
-   "id": "health|gain|large|adults|poverty",
+   "id": "health|5",
    "domain": "health",
-   "frame": "gain",
-   "size": "large",
-   "who": "adults",
-   "need": "poverty"
+   "rank": 5,
+   "phrase": "a month of good health",
+   "amount": 720,
+   "unit": "hour"
   },
   {
-   "id": "health|gain|large|children|none",
+   "id": "health|6",
    "domain": "health",
-   "frame": "gain",
-   "size": "large",
-   "who": "children",
-   "need": "none"
+   "rank": 6,
+   "phrase": "half a year of good health",
+   "amount": 4380,
+   "unit": "hour"
   },
   {
-   "id": "health|gain|large|children|poverty",
+   "id": "health|7",
    "domain": "health",
-   "frame": "gain",
-   "size": "large",
-   "who": "children",
-   "need": "poverty"
-  },
-  {
-   "id": "health|loss|small|adults|none",
-   "domain": "health",
-   "frame": "loss",
-   "size": "small",
-   "who": "adults",
-   "need": "none"
-  },
-  {
-   "id": "health|loss|small|adults|poverty",
-   "domain": "health",
-   "frame": "loss",
-   "size": "small",
-   "who": "adults",
-   "need": "poverty"
-  },
-  {
-   "id": "health|loss|small|children|none",
-   "domain": "health",
-   "frame": "loss",
-   "size": "small",
-   "who": "children",
-   "need": "none"
-  },
-  {
-   "id": "health|loss|small|children|poverty",
-   "domain": "health",
-   "frame": "loss",
-   "size": "small",
-   "who": "children",
-   "need": "poverty"
-  },
-  {
-   "id": "health|loss|large|adults|none",
-   "domain": "health",
-   "frame": "loss",
-   "size": "large",
-   "who": "adults",
-   "need": "none"
-  },
-  {
-   "id": "health|loss|large|adults|poverty",
-   "domain": "health",
-   "frame": "loss",
-   "size": "large",
-   "who": "adults",
-   "need": "poverty"
-  },
-  {
-   "id": "health|loss|large|children|none",
-   "domain": "health",
-   "frame": "loss",
-   "size": "large",
-   "who": "children",
-   "need": "none"
-  },
-  {
-   "id": "health|loss|large|children|poverty",
-   "domain": "health",
-   "frame": "loss",
-   "size": "large",
-   "who": "children",
-   "need": "poverty"
+   "rank": 7,
+   "phrase": "a year of good health",
+   "amount": 8760,
+   "unit": "hour"
   }
  ],
  "train": [
-  "money|gain|small|adults|none",
-  "money|gain|small|adults|poverty",
-  "money|gain|small|children|none",
-  "money|gain|large|adults|none",
-  "money|gain|large|children|none",
-  "money|loss|large|adults|poverty",
-  "money|loss|large|children|none",
-  "money|loss|large|children|poverty",
-  "time|gain|small|adults|poverty",
-  "time|gain|small|children|none",
-  "time|gain|small|children|poverty",
-  "time|gain|large|adults|none",
-  "time|gain|large|adults|poverty",
-  "time|gain|large|children|none",
-  "time|gain|large|children|poverty",
-  "time|loss|small|adults|none",
-  "time|loss|small|adults|poverty",
-  "time|loss|small|children|none",
-  "time|loss|small|children|poverty",
-  "time|loss|large|adults|poverty",
-  "time|loss|large|children|none",
-  "time|loss|large|children|poverty",
-  "health|gain|small|children|none",
-  "health|gain|small|children|poverty",
-  "health|gain|large|adults|none",
-  "health|gain|large|adults|poverty",
-  "health|loss|small|adults|none",
-  "health|loss|small|adults|poverty",
-  "health|loss|small|children|poverty",
-  "health|loss|large|adults|none",
-  "health|loss|large|children|none",
-  "health|loss|large|children|poverty"
+  "money|0",
+  "money|2",
+  "money|3",
+  "money|5",
+  "money|7",
+  "time|0",
+  "time|1",
+  "time|3",
+  "time|4",
+  "time|6",
+  "time|7",
+  "health|0",
+  "health|2",
+  "health|4",
+  "health|5",
+  "health|7"
  ],
  "test": [
-  "health|gain|large|children|none",
-  "health|gain|large|children|poverty",
-  "health|gain|small|adults|none",
-  "health|gain|small|adults|poverty",
-  "health|loss|large|adults|poverty",
-  "health|loss|small|children|none",
-  "money|gain|large|adults|poverty",
-  "money|gain|large|children|poverty",
-  "money|gain|small|children|poverty",
-  "money|loss|large|adults|none",
-  "money|loss|small|adults|none",
-  "money|loss|small|adults|poverty",
-  "money|loss|small|children|none",
-  "money|loss|small|children|poverty",
-  "time|gain|small|adults|none",
-  "time|loss|large|adults|none"
+  "money|1",
+  "money|4",
+  "money|6",
+  "time|2",
+  "time|5",
+  "health|1",
+  "health|3",
+  "health|6"
  ],
- "example": "8 children living in poverty are each prevented from losing a week of free time"
+ "example": "8 people each gain a week of good health"
 }

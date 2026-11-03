@@ -5,7 +5,8 @@
 
 1. The maximum-likelihood fit recovers known worths, b and bias from simulated answers on the real
    behaviour design.
-2. The ingredient regression recovers known effects exactly (R² = 1, held out = 1).
+2. The domain-and-size regression recovers known curves exactly (R² = 1, held out = 1); the price
+   list follows from the curves.
 3. (--run) The run's files exist; the worth direction has length 1; at the top layer, swapping the
    answer position carries 1 for every ingredient.
 """
@@ -37,17 +38,20 @@ def main():
     ib = np.array([idx[r["b"]] for r in rows])
     dlog = np.array([math.log(r["na"] / r["nb"]) for r in rows])
     rng = np.random.default_rng(1)
-    X = p8.features(O)
-    beta = np.array([0.4, -0.8, 0.6, -0.3, 1.2, 0.5, 0.9])
-    u_true = np.column_stack([np.ones(len(O)), X]) @ beta + rng.normal(0, 0.2, len(O))
+    A = p8.design(O)
+    beta = np.array([0.4, -0.8, 0.6, 0.9, 0.5, 1.2])
+    u_true = A @ beta + rng.normal(0, 0.2, len(O))
     u_true -= u_true[0]
     b_true, c_true = 1.5, 0.3
     p = 1 / (1 + np.exp(-(u_true[ia] - u_true[ib] + b_true * dlog + c_true)))
     u, b, c, _ = p8.fit_worth(ia, ib, dlog, p, len(O))
     check("1. fit recovers the worths", np.abs(u - u_true).max() < 1e-3, f"max error {np.abs(u - u_true).max():.1e}")
     check("1b. fit recovers b and the bias", abs(b - b_true) < 1e-3 and abs(c - c_true) < 1e-3, f"b {b:.4f}, c {c:.4f}")
-    u_exact = np.column_stack([np.ones(len(O)), X]) @ beta
-    bt, r2, r2l = p8.ingredient_regression(X, u_exact)
+    u_exact = A @ beta
+    bt, r2, r2l = p8.regress(A, u_exact)
+    pl = p8.price_list(beta, 1.0)
+    check("2b. price list: an hour of free time in euros follows the curves",
+          abs(pl["euro_per_hour_free_time"] - math.exp((beta[1] - beta[0]) / beta[3])) < 1e-9, f"{pl['euro_per_hour_free_time']:.4f}")
     check("2. regression recovers the effects", np.abs(bt - beta).max() < 1e-9 and r2 > 0.999999 and r2l > 0.999999,
           f"R² {r2:.6f}, held out {r2l:.6f}")
     if "--run" in sys.argv:

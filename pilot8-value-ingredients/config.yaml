@@ -8,7 +8,7 @@ results_dir: results/real
 fit: {bootstrap: 200, seed: 8}
 
 map:
-  n_pairs: 96                    # all minimal pairs per ingredient (96; the domain contrasts have 64)
+  n_pairs: 84                    # all minimal pairs (size steps 84; domain contrasts 32 each)
   sites: [A_end, A_nl, B_nl, after_B, last]
   a_sites: [A_end, A_nl]
   seed: 8
@@ -23,10 +23,11 @@ das:
   sweep_pairs: 96                # training pairs used by the rule's sweep
 
 prereg:
-  w1_full: 0.7                   # W1: held-out R² of the main-effects model >= 0.7: a sum of ingredients ...
-  w1_partial: 0.4                # ... 0.4-0.7: partly; below 0.4: not explained by these ingredients
-  w2_corr: 0.7                   # W2: held-out outcomes' positions correlate >= 0.7 with their worth ...
-  w2_weights: 0.7                # ... and the ingredients' effects on position correlate >= 0.7 with their effects on worth
+  w1_full: 0.8                   # W1: worth = domain + slope_domain x log(amount), held-out R² >= 0.8 ...
+  w1_partial: 0.5                # ... 0.5-0.8: partly; below 0.5: not explained this way
+  w3_slope_factor: 1.5           # W3: one sensitivity to size: all slopes positive, largest / smallest <= 1.5
+  w2_corr: 0.7                   # W2: held-out outcomes' positions correlate >= 0.7 with their worth, and the
+                                 #     position grows with log(amount) in every domain
 
 quick:
   models:

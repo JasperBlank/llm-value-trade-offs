@@ -1,0 +1,5 @@
+# Claude's predictions for pilot 8 (sealed before Jasper's; see QUESTIONS.md).
+q1_w1_ingredients_explain: 0.60
+q2_biggest_ingredient: size           # probabilities: size 0.45, domain 0.25, need 0.20, frame 0.05, who 0.05
+q3_child_factor: {best: 1.5, range80: [1.0, 3.0]}
+q4_w2_assembled_at_source: 0.30

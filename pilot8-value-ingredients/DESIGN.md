@@ -1,76 +1,78 @@
-# Pilot 8: why are the relative values what they are? The ingredients of worth
+# Pilot 8: why are the relative values what they are? Worth by domain and size
 
 Written 3 Nov 2026, before any pilot-8 result. Section 4 is pre-registered; the thresholds are also
 in `config.yaml` under `prereg`.
 
+## 0. Revision (3 Nov, before any result)
+
+The first version crossed five ingredients (domain, gain vs prevented loss, size, children vs
+adults, poverty). Jasper narrowed it before the run: only **domain and size** matter for his
+question. This version traces worth as a curve over size within each domain. The first version's
+sealed predictions and Jasper's answers to it are kept in `predictions/` (superseded, never run).
+
 ## 1. Question
 
-Pilots 3-7 measured how much Qwen3-14B values 9 goods and traced how a good reaches the decision. But
-the 9 goods differ in many ways at once (domain, who benefits, how much, need), so their values
-cannot say *which* of these the model pays for. Pilot 8 builds outcomes from controlled ingredients
-and asks: (1) how much does each ingredient add to an outcome's worth, and how much of the
-differences do the ingredients explain? (2) Is the worth already assembled on the outcome's own words,
-with each ingredient weighted as the choices weigh it?
+Why are the relative values what they are? Here: how does an outcome's worth depend on *what* it is
+(money, free time, health) and *how much* of it there is? Concretely: (1) does worth follow a simple
+curve per domain, worth = a_domain + s_domain · log(amount)? (2) Is the sensitivity to size the same
+across domains? (3) What is the model's price list (an hour of free time, a day of good health, in
+euros)? (4) Inside the model, is the worth already assembled on the outcome's own words?
 
 ## 2. Outcomes and prompts (`make_prompts.py`)
 
-48 outcomes, all five ingredients crossed (3 × 2 × 2 × 2 × 2):
+24 outcomes: 3 domains × 8 sizes, all "{n} people each gain …":
 
-| ingredient | levels |
+| domain | sizes |
 |---|---|
-| domain | money / free time / health |
-| frame | a gain ("each gain X") / a prevented loss ("are each prevented from losing X") |
-| size | small / large: €20 / €200; an hour / a week of free time; a day / a month of good health |
-| who | adults / children |
-| need | none / "living in poverty" |
+| money | €2, €5, €20, €50, €200, €1,000, €5,000, €20,000 |
+| free time | 10 minutes, an hour, an afternoon, a day, a week, a month, half a year, a year (of free time) |
+| health | the same eight durations, "of good health" |
 
-Example: "8 children living in poverty are each prevented from losing a week of free time".
+Amounts in a common unit per domain (euros; hours, with an afternoon = 4 hours and a day = 24).
 
-**Behaviour.** Every unordered pair of outcomes (1,128), both orders, three numbers of people
-(A 2 / B 8, 4 / 4, 8 / 2) and two question wordings (pilot 3's wordings 0 and 1, strangers
-frame): 13,536 prompts. The answer is P(A) from the letter probabilities.
+**Behaviour.** Every unordered pair (276), both orders, three numbers of people (A 2 / B 8, 4 / 4,
+8 / 2) and four question wordings (pilot 3's wordings 0-3, strangers frame): 6,624 prompts. The
+answer is P(A) from the letter probabilities.
 
-**Fit.** u (one per outcome, the first fixed at 0), b (the weight of log people) and a position bias
-are fitted by maximum likelihood: P(A) = σ(u_A − u_B + b·log(n_A / n_B) + c). An ingredient's effect
-is reported as an exchange rate in people: exp(β / b) ("one child counts as x adults").
+**Fit.** u per outcome (the first fixed at 0), b (the weight of log people) and a position bias by
+maximum likelihood: P(A) = σ(u_A − u_B + b·log(n_A / n_B) + c). Then the curves u = a_d + s_d·log(amount)
+by least squares; bootstrap over prompts for intervals (200).
 
 ## 3. Inside the model (Qwen3-14B)
 
-- **Ingredient maps** (descriptive): minimal pairs of outcomes that differ in one ingredient (in
-  option A, against 4 fixed option-B outcomes); the recipient's states at one site and layer
-  replaced by the donor's (sites: A's last token, the line break after A, the line break after B,
-  the text after B, the answer position; layers 4, 8, ..., 40); share of the ingredient's effect
-  carried. This shows where each ingredient's contribution sits on its way to the decision.
-- **The worth direction:** at the A site chosen by the rule below, one direction (distributed alignment
-  search, k = 1) trained on swaps of option A's outcome among 32 training outcomes (the other 16 are
-  held out). Then each outcome's position along it is read off its own state at that site (in option
-  A, before option B has been read).
+- **Maps** (descriptive): minimal pairs in option A (size one step up within a domain; domain changed
+  at the same size rank), swapped at one site and layer (A's last token, the line break after A, the
+  line break after B, the text after B, the answer position; layers 4, 8, ..., 40).
+- **The worth direction:** at the A site chosen by the rule, one direction trained on swaps of option
+  A's outcome among 16 training outcomes; the 8 held-out outcomes are interpolations (never the
+  smallest or largest size). Each outcome's position along it is read off its own state (option A,
+  before option B is read).
 
 ## 4. Pre-registered criteria
 
 **Site rule:** among A's last token and the line break after A, and layers 4-24, the site and layer
 where swapping the whole site carries the most of an outcome swap (ties: the earlier layer).
 
-- **W1, the ingredients explain the worth:** a model with the five ingredients' main effects only
-  (domain as two contrasts), fitted on 47 outcomes, predicts the 48th; over all 48, held-out R² ≥
-  **0.7**: "worth is (mostly) a sum of ingredients"; 0.4-0.7: "partly"; below 0.4: "not explained by
-  these ingredients".
-- **W2, assembled on the outcome's own words:** along the worth direction, (a) the 16 held-out
-  outcomes' positions correlate at least **0.7** with their fitted worth u, AND (b) the ingredients'
-  effects on the position (a main-effects regression over all 48 outcomes) correlate at least
-  **0.7** with their effects on worth (the six coefficients). Both: "assembled on the outcome's own
-  words"; otherwise "not assembled there".
+- **W1, worth = domain + log(size):** the per-domain curves, fitted on 23 outcomes, predict the 24th;
+  over all 24, held-out R² ≥ **0.8**: "worth = domain + log(size)"; 0.5-0.8: "partly"; below 0.5:
+  "not explained this way".
+- **W3, one sensitivity to size:** all three slopes positive and the largest at most **1.5 ×** the
+  smallest: "one sensitivity to size across domains"; otherwise "different sensitivities".
+- **W2, assembled on the outcome's own words:** along the worth direction, the 8 held-out outcomes'
+  positions correlate at least **0.7** with their worth, AND the position grows with log(amount) in
+  every domain (over all 24 outcomes).
 
-Reported, not pre-registered: each ingredient's effect with a 95% bootstrap interval (over prompts),
-the largest ingredient, interactions (size × domain, frame × domain), the ingredient maps.
+Reported, not pre-registered: the price list with 95% intervals, the common-slope model, how many
+people doubling an amount is worth (2^(s_d / b)), the maps.
 
 ## 5. Limitations known in advance
 
-One model (Qwen3-14B), one answer format (A/B), English, one template. "Small" and "large" are not
-equal ratios across domains, so size × domain is expected. Twelve wordings of the same ingredients
-would be stronger than two. The worth direction is one direction at one site.
+One model, one answer format, one template ("people each gain"). Units are nominal (a day = 24
+hours of free time is not 24 waking hours); the slopes per ×e of the amount do not depend on the unit,
+but the price list does through these conventions. Very small amounts ("10 minutes of good health",
+"€2") may read oddly. Qwen splits numbers into digits, so for money A's last token is a digit.
 
 ## 6. Budget
 
-One A100 80 GB pod ($1.79/hour), about 35 minutes. The pod prints its results and stops itself
+One A100 80 GB pod ($1.79/hour), about 20-25 minutes. The pod prints its results and stops itself
 (tested: the log stays readable after the stop); Claude then terminates it.
