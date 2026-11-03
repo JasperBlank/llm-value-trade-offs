@@ -1,0 +1,104 @@
+# Pilot 14 results (Qwen/Qwen3-14B)
+
+96 sentences as option A against 8 fixed partners (pilot 13's new sentences, prices -7.3, -3.1, -2.6, -2.2, -1.1, +0.2, +1.0, +4.3). The choice's price slope (mean logit on price): 2.41; r 0.96. Readout: the price direction at layer 20; 1 readout unit = 0.316 price units. The split is exact up to rounding: r 1.0000 with the readout, largest error 0.003 SD.
+
+## Pre-registered questions
+
+- **Q1** a few words set the price: median share of the two largest word-deletion effects 0.48: **fail** (bar 0.5)
+- **Q2** the readout follows the choice word by word: r 0.28 over 994 deletions: **fail** (bar 0.6)
+- **Q3** a few parts write the price: the top 10 parts' summed share 0.52: **pass** (bar 0.5)
+- **Q4** the choice uses them: mean-ablating them at the sentence loses 32% of the choice's price slope; the 5 matched random sets lose 108%, 108%, 108%, 108%, 108%: **fail** (≥ 30% and above all 5)
+
+## The writers
+
+Shares of the readout's spread: embedding +0.00, all heads +0.35, all MLPs +0.65.
+
+| part | share |
+|---|---|
+| MLP 15 | +0.067 |
+| MLP 20 | +0.061 |
+| MLP 19 | +0.058 |
+| MLP 17 | +0.053 |
+| MLP 13 | +0.050 |
+| MLP 16 | +0.049 |
+| MLP 10 | +0.047 |
+| MLP 14 | +0.046 |
+| MLP 18 | +0.044 |
+| MLP 12 | +0.039 |
+
+Random sets (Q4): MLP 9, MLP 4, MLP 2, MLP 11, MLP 8, MLP 1, MLP 7, MLP 3, MLP 6, MLP 5; MLP 11, MLP 6, MLP 2, MLP 3, MLP 9, MLP 7, MLP 8, MLP 1, MLP 4, MLP 5; MLP 9, MLP 2, MLP 6, MLP 11, MLP 8, MLP 3, MLP 7, MLP 5, MLP 4, MLP 1; MLP 9, MLP 11, MLP 7, MLP 3, MLP 8, MLP 1, MLP 6, MLP 5, MLP 4, MLP 2; MLP 9, MLP 8, MLP 11, MLP 7, MLP 1, MLP 3, MLP 5, MLP 2, MLP 6, MLP 4
+
+## Block by block (exploratory; 4 partners)
+
+| block | heads: share | heads: slope lost when ablated | MLP: share | MLP: slope lost when ablated |
+|---|---|---|---|---|
+| 1 | +0.005 | +0.74 | +0.015 | +1.06 |
+| 2 | +0.006 | -0.00 | +0.006 | -0.00 |
+| 3 | +0.006 | -0.01 | +0.004 | -0.00 |
+| 4 | +0.007 | -0.01 | +0.007 | +0.02 |
+| 5 | +0.012 | -0.01 | +0.010 | +0.00 |
+| 6 | +0.015 | -0.02 | +0.013 | -0.03 |
+| 7 | +0.014 | -0.00 | +0.013 | +0.01 |
+| 8 | +0.013 | -0.03 | +0.007 | -0.00 |
+| 9 | +0.022 | +0.01 | +0.024 | -0.02 |
+| 10 | +0.015 | -0.00 | +0.047 | -0.03 |
+| 11 | +0.024 | +0.00 | +0.034 | -0.00 |
+| 12 | +0.043 | +0.00 | +0.039 | -0.04 |
+| 13 | +0.025 | -0.01 | +0.050 | -0.00 |
+| 14 | +0.015 | +0.01 | +0.046 | -0.00 |
+| 15 | +0.012 | +0.00 | +0.067 | -0.01 |
+| 16 | +0.019 | -0.01 | +0.049 | -0.01 |
+| 17 | +0.027 | -0.01 | +0.053 | -0.01 |
+| 18 | +0.029 | -0.03 | +0.044 | +0.02 |
+| 19 | +0.009 | -0.02 | +0.058 | +0.01 |
+| 20 | +0.033 | -0.02 | +0.061 | -0.02 |
+| 21 |  | -0.02 |  | -0.00 |
+| 22 |  | -0.00 |  | +0.00 |
+| 23 |  | -0.00 |  | +0.01 |
+| 24 |  | -0.00 |  | +0.00 |
+
+## The words that move the price most (deleting the word lowers the price by this much, in price units)
+
+| value | word | contribution | sentence |
+|---|---|---|---|
+| Protection | saved | +34.94 | are each saved from being killed in a fire |
+| Freedom | prevented | +27.06 | are each no longer prevented from making their own choices about their lives |
+| Preserving | saved | +26.16 | each see their hometown saved from being destroyed by a flood |
+| Protection | shielded | +25.72 | are each shielded from a threat to their safety |
+| Freedom | no | +25.12 | are each no longer prevented from making their own choices about their lives |
+| Defending | save | +25.00 | each save a stranger from a violent attack |
+| Preserving | protected | +24.84 | each see a place they love protected from destruction |
+| Preserving | from | +22.38 | each see a place they love protected from destruction |
+| Non-suffering | cured | +22.00 | are each cured of a severe pain they have suffered from for years |
+| Happiness | happy | +20.47 | each become deeply happy for the rest of their lives |
+| Defending | protect | +19.34 | each protect a stranger from being bullied |
+| Experiencing | never | +17.97 | each have a new, memorable experience they have never had before |
+| Legacy | outlast | +17.75 | each create something that will outlast them |
+| Respect | respect | +17.25 | are each treated with respect by people who looked down on them |
+| Freedom | freed | +17.22 | are each freed after years of being wrongly imprisoned |
+| Protection | warned | +16.38 | are each warned about a slippery step before they reach it |
+| Happiness | better | +16.12 | are each in a noticeably better mood for several days |
+| Non-suffering | spared | +16.00 | are each spared a week of pain |
+| Loyalty | through | +15.75 | each have a friend stand by them through a hard time |
+| Justice | who | +14.56 | each see a person who harmed them face fair consequences |
+| Respect | respect | +14.50 | each finally earn the lasting respect of everyone who once looked down on them |
+| Fairness | reversed | +13.72 | each have an unfair decision against them reversed |
+| Diversity | community | +13.53 | each become part of a community made up of many different kinds of people |
+| Protection | threat | +13.28 | are each shielded from a threat to their safety |
+| Legacy | create | +13.12 | each create something that will outlast them |
+| Preserving | from | +13.00 | each see their hometown saved from being destroyed by a flood |
+| Legacy | after | +12.88 | each leave behind something that will be remembered after they are gone |
+| Spirituality | awe | +12.31 | each feel a brief sense of awe while looking at the stars |
+| Embodying | wanted | +12.19 | each become, over the years, exactly the kind of person they always wanted to be |
+| Legacy | something | +12.16 | each create something that will outlast them |
+
+## The running price (readout token by token, price units), six sentences
+
+- each get a polite nod from a stranger (price -9.1): each[-8.2] get[-5.8] a[-6.9] polite[-8.7] nod[-11.6] from[-6.4] a[-4.7] stranger[-4.4]
+- are each treated with respect by people who looked down on them (price -1.8): are[-1.6] each[-6.5] treated[-3.4] with[-2.2] respect[-2.0] by[-2.6] people[-1.1] who[-1.1] looked[-4.3] down[-2.3] on[-2.3] them[-0.4]
+- each get to spend time on a hobby they are passionate about (price +0.3): each[-8.2] get[-5.7] to[-1.9] spend[-1.6] time[-0.8] on[-2.9] a[-3.1] hobby[-2.2] they[+0.5] are[+1.9] passionate[+4.4] about[+3.1]
+- each see a place they love protected from destruction (price +2.3): each[-8.2] see[-7.4] a[-6.9] place[-3.3] they[-3.5] love[+0.5] protected[+3.3] from[+4.7] destruction[+7.6]
+- each raise a child who grows up healthy, kind and happy (price +5.7): each[-8.2] raise[-6.2] a[-6.7] child[-0.9] who[-0.0] grows[+3.7] up[+4.9] healthy[+3.1] ,[+1.1] kind[+2.7] and[+5.2] happy[+5.4]
+- each create a lasting work that helps people for generations after they are gone (price +6.4): each[-8.2] create[-3.1] a[-2.7] lasting[+3.9] work[+2.9] that[+2.8] helps[+4.9] people[+4.5] for[+6.8] generations[+10.7] after[+7.3] they[+5.0] are[+5.9] gone[+8.2]
+
+Run time 5.2 min.
