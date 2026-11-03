@@ -1,6 +1,6 @@
 # Pilot 17: do Llama and a bigger Qwen price outcomes the same way?
 
-For Qwen3-14B, pilots 5-6 and 15-16 found a generic "which is bigger" comparator at the answer position, and a price that is partly relative to the alternative. Here the same tests run on Llama 3.1 8B Instruct and Qwen3-32B, with Qwen3-14B as the reference: does each give outcomes a fixed price, does a compact comparator decide, and is it the same machine that judges which pile has more apples? **Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/README.md`](results/README.md) (3 Nov 2026; the Llama decision writers still to come). Bars fixed in advance; no prediction gate.
+For Qwen3-14B, pilots 5-6 and 15-16 found a generic "which is bigger" comparator at the answer position, and a price that is partly relative to the alternative. Here the same tests run on Llama 3.1 8B Instruct and Qwen3-32B, with Qwen3-14B as the reference: does each give outcomes a fixed price, does a compact comparator decide, and is it the same machine that judges which pile has more apples? **Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/README.md`](results/README.md) (3 Nov 2026). Bars fixed in advance; no prediction gate.
 
 | File | What it does |
 |---|---|

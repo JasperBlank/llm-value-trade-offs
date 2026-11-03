@@ -8,7 +8,7 @@ Llama 3.1 8B Instruct, Qwen3-14B and Qwen3-32B, run through the same tests as pi
 |---|---|---|---|
 | First | Llama 8B, Qwen3-14B. Qwen3-32B failed: the disk filled up | RTX PRO 6000, 13:19-13:26 UTC, about $0.30 | `real/` |
 | Rerun, with the decision writers added | Qwen3-32B, Qwen3-14B. Llama failed on disk again | H100 (the 96 GB card was sold out), 13:31-13:43 UTC, about $0.80 | `real2/` |
-| Llama alone, decision writers | Llama 8B | pending: no GPU was free at 13:50 UTC; a retry is scheduled | `real2_llama/` |
+| Llama alone, decision writers | Llama 8B | H100 (nothing smaller was free), 13:57-14:03 UTC, about $0.40 | `real2_llama/` |
 
 **Why the disk filled twice.** The pods use a network volume, and deleting a model's files does not free its quota straight away. So three models (111 GB) do not fit in 100 GB one after the other, even with the cleanup.
 
@@ -20,9 +20,9 @@ Figure: [`fig16_three_models.png`](../../figures/fig16_three_models.png).
 |---|---|---|---|
 | **Q1 Does it give each outcome a fixed price?** Common share, words / outcomes (bar 0.9) | **no**: 0.78 / 0.70 | **no**: 0.75 / 0.77 | **no**: 0.71 / 0.82 |
 | **Method check:** pilot 5's 20 comparator pieces among the 20 decision writers (bar 5) | – | **14** | – |
-| **Q2b Do the decision writers carry the choice?** Held-out value swaps (bar 0.4) | pending | **yes**: 0.71 | **yes**: 0.46 |
-| **Q3b Are they the generic "which is bigger" machine?** Apples / weight (bar 0.3) | pending | **yes**: 0.81 / 0.76 | **yes**: 0.47 / 0.38 |
-| Random sets of 20 pieces, same blocks | – | ≤ 0.01 | ≤ 0.01 |
+| **Q2b Do the decision writers carry the choice?** Held-out value swaps (bar 0.4) | **yes**: 0.86 | **yes**: 0.71 | **yes**: 0.46 |
+| **Q3b Are they the generic "which is bigger" machine?** Apples / weight (bar 0.3) | **yes**: 0.90 / 0.95 | **yes**: 0.81 / 0.76 | **yes**: 0.47 / 0.38 |
+| Random sets of 20 pieces, same blocks | ≤ 0.06 | ≤ 0.01 | ≤ 0.01 |
 | *Q2, Q3: the pieces that write the letter (see below)* | *0.82; 0.86 / 0.88* | *0.96; 0.94 / 0.96* | *0.75; 0.83 / 0.81* |
 
 ## What the runs show
@@ -56,11 +56,13 @@ Figure: [`fig16_three_models.png`](../../figures/fig16_three_models.png).
 
 The deeper the model, the later in it the decision forms.
 
-**The comparator is the generic one, in both Qwens.**
+**The comparator is the generic one, in all three models.**
 - The new method checks out on Qwen3-14B. The 20 pieces that write the decision's direction at the answer position, in the blocks before it arrives, include 14 of pilot 5's 20.
 - On Qwen3-14B they carry 0.71 of held-out value swaps, 0.81 of apples swaps and 0.76 of weight swaps. Pilot 5's own 20 carry 0.57, 0.55 and 0.39 here.
 - On Qwen3-32B the decision writers sit in blocks 47-50 (counted from 0). They carry less, but the same for all three tasks: 0.46, 0.47 and 0.38.
-- Random sets carry at most 0.01.
+- **On Llama** the decision writers sit in blocks 15-18 (counted from 0). The largest is head 24 of block 17, with the MLPs of blocks 16-18. They carry the most of all three models: 0.86 of value swaps, 0.90 of apples and 0.95 of weight.
+- Random sets carry at most 0.06 (Llama) and 0.01 (both Qwens).
+- Llama's rerun repeats its price results: words 0.78, outcomes 0.70, order flips 21% (16% in menus that are not near-certain), no cycles.
 
 **The pieces that write the letter (Q2 and Q3 of the first design) carry almost everything, in every model and every task.**
 - The first run's method picked the pieces with the largest direct effect on logit(A) − logit(B). These are the last blocks, which write the letter.
@@ -69,12 +71,11 @@ The deeper the model, the later in it the decision forms.
 
 ## Cautions
 
-- **The decision writers for Llama are still to come.** For Llama there is so far only the shared timing, and the letter writers.
 - One prompt format, with A always first. The alternatives are from pilot 13.
 - **On Qwen3-32B, Q3b's weight result (0.38) is close to its bar (0.3).** The 20 pieces carry less there, so its comparator may be spread over more pieces.
 
 ## Reading
 
-The picture from Qwen3-14B holds in a bigger Qwen and, as far as it has been tested, in Llama.
+The picture from Qwen3-14B holds in a bigger Qwen and in Llama.
 - None of them gives outcomes a fixed price. A rough price forms while reading each option, and the finished price depends on the alternative.
-- The choice is then made by the same machinery that decides which pile has more apples. It reaches the answer at the same depth, and in both Qwens it runs through the same pieces.
+- The choice is then made by the same machinery that decides which pile has more apples. It reaches the answer at the same depth and runs through the same 20 pieces. In Llama those pieces carry almost all of it; in the bigger Qwen it is spread over more pieces.

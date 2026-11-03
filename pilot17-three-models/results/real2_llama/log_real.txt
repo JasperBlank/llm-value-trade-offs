@@ -1,0 +1,9 @@
+[14:00:09] Loading meta-llama/Llama-3.1-8B-Instruct on cuda ...
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:28<01:26, 28.83s/it]Fetching 4 files:  50%|█████     | 2/4 [00:55<00:55, 27.63s/it]Fetching 4 files:  75%|███████▌  | 3/4 [00:57<00:15, 15.78s/it]Fetching 4 files: 100%|██████████| 4/4 [00:59<00:00, 10.29s/it]Fetching 4 files: 100%|██████████| 4/4 [00:59<00:00, 14.79s/it]
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 3041.26it/s]
+[14:01:23] llama8 (meta-llama/Llama-3.1-8B-Instruct, 32 blocks, 32 heads): 96 outcomes, 994 deletions, 9 alternatives; layers [13, 16, 19, 22, 26]
+[14:02:08] llama8 price: common share words 0.783, outcomes 0.703; order flips 0.21 (3956 pairs; 0.16 within ±8); cycles 0; |logit| > 10 in 3%
+[14:02:25] llama8 comparator: decision reaches the answer position at layer 19; logit writers carry 0.82 (random 0.01, 0.06, 0.04); decision writers (blocks < 19) carry 0.86 (random 0.00, 0.02, 0.01); answer position: END@13 0.01, END@16 0.43, END@19 0.89, END@21 0.89, END@22 0.90, END@24 0.93, END@26 0.93, END@29 0.95
+[14:02:33] llama8 quantity: logit writers 0.87, decision writers 0.90 (random 0.00, 0.06, -0.01)
+[14:02:40] llama8 weight: logit writers 0.88, decision writers 0.95 (random 0.02, 0.04, -0.00)
+[14:02:40] llama8 done in 2.6 min: Q1 relative, Q2 True, Q3 True, Q2b True, Q3b True
