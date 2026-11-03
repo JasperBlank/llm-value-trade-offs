@@ -10,6 +10,7 @@ fig4_monkey_test.png        pilot 7: what one value direction carries, before an
 fig5_price_list.png         pilot 8: the price of each of 24 intrinsic values in trade-offs, and its stated rating
 fig6_sentences_not_values.png  pilot 8 (exploratory): prices are stable per sentence, not per value
 fig7_pilot8_tests.png       pilot 8: the pre-registered tests against their bars
+fig8_vibe_check.png         pilot 9: the direct 'how good' rating of each sentence against its menu price
 """
 import json
 from pathlib import Path
@@ -25,6 +26,7 @@ OUT = Path(__file__).resolve().parent
 P6 = ROOT / "pilot6-value-subspace/results/real"
 P7 = ROOT / "pilot7-value-route/results/real"
 P8 = ROOT / "pilot8-intrinsic-values/results/real"
+P9 = ROOT / "pilot9-vibe-check/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -334,6 +336,42 @@ def fig7():
     plt.close(fig)
 
 
+def fig8(p9=None):
+    """Pilot 9: the direct 'how good would it be' rating of each sentence against its menu price."""
+    p9 = Path(p9) if p9 else P9
+    R = load(p9 / "ratings9.json")
+    V = load(p9 / "verdicts9.json")
+    ex = load(P8 / "exploratory_sentences.json")
+    sent = {(s["value"], s["phrasing"]): s for s in ex["sentences"]}
+    rate = {(v, p): x for (v, p, n, w), x in zip(R["keys"], R["rating"]) if n == 4 and w == 0}
+    names = sorted({k[0] for k in rate})
+    fig, ax = plt.subplots(figsize=(9.5, 6.4))
+    fig.subplots_adjust(left=0.09, right=0.97, top=0.84, bottom=0.14)
+    for v in names:
+        xs = [sent[(v, p)]["u"] for p in (0, 1)]
+        ys = [rate[(v, p)] for p in (0, 1)]
+        ax.plot(xs, ys, color=GRID, linewidth=1, zorder=1)
+    x = np.array([sent[k]["u"] for k in rate])
+    y = np.array([rate[k] for k in rate])
+    ax.plot(x, y, "o", color=BLUE, markersize=6, zorder=2)
+    for k, lab in ((("Non-suffering", 0), "spared a week of pain"), (("Non-suffering", 1), "relieved of a painful condition for a week")):
+        ax.plot(sent[k]["u"], rate[k], "o", color=ORANGE, markersize=8, zorder=3)
+        right = sent[k]["u"] > 1.5
+        ax.annotate(lab, (sent[k]["u"], rate[k]), xytext=(-8 if right else 8, -12 if k[1] else 6), textcoords="offset points",
+                    fontsize=8.5, color=INK2, ha="right" if right else "left")
+    ax.set_xlabel("Menu price of the sentence (log-odds per person, from 13,248 choices in pilot 8)")
+    ax.set_ylabel("'How good would it be if …?' (0-9, 4 people)")
+    ax.grid(color=GRID, linewidth=0.6)
+    ax.set_axisbelow(True)
+    t = V["per_wording"]["W0 how good"]
+    suptitle(fig, "Asked directly, does the model's 'how good' match the prices it pays in choices?",
+             f"Pilot 9, Qwen3-14B, 48 sentences: r = {t['t1_r']:.2f}; the rating picks the same sentence of a value as the menu in "
+             f"{t['t2_same']} of 24 values.")
+    note(fig, "Grey lines join the two sentences written for the same value. Orange: the pain pair.")
+    fig.savefig(OUT / "fig8_vibe_check.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -349,4 +387,6 @@ if __name__ == "__main__":
     fig5()
     fig6()
     fig7()
+    if (P9 / "verdicts9.json").exists():
+        fig8()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))
