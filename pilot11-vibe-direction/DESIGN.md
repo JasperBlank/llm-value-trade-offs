@@ -27,7 +27,7 @@ Gilg et al. (2026) found such a direction for choices in other models (a linear 
 - **A sentence's reading** is its state projected onto that direction, scaled to price units by a straight-line fit on the training sentences.
 - **Held-out:** leave one value out. The direction is learned on 23 values (92 sentences) and read on the 4 sentences of the 24th, all the way round.
 - **Reported alongside:** a ridge readout (standardised features, penalty chosen by an inner leave-one-value-out), and readouts trained on the rating instead of the price.
-- **The layer for Q2 and Q3** is the one where the held-out reading of the price (menu context, mean over the sentence) is best (Q1).
+- **The layer for Q2 and Q3** is the one, among layers 4 to 32, where the held-out reading of the price (menu context, mean over the sentence) is best (Q1). The last layers are left out because a push there can no longer reach the answer.
 
 ## 4. Pre-registered questions
 
