@@ -1,0 +1,441 @@
+{
+ "outcomes": [
+  {
+   "id": "money|gain|small|adults|none",
+   "domain": "money",
+   "frame": "gain",
+   "size": "small",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "money|gain|small|adults|poverty",
+   "domain": "money",
+   "frame": "gain",
+   "size": "small",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "money|gain|small|children|none",
+   "domain": "money",
+   "frame": "gain",
+   "size": "small",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "money|gain|small|children|poverty",
+   "domain": "money",
+   "frame": "gain",
+   "size": "small",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "money|gain|large|adults|none",
+   "domain": "money",
+   "frame": "gain",
+   "size": "large",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "money|gain|large|adults|poverty",
+   "domain": "money",
+   "frame": "gain",
+   "size": "large",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "money|gain|large|children|none",
+   "domain": "money",
+   "frame": "gain",
+   "size": "large",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "money|gain|large|children|poverty",
+   "domain": "money",
+   "frame": "gain",
+   "size": "large",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "money|loss|small|adults|none",
+   "domain": "money",
+   "frame": "loss",
+   "size": "small",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "money|loss|small|adults|poverty",
+   "domain": "money",
+   "frame": "loss",
+   "size": "small",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "money|loss|small|children|none",
+   "domain": "money",
+   "frame": "loss",
+   "size": "small",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "money|loss|small|children|poverty",
+   "domain": "money",
+   "frame": "loss",
+   "size": "small",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "money|loss|large|adults|none",
+   "domain": "money",
+   "frame": "loss",
+   "size": "large",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "money|loss|large|adults|poverty",
+   "domain": "money",
+   "frame": "loss",
+   "size": "large",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "money|loss|large|children|none",
+   "domain": "money",
+   "frame": "loss",
+   "size": "large",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "money|loss|large|children|poverty",
+   "domain": "money",
+   "frame": "loss",
+   "size": "large",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "time|gain|small|adults|none",
+   "domain": "time",
+   "frame": "gain",
+   "size": "small",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "time|gain|small|adults|poverty",
+   "domain": "time",
+   "frame": "gain",
+   "size": "small",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "time|gain|small|children|none",
+   "domain": "time",
+   "frame": "gain",
+   "size": "small",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "time|gain|small|children|poverty",
+   "domain": "time",
+   "frame": "gain",
+   "size": "small",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "time|gain|large|adults|none",
+   "domain": "time",
+   "frame": "gain",
+   "size": "large",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "time|gain|large|adults|poverty",
+   "domain": "time",
+   "frame": "gain",
+   "size": "large",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "time|gain|large|children|none",
+   "domain": "time",
+   "frame": "gain",
+   "size": "large",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "time|gain|large|children|poverty",
+   "domain": "time",
+   "frame": "gain",
+   "size": "large",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "time|loss|small|adults|none",
+   "domain": "time",
+   "frame": "loss",
+   "size": "small",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "time|loss|small|adults|poverty",
+   "domain": "time",
+   "frame": "loss",
+   "size": "small",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "time|loss|small|children|none",
+   "domain": "time",
+   "frame": "loss",
+   "size": "small",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "time|loss|small|children|poverty",
+   "domain": "time",
+   "frame": "loss",
+   "size": "small",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "time|loss|large|adults|none",
+   "domain": "time",
+   "frame": "loss",
+   "size": "large",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "time|loss|large|adults|poverty",
+   "domain": "time",
+   "frame": "loss",
+   "size": "large",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "time|loss|large|children|none",
+   "domain": "time",
+   "frame": "loss",
+   "size": "large",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "time|loss|large|children|poverty",
+   "domain": "time",
+   "frame": "loss",
+   "size": "large",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "health|gain|small|adults|none",
+   "domain": "health",
+   "frame": "gain",
+   "size": "small",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "health|gain|small|adults|poverty",
+   "domain": "health",
+   "frame": "gain",
+   "size": "small",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "health|gain|small|children|none",
+   "domain": "health",
+   "frame": "gain",
+   "size": "small",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "health|gain|small|children|poverty",
+   "domain": "health",
+   "frame": "gain",
+   "size": "small",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "health|gain|large|adults|none",
+   "domain": "health",
+   "frame": "gain",
+   "size": "large",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "health|gain|large|adults|poverty",
+   "domain": "health",
+   "frame": "gain",
+   "size": "large",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "health|gain|large|children|none",
+   "domain": "health",
+   "frame": "gain",
+   "size": "large",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "health|gain|large|children|poverty",
+   "domain": "health",
+   "frame": "gain",
+   "size": "large",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "health|loss|small|adults|none",
+   "domain": "health",
+   "frame": "loss",
+   "size": "small",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "health|loss|small|adults|poverty",
+   "domain": "health",
+   "frame": "loss",
+   "size": "small",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "health|loss|small|children|none",
+   "domain": "health",
+   "frame": "loss",
+   "size": "small",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "health|loss|small|children|poverty",
+   "domain": "health",
+   "frame": "loss",
+   "size": "small",
+   "who": "children",
+   "need": "poverty"
+  },
+  {
+   "id": "health|loss|large|adults|none",
+   "domain": "health",
+   "frame": "loss",
+   "size": "large",
+   "who": "adults",
+   "need": "none"
+  },
+  {
+   "id": "health|loss|large|adults|poverty",
+   "domain": "health",
+   "frame": "loss",
+   "size": "large",
+   "who": "adults",
+   "need": "poverty"
+  },
+  {
+   "id": "health|loss|large|children|none",
+   "domain": "health",
+   "frame": "loss",
+   "size": "large",
+   "who": "children",
+   "need": "none"
+  },
+  {
+   "id": "health|loss|large|children|poverty",
+   "domain": "health",
+   "frame": "loss",
+   "size": "large",
+   "who": "children",
+   "need": "poverty"
+  }
+ ],
+ "train": [
+  "money|gain|small|adults|none",
+  "money|gain|small|adults|poverty",
+  "money|gain|small|children|none",
+  "money|gain|large|adults|none",
+  "money|gain|large|children|none",
+  "money|loss|large|adults|poverty",
+  "money|loss|large|children|none",
+  "money|loss|large|children|poverty",
+  "time|gain|small|adults|poverty",
+  "time|gain|small|children|none",
+  "time|gain|small|children|poverty",
+  "time|gain|large|adults|none",
+  "time|gain|large|adults|poverty",
+  "time|gain|large|children|none",
+  "time|gain|large|children|poverty",
+  "time|loss|small|adults|none",
+  "time|loss|small|adults|poverty",
+  "time|loss|small|children|none",
+  "time|loss|small|children|poverty",
+  "time|loss|large|adults|poverty",
+  "time|loss|large|children|none",
+  "time|loss|large|children|poverty",
+  "health|gain|small|children|none",
+  "health|gain|small|children|poverty",
+  "health|gain|large|adults|none",
+  "health|gain|large|adults|poverty",
+  "health|loss|small|adults|none",
+  "health|loss|small|adults|poverty",
+  "health|loss|small|children|poverty",
+  "health|loss|large|adults|none",
+  "health|loss|large|children|none",
+  "health|loss|large|children|poverty"
+ ],
+ "test": [
+  "health|gain|large|children|none",
+  "health|gain|large|children|poverty",
+  "health|gain|small|adults|none",
+  "health|gain|small|adults|poverty",
+  "health|loss|large|adults|poverty",
+  "health|loss|small|children|none",
+  "money|gain|large|adults|poverty",
+  "money|gain|large|children|poverty",
+  "money|gain|small|children|poverty",
+  "money|loss|large|adults|none",
+  "money|loss|small|adults|none",
+  "money|loss|small|adults|poverty",
+  "money|loss|small|children|none",
+  "money|loss|small|children|poverty",
+  "time|gain|small|adults|none",
+  "time|loss|large|adults|none"
+ ],
+ "example": "8 children living in poverty are each prevented from losing a week of free time"
+}
