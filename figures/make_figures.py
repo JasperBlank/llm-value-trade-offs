@@ -960,7 +960,7 @@ def fig16(p17=None):
              "Pilot 17: 96 outcomes and 994 word deletions against 9 alternatives per model; swaps of one outcome at the answer position. "
              + (f"Method check on Qwen3-14B: {q.get('overlap_with_decision_writers')} of pilot 5's 20 comparator pieces recovered." if q else ""))
     note(fig, "Right: the 20 pieces are chosen on half the values and tested on the other half and on pilot 6's apples and weight pairs; "
-              "random sets of 20 pieces from the same blocks carry at most 0.01. Dotted: the bar for value menus (0.4); dashed: for apples and weight (0.3).")
+              "random sets of 20 pieces from the same blocks carry at most 0.06. Dotted: the bar for value menus (0.4); dashed: for apples and weight (0.3).")
     fig.savefig(OUT / "fig16_three_models.png", dpi=200)
     plt.close(fig)
 
