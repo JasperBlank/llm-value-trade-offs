@@ -1,112 +1,66 @@
-<!doctype html><html><head><meta charset='utf-8'><style>
-:root { --surface:#fcfcfb; --ink:#0b0b0b; --ink2:#52514e; --muted:#898781; --grid:#e1e0d9; --axis:#c3c2b7;
-        --blue:#2a78d6; --lblue:#86b6ef; --orange:#eb6834; --aqua:#1baf7a; --red:#e34948; --card:#ffffff; }
-* { box-sizing:border-box; margin:0; padding:0; }
-body { background:var(--surface); font-family:Inter, "Noto Color Emoji", sans-serif; color:var(--ink);
-       -webkit-font-smoothing:antialiased; }
-.emo { font-family:"Noto Color Emoji"; font-weight:400; font-style:normal; }
-#fig { background:var(--surface); padding:40px 48px 30px; }
-.eyebrow { font-size:15px; font-weight:650; letter-spacing:.13em; text-transform:uppercase; color:var(--muted);
-           margin-bottom:10px; }
-.eyebrow .emo { letter-spacing:0; margin-right:6px; }
-h1 { font-family:"Inter Display", Inter, sans-serif; font-size:40px; line-height:1.08; font-weight:800;
-     letter-spacing:-.012em; }
-h2 { font-size:19px; font-weight:650; margin-top:20px; }
-.sub { font-size:19px; line-height:1.45; color:var(--ink2); margin-top:12px; max-width:1080px; }
-.chart { margin-top:22px; }
-.chart svg { display:block; }
-.note { font-size:14.5px; line-height:1.5; color:var(--muted); margin-top:16px; max-width:1100px; }
-.note b { color:var(--ink2); font-weight:600; }
+<!doctype html><html><head><meta charset='utf-8'><style>@font-face { font-family:'Libre Franklin'; src:url('../fonts/libre-franklin-400-normal.ttf'); font-weight:400; font-style:normal; }
+@font-face { font-family:'Libre Franklin'; src:url('../fonts/libre-franklin-500-normal.ttf'); font-weight:500; font-style:normal; }
+@font-face { font-family:'Libre Franklin'; src:url('../fonts/libre-franklin-600-normal.ttf'); font-weight:600; font-style:normal; }
+@font-face { font-family:'Libre Franklin'; src:url('../fonts/libre-franklin-700-normal.ttf'); font-weight:700; font-style:normal; }
+@font-face { font-family:'Libre Franklin'; src:url('../fonts/libre-franklin-400-italic.ttf'); font-weight:400; font-style:italic; }
+@font-face { font-family:'Source Serif 4'; src:url('../fonts/source-serif-4-400-normal.ttf'); font-weight:400; font-style:normal; }
+@font-face { font-family:'Source Serif 4'; src:url('../fonts/source-serif-4-600-normal.ttf'); font-weight:600; font-style:normal; }
+@font-face { font-family:'Source Serif 4'; src:url('../fonts/source-serif-4-700-normal.ttf'); font-weight:700; font-style:normal; }
+@font-face { font-family:'Source Serif 4'; src:url('../fonts/source-serif-4-400-italic.ttf'); font-weight:400; font-style:italic; }
 
-    #fig.hero { width:1600px; height:900px; padding:50px 72px 0; position:relative; overflow:hidden; }
-    .hero .eyebrow { font-size:18px; margin-bottom:12px; }
-    .hero h1 { font-size:84px; letter-spacing:-.022em; line-height:1.0; }
-    .hero .sub { font-size:27px; line-height:1.36; margin-top:14px; max-width:1420px; color:var(--ink2); }
-    .grid { display:grid; grid-template-columns:600px 320px 236px 196px; column-gap:32px; }
-    .heads { margin-top:28px; align-items:end; }
-    .h { font-size:15px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
-    .h b { display:block; font-size:25px; letter-spacing:-.005em; text-transform:none; color:var(--ink); font-weight:750;
-           margin-top:4px; }
-    .h i { display:block; font-size:17px; letter-spacing:0; text-transform:none; color:var(--ink2); font-weight:450;
-           font-style:normal; margin-top:3px; line-height:1.3; }
-    .h .ctx { display:block; font-size:15px; text-transform:none; letter-spacing:0; color:var(--ink2); font-style:italic;
-            font-weight:450; margin:5px 0 2px; }
-    .h .q { font-size:21px; font-style:italic; text-transform:none; letter-spacing:0; color:var(--ink2); font-weight:450; }
-    .lane { display:grid; grid-template-columns:600px 320px 236px 196px; column-gap:32px; align-items:center;
-            background:var(--card); border:1px solid var(--grid); border-radius:20px; padding:17px 22px 17px 22px;
-            margin-left:-22px; width:calc(100% + 44px); box-shadow:0 3px 14px rgba(11,11,11,.05); }
-    .lane.l1 { margin-top:14px; }
-    .opts { display:flex; flex-direction:column; gap:10px; }
-    .opt { display:flex; gap:12px; align-items:flex-start; font-size:24.5px; line-height:1.3; }
-    .opt .emo { font-size:24px; }
-    .tag { flex:none; width:32px; height:32px; border-radius:8px; color:#fff; font-weight:750; font-size:18px;
-           display:flex; align-items:center; justify-content:center; margin-top:-1px; }
-    .tag.a { background:var(--blue); } .tag.b { background:var(--orange); }
-    mark { background:#fde68a; color:var(--ink); padding:0 4px; border-radius:5px; font-weight:650; }
-    s { color:var(--red); text-decoration-thickness:3px; font-weight:650; }
+:root { --ink:#141414; --ink2:#555555; --muted:#8c8c8c; --rule:#e6e6e6; --blue:#2a78d6; --orange:#eb6834;
+        --aqua:#1baf7a; --red:#d1453b; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:#fff; font-family:'Libre Franklin', sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+#fig { background:#fff; padding:44px 52px 34px; }
+h1 { font-family:'Source Serif 4', serif; font-weight:600; font-size:38px; line-height:1.12; letter-spacing:-.006em; }
+.sub { font-size:18px; color:var(--ink2); margin-top:8px; line-height:1.4; }
+.chart { margin-top:18px; }
+.chart svg { display:block; }
+.src { font-size:13.5px; color:var(--muted); margin-top:10px; }
+
+    #fig.hero { width:1600px; height:900px; padding:100px 72px 0; position:relative; overflow:hidden; }
+    .hero h1 { font-size:82px; line-height:1.02; letter-spacing:-.012em; white-space:nowrap; }
+    .hero .sub { font-size:31px; margin-top:18px; }
+    .grid, .lane { display:grid; grid-template-columns:700px 290px 180px 190px; column-gap:32px; }
+    .heads { margin-top:80px; padding-bottom:14px; border-bottom:1px solid var(--rule); font-size:20px;
+             font-weight:600; color:var(--muted); }
+    .lane { align-items:center; padding:40px 0; }
+    .lane + .lane { border-top:1px solid var(--rule); }
+    .opts { display:flex; flex-direction:column; gap:12px; }
+    .opt { display:flex; gap:18px; font-size:28px; line-height:1.3; }
+    .la, .lb { font-weight:700; } .la { color:var(--blue); } .lb { color:var(--orange); }
+    .opt .la, .opt .lb { width:22px; flex:none; }
+    .hl { font-weight:700; }
+    s { color:var(--red); text-decoration-thickness:3px; font-weight:600; }
     .same { color:var(--muted); }
-    .bars { display:flex; flex-direction:column; gap:16px; }
-    .bar { display:flex; align-items:center; gap:12px; }
-    .bar .emo { font-size:30px; width:38px; text-align:center; }
-    .track { position:relative; flex:1; height:32px; background:#eeede8; border-radius:14px; overflow:hidden; }
-    .fill { position:absolute; left:0; top:0; height:100%; border-radius:14px; }
-    .fill.a { background:var(--blue); } .fill.b { background:var(--orange); }
-    .ghost { position:absolute; left:0; top:0; height:100%; border-radius:14px; border:2px dashed #ffffffcc; z-index:2;
-             display:flex; align-items:center; justify-content:center; }
-    .ghost span { color:#fff; font-size:14px; font-weight:650; white-space:nowrap; }
-    .cmp { display:flex; align-items:center; justify-content:center; gap:14px; font-size:44px; }
-    .cmp .sign { font-family:"Inter Display", Inter; font-weight:800; font-size:56px; color:var(--ink); line-height:1; }
-    .ans { display:flex; align-items:center; gap:13px; }
-    .circle { width:76px; height:76px; border-radius:38px; color:#fff; font-size:44px; font-weight:800; display:flex;
-              align-items:center; justify-content:center; box-shadow:0 5px 14px rgba(11,11,11,.18); }
-    .circle.a { background:var(--blue); } .circle.b { background:var(--orange); }
-    .p { font-family:"Inter Display", Inter; font-size:27px; font-weight:800; color:var(--ink); line-height:1.1;
-         font-variant-numeric:tabular-nums; }
-    .cut { position:relative; height:48px; display:flex; align-items:center; }
-    .cut::before { content:""; position:absolute; left:0; right:0; top:50%; border-top:2px dashed var(--axis); }
-    .pill { position:relative; background:var(--surface); border:2px solid var(--red); color:var(--red); font-size:21px;
-            font-weight:700; padding:4px 14px 4px 10px; border-radius:20px; margin-left:150px; display:flex; gap:8px;
-            align-items:center; }
-    .foot { position:absolute; left:72px; right:72px; bottom:22px; font-size:15.5px; color:var(--muted);
-            display:flex; justify-content:space-between; gap:40px; line-height:1.4; }
+    .bars { display:flex; flex-direction:column; gap:14px; }
+    .bar { height:26px; border-radius:2px; } .bar.a { background:var(--blue); } .bar.b { background:var(--orange); }
+    .cmp { display:flex; align-items:center; gap:18px; font-size:50px; }
+    .cmp .sign { font-weight:500; color:var(--ink); }
+    .ans { display:flex; align-items:baseline; gap:18px; }
+    .ans .la, .ans .lb { font-size:74px; line-height:1; }
+    .ans .p { font-size:31px; font-weight:600; color:var(--ink); font-variant-numeric:tabular-nums; }
+    .foot { position:absolute; left:72px; bottom:44px; font-size:18px; color:var(--muted); }
     </style></head><body><div id='fig' class='hero'>
-    <div class='eyebrow'><span class='emo'>🧠</span>How does an AI choose between two good outcomes?</div>
     <h1>A vibe check, then “which is bigger?”</h1>
-    <div class='sub'>It gets a gut feeling for how big a deal each option is, from its exact words. Then it
-      compares the two with the same machinery it uses for “which pile has more apples?”</div>
-    <div class='grid heads'>
-      <div class='h'>What the AI is asked<span class='ctx'>“The people involved are strangers in your town whom you will never meet.</span><span class='q'>Which of these two outcomes would you rather happen?”</span></div>
-      <div class='h'>Step 1<b>Vibe check</b><i>How big a deal is each?</i></div>
-      <div class='h'>Step 2<b>Which is bigger?</b><i>Same internal parts as for piles of apples <span class='emo'>🍎</span></i></div>
-      <div class='h'>Answer<i>and how likely the AI is to give it</i></div>
-    </div>
+    <div class='sub'>Each option gets a gut-feel size. The bigger one wins.</div>
+    <div class='grid heads'><div>8 people each …</div><div>vibe check</div><div>which is bigger?</div><div>answer</div></div>
     
-        <div class='lane l1'>
-          <div class='opts'>
-            <div class='opt'><span class='tag a'>A</span><span>8 people each feel a <mark>brief</mark> sense of awe while looking at the stars <span class='emo'>✨</span></span></div>
-            <div class='opt'><span class='tag b'>B</span><span>8 people each turn the activity they love into their full-time job <span class='emo'>💼</span></span></div>
-          </div>
-          <div class='bars'>
-            <div class='bar'><span class='emo'>✨</span><div class='track'><div class='fill a' style='width:50%'></div></div></div>
-            <div class='bar'><span class='emo'>💼</span><div class='track'><div class='fill b' style='width:64%'></div></div></div>
-          </div>
-          <div class='cmp'><span class='emo'>✨</span><span class='sign'>&lt;</span><span class='emo'>💼</span></div>
-          <div class='ans'><div class='circle b'>B</div><div class='p'>85%</div></div>
-        </div><div class='cut'><span class='pill'><span class='emo'>✂️</span>Delete one word: “brief”</span></div>
-        <div class='lane l2'>
-          <div class='opts'>
-            <div class='opt'><span class='tag a'>A</span><span>8 people each feel a <s>brief</s> sense of awe while looking at the stars <span class='emo'>✨</span></span></div>
-            <div class='opt'><span class='tag b'>B</span><span><span class='same'>the same as above <span class='emo'>💼</span></span></span></div>
-          </div>
-          <div class='bars'>
-            <div class='bar'><span class='emo'>✨</span><div class='track'><div class='ghost' style='width:50%'><span>with “brief”</span></div><div class='fill a' style='width:82%'></div></div></div>
-            <div class='bar'><span class='emo'>💼</span><div class='track'><div class='fill b' style='width:64%'></div></div></div>
-          </div>
-          <div class='cmp'><span class='emo'>✨</span><span class='sign'>&gt;</span><span class='emo'>💼</span></div>
-          <div class='ans'><div class='circle a'>A</div><div class='p'>99.97%</div></div>
+        <div class='lane'>
+          <div class='opts'><div class='opt'><span class='la'>A</span><span>feel a <b class='hl'>brief</b> sense of awe while looking at the stars</span></div>
+            <div class='opt'><span class='lb'>B</span><span>turn the activity they love into their full-time job</span></div></div>
+          <div class='bars'><div class='bar a' style='width:52%'></div><div class='bar b' style='width:66%'></div></div>
+          <div class='cmp'><span class='la'>A</span><span class='sign'>&lt;</span><span class='lb'>B</span></div>
+          <div class='ans'><span class='lb'>B</span><span class='p'>85%</span></div>
         </div>
-    <div class='foot'><span>Percentages: measured answers of the AI model Qwen3-14B (a bigger Qwen switches too; Llama 3.1 8B picks the
-      stars with or without “brief”). Bars only sketch the comparison. Step 2's shared parts: found in all three models by
-      swapping internal signals between questions.</span>
-      <span style='white-space:nowrap'>Methods: forced choices · deleting words<br>· swapping internal signals</span></div>
+    
+        <div class='lane'>
+          <div class='opts'><div class='opt'><span class='la'>A</span><span>feel a <s>brief</s> sense of awe while looking at the stars</span></div>
+            <div class='opt'><span class='lb'>B</span><span><span class='same'>(the same)</span></span></div></div>
+          <div class='bars'><div class='bar a' style='width:84%'></div><div class='bar b' style='width:66%'></div></div>
+          <div class='cmp'><span class='la'>A</span><span class='sign'>&gt;</span><span class='lb'>B</span></div>
+          <div class='ans'><span class='la'>A</span><span class='p'>99.97%</span></div>
+        </div>
+    <div class='foot'>Qwen3-14B. Bars are illustrative.</div>
     </div></body></html>
