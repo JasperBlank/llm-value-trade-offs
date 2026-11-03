@@ -1,0 +1,4 @@
+# Jasper's predictions for pilot 9 (the vibe check), 3 Nov 2026 06:53 Amsterdam time, before any result.
+t1_rating_vs_menu_r: {best: 0.8, range80: [0.4, 0.9]}
+t2_same_sentence_count: {best: 15, range80: [12, 22]}
+t3_size_at_least_half_point: 0.60

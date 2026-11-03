@@ -1,0 +1,4 @@
+# Claude's predictions for pilot 9 (the vibe check), sealed before Jasper's.
+t1_rating_vs_menu_r: {best: 0.55, range80: [0.30, 0.78]}
+t2_same_sentence_count: {best: 15, range80: [11, 19]}
+t3_size_at_least_half_point: 0.35
