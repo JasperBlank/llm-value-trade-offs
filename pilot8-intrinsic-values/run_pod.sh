@@ -1,13 +1,18 @@
 #!/bin/bash
 # Pilot 8 (intrinsic values) on a Runpod pod: install; quick test on Qwen3-0.6B with the checks; the real run; then,
 # if both prediction sets are in the repo (they are committed before the pod is created), print
-# everything to the pod's log; finally the pod STOPS ITSELF (no idle GPU). The log stays readable.
+# everything to the pod's log; Claude reads it and terminates the pod. If nobody does within 40
+# minutes, the pod stops itself (a stopped pod's log is gone, but the results stay on /workspace).
 set -o pipefail
 export HF_HOME=/workspace/hf
 REPO=/workspace/llm-value-trade-offs
 P8=$REPO/pilot8-intrinsic-values
 exec > >(tee -a /workspace/log_pilot8_pod.txt) 2>&1
 stop_pod() {
+  # A stopped pod's log can no longer be read (found 3 Nov), so the pod first waits for Claude to read
+  # the log and terminate it; only if nobody does within the wait does it stop itself.
+  echo "PILOT8 WAITING ${READ_WAIT:-2400}s for the log to be read before stopping $(date -u +%FT%TZ)"
+  sleep ${READ_WAIT:-2400}
   echo "PILOT8 STOPPING THE POD $(date -u +%FT%TZ)"
   python3 -c "import os,json,urllib.request as u; r=u.Request('https://api.runpod.io/v2/pods/'+os.environ['RUNPOD_POD_ID']+'/action', data=json.dumps({'action':'stop'}).encode(), method='POST', headers={'Authorization':'Bearer '+os.environ.get('RUNPOD_API_KEY',''),'Content-Type':'application/json'}); print('PILOT8 stop request', u.urlopen(r).status, flush=True)" \
     || echo "PILOT8 stop request FAILED"
