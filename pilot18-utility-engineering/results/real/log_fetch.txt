@@ -1,0 +1,20 @@
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files:   9%|▉         | 1/11 [00:00<00:03,  3.14it/s]Fetching 11 files:  36%|███▋      | 4/11 [00:00<00:01,  6.94it/s]Fetching 11 files:  64%|██████▎   | 7/11 [00:01<00:00,  6.43it/s]Fetching 11 files:  73%|███████▎  | 8/11 [00:32<00:19,  6.43s/it]Fetching 11 files:  82%|████████▏ | 9/11 [01:08<00:26, 13.26s/it]Fetching 11 files:  91%|█████████ | 10/11 [01:09<00:10, 10.27s/it]Fetching 11 files: 100%|██████████| 11/11 [01:11<00:00,  8.02s/it]Fetching 11 files: 100%|██████████| 11/11 [01:11<00:00,  6.49s/it]
+model meta-llama/Llama-3.1-8B-Instruct at their revision 0e9e39f
+mmazeika/emergent-values-data (model): 2 files
+  .gitattributes  1519
+  options_hierarchical.zip  122699165
+options_hierarchical.zip: 133 members; llama-31-8b-instruct: ['options_hierarchical/llama-31-8b-instruct/results_llama-31-8b-instruct.json', 'options_hierarchical/llama-31-8b-instruct/results_utilities_llama-31-8b-instruct.json', 'options_hierarchical/llama-31-8b-instruct/summary_llama-31-8b-instruct.txt']
+their results: 38925 pairs, 1000 held out; holdout metrics {'log_loss': 0.505377432949615, 'accuracy': 0.904}
+/usr/local/lib/python3.12/dist-packages/fitz/__init__.py:17: FutureWarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+  warnings.warn(
+paper: 38 pages
+MuPDF error: syntax error: could not parse color space (98 0 R)
+
+MuPDF error: syntax error: could not parse color space (240 0 R)
+
+  Figure 4: on page 8: page008_Figure4.png
+  Figure 7: on page 9: page009_Figure7.png
+  Figure 8: on page 10: page010_Figure8.png
+MuPDF error: syntax error: could not parse color space (2340 0 R)
+
+  Figure 23: on page 25: page025_Figure23.png

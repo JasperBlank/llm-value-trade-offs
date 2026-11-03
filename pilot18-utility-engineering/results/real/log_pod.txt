@@ -1,0 +1,43 @@
+PILOT18 START 2026-11-03T18:41:51Z
+PILOT18 commit fd4b27c: Pilot 18 design and code: Utility Engineering's measures on Llama 3.1 8B with their code (K = 10 utilities, logprobs mode, transitivity), their linear readout, and two new tests (pushing along the readout; pilot 17's decision writers on their menus); bars fixed before the run
+NVIDIA H100 80GB HBM3, 81559 MiB, 595.91.07
+eur-no-2-vast.runpod.net:/runpodfs/podvolumes/ejwtb3de6ji0/9e5etsymya3jju   94G  236M   93G   1% /workspace
+Python 3.12.3
+PILOT18 their code 5e5966d: Adding logprobs mode for preference elicitation
+PILOT18 model at /workspace/hf/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659
+model meta-llama/Llama-3.1-8B-Instruct at their revision 0e9e39f
+options_hierarchical.zip: 133 members; llama-31-8b-instruct: ['options_hierarchical/llama-31-8b-instruct/results_llama-31-8b-instruct.json', 'options_hierarchical/llama-31-8b-instruct/results_utilities_llama-31-8b-instruct.json', 'options_hierarchical/llama-31-8b-instruct/summary_llama-31-8b-instruct.txt']
+their results: 38925 pairs, 1000 held out; holdout metrics {'log_loss': 0.505377432949615, 'accuracy': 0.904}
+paper: 38 pages
+  Figure 4: on page 8: page008_Figure4.png
+  Figure 7: on page 9: page009_Figure7.png
+  Figure 8: on page 10: page010_Figure8.png
+  Figure 23: on page 25: page025_Figure23.png
+remote: 
+remote: Create a pull request for 'pod-results/pilot18-paper' on GitHub by visiting:        
+remote:      https://github.com/JasperBlank/llm-value-trade-offs/pull/new/pod-results/pilot18-paper        
+remote: 
+PILOT18 paper pages pushed
+PILOT18 QUICK TEST 2026-11-03T18:50:05Z
+PILOT18 FAILED: quick test
+[18:50:06] step 1: held-out accuracy ours 94.9 (logprobs 97.4) vs 89.7; utilities r 0.9840775310097576; cycles 3/20 (log10 -0.82 vs -1.5); order flips 0.0
+[18:50:08] Loading /workspace/hf/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659 on cuda ...
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:  31%|███       | 90/291 [00:00<00:00, 794.56it/s]Loading weights:  61%|██████    | 178/291 [00:00<00:00, 773.09it/s]Loading weights:  88%|████████▊ | 256/291 [00:00<00:00, 738.81it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 820.36it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+[18:50:49] pipeline check: two BOS r -0.0380 (|Δp| 0.4703), one BOS r -0.0378 (|Δp| 0.4916); using one_bos
+[18:50:49] cycles with exact probabilities: 0/20 (log10 -inf)
+/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py:370: RuntimeWarning: invalid value encountered in divide
+  f = S ** 2 / (S ** 2 + lam)
+Traceback (most recent call last):
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 794, in <module>
+    main()
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 647, in main
+    probe = probe_layers(M, X, Xmean, k10, cats, layers, a.quick)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 416, in probe_layers
+    pred, _ = ridge_loo(Xl[tr_o], run.mu[tr_o])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 377, in ridge_loo
+    coef = Vt.T @ ((S / (S ** 2 + lam)) * Uy)
+                         ~~~~~~~^~~~~
+TypeError: unsupported operand type(s) for +: 'float' and 'NoneType'

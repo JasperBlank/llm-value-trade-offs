@@ -1,0 +1,21 @@
+[18:50:06] step 1: held-out accuracy ours 94.9 (logprobs 97.4) vs 89.7; utilities r 0.9840775310097576; cycles 3/20 (log10 -0.82 vs -1.5); order flips 0.0
+[18:50:08] Loading /workspace/hf/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659 on cuda ...
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:  31%|███       | 90/291 [00:00<00:00, 794.56it/s]Loading weights:  61%|██████    | 178/291 [00:00<00:00, 773.09it/s]Loading weights:  88%|████████▊ | 256/291 [00:00<00:00, 738.81it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 820.36it/s]
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+[18:50:49] pipeline check: two BOS r -0.0380 (|Δp| 0.4703), one BOS r -0.0378 (|Δp| 0.4916); using one_bos
+[18:50:49] cycles with exact probabilities: 0/20 (log10 -inf)
+/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py:370: RuntimeWarning: invalid value encountered in divide
+  f = S ** 2 / (S ** 2 + lam)
+Traceback (most recent call last):
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 794, in <module>
+    main()
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 647, in main
+    probe = probe_layers(M, X, Xmean, k10, cats, layers, a.quick)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 416, in probe_layers
+    pred, _ = ridge_loo(Xl[tr_o], run.mu[tr_o])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-value-trade-offs/pilot18-utility-engineering/pilot18.py", line 377, in ridge_loo
+    coef = Vt.T @ ((S / (S ** 2 + lam)) * Uy)
+                         ~~~~~~~^~~~~
+TypeError: unsupported operand type(s) for +: 'float' and 'NoneType'

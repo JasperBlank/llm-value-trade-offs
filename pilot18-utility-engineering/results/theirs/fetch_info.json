@@ -1,0 +1,22 @@
+{
+ "data_repo": "mmazeika/emergent-values-data",
+ "repo_type": "model",
+ "files": [
+  [
+   ".gitattributes",
+   1519
+  ],
+  [
+   "options_hierarchical.zip",
+   122699165
+  ]
+ ],
+ "options_hierarchical.zip": {
+  "members": 133,
+  "llama_members": [
+   "options_hierarchical/llama-31-8b-instruct/results_llama-31-8b-instruct.json",
+   "options_hierarchical/llama-31-8b-instruct/results_utilities_llama-31-8b-instruct.json",
+   "options_hierarchical/llama-31-8b-instruct/summary_llama-31-8b-instruct.txt"
+  ]
+ }
+}
