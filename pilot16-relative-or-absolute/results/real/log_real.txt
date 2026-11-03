@@ -1,0 +1,9 @@
+[12:31:00] Loading Qwen/Qwen3-14B on cuda ...
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:04<00:31,  4.56s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:06<00:16,  2.80s/it]Fetching 8 files:  38%|███▊      | 3/8 [00:07<00:11,  2.30s/it]Fetching 8 files:  50%|█████     | 4/8 [00:09<00:07,  1.95s/it]Fetching 8 files:  75%|███████▌  | 6/8 [00:09<00:02,  1.02s/it]Fetching 8 files:  88%|████████▊ | 7/8 [00:11<00:01,  1.24s/it]Fetching 8 files: 100%|██████████| 8/8 [00:12<00:00,  1.13s/it]Fetching 8 files: 100%|██████████| 8/8 [00:12<00:00,  1.54s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 16119.90it/s]
+[12:31:21] Qwen/Qwen3-14B: 96 sentences, 994 deletions, 8 alternatives B (prices -7.3, -3.1, -2.6, -2.2, -1.1, +0.2, +1.0, +4.3)
+[12:32:44] choice: word effects common share 0.747; whole outcomes 0.762; median |word effect| 1.75 logits
+[12:32:46] readout A_nl: 16: 1.000, 20: 0.999, 24: 0.999, 28: 0.999, 32: 0.999
+[12:32:52] readout B_nl: 16: 0.722, 20: 0.789, 24: 0.752, 28: 0.729, 32: 0.679
+[12:32:54] readout END: 16: 0.599, 20: 0.715, 24: 0.804, 28: 0.739, 32: 0.745
+[12:32:54] Q1 0.752, Q2 0.747, Q3 0.762: relative, already in the finished price; report written; 1.9 min
