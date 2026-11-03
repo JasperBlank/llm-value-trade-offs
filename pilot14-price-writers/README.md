@@ -1,6 +1,6 @@
 # Pilot 14: what writes the price
 
-Pilots 10-13 found that Qwen writes a price onto each outcome as it reads it, and that the choice partly uses it. Here: which words of a sentence set its price, which attention heads and MLP layers write it onto the sentence, and whether the choice goes blind to the price when those parts are silenced. **Read [`DESIGN.md`](DESIGN.md) first.**
+Pilots 10-13 found that Qwen writes a price onto each outcome as it reads it, and that the choice partly uses it. Here: which words of a sentence set its price, which attention heads and MLP layers write it onto the sentence, and whether the choice goes blind to the price when those parts are silenced. **Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/real/README.md`](results/real/README.md) (run 3 Nov 2026).
 
 | File | What it does |
 |---|---|

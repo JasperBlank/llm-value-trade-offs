@@ -15,6 +15,7 @@ fig9_full_range.png         pilot 10: rating against menu over the full range of
 fig10_vibe_direction.png    pilot 11: where the price direction can be read, and what pushing along it does
 fig11_recipes.png           pilot 12: the disagreement is readable from the sentence, and pushing it moves the rating beyond the choice
 fig12_recipe_in_words.png   pilot 13: the two recipes in named features, how well each predictor prices outcomes, the pushes against random ones
+fig13_price_writers.png     pilot 14: which parts write the price readout, silencing them block by block, and word deletions
 """
 import json
 from pathlib import Path
@@ -35,6 +36,7 @@ P10 = ROOT / "pilot10-full-range/results/real"
 P11 = ROOT / "pilot11-vibe-direction/results/real"
 P12 = ROOT / "pilot12-recipes/results/real"
 P13 = ROOT / "pilot13-recipe-in-words/results/real"
+P14 = ROOT / "pilot14-price-writers/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -657,6 +659,84 @@ def fig12(p13=None):
     plt.close(fig)
 
 
+def fig13(p14=None):
+    """Pilot 14: who writes the layer-20 price readout (heads and MLPs by block), what silencing one block at the
+    sentence does to the choice, and single-word deletions: the choice's price change against the readout's."""
+    p14 = Path(p14) if p14 else P14
+    V = load(p14 / "verdicts14.json")
+    Z = np.load(p14 / "attribution14.npz")
+    W = load(p14 / "words14.json")
+    fig, axs = plt.subplots(1, 3, figsize=(16.5, 5.4), gridspec_kw={"width_ratios": [1.0, 1.0, 1.15]})
+    fig.subplots_adjust(left=0.05, right=0.985, top=0.77, bottom=0.15, wspace=0.28)
+    blocks = np.arange(1, len(Z["share_mlps"]) + 1)
+    ax = axs[0]
+    w = 0.4
+    ax.bar(blocks - w / 2, Z["share_heads"].sum(1), width=w, color=BLUE, label=f"all 40 heads of the block (total {Z['share_heads'].sum():.2f})")
+    ax.bar(blocks + w / 2, Z["share_mlps"], width=w, color=ORANGE, label=f"the block's MLP (total {Z['share_mlps'].sum():.2f})")
+    top = {t["part"] for t in V["Q3"]["top"]}
+    for b in blocks:
+        if f"MLP {b}" in top:
+            ax.text(b + w / 2, Z["share_mlps"][b - 1] + 0.002, "•", ha="center", va="bottom", fontsize=9, color=INK)
+    ax.set_xlabel("Block")
+    ax.set_ylabel("Share of the readout's spread across sentences")
+    ax.set_title("Who writes the price readout at layer 20")
+    ax.legend(loc="upper left", fontsize=8.5)
+    ax.set_xticks([1, 5, 10, 15, 20])
+    ax = axs[1]
+    bm = V["block_map"]
+    bb = [b["block"] for b in bm]
+    ax.plot(bb, [b["heads_lost"] for b in bm], "-o", color=BLUE, markersize=4, label="silence all heads of one block")
+    ax.plot(bb, [b["mlp_lost"] for b in bm], "-o", color=ORANGE, markersize=4, label="silence the MLP of one block")
+    ax.axhline(V["Q4"]["lost_top"], color=INK2, linewidth=1, linestyle="--")
+    ax.text(24, V["Q4"]["lost_top"] + 0.03, f"the 10 top MLPs together: {V['Q4']['lost_top']:.0%}", ha="right", fontsize=8.5, color=INK2)
+    ax.axhline(0, color=AXIS, linewidth=0.8)
+    ax.set_ylim(-0.15, 1.15)
+    ax.set_xlabel("Block silenced at the sentence's tokens")
+    ax.set_ylabel("Share of the choice's price dependence lost")
+    ax.set_title("Silencing one block does nothing\n(except block 1, which erases the words)")
+    ax.legend(loc="upper right", fontsize=8.5)
+    ax = axs[2]
+    b8, c = V["choice_slope_8"], V["price_units_per_readout_unit"]
+    x = Z["d_read"] * c
+    y = Z["d_price"] / b8
+    ax.plot(x, y, "o", color=BLUE_LIGHT, markersize=3.5)
+    xl, yl = (x.min() - 0.6, x.max() + 0.6), (y.min() - 1.0, y.max() + 1.0)
+    lo, hi = max(xl[0], yl[0]), min(xl[1], yl[1])
+    ax.plot([lo, hi], [lo, hi], color=AXIS, linewidth=1, linestyle="--")
+    ax.set_xlim(xl)
+    ax.set_ylim(yl)
+    keys = Z["var_key"]
+    order = np.argsort(y)
+    picks, seen = [], set()
+    for j in list(order[:12]):
+        i, k = keys[j]
+        word = W[i]["words"][k].strip(",.")
+        if word not in seen and len(picks) < 4:
+            seen.add(word)
+            picks.append((j, word))
+    for j in list(order[-2:]):
+        i, k = keys[j]
+        picks.append((j, W[i]["words"][k].strip(",.")))
+    for n_, (j, word) in enumerate(picks):
+        i, _ = keys[j]
+        dy = [0, 9, -9, 18, 0, 0][n_] if n_ < 4 else 0
+        ax.annotate(f"delete \"{word}\"", (x[j], y[j]), xytext=(8, dy), textcoords="offset points", fontsize=8, color=INK2, va="center",
+                    arrowprops=dict(arrowstyle="-", color=AXIS, linewidth=0.6) if dy else None)
+    ax.set_xlabel("Change in the layer-20 readout (price units)")
+    ax.set_ylabel("Change in the price the choice shows (price units)")
+    ax.set_title(f"Deleting one word: the choice moves, the readout\nbarely follows (r {V['Q2']['r']:.2f}, {V['Q2']['n_deletions']} deletions)")
+    for a in axs:
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    suptitle(fig, "What writes the price: many MLP layers a little each, and the readout is not the whole price",
+             f"Pilot 14, Qwen3-14B, 96 sentences as option A. Q1 fail ({V['Q1']['median_top2_share']:.2f}, bar 0.5); Q2 fail (r {V['Q2']['r']:.2f}, bar 0.6); "
+             f"Q3 pass ({V['Q3']['top_share']:.2f}, bar 0.5); Q4 unreadable: its random control was broken (see the results README).")
+    note(fig, "Left: • marks the 10 largest writers. Middle: 4 partners per sentence. Right: deleting a rescue word (saved, prevented, cured) turns the "
+              "outcome into the harm itself; the dashed line is where a readout that carried the whole price would put every deletion.")
+    fig.savefig(OUT / "fig13_price_writers.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -682,4 +762,6 @@ if __name__ == "__main__":
         fig11()
     if (P13 / "verdicts13.json").exists():
         fig12()
+    if (P14 / "verdicts14.json").exists():
+        fig13()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))

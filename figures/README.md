@@ -19,3 +19,4 @@ Drawn by `make_figures.py` straight from the committed result files of pilots 6 
 | `fig10_vibe_direction.png` | Pilot 11: where the price direction can be read from a sentence (held out), and what pushing along it does to the choice and the rating |
 | `fig11_recipes.png` | Pilot 12: where the rating disagrees with the price can be read from the sentence, and pushing along it moves the rating beyond what a shared variable would |
 | `fig12_recipe_in_words.png` | Pilot 13: the choice's and the stated rating's recipes in named features (rated blind by Claude), how well each predictor prices Qwen's outcomes, and the pushes at layer 20 against 20 random directions |
+| `fig13_price_writers.png` | Pilot 14: which heads and MLP layers write the layer-20 price readout, what silencing one block at the sentence does to the choice, and single-word deletions: the choice's price change against the readout's |
