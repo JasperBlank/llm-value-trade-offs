@@ -1,6 +1,6 @@
 # Sealed predictions
 
-Claude's predictions were written on 3 Nov 2026 at about 05:55 UTC, before Jasper's and before any
+Claude's predictions were written on 3 Nov 2026 at about 05:40 UTC, before Jasper's and before any
 pilot-9 result. Only their SHA-256 hashes are committed here; the files are added after Jasper has
 answered (`sha256sum -c predictions/hashes.sha256`).
 

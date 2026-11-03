@@ -119,7 +119,9 @@ out = {
     "spread_sd_values_mean_of_two": float(((p0 + p1) / 2).std()),
     "explained": explained, "order_and_size": order_size,
     "sentences": sorted([{"value": v, "phrasing": i, "text": text[(v, i)], "u": float(u[sid[(v, i)]]),
-                          "u_wording0": float(u0[sid[(v, i)]]), "u_wording1": float(u1[sid[(v, i)]])}
+                          "u_wording0": float(u0[sid[(v, i)]]), "u_wording1": float(u1[sid[(v, i)]]),
+                          "u_slot_A": float(uA[sid[(v, i)]]), "u_slot_B": float(uB[sid[(v, i)]]),
+                          "size_weight": float(bs_all[sid[(v, i)]])}
                          for v in names for i in (0, 1)], key=lambda s: -s["u"]),
 }
 json.dump(out, open(res / "exploratory_sentences.json", "w"), indent=1)

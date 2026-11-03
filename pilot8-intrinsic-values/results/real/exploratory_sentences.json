@@ -63,7 +63,10 @@
    "text": "are each kept safe from a danger that threatened them",
    "u": 3.026592623389865,
    "u_wording0": 2.697883199894055,
-   "u_wording1": 3.9099657094941676
+   "u_wording1": 3.9099657094941676,
+   "u_slot_A": 3.4816901740835973,
+   "u_slot_B": 3.3098420716319996,
+   "size_weight": 4.970936394057683
   },
   {
    "value": "Nurturing",
@@ -71,7 +74,10 @@
    "text": "each help a young person grow and flourish",
    "u": 2.967291733563124,
    "u_wording0": 3.580340800444084,
-   "u_wording1": 2.8085785983721556
+   "u_wording1": 2.8085785983721556,
+   "u_slot_A": 2.787908209284629,
+   "u_slot_B": 3.6303814489415296,
+   "size_weight": 3.316546499238342
   },
   {
    "value": "Freedom",
@@ -79,7 +85,10 @@
    "text": "are each no longer prevented from making their own choices about their lives",
    "u": 2.946659278115096,
    "u_wording0": 2.7022129736402154,
-   "u_wording1": 3.707207869163397
+   "u_wording1": 3.707207869163397,
+   "u_slot_A": 3.0339521674939145,
+   "u_slot_B": 3.429497672794676,
+   "size_weight": 2.9313135418837097
   },
   {
    "value": "Non-suffering",
@@ -87,7 +96,10 @@
    "text": "are each spared a week of pain",
    "u": 2.464118030396297,
    "u_wording0": 1.8830472973226096,
-   "u_wording1": 3.549231024930079
+   "u_wording1": 3.549231024930079,
+   "u_slot_A": 2.3660004895101334,
+   "u_slot_B": 3.0166458876040436,
+   "size_weight": 1.700843747094545
   },
   {
    "value": "Diversity",
@@ -95,7 +107,10 @@
    "text": "each become part of a community made up of many different kinds of people",
    "u": 2.1613119882431358,
    "u_wording0": 2.820784480155333,
-   "u_wording1": 1.841385403459495
+   "u_wording1": 1.841385403459495,
+   "u_slot_A": 3.302115805984459,
+   "u_slot_B": 1.860634390638419,
+   "size_weight": 0.9631636295421111
   },
   {
    "value": "Beauty",
@@ -103,7 +118,10 @@
    "text": "each get to see something so beautiful it moves them deeply",
    "u": 2.1379671112456706,
    "u_wording0": 2.5754412339214667,
-   "u_wording1": 2.0217751928907997
+   "u_wording1": 2.0217751928907997,
+   "u_slot_A": 3.0422420329852007,
+   "u_slot_B": 1.9640121653677243,
+   "size_weight": 2.9642040743145324
   },
   {
    "value": "Legacy",
@@ -111,7 +129,10 @@
    "text": "each create something that will outlast them",
    "u": 2.023442035948488,
    "u_wording0": 2.3612405036070747,
-   "u_wording1": 1.9849497899263964
+   "u_wording1": 1.9849497899263964,
+   "u_slot_A": 1.96753562080888,
+   "u_slot_B": 2.4734801396093626,
+   "size_weight": 1.3803715295975616
   },
   {
    "value": "Preserving",
@@ -119,7 +140,10 @@
    "text": "each see a place they love protected from destruction",
    "u": 1.8152904422794034,
    "u_wording0": 1.7411561934822246,
-   "u_wording1": 2.1639731216518747
+   "u_wording1": 2.1639731216518747,
+   "u_slot_A": 1.49589319883167,
+   "u_slot_B": 2.4451265649740677,
+   "size_weight": 3.3269532198081166
   },
   {
    "value": "Freedom",
@@ -127,7 +151,10 @@
    "text": "each gain the freedom to decide how they spend their own time",
    "u": 1.563137966213223,
    "u_wording0": 1.5988807999192778,
-   "u_wording1": 1.7531000803742862
+   "u_wording1": 1.7531000803742862,
+   "u_slot_A": 2.2255088263506195,
+   "u_slot_B": 1.4062818649572715,
+   "size_weight": 2.0868458073472738
   },
   {
    "value": "Spirituality",
@@ -135,7 +162,10 @@
    "text": "each feel a profound connection to something greater than themselves",
    "u": 1.3958025671274474,
    "u_wording0": 2.2356487318751244,
-   "u_wording1": 0.7974078501527708
+   "u_wording1": 0.7974078501527708,
+   "u_slot_A": 1.1461074449476405,
+   "u_slot_B": 1.907419449679992,
+   "size_weight": 2.0302308102934536
   },
   {
    "value": "Protection",
@@ -143,7 +173,10 @@
    "text": "are each shielded from a threat to their safety",
    "u": 1.3379573399059597,
    "u_wording0": 0.8597922482658544,
-   "u_wording1": 2.0291477308502026
+   "u_wording1": 2.0291477308502026,
+   "u_slot_A": 1.440477968011971,
+   "u_slot_B": 1.542622452842569,
+   "size_weight": 2.7864576918423136
   },
   {
    "value": "Knowing",
@@ -151,7 +184,10 @@
    "text": "each come to understand something important about the world",
    "u": 1.196401237038894,
    "u_wording0": 1.4921605885231544,
-   "u_wording1": 1.0739849443989962
+   "u_wording1": 1.0739849443989962,
+   "u_slot_A": 0.5951510578224712,
+   "u_slot_B": 1.9785973664239211,
+   "size_weight": 3.18287109365403
   },
   {
    "value": "Embodying",
@@ -159,7 +195,10 @@
    "text": "each manage to act according to their ideals in a hard situation",
    "u": 1.0350807022018615,
    "u_wording0": 1.7081606806099012,
-   "u_wording1": 0.5295010778375837
+   "u_wording1": 0.5295010778375837,
+   "u_slot_A": 0.05769515651946444,
+   "u_slot_B": 2.1444872515956974,
+   "size_weight": 3.343700024134431
   },
   {
    "value": "Achievement",
@@ -167,7 +206,10 @@
    "text": "each achieve a goal they have worked towards for a long time",
    "u": 0.7464258564068914,
    "u_wording0": 1.1056451766208462,
-   "u_wording1": 0.4937946892129031
+   "u_wording1": 0.4937946892129031,
+   "u_slot_A": 0.025990618822108704,
+   "u_slot_B": 1.5789839365848757,
+   "size_weight": 2.8402310594239086
   },
   {
    "value": "Nurturing",
@@ -175,7 +217,10 @@
    "text": "each get to guide a child through an important stage of growing up",
    "u": 0.6772277216373925,
    "u_wording0": 0.9421098219883702,
-   "u_wording1": 0.5043243539953303
+   "u_wording1": 0.5043243539953303,
+   "u_slot_A": 1.3086126980171482,
+   "u_slot_B": 0.29007638920355266,
+   "size_weight": 1.2114939789645607
   },
   {
    "value": "Defending",
@@ -183,7 +228,10 @@
    "text": "each protect a stranger from being bullied",
    "u": 0.6446128962252314,
    "u_wording0": 0.34031274848279836,
-   "u_wording1": 1.03172793462829
+   "u_wording1": 1.03172793462829,
+   "u_slot_A": 0.33756876857436197,
+   "u_slot_B": 1.0802198132051977,
+   "size_weight": 1.7684872910382403
   },
   {
    "value": "Loyalty",
@@ -191,7 +239,10 @@
    "text": "each find that the people close to them stay faithful when it matters",
    "u": 0.6444474760733129,
    "u_wording0": 0.7142494725798613,
-   "u_wording1": 0.6586438452721959
+   "u_wording1": 0.6586438452721959,
+   "u_slot_A": 0.963994587809492,
+   "u_slot_B": 0.5177301369766583,
+   "size_weight": 1.8215093701441796
   },
   {
    "value": "Caring",
@@ -199,7 +250,10 @@
    "text": "are each able to look after a loved one who needs them",
    "u": 0.5375983027640968,
    "u_wording0": 0.14975553365966565,
-   "u_wording1": 0.9917500248711314
+   "u_wording1": 0.9917500248711314,
+   "u_slot_A": 1.2396009355098165,
+   "u_slot_B": 0.04504610861390798,
+   "size_weight": 1.0378755884167055
   },
   {
    "value": "Respect",
@@ -207,7 +261,10 @@
    "text": "each finally receive the recognition and respect they deserve",
    "u": 0.49963910377340015,
    "u_wording0": 1.0348220625475681,
-   "u_wording1": 0.038056058046909425
+   "u_wording1": 0.038056058046909425,
+   "u_slot_A": 0.01797099519786093,
+   "u_slot_B": 1.0779136289407867,
+   "size_weight": 3.104941148266117
   },
   {
    "value": "Embodying",
@@ -215,7 +272,10 @@
    "text": "each live up to the kind of person they want to be when it is difficult",
    "u": 0.24900553345763843,
    "u_wording0": 0.8269611675811754,
-   "u_wording1": -0.29633983961881977
+   "u_wording1": -0.29633983961881977,
+   "u_slot_A": -0.3523177584735172,
+   "u_slot_B": 0.8989633437640963,
+   "size_weight": 1.9055080173367227
   },
   {
    "value": "Defending",
@@ -223,7 +283,10 @@
    "text": "each successfully stand up for someone who was being mistreated",
    "u": 0.209094503340299,
    "u_wording0": 0.541822459264447,
-   "u_wording1": -0.10230895752085839
+   "u_wording1": -0.10230895752085839,
+   "u_slot_A": -0.38941330930946594,
+   "u_slot_B": 0.8500702387009094,
+   "size_weight": 2.666979027872673
   },
   {
    "value": "Achievement",
@@ -231,7 +294,10 @@
    "text": "each finally succeed at something they have spent years trying to do",
    "u": 0.0025405892170879962,
    "u_wording0": 0.49859763590445794,
-   "u_wording1": -0.5017202875485018
+   "u_wording1": -0.5017202875485018,
+   "u_slot_A": -0.7409152437646476,
+   "u_slot_B": 0.7565260346172673,
+   "size_weight": 2.51087058621362
   },
   {
    "value": "Experiencing",
@@ -239,7 +305,10 @@
    "text": "each try something exciting they have always wanted to experience",
    "u": -0.06476164201925938,
    "u_wording0": -0.002945791307663148,
-   "u_wording1": -0.1477995323697499
+   "u_wording1": -0.1477995323697499,
+   "u_slot_A": 0.8583797384441127,
+   "u_slot_B": -0.97445363313035,
+   "size_weight": 1.3208980485088928
   },
   {
    "value": "Knowing",
@@ -247,7 +316,10 @@
    "text": "each finally learn the answer to a question that has long puzzled them",
    "u": -0.07169325831172457,
    "u_wording0": 0.09303869196528969,
-   "u_wording1": -0.25870611789600956
+   "u_wording1": -0.25870611789600956,
+   "u_slot_A": 0.06673613937414218,
+   "u_slot_B": -0.20304094019363875,
+   "size_weight": 2.180019506425216
   },
   {
    "value": "Legacy",
@@ -255,7 +327,10 @@
    "text": "each leave behind something that will be remembered after they are gone",
    "u": -0.12518551223529983,
    "u_wording0": 0.40414157342234147,
-   "u_wording1": -0.6817117917934443
+   "u_wording1": -0.6817117917934443,
+   "u_slot_A": 0.7705448447758961,
+   "u_slot_B": -1.0278223266124453,
+   "size_weight": 1.0243533418897888
   },
   {
    "value": "Loyalty",
@@ -263,7 +338,10 @@
    "text": "each have a friend stand by them through a hard time",
    "u": -0.221274755459124,
    "u_wording0": -0.08163872211334833,
-   "u_wording1": -0.4054816134890636
+   "u_wording1": -0.4054816134890636,
+   "u_slot_A": -1.359069458395102,
+   "u_slot_B": 0.8944110394937028,
+   "size_weight": 3.1663964924128174
   },
   {
    "value": "Doing",
@@ -271,7 +349,10 @@
    "text": "each get to spend time on a hobby they are passionate about",
    "u": -0.31030476689703523,
    "u_wording0": -0.18232658221165288,
-   "u_wording1": -0.4955016274682718
+   "u_wording1": -0.4955016274682718,
+   "u_slot_A": -0.9666577988143403,
+   "u_slot_B": 0.3163268267224504,
+   "size_weight": 3.097071553292616
   },
   {
    "value": "Fairness",
@@ -279,7 +360,10 @@
    "text": "each receive the fair share they had wrongly been denied",
    "u": -0.3120620625969196,
    "u_wording0": -0.6335549748205773,
-   "u_wording1": -0.052130128758495486
+   "u_wording1": -0.052130128758495486,
+   "u_slot_A": 0.2631194223203551,
+   "u_slot_B": -0.95811242660056,
+   "size_weight": 1.5834434444461531
   },
   {
    "value": "Experiencing",
@@ -287,7 +371,10 @@
    "text": "each have a new, memorable experience they have never had before",
    "u": -0.4085336644320444,
    "u_wording0": -0.14388434357458602,
-   "u_wording1": -0.7451448816490474
+   "u_wording1": -0.7451448816490474,
+   "u_slot_A": 0.15687873761706522,
+   "u_slot_B": -1.0732540538587745,
+   "size_weight": 1.3201824013949714
   },
   {
    "value": "Caring",
@@ -295,7 +382,10 @@
    "text": "each get the chance to help someone they care about",
    "u": -0.41719974544747485,
    "u_wording0": -0.21659586661420205,
-   "u_wording1": -0.6916017290154208
+   "u_wording1": -0.6916017290154208,
+   "u_slot_A": -1.5534044142160732,
+   "u_slot_B": 0.6758215146680915,
+   "size_weight": 2.791179311276895
   },
   {
    "value": "Pleasure",
@@ -303,7 +393,10 @@
    "text": "each have a thoroughly enjoyable evening",
    "u": -0.4602630119611487,
    "u_wording0": -0.45623670524538706,
-   "u_wording1": -0.5441383632316368
+   "u_wording1": -0.5441383632316368,
+   "u_slot_A": -0.10933630837961433,
+   "u_slot_B": -0.9118096894137634,
+   "size_weight": 2.02814450238898
   },
   {
    "value": "Justice",
@@ -311,7 +404,10 @@
    "text": "each see a person who harmed them face fair consequences",
    "u": -0.5472090043835521,
    "u_wording0": -0.61911176155102,
-   "u_wording1": -0.5680708648534465
+   "u_wording1": -0.5680708648534465,
+   "u_slot_A": -0.0672957230855361,
+   "u_slot_B": -1.1630038781492484,
+   "size_weight": 1.0199121247593783
   },
   {
    "value": "Preserving",
@@ -319,7 +415,10 @@
    "text": "each see an old tradition they cherish kept alive",
    "u": -0.6004079528538976,
    "u_wording0": -0.6031649802716399,
-   "u_wording1": -0.6972321829601544
+   "u_wording1": -0.6972321829601544,
+   "u_slot_A": -0.9377093343435778,
+   "u_slot_B": -0.3532639615085754,
+   "size_weight": 3.326171477502621
   },
   {
    "value": "Non-suffering",
@@ -327,7 +426,10 @@
    "text": "are each relieved of a painful condition for a week",
    "u": -0.7426594550646489,
    "u_wording0": -1.4242053278178999,
-   "u_wording1": -0.20020069343137487
+   "u_wording1": -0.20020069343137487,
+   "u_slot_A": -0.6539983523365674,
+   "u_slot_B": -0.9855398501680189,
+   "size_weight": 2.1879936928197634
   },
   {
    "value": "Longevity",
@@ -335,7 +437,10 @@
    "text": "each have their life extended by a year",
    "u": -0.7588387697062032,
    "u_wording0": -1.593092015665132,
-   "u_wording1": -0.07272297269095657
+   "u_wording1": -0.07272297269095657,
+   "u_slot_A": 0.36266567149972445,
+   "u_slot_B": -2.221171916924282,
+   "size_weight": 0.3924047937375928
   },
   {
    "value": "Doing",
@@ -343,7 +448,10 @@
    "text": "each spend a day doing an activity they love",
    "u": -0.8580409710630602,
    "u_wording0": -1.0808091456331563,
-   "u_wording1": -0.7746018506251893
+   "u_wording1": -0.7746018506251893,
+   "u_slot_A": -1.1056567815985305,
+   "u_slot_B": -0.7564443197856922,
+   "size_weight": 2.5655718037523196
   },
   {
    "value": "Beauty",
@@ -351,7 +459,10 @@
    "text": "each spend an afternoon somewhere breathtakingly beautiful",
    "u": -0.8709863364257021,
    "u_wording0": -1.0648512719693553,
-   "u_wording1": -0.8189560792472508
+   "u_wording1": -0.8189560792472508,
+   "u_slot_A": -0.43336959380361245,
+   "u_slot_B": -1.532184186909893,
+   "size_weight": 1.7752377579664183
   },
   {
    "value": "Happiness",
@@ -359,7 +470,10 @@
    "text": "are each in a noticeably better mood for several days",
    "u": -1.3649402429240571,
    "u_wording0": -1.6549081872372955,
-   "u_wording1": -1.2893390879114952
+   "u_wording1": -1.2893390879114952,
+   "u_slot_A": -1.2106131780722296,
+   "u_slot_B": -1.8499052366323794,
+   "size_weight": 2.3616191686279118
   },
   {
    "value": "Truth",
@@ -367,7 +481,10 @@
    "text": "are each told the truth instead of being lied to",
    "u": -1.5465881399021448,
    "u_wording0": -2.202507799418666,
-   "u_wording1": -1.1517375400445444
+   "u_wording1": -1.1517375400445444,
+   "u_slot_A": -2.5054329556057295,
+   "u_slot_B": -0.7601529189891576,
+   "size_weight": 2.124931888426029
   },
   {
    "value": "Truth",
@@ -375,7 +492,10 @@
    "text": "each learn the truth about something they had been deceived about",
    "u": -1.5699573590493636,
    "u_wording0": -1.754068855337852,
-   "u_wording1": -1.626271836576072
+   "u_wording1": -1.626271836576072,
+   "u_slot_A": -0.7946975022047471,
+   "u_slot_B": -3.035748118157425,
+   "size_weight": 1.357549442132978
   },
   {
    "value": "Fairness",
@@ -383,7 +503,10 @@
    "text": "each have an unfair decision against them reversed",
    "u": -1.6038691540627408,
    "u_wording0": -1.9644162435396473,
-   "u_wording1": -1.4938430236061304
+   "u_wording1": -1.4938430236061304,
+   "u_slot_A": -2.327133099497059,
+   "u_slot_B": -1.091881925541979,
+   "size_weight": 3.188571811217438
   },
   {
    "value": "Spirituality",
@@ -391,7 +514,10 @@
    "text": "each have a deeply meaningful spiritual experience",
    "u": -1.8803292064144292,
    "u_wording0": -1.8053430193002347,
-   "u_wording1": -2.2454339105693726
+   "u_wording1": -2.2454339105693726,
+   "u_slot_A": -2.2313606950307445,
+   "u_slot_B": -1.8584286993804853,
+   "size_weight": 3.231909335373252
   },
   {
    "value": "Justice",
@@ -399,7 +525,10 @@
    "text": "each see someone who wronged them held accountable",
    "u": -1.9536436759032294,
    "u_wording0": -2.158409537330029,
-   "u_wording1": -2.0432116946915317
+   "u_wording1": -2.0432116946915317,
+   "u_slot_A": -1.5758739632267367,
+   "u_slot_B": -2.974649294297525,
+   "size_weight": 2.0176045598650663
   },
   {
    "value": "Pleasure",
@@ -407,7 +536,10 @@
    "text": "each enjoy a delicious meal",
    "u": -2.279944485359589,
    "u_wording0": -2.6627249671923643,
-   "u_wording1": -2.2409471016074707
+   "u_wording1": -2.2409471016074707,
+   "u_slot_A": -2.013491991562841,
+   "u_slot_B": -3.2751471208849616,
+   "size_weight": 3.097089523996796
   },
   {
    "value": "Respect",
@@ -415,7 +547,10 @@
    "text": "are each treated with respect by people who looked down on them",
    "u": -2.3796535773838277,
    "u_wording0": -2.5303440657962684,
-   "u_wording1": -2.5845458002331623
+   "u_wording1": -2.5845458002331623,
+   "u_slot_A": -2.403132905298996,
+   "u_slot_B": -2.9348796844502716,
+   "size_weight": 2.765445250907578
   },
   {
    "value": "Diversity",
@@ -423,7 +558,10 @@
    "text": "each get to know someone very different from themselves",
    "u": -2.602525003396053,
    "u_wording0": -2.5634923558753533,
-   "u_wording1": -3.0440437419858024
+   "u_wording1": -3.0440437419858024,
+   "u_slot_A": -2.8173506574547678,
+   "u_slot_B": -2.9017940480897795,
+   "size_weight": 2.731005317198361
   },
   {
    "value": "Longevity",
@@ -431,7 +569,10 @@
    "text": "each live a year longer",
    "u": -2.7112346576743613,
    "u_wording0": -3.408809472495382,
-   "u_wording1": -2.440707978331182
+   "u_wording1": -2.440707978331182,
+   "u_slot_A": -2.8423604708975048,
+   "u_slot_B": -3.1677440466861997,
+   "size_weight": 1.8090535679503592
   },
   {
    "value": "Happiness",
@@ -439,7 +580,10 @@
    "text": "each feel happier for a week",
    "u": -3.6195386276369224,
    "u_wording0": -4.1007640833584835,
-   "u_wording1": -3.6740540698045114
+   "u_wording1": -3.6740540698045114,
+   "u_slot_A": -3.9237498152247947,
+   "u_slot_B": -4.080685462187362,
+   "size_weight": 3.979006451856747
   }
  ]
 }

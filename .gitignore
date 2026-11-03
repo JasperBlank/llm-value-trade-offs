@@ -14,3 +14,4 @@ pilot5-value-circuit/results/formats_run/*.npz
 pilot6-value-subspace/results/quick*/
 pilot7-value-route/results/quick*/
 pilot8-intrinsic-values/results/quick*/
+pilot9-vibe-check/results/quick/
