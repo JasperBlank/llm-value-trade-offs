@@ -5,6 +5,57 @@
  "two_sentences_of_a_value_r": 0.20289480452660888,
  "spread_sd_sentences": 1.5769175326529123,
  "spread_sd_values_mean_of_two": 1.1915556564244978,
+ "explained": {
+  "sentence_prices_predict_other_wording_r": 0.8079335761383198,
+  "sentence_prices_predict_other_wording_same_side": 0.8389190821256038,
+  "ceiling_same_prompt_two_wordings_r": 0.9254219467952355,
+  "ceiling_same_prompt_two_wordings_same_side": 0.8866243961352657
+ },
+ "order_and_size": {
+  "price_slot_A_vs_slot_B_r": 0.7917743625794187,
+  "price_sd_slot_A": 1.7486003585208938,
+  "price_sd_slot_B": 1.9683195760707817,
+  "size_weight_per_sentence": {
+   "median": 2.274806430723838,
+   "q10": 1.159408461800204,
+   "q90": 3.3194339927176255,
+   "wording0_vs_wording1_r": 0.8322758138215964,
+   "lowest": [
+    [
+     "Longevity",
+     "each have their life extended by a year",
+     0.3924047937375928
+    ],
+    [
+     "Diversity",
+     "each become part of a community made up of many different kinds of people",
+     0.9631636295421111
+    ],
+    [
+     "Justice",
+     "each see a person who harmed them face fair consequences",
+     1.0199121247593783
+    ]
+   ],
+   "highest": [
+    [
+     "Protection",
+     "are each kept safe from a danger that threatened them",
+     4.970936394057683
+    ],
+    [
+     "Happiness",
+     "each feel happier for a week",
+     3.979006451856747
+    ],
+    [
+     "Embodying",
+     "each manage to act according to their ideals in a hard situation",
+     3.343700024134431
+    ]
+   ]
+  }
+ },
  "sentences": [
   {
    "value": "Protection",

@@ -6,6 +6,12 @@ Not pre-registered; computed after the results from the model's saved answers (`
 - The two sentences written for the same value: r = 0.20.
 - Spread of the 48 sentence prices: SD 1.58 logits; b = 2.11 per log person.
 
+## How far one price per sentence goes
+
+- **It explains most of what is reliable.** Prices fitted on one question wording predict the answers under the other with r = 0.81 (84% on the same side). The ceiling, the same prompt answered under the two wordings, is r = 0.93 (89%).
+- **Order: mostly.** A sentence's price as option A and as option B agree r = 0.79. Prices spread a little more as option B (SD 1.97 against 1.75).
+- **Size: the weight of the number of people depends on the sentence.** With a separate weight of log(people) for each sentence, the weights have median 2.27 (10-90%: 1.16 to 3.32), and they are reliable: r = 0.83 between the two wordings. Lowest: 'each have their life extended by a year' 0.39; 'each become part of a community made up of many different kinds of people' 0.96; 'each see a person who harmed them face fair consequences' 1.02. Highest: 'are each kept safe from a danger that threatened them' 4.97; 'each feel happier for a week' 3.98; 'each manage to act according to their ideals in a hard situation' 3.34.
+
 ## The values whose two sentences disagree most
 
 | value | sentence | price u |
