@@ -37,6 +37,10 @@ KEY=llama-31-8b-instruct
 echo "PILOT18 START $(date -u +%FT%TZ)"
 cd $REPO && git fetch -q origin main && git reset -q --hard origin/main && cd $P18 || fail "no repo"
 git log -1 --format='PILOT18 commit %h: %s'
+if [ -n "$GH_PUSH_TOKEN" ] && [ "${PAPER_PUSH:-0}" != 1 ]; then   # the paper's figure pages were read on 3 Nov: their branch goes
+  git -c credential.helper= -c credential.helper='!f() { echo username=x-access-token; echo "password=$GH_PUSH_TOKEN"; }; f' \
+    push -q "$GH_REPO_URL" --delete pod-results/pilot18-paper 2>/dev/null && echo "PILOT18 deleted the branch with the paper's pages"
+fi
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader
 df -h /workspace | tail -1
 python3 --version
