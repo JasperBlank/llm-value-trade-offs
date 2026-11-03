@@ -1,0 +1,20 @@
+[12:05:35] Loading Qwen/Qwen3-14B on cuda ...
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:18<02:12, 18.95s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:21<00:56,  9.45s/it]Fetching 8 files:  38%|███▊      | 3/8 [00:23<00:29,  5.94s/it]Fetching 8 files:  50%|█████     | 4/8 [00:25<00:17,  4.32s/it]Fetching 8 files:  62%|██████▎   | 5/8 [00:28<00:11,  3.84s/it]Fetching 8 files:  75%|███████▌  | 6/8 [00:30<00:06,  3.23s/it]Fetching 8 files:  88%|████████▊ | 7/8 [00:30<00:02,  2.24s/it]Fetching 8 files: 100%|██████████| 8/8 [00:37<00:00,  3.78s/it]Fetching 8 files: 100%|██████████| 8/8 [00:37<00:00,  4.71s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 5357.87it/s]
+[12:06:23] Qwen/Qwen3-14B: 96 sentences; B = 'each help a teenager get through a difficult school year'
+[12:06:44] read 96 + 994 menus; choice r with price 0.88; median |change| 2.50 logits; A's line break shares A's last token in 0%
+[12:06:52] readout A_mean: 0: +0.04/0.31, 4: +0.07/0.44, 8: +0.22/0.49, 12: +0.23/0.51, 16: +0.27/0.52, 20: +0.30/0.62, 24: +0.31/0.60, 28: +0.25/0.59, 32: +0.22/0.55, 36: +0.24/0.51, 40: +0.27/0.52
+[12:06:59] readout A_end: 0: +0.01/0.08, 4: +0.06/0.27, 8: +0.12/0.28, 12: +0.14/0.36, 16: +0.23/0.48, 20: +0.26/0.58, 24: +0.25/0.57, 28: +0.22/0.56, 32: +0.18/0.51, 36: +0.17/0.47, 40: +0.19/0.49
+/usr/local/lib/python3.12/dist-packages/numpy/lib/_function_base_impl.py:2999: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.12/dist-packages/numpy/lib/_function_base_impl.py:3000: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+[12:07:07] readout A_nl: 0: +nan/-0.23, 4: +0.12/0.37, 8: +0.25/0.44, 12: +0.32/0.50, 16: +0.41/0.61, 20: +0.55/0.72, 24: +0.54/0.72, 28: +0.45/0.70, 32: +0.39/0.65, 36: +0.38/0.60, 40: +0.41/0.59
+[12:07:15] readout B_end: 0: +nan/-0.23, 4: +0.19/0.35, 8: +0.22/0.40, 12: +0.28/0.40, 16: +0.39/0.53, 20: +0.53/0.69, 24: +0.57/0.76, 28: +0.49/0.77, 32: +0.43/0.74, 36: +0.41/0.74, 40: +0.36/0.74
+[12:07:23] readout B_nl: 0: +nan/-0.23, 4: +0.15/0.36, 8: +0.20/0.43, 12: +0.18/0.46, 16: +0.42/0.59, 20: +0.76/0.82, 24: +0.85/0.90, 28: +0.82/0.89, 32: +0.72/0.87, 36: +0.70/0.86, 40: +0.64/0.84
+[12:07:30] readout END: 0: +nan/-0.23, 4: +0.20/0.32, 8: +0.23/0.38, 12: +0.20/0.38, 16: +0.27/0.46, 20: +0.35/0.55, 24: +0.82/0.85, 28: +0.99/0.99, 32: +0.99/1.00, 36: +0.99/1.00, 40: +1.00/1.00
+[12:07:30] Q1: best A-side readout A_nl@20 (half A r 0.57); r on the other half 0.53
+[12:08:32] route: A_end@8 +0.26, A_end@16 +0.26, A_end@20 +0.08, A_end@24 +0.01, A_end@28 +0.00, A_end@32 +0.00, A_nl@8 +0.01, A_nl@16 +0.10, A_nl@20 +0.10, A_nl@24 +0.10, A_nl@28 +0.00, A_nl@32 -0.00, B_end@8 +0.01, B_end@16 +0.02, B_end@20 +0.02, B_end@24 +0.00, B_end@28 +0.00, B_end@32 +0.00, B_nl@8 +0.00, B_nl@16 +0.05, B_nl@20 +0.29, B_nl@24 +0.43, B_nl@28 +0.02, B_nl@32 +0.00, END@16 +0.00, END@20 +0.00, END@24 +0.02, END@28 +0.75, END@32 +0.91, END@36 +0.95
+[12:08:32] Q2: best single position B_nl@24 0.43; Q3: comparator 0.60 (random max 0.07)
+[12:10:03] Q4: lost 0.32 with pilot 14's top 10; random sets 0.05, 0.06, 0.05, 0.06, 0.32
+[12:10:03] report written; 4.5 min
