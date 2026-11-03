@@ -1,0 +1,5 @@
+# Jasper's predictions for pilot 14, 3 Nov 2026 11:06 Amsterdam time, before any result.
+q1_few_words_prob: 0.61
+q2_readout_tracks_r: {best: 0.8, range80: [0.5, 0.9]}
+q3_top10_share: {best: 1.0, range80: [0.0, 2.0]}
+q4_writers_used_prob: 0.62

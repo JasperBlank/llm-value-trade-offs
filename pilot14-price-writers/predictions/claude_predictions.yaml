@@ -1,0 +1,5 @@
+# Claude's predictions for pilot 14 (what writes the price), sealed before Jasper's and before any result.
+q1_few_words_prob: 0.40
+q2_readout_tracks_r: {best: 0.5, range80: [0.25, 0.75]}
+q3_top10_share: {best: 0.6, range80: [0.35, 1.0]}
+q4_writers_used_prob: 0.45
