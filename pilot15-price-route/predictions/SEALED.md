@@ -6,3 +6,5 @@ Only the hash is committed here; the file is added after Jasper has answered (`s
 | File | SHA-256 |
 |---|---|
 | `claude_predictions.yaml` | `6de0d2da15d34495725fc6f3fdbe49946d607769f424a12df46abea1c63f968b` |
+
+Jasper decided on 3 Nov 2026 (12:59 Amsterdam time) to skip probability predictions for this pilot; the questions were then reworded as the claims they test (DESIGN.md). Claude's sealed file is added for the record; the hash matches.

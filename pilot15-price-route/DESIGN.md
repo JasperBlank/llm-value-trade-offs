@@ -54,12 +54,14 @@ At the answer position, pilot 5's top-20 pieces (outputs patched from the donor'
 
 ## 3. Pre-registered questions
 
-| | Question | Measure | Pass |
+The questions are put as the claims they test. Each has a bar fixed before any result.
+
+| | Question | Measure | Pass ("yes") |
 |---|---|---|---|
-| **Q1** | Is A's price finished before B is read? | The best of A's positions (tokens' mean, last token, line break) and layers (0-40 by 4), chosen on the deletions of half the values. Its r on the other half's deletions, from the readout map. | r ≥ 0.6 |
-| **Q2** | Does A's sentence pass through one place? | The largest transfer of a single-position patch: A's last token, the line break after A, B's last token or the line break after B, at layers 16-32 | ≥ 0.5 |
-| **Q3** | Do pilots 5-6's comparator pieces compare these prices? | Transfer of pilot 5's top-20 pieces at the answer position | ≥ 0.5, and every random set ≤ 0.1 |
-| **Q4** | (Pilot 14's Q4, redone) Does the choice use the price writers? | The fraction of the price slope lost with the top 10 MLPs silenced, against the 5 random sets | ≥ 0.3, and more than all 5 random sets |
+| **Q1** | **Does Qwen value each option on its own before comparing?** If yes, there is something like a utility per outcome, like the monkeys' "offer value", that could be read off or monitored. If no, its values exist only relative to a menu. | From the readout map: the best of A's positions (tokens' mean, last token, line break) and layers (0-40 by 4), chosen on the deletions of half the values. Its r on the other half's deletions. | r ≥ 0.6 |
+| **Q2** | **Does an option's worth funnel through one spot on its way to the answer?** If yes, there is one place to watch or edit. | The largest transfer of a single-position patch: A's last token, the line break after A, B's last token or the line break after B, at layers 16-32 | ≥ 0.5 |
+| **Q3** | **Is the comparison a generic "which is bigger" machine**, the one that also picks the bigger pile of apples (pilot 6)? If yes, everything particular to its values is in the pricing. | Transfer of pilot 5's top-20 pieces at the answer position | ≥ 0.5, and every random set ≤ 0.1 |
+| **Q4** | (Pilot 14's Q4, redone with a working control) Does the choice use the price writers? | The fraction of the price slope lost with the top 10 MLPs silenced, against the 5 random sets | ≥ 0.3, and more than all 5 random sets |
 
 ## 4. Also reported (not pre-registered)
 
@@ -72,4 +74,4 @@ At the answer position, pilot 5's top-20 pieces (outputs patched from the donor'
 
 - One GPU pod (L40S at $1.09/h if one is free, otherwise the 96 GB RTX PRO 6000 at $2.49/h). About 10 minutes: roughly 1,100 passes for the readout map, 3,000 for the route and comparator, and 4,600 for Q4.
 - The pod pushes its results to `pod-results/pilot15` and stops itself. Claude's watcher checks every minute.
-- Predictions: Claude's sealed first, then Jasper's (`predictions/`).
+- **No probability predictions for this pilot.** Jasper's decision on 3 Nov 2026: the bars above, fixed before any result, are what protect the conclusions. Predictions are now asked only when a question puts an intuition on the line. Claude's predictions, sealed before this change, are in `predictions/` for the record.

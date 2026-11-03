@@ -1,0 +1,5 @@
+# Claude's predictions for pilot 15 (where the price is finished, and how it is compared), sealed before Jasper's and before any result.
+q1_finished_before_b_r: {best: 0.5, range80: [0.2, 0.8]}
+q2_one_place_prob: 0.45
+q3_comparator_transfer: {best: 0.5, range80: [0.25, 0.75]}
+q4_redone_prob: 0.35
