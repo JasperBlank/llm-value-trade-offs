@@ -29,7 +29,7 @@ import pilot7 as p7  # noqa: E402
 import probe11 as pb  # noqa: E402
 from build_prompts import WORDINGS  # noqa: E402  (pilot 9)
 from build_prompts10 import BENEFICIARY, Q2, R2  # noqa: E402
-from common import batches, load_model, log  # noqa: E402
+from common import batches, forward, load_model, log  # noqa: E402
 from pilot8 import letter_set  # noqa: E402
 from pilot9_logscale import log_scale_score  # noqa: E402
 
@@ -151,8 +151,7 @@ class Runner:
             ids, att, spans = self._batch(encs, ch)
             h = self._push_hook(push[0], push[1], [push[2][i] for i in ch], spans) if push else None
             try:
-                with torch.no_grad():
-                    lg = self.model(input_ids=ids, attention_mask=att, logits_to_keep=1).logits[:, -1].float()
+                lg = forward(self.model, ids, att, torch).logits[:, -1].float()
             finally:
                 if h:
                     h.remove()
