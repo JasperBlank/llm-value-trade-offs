@@ -1,0 +1,4 @@
+# Claude's prediction for the pilot 9 follow-up (log-scale readout), sealed before Jasper's and before the rerun.
+# Correlation, across the 48 sentences, between the log-scale score of "How good would it be if ...?" (W0, 4 people)
+# and the sentence's menu price.
+followup_logscale_r: {best: 0.68, range80: [0.50, 0.85]}

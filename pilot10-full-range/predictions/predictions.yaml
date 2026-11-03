@@ -1,0 +1,4 @@
+# Jasper's predictions for pilot 10, 3 Nov 2026 07:27 Amsterdam time, before any result.
+q1_full_range_r: {best: 0.7, range80: [0.4, 0.9]}
+q2_logscale_r: {best: 0.4, range80: [0.2, 0.8]}
+q3_size_at_least_one_point: 0.10

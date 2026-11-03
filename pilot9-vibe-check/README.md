@@ -9,5 +9,5 @@ Pilot 8 found that Qwen3-14B prices each sentence, not each value. If the model 
 | `analyze9.py` | The pre-registered tests T1-T3 and the rest of the report, on CPU, against pilot 8's per-sentence prices |
 | `score_predictions9.py` | Scores both prediction sets |
 | `run_pod.sh` | The pod's script: install, quick test, real run, analysis, then push the results (or print them) and stop |
-| `pilot9_logscale.py`, `explore_logscale.py`, `run_pod_logscale.sh` | Follow-up (exploratory): the same prompts read on a log scale, so the answers piled up at 7 spread out |
+| `pilot9_logscale.py`, `explore_logscale.py`, `run_pod_logscale.sh` | Follow-up (exploratory): the same prompts read on a log scale, so the answers piled up at 7 spread out. Folded into pilot 10 (its test F2), which reruns these prompts; these files were not run |
 | `predictions/` | The questions, Claude's sealed predictions, Jasper's |
