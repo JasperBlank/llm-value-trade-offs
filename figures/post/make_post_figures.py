@@ -274,7 +274,7 @@ def fig_f2():
             "except for the “how good” rating, a plain correlation. The 24 new outcomes were priced in 13,824 new choices "
             "and predicted from fits on the 96. Ratings are Qwen's expected digit; “how good” averages “How good would it "
             "be if …”, “How much better would the world be if …” and “How bad or good would it be if …”. Data: pilot 13.")
-    body = header("🌡️", "The vibe check", "The price tracks a vibe check", sub) + \
+    body = header("🌡️", "Step 1: the vibe check", "The price tracks a vibe check", sub) + \
         f"<div class='chart'>{svg_of(fig)}</div><div class='note'>{note}</div>"
     return page(body)
 
@@ -393,10 +393,14 @@ def cycle_sets(L, gap=2.0):
 
 
 def pct(p):
-    """Probability as a percentage, never rounded up to 100%."""
+    """Probability as a percentage, with as many decimals as it takes not to round up to 100%."""
     if p > 0.9999:
         return "> 99.99%"
-    return f"{p * 100:.1f}%" if p > 0.99 else f"{p * 100:.0f}%"
+    for d in (0, 1, 2):
+        s = f"{p * 100:.{d}f}"
+        if float(s) < 100 and (d > 0 or p < 0.99):
+            return s + "%"
+    return "> 99.99%"
 
 
 def fig_f4():
@@ -537,7 +541,7 @@ def fig_f5():
             f"{q['overlap_with_decision_writers']} of the 20 comparator parts found earlier with a different method "
             "(pilot 5). Dashed line: the first layer tested at which swapping the state carries at least half of an "
             "outcome swap; layers were tested on a coarse grid. Data: pilot 17.")
-    body = header("🍎", "The comparator", "Outcomes are compared like piles of apples", sub) + \
+    body = header("🍎", "Step 2: which is bigger?", "Outcomes are compared by the same machinery as piles of apples", sub) + \
         f"<h2>When the decision reaches the answer</h2><div class='chart' style='margin-top:6px'>{top}</div>" \
         f"<h2>What the 20 parts that write the decision carry</h2><div class='chart' style='margin-top:10px'>{bottom}</div>" \
         f"<div class='note'>{note}</div>"
@@ -610,116 +614,131 @@ def fig_f6():
 
 
 # ---------------------------------------------------------------- hero
-def hero():
-    P = {d["text"]: d["u"] for d in load(P10 / "results/real/prices10.json")}
-    D13 = load(P13 / "features13.json")
-    new = {d["text"]: d["u"] for d in D13 if d["set"] == "new"}
-    lo, hi = min(P.values()), max(P.values())
-    A_TXT, B_TXT = "each get to make a cup of tea for someone they care about", "each get to decide where to go for lunch"
-    fa, fb = (P[A_TXT] - lo) / (hi - lo) * 100, (new[B_TXT] - lo) / (hi - lo) * 100
-    # the example must agree on every count: price, Qwen's "how good" rating, its "how big a difference" answer,
-    # and every model's answer to this very menu
-    F = {d["text"]: d for d in D13}
-    assert F[A_TXT]["u"] > F[B_TXT]["u"] and F[A_TXT]["Rbar"] > F[B_TXT]["Rbar"]
-    assert F[A_TXT]["features"]["size"] > F[B_TXT]["features"]["size"]
+HERO_A = "each feel a brief sense of awe while looking at the stars"
+HERO_B = "each turn the activity they love into their full-time job"
+HERO_WORD = "brief"
+
+
+def hero_data():
+    """The minimal pair in the hero: Qwen3-14B's answer to one menu, with and without one word (pilot 16), and the
+    same deletion in the other two models (pilot 17)."""
     S = [s["text"] for s in load(P10 / "sentences10.json")["sentences"]]
-    for _, sub in F5_MODELS:
+    i = S.index(HERO_A)
+    Z = np.load(P16 / "effects16.npz")
+    r = [r for r, (p, w) in enumerate(Z["var_key"]) if p == i and HERO_A.split()[w] == HERO_WORD]
+    assert len(r) == 1
+    k = load(P16 / "verdicts16.json")["B"].index(HERO_B)
+    p_with, p_without = sig(Z["logits_intact"][i, k]), sig(Z["logits_deleted"][r[0], k])
+    assert p_with < 0.5 < p_without                       # with the word Qwen picks B; without it, A
+    other = {}
+    for name, sub in F5_MODELS:
         V17 = load(P17 / sub / "verdicts17.json")
-        assert np.load(P17 / sub / "effects17.npz")["logits_intact"][S.index(A_TXT), V17["B"].index(B_TXT)] > 2
-    old = [d for d in D13 if d["set"] == "old"]
-    r_good = float(np.corrcoef([d["Rbar"] for d in old], [d["u"] for d in old])[0, 1])
-    v10 = load(P10 / "results/real/verdicts10.json")["variance_explained"]["menu"]["value"]
+        Z17 = np.load(P17 / sub / "effects17.npz")
+        k17 = V17["B"].index(HERO_B)
+        other[name] = (sig(Z17["logits_intact"][i, k17]), sig(Z17["logits_deleted"][r[0], k17]))
+    return p_with, p_without, other
+
+
+def hero():
+    p_with, p_without, other = hero_data()
+    assert other["Qwen3-32B"][0] < 0.5 < other["Qwen3-32B"][1]      # the 32B model flips too
+    assert other["Llama 3.1 8B"][0] > 0.5                              # Llama already picks the stars
+    a_words = HERO_A.split()
+    j = a_words.index(HERO_WORD)
+    a_hl = " ".join(a_words[:j]) + f" <mark>{HERO_WORD}</mark> " + " ".join(a_words[j + 1:])
+    a_del = " ".join(a_words[:j]) + f" <s>{HERO_WORD}</s> " + " ".join(a_words[j + 1:])
+
+    def pc(p):
+        return pct(p).replace("> ", "&gt;&#8239;")
+
+    def lane(cls, a_html, b_html, w_a, w_b, ghost, sign, winner, p_win):
+        ghost_div = f"<div class='ghost' style='width:{ghost}%'></div>" if ghost else ""
+        win_col = "a" if winner == "A" else "b"
+        return f"""
+        <div class='lane {cls}'>
+          <div class='opts'>
+            <div class='opt'><span class='tag a'>A</span><span>{a_html} <span class='emo'>✨</span></span></div>
+            <div class='opt'><span class='tag b'>B</span><span>{b_html}</span></div>
+          </div>
+          <div class='bars'>
+            <div class='bar'><span class='emo'>✨</span><div class='track'>{ghost_div}<div class='fill a' style='width:{w_a}%'></div></div></div>
+            <div class='bar'><span class='emo'>💼</span><div class='track'><div class='fill b' style='width:{w_b}%'></div></div></div>
+          </div>
+          <div class='cmp'><span class='emo'>✨</span><span class='sign'>{sign}</span><span class='emo'>💼</span></div>
+          <div class='ans'><div class='circle {win_col}'>{winner}</div><div class='p'>{pc(p_win)}</div></div>
+        </div>"""
+
+    lanes = (lane("l1", "8 people " + a_hl, f"8 people {esc(HERO_B)} <span class='emo'>💼</span>", 50, 64, 0, "&lt;", "B",
+                  1 - p_with)
+             + "<div class='cut'><span class='pill'><span class='emo'>✂️</span>Delete one word: “brief”</span></div>"
+             + lane("l2", "8 people " + a_del, "<span class='same'>the same as above <span class='emo'>💼</span></span>", 82,
+                    64, 50, "&gt;", "A", p_without))
     css = """
-    #fig.hero { width:1600px; height:900px; padding:56px 72px 0; position:relative; overflow:hidden; }
-    .hero .eyebrow { font-size:19px; margin-bottom:14px; }
-    .hero h1 { font-size:78px; letter-spacing:-.02em; line-height:1.0; }
-    .hl-b { color:var(--blue); } .hl-o { color:var(--orange); }
-    .hero .sub { font-size:26px; margin-top:16px; max-width:1400px; }
-    .pipe { display:flex; align-items:stretch; margin-top:38px; height:372px; }
-    .card { background:var(--card); border:1px solid var(--grid); border-radius:24px; padding:24px 28px;
-            box-shadow:0 4px 18px rgba(11,11,11,.06); display:flex; flex-direction:column; }
-    .c1 { width:478px; } .c2 { width:360px; } .c3 { width:360px; }
-    .step { display:flex; align-items:center; gap:12px; font-size:27px; font-weight:750; letter-spacing:-.005em; }
-    .num { width:38px; height:38px; border-radius:19px; background:var(--ink); color:#fff; font-size:21px;
-           font-weight:700; display:flex; align-items:center; justify-content:center; }
-    .q { font-size:20px; color:var(--ink2); margin:14px 0 14px; font-style:italic; line-height:1.3; }
-    .ctx { font-size:16px; color:var(--muted); margin-top:12px; line-height:1.3; }
-    .ctx + .q { margin-top:6px; margin-bottom:12px; }
-    .opt { display:flex; gap:12px; align-items:flex-start; font-size:21px; line-height:1.32; margin-bottom:12px; }
-    .tag { flex:none; width:34px; height:34px; border-radius:9px; color:#fff; font-weight:750; font-size:19px;
-           display:flex; align-items:center; justify-content:center; margin-top:-2px; }
+    #fig.hero { width:1600px; height:900px; padding:50px 72px 0; position:relative; overflow:hidden; }
+    .hero .eyebrow { font-size:18px; margin-bottom:12px; }
+    .hero h1 { font-size:84px; letter-spacing:-.022em; line-height:1.0; }
+    .hero .sub { font-size:28px; line-height:1.38; margin-top:16px; max-width:1420px; color:var(--ink2); }
+    .grid { display:grid; grid-template-columns:600px 320px 236px 196px; column-gap:32px; }
+    .heads { margin-top:34px; align-items:end; }
+    .h { font-size:15px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+    .h b { display:block; font-size:25px; letter-spacing:-.005em; text-transform:none; color:var(--ink); font-weight:750;
+           margin-top:4px; }
+    .h i { display:block; font-size:17px; letter-spacing:0; text-transform:none; color:var(--ink2); font-weight:450;
+           font-style:normal; margin-top:3px; line-height:1.3; }
+    .h .ctx { display:block; font-size:16px; text-transform:none; letter-spacing:0; color:var(--muted);
+            font-weight:450; margin-bottom:6px; }
+    .h .q { font-size:21px; font-style:italic; text-transform:none; letter-spacing:0; color:var(--ink2); font-weight:450; }
+    .lane { display:grid; grid-template-columns:600px 320px 236px 196px; column-gap:32px; align-items:center;
+            background:var(--card); border:1px solid var(--grid); border-radius:20px; padding:20px 22px 20px 22px;
+            margin-left:-22px; width:calc(100% + 44px); box-shadow:0 3px 14px rgba(11,11,11,.05); }
+    .lane.l1 { margin-top:14px; }
+    .opts { display:flex; flex-direction:column; gap:10px; }
+    .opt { display:flex; gap:12px; align-items:flex-start; font-size:24.5px; line-height:1.3; }
+    .opt .emo { font-size:24px; }
+    .tag { flex:none; width:32px; height:32px; border-radius:8px; color:#fff; font-weight:750; font-size:18px;
+           display:flex; align-items:center; justify-content:center; margin-top:-1px; }
     .tag.a { background:var(--blue); } .tag.b { background:var(--orange); }
-    .opt .emo { font-size:25px; }
-    .reply { font-size:17px; color:var(--muted); margin-top:auto; }
-    .gauge { display:flex; align-items:center; gap:14px; margin:10px 0 8px; }
-    .gauge .emo { font-size:38px; width:46px; text-align:center; }
-    .track { flex:1; height:30px; background:#eeede8; border-radius:15px; overflow:hidden; }
-    .fill { height:100%; border-radius:15px; }
+    mark { background:#fde68a; color:var(--ink); padding:0 4px; border-radius:5px; font-weight:650; }
+    s { color:var(--red); text-decoration-thickness:3px; font-weight:650; }
+    .same { color:var(--muted); }
+    .bars { display:flex; flex-direction:column; gap:16px; }
+    .bar { display:flex; align-items:center; gap:12px; }
+    .bar .emo { font-size:30px; width:38px; text-align:center; }
+    .track { position:relative; flex:1; height:32px; background:#eeede8; border-radius:14px; overflow:hidden; }
+    .fill { position:absolute; left:0; top:0; height:100%; border-radius:14px; }
     .fill.a { background:var(--blue); } .fill.b { background:var(--orange); }
-    .cap { font-size:18px; color:var(--ink2); line-height:1.35; margin-top:auto; }
-    .cmp { display:flex; align-items:center; justify-content:space-between; font-size:30px; margin:3px 0 6px;
-           padding:5px 12px; border-radius:14px; background:#f5f4f0; }
-    .cmp i { font-style:normal; font-size:17px; color:var(--muted); font-weight:600; }
-    .cmp .num2 { font-family:Inter; font-size:21px; font-weight:700; color:var(--ink); margin-left:4px; }
-    .cmp .win { box-shadow:0 0 0 3px var(--blue); border-radius:10px; padding:0 4px; background:#fff; }
-    .arrow { width:46px; display:flex; align-items:center; justify-content:center; font-size:38px; color:var(--axis);
-             font-weight:300; }
-    .out { width:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; }
-    .ans { width:92px; height:92px; border-radius:46px; background:var(--blue); color:#fff; font-size:52px;
-           font-weight:800; display:flex; align-items:center; justify-content:center;
-           box-shadow:0 6px 18px rgba(42,120,214,.35); }
-    .out .cap { text-align:center; font-size:17px; margin-top:0; }
-    .finds { display:flex; margin-top:30px; }
-    .finds > div { font-size:21px; line-height:1.38; color:var(--ink2); padding-right:34px; }
-    .finds b { color:var(--ink); font-weight:700; display:block; font-size:22px; margin-bottom:3px; }
-    .f1 { width:524px; } .f2 { width:406px; } .f3 { width:526px; }
-    .foot { position:absolute; left:72px; right:72px; bottom:30px; font-size:16px; color:var(--muted);
-            display:flex; justify-content:space-between; }
+    .ghost { position:absolute; left:0; top:0; height:100%; border-radius:14px; border:2px dashed var(--axis); z-index:2; }
+    .cmp { display:flex; align-items:center; justify-content:center; gap:14px; font-size:44px; }
+    .cmp .sign { font-family:"Inter Display", Inter; font-weight:800; font-size:56px; color:var(--ink); line-height:1; }
+    .ans { display:flex; align-items:center; gap:13px; }
+    .circle { width:76px; height:76px; border-radius:38px; color:#fff; font-size:44px; font-weight:800; display:flex;
+              align-items:center; justify-content:center; box-shadow:0 5px 14px rgba(11,11,11,.18); }
+    .circle.a { background:var(--blue); } .circle.b { background:var(--orange); }
+    .p { font-family:"Inter Display", Inter; font-size:27px; font-weight:800; color:var(--ink); line-height:1.1;
+         font-variant-numeric:tabular-nums; }
+    .cut { position:relative; height:52px; display:flex; align-items:center; }
+    .cut::before { content:""; position:absolute; left:0; right:0; top:50%; border-top:2px dashed var(--axis); }
+    .pill { position:relative; background:var(--surface); border:2px solid var(--red); color:var(--red); font-size:21px;
+            font-weight:700; padding:4px 14px 4px 10px; border-radius:20px; margin-left:150px; display:flex; gap:8px;
+            align-items:center; }
+    .foot { position:absolute; left:72px; right:72px; bottom:26px; font-size:17px; color:var(--muted);
+            display:flex; justify-content:space-between; gap:40px; line-height:1.4; }
     """
     body = f"""
-    <div class='eyebrow'><span class='emo'>🧠</span>How language models choose between two good outcomes</div>
-    <h1>A <span class='hl-b'>vibe check</span>, then the <span class='hl-o'>apple comparator</span></h1>
-    <div class='sub'>Inside Qwen3 and Llama 3.1, from the words of each option to the letter of the answer</div>
-    <div class='pipe'>
-      <div class='card c1'>
-        <div class='step'><span class='num'>1</span>Read the options</div>
-        <div class='ctx'>{esc(CONTEXT)}</div>
-        <div class='q'>{esc(QUESTION)}</div>
-        <div class='opt'><span class='tag a'>A</span><span>8 people {esc(A_TXT)} <span class='emo'>☕</span></span></div>
-        <div class='opt'><span class='tag b'>B</span><span>8 people {esc(B_TXT)} <span class='emo'>🥪</span></span></div>
-        <div class='reply'>{esc(REPLY)}</div>
-      </div>
-      <div class='arrow'>→</div>
-      <div class='card c2'>
-        <div class='step'><span class='num'>2</span>Vibe check</div>
-        <div class='q'>How big a deal is each?</div>
-        <div class='gauge'><span class='emo'>☕</span><div class='track'><div class='fill a' style='width:{fa:.0f}%'></div></div></div>
-        <div class='gauge'><span class='emo'>🥪</span><div class='track'><div class='fill b' style='width:{fb:.0f}%'></div></div></div>
-        <div class='cap'>Rough after the first option, finished after both. About ¼ of its variation depends on the
-          alternative.</div>
-      </div>
-      <div class='arrow'>→</div>
-      <div class='card c3'>
-        <div class='step'><span class='num'>3</span>Compare</div>
-        <div class='q'>Which is bigger?</div>
-        <div class='cmp'><span class='emo win'>☕</span><i>vs</i><span class='emo'>🥪</span></div>
-        <div class='cmp'><span class='emo win'>🍎<span class='num2'>28</span></span><i>vs</i><span class='emo'>🍎<span class='num2'>10</span></span></div>
-        <div class='cmp'><span class='emo win'>🐘</span><i>vs</i><span class='emo'>🐭</span></div>
-        <div class='cap'>One comparator for all three.</div>
-      </div>
-      <div class='arrow'>→</div>
-      <div class='out'><div class='ans'>A</div><div class='cap'>all three<br>models' answer</div></div>
+    <div class='eyebrow'><span class='emo'>🧠</span>How does an AI choose between two good outcomes?</div>
+    <h1>A vibe check, then “which is bigger?”</h1>
+    <div class='sub'>It gets a gut feeling for how big a deal each option is, from its exact words. Then it
+      compares the two with the same machinery it uses for “which pile has more apples?”</div>
+    <div class='grid heads'>
+      <div class='h'><span class='ctx'>{esc(CONTEXT)}</span><span class='q'>“{esc(QUESTION)}”</span></div>
+      <div class='h'>Step 1<b>Vibe check</b><i>How big a deal is each?</i></div>
+      <div class='h'>Step 2<b>Which is bigger?</b><i>The same check as for piles of apples <span class='emo'>🍎</span></i></div>
+      <div class='h'>Answer<i>and its probability</i></div>
     </div>
-    <div class='finds'>
-      <div class='f1'><b>Wording over value</b>Which value an outcome serves explains {v10 * 100:.0f}% of its price.
-        One word can flip a choice: “saved” in “saved from being killed in a fire”.</div>
-      <div class='f2'><b>A gut-feel price</b>Asking how good it would be predicts the price about as well as
-        anything we tried (r ≈ {r_good:.1f}).</div>
-      <div class='f3'><b>A generic comparator</b>The parts that write the decision carry outcome and apple decisions
-        alike, in all three models.</div>
-    </div>
-    <div class='foot'><span>Bars and findings 1-2: Qwen3-14B. Relative prices and the comparator: also Qwen3-32B and
-      Llama 3.1 8B</span><span>forced choices · word deletions · activation patching</span></div>
+    {lanes}
+    <div class='foot'><span>Answers: Qwen3-14B (Qwen3-32B flips too; Llama 3.1 8B already picks the stars). Bars are a
+      sketch. The shared “which is bigger?” step: Qwen3-14B, Qwen3-32B and Llama 3.1 8B.</span>
+      <span style='white-space:nowrap'>forced choices · word deletions · activation patching</span></div>
     """
     return ("<!doctype html><html><head><meta charset='utf-8'><style>" + CSS + css + "</style></head><body>"
             "<div id='fig' class='hero'>" + body + "</div></body></html>")
