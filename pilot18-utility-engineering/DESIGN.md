@@ -152,3 +152,28 @@ ours.
   6. Push to `pod-results/pilot18` and stop.
 - **Time and cost:** about an hour, about $3-4.
 - **Predictions:** no prediction gate. The bars above are fixed before any result.
+
+## 6. Addendum before the rerun (3 Nov 2026, about 19:00 UTC)
+
+**The targets, read before any of our results existed.**
+- **Their released results** for `llama-31-8b-instruct`: held-out accuracy exactly **90.4%** (log loss 0.505), as read
+  from their Figure 4. Their outcomes are the repo's 510, in the same order.
+- **Figure 8, the Llama-3.1-8B bar: 78.0%.** Measured on the page rendered at 200 dpi:
+  - the zero line at y = 1135.5, 2.533 px per percentage point, checked against the gridlines at 60 and 80;
+  - the other bars: Llama-3.2-1B 44.0%, Llama-3.3-70B 89.0%.
+- **Figure 23 agrees:** Llama-3.1 8B's cells are pale yellow, a test error of about 0.22, from early layers on.
+- **So B2 passes if our best-layer accuracy is 73-83%.**
+
+**What happened in the first run.**
+- **The quick test failed, as designed,** before their code or our real run started.
+  - At layer 0 every outcome's last token is ".", so all the states are identical and the ridge's penalty search had
+    nothing to work with.
+  - The ridge now falls back to the mean in that case.
+- **Their released file has 38,925 pairs, not 9,174.** After the 9,174 asked pairs and the 1,000 held out, their code
+  adds every unasked pair that the fitted model is at least 95% sure of, as a 0/1 "pseudolabel". This is described after
+  their Algorithm 1.
+  - Those are the fitted model's own labels, not the model's choices. So **the probe is trained and tested only on asked
+    pairs.**
+  - The utilities are still fitted their way, with pseudolabels.
+- **The pod's container took 13 minutes to start,** because it was creating a 100 GB network volume. The rerun uses a
+  large container disk instead.

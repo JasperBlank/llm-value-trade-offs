@@ -44,7 +44,8 @@ python3 --version
 # ---- 1. dependencies, their repo, their environment
 python3 -m pip install -q --break-system-packages -r $REPO/pilot5-value-circuit/requirements.txt pymupdf huggingface_hub \
   || python3 -m pip install -q -r $REPO/pilot5-value-circuit/requirements.txt pymupdf huggingface_hub || fail pip
-git clone -q https://github.com/centerforaisafety/emergent-values.git $UE && (cd $UE && git checkout -q $UE_COMMIT) || fail "their repo"
+[ -d $UE/.git ] || git clone -q https://github.com/centerforaisafety/emergent-values.git $UE || fail "their repo"
+(cd $UE && git checkout -q -f $UE_COMMIT && git checkout -q -- .) || fail "their commit"
 (cd $UE && git log -1 --format='PILOT18 their code %h: %s')
 bash $P18/ue_setup.sh > /workspace/log_ue_setup.txt 2>&1 &
 SETUP_PID=$!
@@ -56,7 +57,7 @@ echo "PILOT18 model at $MODEL"
 python3 $P18/fetch_theirs.py theirs --out $P18/results/theirs --paper /workspace/paper >> /workspace/log_fetch.txt 2>&1 \
   || echo "PILOT18 fetching their results had errors"
 grep -E "their results|members|paper|Figure|revision|listing|download" /workspace/log_fetch.txt | head -30
-if [ -n "$GH_PUSH_TOKEN" ]; then   # the figure pages go to a short-lived branch of their own, not into the results
+if [ -n "$GH_PUSH_TOKEN" ] && [ "${PAPER_PUSH:-0}" = 1 ]; then   # the figure pages: a short-lived branch of their own (read once, 3 Nov)
   (rm -rf /workspace/paperpush && git clone -q --depth 1 "file://$REPO" /workspace/paperpush && cd /workspace/paperpush \
    && mkdir -p pilot18-paper && cp /workspace/paper/*.png pilot18-paper/ 2>/dev/null; cp -r $P18/results/theirs pilot18-paper/ 2>/dev/null
    git checkout -q -B pod-results/pilot18-paper && git add -f pilot18-paper \

@@ -6,7 +6,7 @@ set -e
 UE=${UE:-/workspace/emergent-values}
 VENV=${VENV:-/workspace/uevenv}
 python3 -m pip install -q --break-system-packages uv 2>/dev/null || python3 -m pip install -q uv
-uv venv -q "$VENV" --python "$(command -v python3)"
+uv venv -q --allow-existing "$VENV" --python "$(command -v python3)"
 VPY=$VENV/bin/python
 PINNED=("vllm==0.6.6.post1" "torch==2.5.1" "transformers==4.46.2" "anthropic==0.45.2" "fireworks-ai==0.15.8"
         "litellm==1.61.5" "openai==1.63.0" "python-dotenv==1.0.1" "networkx==3.3" "scikit-learn==1.6.1" "pandas==2.2.3"

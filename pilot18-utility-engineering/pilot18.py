@@ -57,7 +57,7 @@ N_PATCH, PATCH_MIN_GAP, PATCH_MIN_EFFECT = 150, 1.0, 2.0
 RESID_LAYERS = [8, 12, 16, 19, 22, 26]
 N_RANDOM_SETS = 3
 # bars (DESIGN.md section 3)
-FIG4_ACC, FIG7_LOG10 = 90.4, -1.50
+FIG4_ACC, FIG7_LOG10, FIG8_ACC = 90.4, -1.50, 78.0     # their Figures 4, 7 and 8 (DESIGN.md sections 2 and 6)
 B1A_POINTS, B1B_R, B1C_LOG10, CHECK_R = 3.0, 0.90, 0.30, 0.99
 B2_POINTS = 5.0
 B3A_RATIO, B3A_MOSTLY = 0.25, 0.5
@@ -94,12 +94,16 @@ class Run:
         self.var = np.array([get(i)["variance"] for i in range(n)], dtype=np.float64)
         self.holdout = [tuple(e) for e in (g.get("holdout_edge_indices") or [])]
         self.hold = set(self.holdout)
+        key = lambda k: tuple(int(x) for x in k.strip("()").split(","))  # noqa: E731
         self.pA, self.aux = {}, {}
+        self.pseudo = {key(k) for k in (data.get("pseudolabels") or [])}      # the compact copy lists them
         for k, v in g["edges"].items():
-            a, b = (int(x) for x in k.strip("()").split(","))
+            a, b = key(k)
             if isinstance(v, dict):
                 self.pA[(a, b)] = v["probability_A"]
                 self.aux[(a, b)] = v.get("aux_data")
+                if (v.get("aux_data") or {}).get("is_pseudolabel"):
+                    self.pseudo.add((a, b))
             else:
                 self.pA[(a, b)] = v
         self.holdout_metrics = data.get("holdout_metrics")
@@ -116,7 +120,9 @@ class Run:
         return float(np.mean(vals)) if vals else float("nan"), len(vals)
 
     def edges(self, which="all"):
-        keys = [k for k in self.pA if which == "all" or (which == "train") == (k not in self.hold)]
+        """The pairs the model was asked ("all", "train" or "hold"), never the pseudolabels (the fitted model's own
+        0/1 labels for confident unasked pairs)."""
+        keys = [k for k in self.pA if k not in self.pseudo and (which == "all" or (which == "train") == (k not in self.hold))]
         a = np.array([k[0] for k in keys])
         b = np.array([k[1] for k in keys])
         return a, b, np.array([self.pA[k] for k in keys], dtype=np.float64)
@@ -364,6 +370,8 @@ def ridge_loo(X, y, n_lam=13):
     Z = (X - mu) / sd
     ym = y.mean()
     U, S, Vt = np.linalg.svd(Z.astype(np.float64), full_matrices=False)
+    if not np.isfinite(S).all() or S[0] < 1e-8:      # identical states (layer 0: every outcome ends in the same token)
+        return (lambda Xn: np.full(len(Xn), ym)), float("nan")
     Uy = U.T @ (y - ym)
     best = (np.inf, None)
     for lam in S[0] ** 2 * np.logspace(-6, 0, n_lam):
@@ -371,8 +379,10 @@ def ridge_loo(X, y, n_lam=13):
         h = (U ** 2) @ f + 1.0 / len(y)
         loo = ((y - ym) - U @ (f * Uy)) / np.clip(1 - h, 1e-6, None)
         mse = float(np.mean(loo ** 2))
-        if mse < best[0]:
+        if np.isfinite(mse) and mse < best[0]:
             best = (mse, lam)
+    if best[1] is None:
+        return (lambda Xn: np.full(len(Xn), ym)), float("nan")
     lam = best[1]
     coef = Vt.T @ ((S / (S ** 2 + lam)) * Uy)
     return (lambda Xn: ((Xn - mu) / sd) @ coef + ym), lam
@@ -499,6 +509,8 @@ def synthetic(texts, rng):
         for a, b in pairs:
             p = float(np.clip(Phi((mu[a] - mu[b]) / math.sqrt(0.6)) + rng.normal(scale=0.05), 0, 1))
             aux = {"choice_probs": [{"direction": "original", "p_a": p}, {"direction": "flipped", "p_a": 1 - p}]} if lp else {}
+            if (a, b) not in hold and rng.random() < 0.1:
+                p, aux = float(mu[a] > mu[b]), {"is_pseudolabel": True}
             edges[str((a, b))] = {"option_A": opts[a], "option_B": opts[b], "probability_A": p, "aux_data": aux}
         return {"utilities": {str(i): {"mean": float(m[i]), "variance": 0.3} for i in range(n)}, "holdout_metrics": {"accuracy": 0.9},
                 "graph_data": {"options": opts, "edges": edges, "holdout_edge_indices": [list(h) for h in hold]}}
@@ -550,6 +562,8 @@ def main():
     # ---- step 1, from the files
     acc = {r.name: r.holdout_accuracy() for r in (k10, lp, theirs) if r is not None}
     V["step1"] = {"holdout_accuracy": {k: {"accuracy": v[0], "pairs": v[1]} for k, v in acc.items()},
+                  "pairs": {r.name: {"asked_or_held_out": len(r.pA) - len(r.pseudo), "pseudolabels": len(r.pseudo)}
+                            for r in (k10, lp, theirs) if r is not None},
                   "their_holdout_metrics": theirs.holdout_metrics if theirs else None,
                   "our_holdout_metrics": {"k10": k10.holdout_metrics, "logprobs": lp.holdout_metrics}}
     target_acc = acc["theirs"][0] if theirs is not None and np.isfinite(acc["theirs"][0]) else FIG4_ACC
@@ -648,8 +662,8 @@ def main():
     best = max(layers, key=lambda L: probe[L]["probit"])
     V["step2"] = {"by_layer": {str(L): v for L, v in probe.items()}, "best_layer": best, "best_accuracy": probe[best]["probit"],
                   "best_ridge_layer": max(layers, key=lambda L: probe[L]["ridge"]),
-                  "B2": {"ours": 100 * probe[best]["probit"], "target": None,
-                         "note": "their Figure 8 value is recorded in DESIGN.md's addendum; the verdict is in README.md"}}
+                  "B2": {"ours": 100 * probe[best]["probit"], "target": FIG8_ACC,
+                         "pass": bool(abs(100 * probe[best]["probit"] - FIG8_ACC) <= B2_POINTS)}}
     log(f"step 2: best layer {best}, probe test accuracy {probe[best]['probit']:.3f}")
 
     # ---- step 3a: pushing along the readout
@@ -762,7 +776,7 @@ def report(V, out):
             f"| B1b | Same utilities? | r = {s1['B1b']['r'] if s1['B1b']['r'] is None else round(s1['B1b']['r'], 3)} | {yn(s1['B1b']['pass'])} |",
             f"| B1c | Same consistency? | {s1['cycles_sampled']['cycles']}/{s1['cycles_sampled']['n']} triads cycle, log10 "
             f"{s1['cycles_sampled']['log10']:.2f} vs {s1['B1c']['target_log10']} | {yn(s1['B1c']['pass'])} |",
-            f"| B2 | Same readout? | best layer {s2['best_layer']}: {100 * s2['best_accuracy']:.1f}% | see README |",
+            f"| B2 | Same readout? | best layer {s2['best_layer']}: {100 * s2['best_accuracy']:.1f}% vs {s2['B2']['target']:.1f}% (Figure 8) | {yn(s2['B2']['pass'])} |",
             f"| B3a | Is the readout used? | {s3a['effect_per_sd']:.3f} logits per SD at layer {s3a['layer']} "
             f"(95% CI {s3a['ci95'][0]:.3f} to {s3a['ci95'][1]:.3f}); γ {s3a['gamma']:.3f}, ratio {s3a['ratio_to_gamma']:.2f}; "
             f"random ≤ {s3a['max_abs_random']:.3f}: **{s3a['reading']}** | {yn(s3a['B3a']['pass'])} |",

@@ -43,12 +43,16 @@ def model():
 def compact(data):
     """Their results file without the raw responses: outcomes, utilities, metrics, and every asked pair's P(A)."""
     g = data.get("graph_data", {})
+    edges = g.get("edges", {})
     return {
         "options": g.get("options"),
         "utilities": data.get("utilities"),
         "metrics": data.get("metrics"),
         "holdout_metrics": data.get("holdout_metrics"),
-        "edges": {k: v["probability_A"] for k, v in g.get("edges", {}).items()},
+        "compute_utilities_config": data.get("compute_utilities_config"),
+        "create_agent_config": data.get("create_agent_config"),
+        "edges": {k: v["probability_A"] for k, v in edges.items()},
+        "pseudolabels": [k for k, v in edges.items() if (v.get("aux_data") or {}).get("is_pseudolabel")],
         "training_edges": g.get("training_edges"),
         "holdout_edge_indices": g.get("holdout_edge_indices"),
         "other_keys": sorted(k for k in data if k not in ("graph_data", "utilities", "metrics", "holdout_metrics")),
