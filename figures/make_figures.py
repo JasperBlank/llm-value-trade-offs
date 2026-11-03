@@ -17,6 +17,7 @@ fig11_recipes.png           pilot 12: the disagreement is readable from the sent
 fig12_recipe_in_words.png   pilot 13: the two recipes in named features, how well each predictor prices outcomes, the pushes against random ones
 fig13_price_writers.png     pilot 14: which parts write the price readout, silencing them block by block, and word deletions
 fig14_price_route.png       pilot 15: where the price is finished, the route to the answer, and the generic comparator
+fig15_relative.png          pilot 16: how much of an outcome's price is the same whatever the alternative, and an example of order flips
 """
 import json
 from pathlib import Path
@@ -39,6 +40,7 @@ P12 = ROOT / "pilot12-recipes/results/real"
 P13 = ROOT / "pilot13-recipe-in-words/results/real"
 P14 = ROOT / "pilot14-price-writers/results/real"
 P15 = ROOT / "pilot15-price-route/results/real"
+P16 = ROOT / "pilot16-relative-or-absolute/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -804,6 +806,77 @@ def fig14(p15=None):
     plt.close(fig)
 
 
+def fig15(p16=None):
+    """Pilot 16: the share of the price that is the same whatever the alternative is (choice and inside), the logits of
+    the 96 outcomes against two alternatives (order flips), and how each alternative stretches or squeezes them."""
+    p16 = Path(p16) if p16 else P16
+    V = load(p16 / "verdicts16.json")
+    Z = np.load(p16 / "effects16.npz")
+    L, uB = Z["logits_intact"], Z["uB"]
+    S10 = load(ROOT / "pilot10-full-range/sentences10.json")["sentences"]
+    fig, axs = plt.subplots(1, 3, figsize=(16.5, 5.6), gridspec_kw={"width_ratios": [1.0, 1.15, 0.95]})
+    fig.subplots_adjust(left=0.115, right=0.985, top=0.77, bottom=0.15, wspace=0.42)
+    ax = axs[0]
+    cs = V["common_share_by_position"]
+    rows = [("choice: single words", V["Q2"]["common_share"], V["choice_words_without_extreme_Bs"], ORANGE),
+            ("choice: whole outcomes", V["Q3"]["common_share"], V["choice_outcomes_without_extreme_Bs"], ORANGE),
+            ("inside: line break after B", V["Q1"]["common_share"], V["common_share_without_extreme_Bs"]["B_nl@24"], BLUE),
+            ("inside: answer position", cs["END@24"], V["common_share_without_extreme_Bs"]["END@24"], BLUE_LIGHT),
+            ("check: line break after A", cs["A_nl@24"], V["common_share_without_extreme_Bs"]["A_nl@24"], MUTED)]
+    y = np.arange(len(rows))[::-1]
+    ax.barh(y, [r[1] for r in rows], color=[r[3] for r in rows], height=0.6)
+    ax.plot([r[2] for r in rows], y, "|", color=INK, markersize=14, markeredgewidth=2, label="without the two extreme alternatives")
+    for yi, r in zip(y, rows):
+        ax.text(r[1] - 0.02, yi, f"{r[1]:.2f}", va="center", ha="right", fontsize=9, color=SURFACE, fontweight="bold")
+    ax.axvline(0.9, color=INK2, linewidth=1, linestyle="--")
+    ax.text(0.905, len(rows) - 0.45, "bar for\n\"absolute\"", fontsize=8, color=INK2, va="top")
+    ax.set_yticks(y, [r[0] for r in rows])
+    ax.tick_params(axis="y", length=0)
+    ax.set_xlim(0.4, 1.02)
+    ax.set_ylim(-0.6, len(rows) - 0.1)
+    ax.set_xlabel("Share that is the same whatever the alternative is")
+    ax.set_title("About a quarter of an outcome's price\ndepends on the alternative")
+    ax.legend(loc="lower left", fontsize=8)
+    ax = axs[1]
+    B = V["B"]
+    k = B.index("each turn the activity they love into their full-time job")
+    l = B.index("each have a decade of unequal pay made up to them in full")
+    x, yv = L[:, k], L[:, l]
+    ax.plot(x, yv, "o", color=BLUE_LIGHT, markersize=4.5)
+    fit = np.polyfit(x, yv, 1)
+    xx = np.array([x.min(), x.max()])
+    ax.plot(xx, np.polyval(fit, xx), color=AXIS, linewidth=1, linestyle="--")
+    ax.axhline(0, color=AXIS, linewidth=0.8)
+    ax.axvline(0, color=AXIS, linewidth=0.8)
+    for t, off in (("each get to choose which film to watch tonight", (8, -4)), ("each have their life extended by a year", (8, 2))):
+        i = [s["text"] for s in S10].index(t)
+        ax.plot([x[i]], [yv[i]], "o", color=ORANGE, markersize=7)
+        ax.annotate(t.replace("each ", ""), (x[i], yv[i]), xytext=off, textcoords="offset points", fontsize=8.5, color=INK)
+    ax.set_xlabel("Logit for A against \"turn the activity they love into their full-time job\"", fontsize=9)
+    ax.set_ylabel("Logit for A against \"a decade of unequal pay made up to them\"", fontsize=9)
+    ax.set_title("The 96 outcomes against two alternatives:\nfixed values would put them on a line")
+    ax = axs[2]
+    o = np.argsort(uB)
+    ax.plot(uB[o], np.array(V["slopes_outcomes"])[o], "-o", color=ORANGE, markersize=5, label="whole outcomes")
+    ax.plot(uB[o], np.array(V["slopes_word_effects_choice"])[o], "-o", color=BLUE, markersize=5, label="single words")
+    ax.axhline(1, color=AXIS, linewidth=1, linestyle="--")
+    ax.set_xlabel("The alternative's price (pilot 13)")
+    ax.set_ylabel("Stretch against the average over alternatives")
+    ax.set_title("Each alternative stretches or squeezes\nthe differences between outcomes")
+    ax.legend(loc="upper left", fontsize=8.5)
+    for a in axs:
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    suptitle(fig, "Is the finished price absolute, or relative to the alternative? Partly relative",
+             f"Pilot 16, Qwen3-14B: 96 outcomes and 994 word deletions, each against 8 alternatives (8,720 menus). "
+             f"Q1 inside {V['Q1']['common_share']:.2f}, Q2 words {V['Q2']['common_share']:.2f}, Q3 whole outcomes {V['Q3']['common_share']:.2f} "
+             f"(bar 0.9 for \"absolute\"). Verdict: relative, already in the finished price.")
+    note(fig, "Left: the line break after A comes before the alternative and must give 1. Middle: the two orange outcomes swap places between the "
+              "two alternatives; a fixed value for each would keep their order. Right: slopes of each alternative's logits on the average over all 8.")
+    fig.savefig(OUT / "fig15_relative.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -833,4 +906,6 @@ if __name__ == "__main__":
         fig13()
     if (P15 / "verdicts15.json").exists():
         fig14()
+    if (P16 / "verdicts16.json").exists():
+        fig15()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))

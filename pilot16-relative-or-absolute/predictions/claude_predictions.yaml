@@ -1,0 +1,5 @@
+# Claude's predictions for pilot 16 (is the finished price absolute, or relative to the alternative?), sealed before any result.
+q1_inside_common_share: {best: 0.8, range80: [0.6, 0.95]}
+q1_inside_absolute_prob: 0.30
+q2_words_absolute_prob: 0.35
+q3_outcomes_absolute_prob: 0.45
