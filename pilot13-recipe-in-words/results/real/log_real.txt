@@ -1,0 +1,42 @@
+[09:26:04] Loading Qwen/Qwen3-14B on cuda ...
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:09<01:07,  9.57s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:13<00:38,  6.41s/it]Fetching 8 files:  38%|███▊      | 3/8 [00:14<00:18,  3.61s/it]Fetching 8 files:  50%|█████     | 4/8 [00:14<00:09,  2.45s/it]Fetching 8 files:  62%|██████▎   | 5/8 [00:15<00:06,  2.01s/it]Fetching 8 files:  75%|███████▌  | 6/8 [00:16<00:02,  1.41s/it]Fetching 8 files:  88%|████████▊ | 7/8 [00:16<00:01,  1.11s/it]Fetching 8 files: 100%|██████████| 8/8 [00:18<00:00,  1.22s/it]Fetching 8 files: 100%|██████████| 8/8 [00:18<00:00,  2.27s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights:  85%|████████▍ | 375/443 [00:00<00:00, 3730.77it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 3703.92it/s]
+[09:26:37] Qwen/Qwen3-14B: 96 old and 24 new sentences
+[09:26:53] features done; r with the price: size +0.81, severity +0.59, duration +0.75, health_safety +0.35, moral +0.59, relationships +0.61, meaning +0.80, pleasure +0.41, legacy +0.75, concreteness +0.08
+[09:30:36] new prices done (13824 trade-offs); range -8.07 to +4.60 (old -9.10 to +6.41)
+[09:30:41] states done
+[09:30:42] recipes: P1 r 0.79; P2 -0.04 [-0.22, +0.15]; P4 r 0.71
+[09:30:58] push price: choice +0.771 logit and rating +0.112 points per push
+[09:31:14] push rating: choice +0.729 logit and rating +0.126 points per push
+[09:31:29] push disagreement: choice +0.103 logit and rating +0.055 points per push
+[09:31:45] push feature:size: choice +0.613 logit and rating +0.112 points per push
+[09:32:01] push feature:severity: choice +0.510 logit and rating +0.087 points per push
+[09:32:16] push feature:duration: choice +0.564 logit and rating +0.099 points per push
+[09:32:32] push feature:health_safety: choice +0.512 logit and rating +0.052 points per push
+[09:32:47] push feature:moral: choice +0.628 logit and rating +0.099 points per push
+[09:33:03] push feature:relationships: choice +0.547 logit and rating +0.093 points per push
+[09:33:19] push feature:meaning: choice +0.554 logit and rating +0.101 points per push
+[09:33:34] push feature:pleasure: choice +0.620 logit and rating +0.106 points per push
+[09:33:50] push feature:legacy: choice +0.564 logit and rating +0.100 points per push
+[09:34:05] push feature:concreteness: choice +0.453 logit and rating +0.036 points per push
+[09:34:21] push random:0: choice -0.201 logit and rating -0.020 points per push
+[09:34:36] push random:1: choice +0.254 logit and rating +0.023 points per push
+[09:34:52] push random:2: choice +0.135 logit and rating +0.011 points per push
+[09:35:07] push random:3: choice -0.059 logit and rating +0.004 points per push
+[09:35:23] push random:4: choice +0.035 logit and rating -0.014 points per push
+[09:35:39] push random:5: choice -0.334 logit and rating -0.028 points per push
+[09:35:54] push random:6: choice +0.048 logit and rating +0.013 points per push
+[09:36:10] push random:7: choice +0.201 logit and rating -0.005 points per push
+[09:36:26] push random:8: choice -0.076 logit and rating -0.033 points per push
+[09:36:41] push random:9: choice +0.110 logit and rating +0.033 points per push
+[09:36:57] push random:10: choice -0.217 logit and rating -0.023 points per push
+[09:37:13] push random:11: choice +0.119 logit and rating +0.020 points per push
+[09:37:28] push random:12: choice +0.326 logit and rating +0.060 points per push
+[09:37:44] push random:13: choice -0.214 logit and rating -0.021 points per push
+[09:38:00] push random:14: choice +0.305 logit and rating +0.009 points per push
+[09:38:15] push random:15: choice -0.007 logit and rating -0.003 points per push
+[09:38:31] push random:16: choice +0.178 logit and rating -0.013 points per push
+[09:38:46] push random:17: choice -0.087 logit and rating -0.022 points per push
+[09:39:02] push random:18: choice -0.001 logit and rating +0.012 points per push
+[09:39:18] push random:19: choice -0.244 logit and rating -0.004 points per push
+[09:39:18] report written; 13.3 min
