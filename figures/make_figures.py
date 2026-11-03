@@ -12,6 +12,7 @@ fig6_sentences_not_values.png  pilot 8 (exploratory): prices are stable per sent
 fig7_pilot8_tests.png       pilot 8: the pre-registered tests against their bars
 fig8_vibe_check.png         pilot 9: the direct 'how good' rating of each sentence against its menu price
 fig9_full_range.png         pilot 10: rating against menu over the full range of goodness, and the log-scale readout
+fig10_vibe_direction.png    pilot 11: where the price direction can be read, and what pushing along it does
 """
 import json
 from pathlib import Path
@@ -29,6 +30,7 @@ P7 = ROOT / "pilot7-value-route/results/real"
 P8 = ROOT / "pilot8-intrinsic-values/results/real"
 P9 = ROOT / "pilot9-vibe-check/results/real"
 P10 = ROOT / "pilot10-full-range/results/real"
+P11 = ROOT / "pilot11-vibe-direction/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -443,6 +445,49 @@ def fig9(p10=None, title=None, subtitle=None):
     plt.close(fig)
 
 
+def fig10(p11=None):
+    """Pilot 11: where the vibe direction can be read (held out), and what pushing along it does, layer by layer."""
+    p11 = Path(p11) if p11 else P11
+    rep = open(p11 / "report.md").read().splitlines()
+    rows = [l.split("|")[1:-1] for l in rep if l.startswith("| ") and l.split("|")[1].strip().isdigit()]
+    read = [[float(x) for x in r] for r in rows if len(r) == 10]
+    steer = [r for r in rows if len(r) == 6]
+    L = [int(r[0]) for r in read]
+    fig, axs = plt.subplots(1, 2, figsize=(12.5, 4.8))
+    fig.subplots_adjust(left=0.065, right=0.98, top=0.78, bottom=0.15, wspace=0.22)
+    ax = axs[0]
+    ax.plot(L, [r[1] for r in read], "-o", color=BLUE, markersize=4, label="menu price, read as option A (before B)")
+    ax.plot(L, [r[3] for r in read], "-o", color=AQUA, markersize=4, label="menu price, read in the rating prompt")
+    ax.plot(L, [r[4] for r in read], "-o", color=ORANGE, markersize=4, label="the rating, read in the rating prompt")
+    ax.set_ylim(0, 1)
+    ax.set_xlabel("Layer")
+    ax.set_ylabel("Held-out r (one value left out)")
+    ax.set_title("Reading the sentence: the price is there, in both prompts")
+    ax.legend(loc="lower right")
+    ax = axs[1]
+    vib = [(int(r[0]), float(r[2].split("(")[0]), float(r[3])) for r in steer if r[1].strip() == "vibe"]
+    rnd = [(int(r[0]), float(r[2].split("(")[0]), float(r[3])) for r in steer if r[1].strip() == "random"]
+    ax.axhline(0.5, color=AXIS, linewidth=1, linestyle="--")
+    ax.plot([v[0] for v in vib], [v[1] for v in vib], "-o", color=BLUE, markersize=4, label="the choice (menu)")
+    ax.plot([v[0] for v in vib], [v[2] for v in vib], "-o", color=ORANGE, markersize=4, label="the stated rating")
+    for v in rnd:
+        ax.plot([v[0]], [v[1]], "x", color=INK2, markersize=7)
+        ax.annotate("random direction", (v[0], v[1]), xytext=(6, -12), textcoords="offset points", fontsize=8.5, color=INK2)
+    ax.set_ylim(-0.1, 1)
+    ax.set_xlabel("Layer pushed")
+    ax.set_ylabel("Share of the predicted change")
+    ax.set_title("Pushing along it: the choice moves, the rating barely")
+    ax.legend(loc="upper right")
+    for a in axs:
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    suptitle(fig, "A price direction on the sentence: readable, partly used for the choice, hardly for the rating",
+             "Pilot 11, Qwen3-14B, 96 sentences. Direction = difference of means between the highest- and lowest-priced thirds; pushed over the sentence's words by ±2 price units.")
+    note(fig, "Dashed line: the pre-registered bar (0.5). After layer 24 pushing the sentence does nothing: by then its information has moved on to later positions.")
+    fig.savefig(OUT / "fig10_vibe_direction.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -462,4 +507,6 @@ if __name__ == "__main__":
         fig8()
     if (P10 / "verdicts10.json").exists():
         fig9()
+    if (P11 / "report.md").exists():
+        fig10()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))

@@ -1,0 +1,27 @@
+{
+ "model": "Qwen/Qwen3-14B",
+ "layer": 20,
+ "Q1": {
+  "r": 0.78,
+  "pass": true
+ },
+ "Q2": {
+  "r_rating": 0.64,
+  "partial": 0.65,
+  "raw_r": 0.81,
+  "pass": false
+ },
+ "Q3": {
+  "vibe": {
+   "menu_transfer": 0.38,
+   "rating_transfer": 0.17
+  },
+  "random": {
+   "menu_transfer": -0.02,
+   "rating_transfer": -0.02
+  },
+  "pass": false
+ },
+ "verdict": "readable but not shared",
+ "note": "Rebuilt from the pod's report in its log (no GitHub token; the pod's own verdicts11.json, per-layer table and states were not pushed). The full per-layer table and steering results are in report.md."
+}

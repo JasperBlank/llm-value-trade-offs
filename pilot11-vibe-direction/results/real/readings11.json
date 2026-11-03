@@ -1,0 +1,866 @@
+[
+ {
+  "value": "Achievement",
+  "level": "small",
+  "text": "each finish a small task they had been putting off",
+  "u": -4.547395818400736,
+  "rating": 5.9032,
+  "reading_menu_ctx": -1.3440919302289434,
+  "projection_rating_ctx": -10.825338363647461
+ },
+ {
+  "value": "Achievement",
+  "level": "medium",
+  "text": "each achieve a goal they have worked towards for a long time",
+  "u": 1.5679976726064806,
+  "rating": 7.7626,
+  "reading_menu_ctx": 3.5460828249157963,
+  "projection_rating_ctx": 3.5722227096557617
+ },
+ {
+  "value": "Achievement",
+  "level": "medium",
+  "text": "each finally succeed at something they have spent years trying to do",
+  "u": 0.8643193259338955,
+  "rating": 7.0501,
+  "reading_menu_ctx": 3.222700179852491,
+  "projection_rating_ctx": 2.741767168045044
+ },
+ {
+  "value": "Achievement",
+  "level": "large",
+  "text": "each achieve the greatest ambition of their life",
+  "u": 0.27425319220164596,
+  "rating": 7.9477,
+  "reading_menu_ctx": 4.167721788179723,
+  "projection_rating_ctx": 5.099462509155273
+ },
+ {
+  "value": "Beauty",
+  "level": "small",
+  "text": "each notice a pretty flower on their way to work",
+  "u": -4.280057308510688,
+  "rating": 4.9412,
+  "reading_menu_ctx": -3.6507356760775145,
+  "projection_rating_ctx": -17.229867935180664
+ },
+ {
+  "value": "Beauty",
+  "level": "medium",
+  "text": "each spend an afternoon somewhere breathtakingly beautiful",
+  "u": -0.4677196826411919,
+  "rating": 7.7105,
+  "reading_menu_ctx": -0.06466313486235054,
+  "projection_rating_ctx": -7.05947732925415
+ },
+ {
+  "value": "Beauty",
+  "level": "medium",
+  "text": "each get to see something so beautiful it moves them deeply",
+  "u": 2.754358342044994,
+  "rating": 8.0594,
+  "reading_menu_ctx": 0.9096217827008375,
+  "projection_rating_ctx": -4.946292400360107
+ },
+ {
+  "value": "Beauty",
+  "level": "large",
+  "text": "each see a sight so beautiful that they remember it for the rest of their lives",
+  "u": 1.277476244050775,
+  "rating": 7.9265,
+  "reading_menu_ctx": 2.1352854100629637,
+  "projection_rating_ctx": -1.1157801151275635
+ },
+ {
+  "value": "Caring",
+  "level": "small",
+  "text": "each get to make a cup of tea for someone they care about",
+  "u": -1.0633573683949222,
+  "rating": 6.8156,
+  "reading_menu_ctx": -2.5556874495754767,
+  "projection_rating_ctx": -14.398252487182617
+ },
+ {
+  "value": "Caring",
+  "level": "medium",
+  "text": "each get the chance to help someone they care about",
+  "u": 0.4595801415520831,
+  "rating": 6.5968,
+  "reading_menu_ctx": -0.7464837110416278,
+  "projection_rating_ctx": -8.918587684631348
+ },
+ {
+  "value": "Caring",
+  "level": "medium",
+  "text": "are each able to look after a loved one who needs them",
+  "u": 1.0736875638279735,
+  "rating": 7.9571,
+  "reading_menu_ctx": 0.4266305885953374,
+  "projection_rating_ctx": -5.827090263366699
+ },
+ {
+  "value": "Caring",
+  "level": "large",
+  "text": "are each able to be there for a loved one through the hardest time of their life",
+  "u": 3.877158893954731,
+  "rating": 8.7621,
+  "reading_menu_ctx": 2.7766684414725202,
+  "projection_rating_ctx": 1.5922536849975586
+ },
+ {
+  "value": "Defending",
+  "level": "small",
+  "text": "each speak up for a colleague who was interrupted in a meeting",
+  "u": -4.041366453141052,
+  "rating": 6.9958,
+  "reading_menu_ctx": -2.8776425474547658,
+  "projection_rating_ctx": -15.638740539550781
+ },
+ {
+  "value": "Defending",
+  "level": "medium",
+  "text": "each successfully stand up for someone who was being mistreated",
+  "u": 0.7086740037363102,
+  "rating": 7.8515,
+  "reading_menu_ctx": 0.1514093544602395,
+  "projection_rating_ctx": -6.076180458068848
+ },
+ {
+  "value": "Defending",
+  "level": "medium",
+  "text": "each protect a stranger from being bullied",
+  "u": 0.4891996176632001,
+  "rating": 7.6546,
+  "reading_menu_ctx": -0.8349149187402389,
+  "projection_rating_ctx": -8.282549858093262
+ },
+ {
+  "value": "Defending",
+  "level": "large",
+  "text": "each save a stranger from a violent attack",
+  "u": 2.0642110821863584,
+  "rating": 8.9388,
+  "reading_menu_ctx": 0.03448791740510604,
+  "projection_rating_ctx": -7.646324157714844
+ },
+ {
+  "value": "Diversity",
+  "level": "small",
+  "text": "each try a dish from a culture they have never encountered",
+  "u": -4.164178624799515,
+  "rating": 6.1269,
+  "reading_menu_ctx": -2.3919822713551815,
+  "projection_rating_ctx": -12.983243942260742
+ },
+ {
+  "value": "Diversity",
+  "level": "medium",
+  "text": "each get to know someone very different from themselves",
+  "u": -1.7528306862857332,
+  "rating": 6.9806,
+  "reading_menu_ctx": -0.09127554866450205,
+  "projection_rating_ctx": -6.886066436767578
+ },
+ {
+  "value": "Diversity",
+  "level": "medium",
+  "text": "each become part of a community made up of many different kinds of people",
+  "u": 2.9663112861265404,
+  "rating": 6.9751,
+  "reading_menu_ctx": 2.490586665999568,
+  "projection_rating_ctx": 1.2285797595977783
+ },
+ {
+  "value": "Diversity",
+  "level": "large",
+  "text": "each help build a town where people of every background are truly welcome",
+  "u": 5.470054230878065,
+  "rating": 8.4334,
+  "reading_menu_ctx": 2.069844123134107,
+  "projection_rating_ctx": 0.4056684374809265
+ },
+ {
+  "value": "Doing",
+  "level": "small",
+  "text": "each get ten minutes to do something they enjoy",
+  "u": -0.4502437246172755,
+  "rating": 6.9996,
+  "reading_menu_ctx": -2.203751183084042,
+  "projection_rating_ctx": -13.871227264404297
+ },
+ {
+  "value": "Doing",
+  "level": "medium",
+  "text": "each spend a day doing an activity they love",
+  "u": -0.5096483649894668,
+  "rating": 7.0032,
+  "reading_menu_ctx": -1.6263652536230562,
+  "projection_rating_ctx": -11.722437858581543
+ },
+ {
+  "value": "Doing",
+  "level": "medium",
+  "text": "each get to spend time on a hobby they are passionate about",
+  "u": 0.33369694794824445,
+  "rating": 7.2019,
+  "reading_menu_ctx": 0.06364449195227317,
+  "projection_rating_ctx": -7.780001163482666
+ },
+ {
+  "value": "Doing",
+  "level": "large",
+  "text": "each get to spend the rest of their working life doing the work they love most",
+  "u": 3.3494852484912805,
+  "rating": 8.6899,
+  "reading_menu_ctx": 2.6094015412936247,
+  "projection_rating_ctx": 1.2591650485992432
+ },
+ {
+  "value": "Embodying",
+  "level": "small",
+  "text": "each keep a small promise they made to themselves",
+  "u": -6.039866389487667,
+  "rating": 5.1516,
+  "reading_menu_ctx": -2.2288124153515696,
+  "projection_rating_ctx": -10.968536376953125
+ },
+ {
+  "value": "Embodying",
+  "level": "medium",
+  "text": "each manage to act according to their ideals in a hard situation",
+  "u": 1.9966409250300543,
+  "rating": 7.1641,
+  "reading_menu_ctx": 0.7413877579886057,
+  "projection_rating_ctx": -2.367715835571289
+ },
+ {
+  "value": "Embodying",
+  "level": "medium",
+  "text": "each live up to the kind of person they want to be when it is difficult",
+  "u": 1.1725657768770632,
+  "rating": 7.884,
+  "reading_menu_ctx": 1.8082156610879458,
+  "projection_rating_ctx": 0.3079262375831604
+ },
+ {
+  "value": "Embodying",
+  "level": "large",
+  "text": "each become, over the years, exactly the kind of person they always wanted to be",
+  "u": 4.184594873174543,
+  "rating": 8.8915,
+  "reading_menu_ctx": 3.5879597732480795,
+  "projection_rating_ctx": 5.816463470458984
+ },
+ {
+  "value": "Experiencing",
+  "level": "small",
+  "text": "each taste a fruit they have never tried before",
+  "u": -6.473371926543289,
+  "rating": 5.0186,
+  "reading_menu_ctx": -3.796986758075066,
+  "projection_rating_ctx": -18.339874267578125
+ },
+ {
+  "value": "Experiencing",
+  "level": "medium",
+  "text": "each have a new, memorable experience they have never had before",
+  "u": 0.014591391055187954,
+  "rating": 7.04,
+  "reading_menu_ctx": 0.43828946601243524,
+  "projection_rating_ctx": -7.211698055267334
+ },
+ {
+  "value": "Experiencing",
+  "level": "medium",
+  "text": "each try something exciting they have always wanted to experience",
+  "u": 0.7053277519622176,
+  "rating": 7.049,
+  "reading_menu_ctx": 0.12072311276273728,
+  "projection_rating_ctx": -6.739907741546631
+ },
+ {
+  "value": "Experiencing",
+  "level": "large",
+  "text": "each go on the journey of a lifetime that they had dreamed of for decades",
+  "u": 2.7961451736802427,
+  "rating": 8.7152,
+  "reading_menu_ctx": 2.3988679130852497,
+  "projection_rating_ctx": 0.34955859184265137
+ },
+ {
+  "value": "Fairness",
+  "level": "small",
+  "text": "each get back a small amount they were overcharged on a bill",
+  "u": -3.8277277079486987,
+  "rating": 5.195,
+  "reading_menu_ctx": -2.623443760885127,
+  "projection_rating_ctx": -15.948814392089844
+ },
+ {
+  "value": "Fairness",
+  "level": "medium",
+  "text": "each have an unfair decision against them reversed",
+  "u": -1.2888267711810637,
+  "rating": 6.9965,
+  "reading_menu_ctx": -2.04648085126902,
+  "projection_rating_ctx": -13.764042854309082
+ },
+ {
+  "value": "Fairness",
+  "level": "medium",
+  "text": "each receive the fair share they had wrongly been denied",
+  "u": 0.17391461128372535,
+  "rating": 8.175,
+  "reading_menu_ctx": -1.1106533643746506,
+  "projection_rating_ctx": -10.621177673339844
+ },
+ {
+  "value": "Fairness",
+  "level": "large",
+  "text": "each have years of unfair treatment finally set right and fully compensated",
+  "u": 3.908661649767058,
+  "rating": 8.9865,
+  "reading_menu_ctx": 2.3173798519388167,
+  "projection_rating_ctx": -0.33770453929901123
+ },
+ {
+  "value": "Freedom",
+  "level": "small",
+  "text": "each get to choose which film to watch tonight",
+  "u": -1.4170376436007808,
+  "rating": 5.11,
+  "reading_menu_ctx": -2.586718130154344,
+  "projection_rating_ctx": -15.712656021118164
+ },
+ {
+  "value": "Freedom",
+  "level": "medium",
+  "text": "each gain the freedom to decide how they spend their own time",
+  "u": 2.0917949751005693,
+  "rating": 7.0082,
+  "reading_menu_ctx": 2.281321034617893,
+  "projection_rating_ctx": -0.9802566170692444
+ },
+ {
+  "value": "Freedom",
+  "level": "medium",
+  "text": "are each no longer prevented from making their own choices about their lives",
+  "u": 3.3338580353745573,
+  "rating": 8.156,
+  "reading_menu_ctx": 2.498561345716571,
+  "projection_rating_ctx": -0.39780306816101074
+ },
+ {
+  "value": "Freedom",
+  "level": "large",
+  "text": "are each freed after years of being wrongly imprisoned",
+  "u": 5.225023441362385,
+  "rating": 9.0,
+  "reading_menu_ctx": 1.759229706428802,
+  "projection_rating_ctx": -2.297693967819214
+ },
+ {
+  "value": "Happiness",
+  "level": "small",
+  "text": "each smile at a funny joke",
+  "u": -5.011188509326156,
+  "rating": 6.2093,
+  "reading_menu_ctx": -6.005875877721924,
+  "projection_rating_ctx": -23.548873901367188
+ },
+ {
+  "value": "Happiness",
+  "level": "medium",
+  "text": "each feel happier for a week",
+  "u": -3.2434190354226207,
+  "rating": 6.1185,
+  "reading_menu_ctx": -0.6984425005179182,
+  "projection_rating_ctx": -8.339278221130371
+ },
+ {
+  "value": "Happiness",
+  "level": "medium",
+  "text": "are each in a noticeably better mood for several days",
+  "u": -0.9543151670892412,
+  "rating": 6.7723,
+  "reading_menu_ctx": -0.05251515629591608,
+  "projection_rating_ctx": -7.961831092834473
+ },
+ {
+  "value": "Happiness",
+  "level": "large",
+  "text": "each become deeply happy for the rest of their lives",
+  "u": 2.4838764650724046,
+  "rating": 8.983,
+  "reading_menu_ctx": 3.498675624185434,
+  "projection_rating_ctx": 4.260926723480225
+ },
+ {
+  "value": "Justice",
+  "level": "small",
+  "text": "each see someone who cut in line sent to the back",
+  "u": -8.411892022758822,
+  "rating": 4.4791,
+  "reading_menu_ctx": -2.767906997231057,
+  "projection_rating_ctx": -15.69229507446289
+ },
+ {
+  "value": "Justice",
+  "level": "medium",
+  "text": "each see someone who wronged them held accountable",
+  "u": -1.5345602294523015,
+  "rating": 7.0282,
+  "reading_menu_ctx": -1.0093328281999505,
+  "projection_rating_ctx": -9.88598918914795
+ },
+ {
+  "value": "Justice",
+  "level": "medium",
+  "text": "each see a person who harmed them face fair consequences",
+  "u": -0.10024350655875604,
+  "rating": 7.0119,
+  "reading_menu_ctx": -1.2913600022543732,
+  "projection_rating_ctx": -11.091611862182617
+ },
+ {
+  "value": "Justice",
+  "level": "large",
+  "text": "each see the person who ruined their life brought to justice",
+  "u": -0.6583325560056461,
+  "rating": 7.7572,
+  "reading_menu_ctx": 0.44376390408526634,
+  "projection_rating_ctx": -5.383721828460693
+ },
+ {
+  "value": "Knowing",
+  "level": "small",
+  "text": "each learn a fun fact",
+  "u": -4.279227783629695,
+  "rating": 5.3274,
+  "reading_menu_ctx": -4.682925497917981,
+  "projection_rating_ctx": -19.42938804626465
+ },
+ {
+  "value": "Knowing",
+  "level": "medium",
+  "text": "each come to understand something important about the world",
+  "u": 2.1948548798956056,
+  "rating": 7.0017,
+  "reading_menu_ctx": -0.23919853777461242,
+  "projection_rating_ctx": -5.791403293609619
+ },
+ {
+  "value": "Knowing",
+  "level": "medium",
+  "text": "each finally learn the answer to a question that has long puzzled them",
+  "u": 0.5017262488892268,
+  "rating": 6.9945,
+  "reading_menu_ctx": -0.15947421017442176,
+  "projection_rating_ctx": -5.684390544891357
+ },
+ {
+  "value": "Knowing",
+  "level": "large",
+  "text": "each gain a deep understanding that transforms how they see the world",
+  "u": 4.378709039189008,
+  "rating": 7.8022,
+  "reading_menu_ctx": 2.3661009143874896,
+  "projection_rating_ctx": 2.2833988666534424
+ },
+ {
+  "value": "Legacy",
+  "level": "small",
+  "text": "each leave a kind note that someone finds years later",
+  "u": -0.9712448261595948,
+  "rating": 7.048,
+  "reading_menu_ctx": -2.948675291964835,
+  "projection_rating_ctx": -14.561769485473633
+ },
+ {
+  "value": "Legacy",
+  "level": "medium",
+  "text": "each create something that will outlast them",
+  "u": 3.1643457649097395,
+  "rating": 7.0452,
+  "reading_menu_ctx": 1.245138713370686,
+  "projection_rating_ctx": -2.8941292762756348
+ },
+ {
+  "value": "Legacy",
+  "level": "medium",
+  "text": "each leave behind something that will be remembered after they are gone",
+  "u": 1.3452169233895435,
+  "rating": 7.0003,
+  "reading_menu_ctx": 1.3033525848007899,
+  "projection_rating_ctx": -2.8699450492858887
+ },
+ {
+  "value": "Legacy",
+  "level": "large",
+  "text": "each create a lasting work that helps people for generations after they are gone",
+  "u": 6.412070237918018,
+  "rating": 9.0,
+  "reading_menu_ctx": 4.200212035141756,
+  "projection_rating_ctx": 6.322558403015137
+ },
+ {
+  "value": "Longevity",
+  "level": "small",
+  "text": "each live one day longer",
+  "u": -4.250968498960641,
+  "rating": 2.9273,
+  "reading_menu_ctx": -0.5714971998487384,
+  "projection_rating_ctx": -9.604251861572266
+ },
+ {
+  "value": "Longevity",
+  "level": "medium",
+  "text": "each live a year longer",
+  "u": -2.276774048136031,
+  "rating": 4.2036,
+  "reading_menu_ctx": 0.6702875096419996,
+  "projection_rating_ctx": -6.01412296295166
+ },
+ {
+  "value": "Longevity",
+  "level": "medium",
+  "text": "each have their life extended by a year",
+  "u": -0.21927206637822536,
+  "rating": 4.9379,
+  "reading_menu_ctx": 1.1079952433523035,
+  "projection_rating_ctx": -4.227121353149414
+ },
+ {
+  "value": "Longevity",
+  "level": "large",
+  "text": "each live twenty more years in good health",
+  "u": 3.044245904700587,
+  "rating": 7.0572,
+  "reading_menu_ctx": 3.267591104485044,
+  "projection_rating_ctx": 2.5193467140197754
+ },
+ {
+  "value": "Loyalty",
+  "level": "small",
+  "text": "each get a message from a friend checking in on them",
+  "u": -3.291053060231399,
+  "rating": 6.8681,
+  "reading_menu_ctx": -3.2471551194101314,
+  "projection_rating_ctx": -16.68524932861328
+ },
+ {
+  "value": "Loyalty",
+  "level": "medium",
+  "text": "each have a friend stand by them through a hard time",
+  "u": 0.6736871800328237,
+  "rating": 7.3481,
+  "reading_menu_ctx": -0.5788689798245281,
+  "projection_rating_ctx": -9.697664260864258
+ },
+ {
+  "value": "Loyalty",
+  "level": "medium",
+  "text": "each find that the people close to them stay faithful when it matters",
+  "u": 1.550756069525106,
+  "rating": 6.9973,
+  "reading_menu_ctx": 0.8913072286547759,
+  "projection_rating_ctx": -3.7700552940368652
+ },
+ {
+  "value": "Loyalty",
+  "level": "large",
+  "text": "each have a friend who stands by them through the worst crisis of their life",
+  "u": 2.3662053518952293,
+  "rating": 8.1255,
+  "reading_menu_ctx": 1.9389067334867778,
+  "projection_rating_ctx": -1.6573609113693237
+ },
+ {
+  "value": "Nurturing",
+  "level": "small",
+  "text": "each help a child tie their shoes",
+  "u": -4.551449907834201,
+  "rating": 6.8254,
+  "reading_menu_ctx": -3.392895011812599,
+  "projection_rating_ctx": -16.261526107788086
+ },
+ {
+  "value": "Nurturing",
+  "level": "medium",
+  "text": "each help a young person grow and flourish",
+  "u": 3.7160249023072565,
+  "rating": 8.4631,
+  "reading_menu_ctx": 0.3444530065310927,
+  "projection_rating_ctx": -4.145171165466309
+ },
+ {
+  "value": "Nurturing",
+  "level": "medium",
+  "text": "each get to guide a child through an important stage of growing up",
+  "u": 1.530030934400208,
+  "rating": 6.9647,
+  "reading_menu_ctx": 1.7127377730829008,
+  "projection_rating_ctx": -2.270920991897583
+ },
+ {
+  "value": "Nurturing",
+  "level": "large",
+  "text": "each raise a child who grows up healthy, kind and happy",
+  "u": 5.707290261719112,
+  "rating": 8.9935,
+  "reading_menu_ctx": 1.0624882789568697,
+  "projection_rating_ctx": -3.165461540222168
+ },
+ {
+  "value": "Pleasure",
+  "level": "small",
+  "text": "each enjoy a piece of chocolate",
+  "u": -4.046673238222298,
+  "rating": 5.1108,
+  "reading_menu_ctx": -3.541698158101477,
+  "projection_rating_ctx": -18.292083740234375
+ },
+ {
+  "value": "Pleasure",
+  "level": "medium",
+  "text": "each enjoy a delicious meal",
+  "u": -1.9173382991567762,
+  "rating": 6.9187,
+  "reading_menu_ctx": -2.3612761832952494,
+  "projection_rating_ctx": -14.75289535522461
+ },
+ {
+  "value": "Pleasure",
+  "level": "medium",
+  "text": "each have a thoroughly enjoyable evening",
+  "u": 0.029644521193398502,
+  "rating": 7.4677,
+  "reading_menu_ctx": -1.3593689019813482,
+  "projection_rating_ctx": -11.529906272888184
+ },
+ {
+  "value": "Pleasure",
+  "level": "large",
+  "text": "each enjoy a perfect week of rest, good food and fun",
+  "u": 0.29357625985022967,
+  "rating": 7.7714,
+  "reading_menu_ctx": 1.8194624417443515,
+  "projection_rating_ctx": -2.0663745403289795
+ },
+ {
+  "value": "Preserving",
+  "level": "small",
+  "text": "each see an old bench in their park repaired",
+  "u": -3.2120177548505215,
+  "rating": 5.2458,
+  "reading_menu_ctx": -4.033165545897672,
+  "projection_rating_ctx": -18.71949577331543
+ },
+ {
+  "value": "Preserving",
+  "level": "medium",
+  "text": "each see a place they love protected from destruction",
+  "u": 2.2872890828216232,
+  "rating": 7.0282,
+  "reading_menu_ctx": -0.4608859077715599,
+  "projection_rating_ctx": -7.934189796447754
+ },
+ {
+  "value": "Preserving",
+  "level": "medium",
+  "text": "each see an old tradition they cherish kept alive",
+  "u": 0.2879909700949603,
+  "rating": 7.2313,
+  "reading_menu_ctx": -1.4002562026574186,
+  "projection_rating_ctx": -10.879476547241211
+ },
+ {
+  "value": "Preserving",
+  "level": "large",
+  "text": "each see their hometown saved from being destroyed by a flood",
+  "u": 2.6904929994547184,
+  "rating": 8.2182,
+  "reading_menu_ctx": 1.6629502776149987,
+  "projection_rating_ctx": -1.240962028503418
+ },
+ {
+  "value": "Protection",
+  "level": "small",
+  "text": "are each warned about a slippery step before they reach it",
+  "u": -0.9094494524594181,
+  "rating": 7.3915,
+  "reading_menu_ctx": -2.6523457697197044,
+  "projection_rating_ctx": -17.062162399291992
+ },
+ {
+  "value": "Protection",
+  "level": "medium",
+  "text": "are each kept safe from a danger that threatened them",
+  "u": 3.1256124606026634,
+  "rating": 8.9905,
+  "reading_menu_ctx": 0.9489743789346741,
+  "projection_rating_ctx": -4.542322158813477
+ },
+ {
+  "value": "Protection",
+  "level": "medium",
+  "text": "are each shielded from a threat to their safety",
+  "u": 1.6473525655424797,
+  "rating": 8.3914,
+  "reading_menu_ctx": 0.38417066478757333,
+  "projection_rating_ctx": -8.039278030395508
+ },
+ {
+  "value": "Protection",
+  "level": "large",
+  "text": "are each saved from being killed in a fire",
+  "u": 3.938972910951783,
+  "rating": 8.7675,
+  "reading_menu_ctx": 0.9188739883450836,
+  "projection_rating_ctx": -6.099794864654541
+ },
+ {
+  "value": "Respect",
+  "level": "small",
+  "text": "each get a polite nod from a stranger",
+  "u": -9.100953790863564,
+  "rating": 4.9539,
+  "reading_menu_ctx": -4.236289183075632,
+  "projection_rating_ctx": -21.778152465820312
+ },
+ {
+  "value": "Respect",
+  "level": "medium",
+  "text": "are each treated with respect by people who looked down on them",
+  "u": -1.7706591533795226,
+  "rating": 7.1173,
+  "reading_menu_ctx": 0.22931177700681826,
+  "projection_rating_ctx": -7.272302627563477
+ },
+ {
+  "value": "Respect",
+  "level": "medium",
+  "text": "each finally receive the recognition and respect they deserve",
+  "u": 1.4764068308695537,
+  "rating": 8.821,
+  "reading_menu_ctx": 1.9275704389016495,
+  "projection_rating_ctx": -1.2434908151626587
+ },
+ {
+  "value": "Respect",
+  "level": "large",
+  "text": "each finally earn the lasting respect of everyone who once looked down on them",
+  "u": 1.1298937693344508,
+  "rating": 7.9729,
+  "reading_menu_ctx": 2.3404749623632024,
+  "projection_rating_ctx": 0.02708214521408081
+ },
+ {
+  "value": "Spirituality",
+  "level": "small",
+  "text": "each feel a brief sense of awe while looking at the stars",
+  "u": -1.886105792077888,
+  "rating": 5.1806,
+  "reading_menu_ctx": -1.4757070081177623,
+  "projection_rating_ctx": -10.409425735473633
+ },
+ {
+  "value": "Spirituality",
+  "level": "medium",
+  "text": "each have a deeply meaningful spiritual experience",
+  "u": -1.103970474846782,
+  "rating": 6.9963,
+  "reading_menu_ctx": 0.581999763336995,
+  "projection_rating_ctx": -4.068920612335205
+ },
+ {
+  "value": "Spirituality",
+  "level": "medium",
+  "text": "each feel a profound connection to something greater than themselves",
+  "u": 2.518966217595431,
+  "rating": 7.0042,
+  "reading_menu_ctx": 2.084846779552227,
+  "projection_rating_ctx": 0.3794432282447815
+ },
+ {
+  "value": "Spirituality",
+  "level": "large",
+  "text": "each find a deep sense of meaning and peace that stays with them for the rest of their lives",
+  "u": 4.418045008565472,
+  "rating": 8.9989,
+  "reading_menu_ctx": 5.141424788813883,
+  "projection_rating_ctx": 9.881782531738281
+ },
+ {
+  "value": "Non-suffering",
+  "level": "small",
+  "text": "are each spared a mild headache",
+  "u": -4.348479840658255,
+  "rating": 5.4538,
+  "reading_menu_ctx": -1.1613511805065537,
+  "projection_rating_ctx": -12.575916290283203
+ },
+ {
+  "value": "Non-suffering",
+  "level": "medium",
+  "text": "are each spared a week of pain",
+  "u": 2.2182902872843306,
+  "rating": 7.0266,
+  "reading_menu_ctx": 0.2975365087344528,
+  "projection_rating_ctx": -7.816413402557373
+ },
+ {
+  "value": "Non-suffering",
+  "level": "medium",
+  "text": "are each relieved of a painful condition for a week",
+  "u": -0.623386607442811,
+  "rating": 6.9948,
+  "reading_menu_ctx": 0.6232817542704139,
+  "projection_rating_ctx": -5.813297271728516
+ },
+ {
+  "value": "Non-suffering",
+  "level": "large",
+  "text": "are each cured of a severe pain they have suffered from for years",
+  "u": 1.9292278645378627,
+  "rating": 8.2421,
+  "reading_menu_ctx": 2.7961707340653303,
+  "projection_rating_ctx": 1.949078917503357
+ },
+ {
+  "value": "Truth",
+  "level": "small",
+  "text": "each learn the real reason a meeting was moved",
+  "u": -5.65740082094094,
+  "rating": 4.8898,
+  "reading_menu_ctx": -1.5973121412384939,
+  "projection_rating_ctx": -13.00527572631836
+ },
+ {
+  "value": "Truth",
+  "level": "medium",
+  "text": "are each told the truth instead of being lied to",
+  "u": -2.129018297214417,
+  "rating": 6.9819,
+  "reading_menu_ctx": -1.1507832048145517,
+  "projection_rating_ctx": -12.225313186645508
+ },
+ {
+  "value": "Truth",
+  "level": "medium",
+  "text": "each learn the truth about something they had been deceived about",
+  "u": -1.0657770799246777,
+  "rating": 6.9391,
+  "reading_menu_ctx": 0.42587894390245173,
+  "projection_rating_ctx": -6.527676582336426
+ },
+ {
+  "value": "Truth",
+  "level": "large",
+  "text": "each finally learn the truth about a lie that shaped their whole life",
+  "u": -2.345584019889726,
+  "rating": 6.9427,
+  "reading_menu_ctx": 1.9644410725696049,
+  "projection_rating_ctx": -0.6974430084228516
+ }
+]

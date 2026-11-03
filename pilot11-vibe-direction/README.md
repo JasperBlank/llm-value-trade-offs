@@ -1,6 +1,6 @@
 # Pilot 11: one direction for both?
 
-Pilot 10 found a stable price for each sentence, and a direct "how good" rating that overlaps with it (r 0.81 over the full range, about 0.5 among outcomes of similar size). Is there a direction inside the model, read from the sentence itself, that carries this overlap, and does the model use it for both the choice and the rating? **Read [`DESIGN.md`](DESIGN.md) first.**
+Pilot 10 found a stable price for each sentence, and a direct "how good" rating that overlaps with it (r 0.81 over the full range, about 0.5 among outcomes of similar size). Is there a direction inside the model, read from the sentence itself, that carries this overlap, and does the model use it for both the choice and the rating? **Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/real/README.md`](results/real/README.md) (run 3 Nov 2026).
 
 | File | What it does |
 |---|---|

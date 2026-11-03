@@ -1,0 +1,1346 @@
+[
+ {
+  "value": "Achievement",
+  "level": "small",
+  "text": "each finish a small task they had been putting off",
+  "p8": null,
+  "u": -4.547395818400736,
+  "rating": 5.9032,
+  "partners": [
+   64,
+   88,
+   4,
+   48
+  ]
+ },
+ {
+  "value": "Achievement",
+  "level": "medium",
+  "text": "each achieve a goal they have worked towards for a long time",
+  "p8": 0,
+  "u": 1.5679976726064806,
+  "rating": 7.7626,
+  "partners": [
+   62,
+   66,
+   78,
+   82
+  ]
+ },
+ {
+  "value": "Achievement",
+  "level": "medium",
+  "text": "each finally succeed at something they have spent years trying to do",
+  "p8": 1,
+  "u": 0.8643193259338955,
+  "rating": 7.0501,
+  "partners": [
+   13,
+   30,
+   61,
+   10
+  ]
+ },
+ {
+  "value": "Achievement",
+  "level": "large",
+  "text": "each achieve the greatest ambition of their life",
+  "p8": null,
+  "u": 0.27425319220164596,
+  "rating": 7.9477,
+  "partners": [
+   74,
+   71,
+   22,
+   34
+  ]
+ },
+ {
+  "value": "Beauty",
+  "level": "small",
+  "text": "each notice a pretty flower on their way to work",
+  "p8": null,
+  "u": -4.280057308510688,
+  "rating": 4.9412,
+  "partners": [
+   48,
+   56,
+   88,
+   16
+  ]
+ },
+ {
+  "value": "Beauty",
+  "level": "medium",
+  "text": "each spend an afternoon somewhere breathtakingly beautiful",
+  "p8": 0,
+  "u": -0.4677196826411919,
+  "rating": 7.7105,
+  "partners": [
+   20,
+   21,
+   90,
+   47
+  ]
+ },
+ {
+  "value": "Beauty",
+  "level": "medium",
+  "text": "each get to see something so beautiful it moves them deeply",
+  "p8": 1,
+  "u": 2.754358342044994,
+  "rating": 8.0594,
+  "partners": [
+   31,
+   75,
+   18,
+   86
+  ]
+ },
+ {
+  "value": "Beauty",
+  "level": "large",
+  "text": "each see a sight so beautiful that they remember it for the rest of their lives",
+  "p8": null,
+  "u": 1.277476244050775,
+  "rating": 7.9265,
+  "partners": [
+   54,
+   26,
+   83,
+   82
+  ]
+ },
+ {
+  "value": "Caring",
+  "level": "small",
+  "text": "each get to make a cup of tea for someone they care about",
+  "p8": null,
+  "u": -1.0633573683949222,
+  "rating": 6.8156,
+  "partners": [
+   94,
+   85,
+   52,
+   42
+  ]
+ },
+ {
+  "value": "Caring",
+  "level": "medium",
+  "text": "each get the chance to help someone they care about",
+  "p8": 0,
+  "u": 0.4595801415520831,
+  "rating": 6.5968,
+  "partners": [
+   14,
+   50,
+   22,
+   71
+  ]
+ },
+ {
+  "value": "Caring",
+  "level": "medium",
+  "text": "are each able to look after a loved one who needs them",
+  "p8": 1,
+  "u": 1.0736875638279735,
+  "rating": 7.9571,
+  "partners": [
+   83,
+   26,
+   7,
+   2
+  ]
+ },
+ {
+  "value": "Caring",
+  "level": "large",
+  "text": "are each able to be there for a loved one through the hardest time of their life",
+  "p8": null,
+  "u": 3.877158893954731,
+  "rating": 8.7621,
+  "partners": [
+   35,
+   79,
+   65,
+   27
+  ]
+ },
+ {
+  "value": "Defending",
+  "level": "small",
+  "text": "each speak up for a colleague who was interrupted in a meeting",
+  "p8": null,
+  "u": -4.041366453141052,
+  "rating": 6.9958,
+  "partners": [
+   68,
+   16,
+   56,
+   32
+  ]
+ },
+ {
+  "value": "Defending",
+  "level": "medium",
+  "text": "each successfully stand up for someone who was being mistreated",
+  "p8": 0,
+  "u": 0.7086740037363102,
+  "rating": 7.8515,
+  "partners": [
+   30,
+   61,
+   2,
+   50
+  ]
+ },
+ {
+  "value": "Defending",
+  "level": "medium",
+  "text": "each protect a stranger from being bullied",
+  "p8": 1,
+  "u": 0.4891996176632001,
+  "rating": 7.6546,
+  "partners": [
+   50,
+   9,
+   22,
+   61
+  ]
+ },
+ {
+  "value": "Defending",
+  "level": "large",
+  "text": "each save a stranger from a violent attack",
+  "p8": null,
+  "u": 2.0642110821863584,
+  "rating": 8.9388,
+  "partners": [
+   37,
+   25,
+   49,
+   91
+  ]
+ },
+ {
+  "value": "Diversity",
+  "level": "small",
+  "text": "each try a dish from a culture they have never encountered",
+  "p8": null,
+  "u": -4.164178624799515,
+  "rating": 6.1269,
+  "partners": [
+   56,
+   48,
+   4,
+   68
+  ]
+ },
+ {
+  "value": "Diversity",
+  "level": "medium",
+  "text": "each get to know someone very different from themselves",
+  "p8": 0,
+  "u": -1.7528306862857332,
+  "rating": 6.9806,
+  "partners": [
+   81,
+   84,
+   69,
+   45
+  ]
+ },
+ {
+  "value": "Diversity",
+  "level": "medium",
+  "text": "each become part of a community made up of many different kinds of people",
+  "p8": 1,
+  "u": 2.9663112861265404,
+  "rating": 6.9751,
+  "partners": [
+   59,
+   77,
+   31,
+   53
+  ]
+ },
+ {
+  "value": "Diversity",
+  "level": "large",
+  "text": "each help build a town where people of every background are truly welcome",
+  "p8": null,
+  "u": 5.470054230878065,
+  "rating": 8.4334,
+  "partners": [
+   67,
+   39,
+   55,
+   87
+  ]
+ },
+ {
+  "value": "Doing",
+  "level": "small",
+  "text": "each get ten minutes to do something they enjoy",
+  "p8": null,
+  "u": -0.4502437246172755,
+  "rating": 6.9996,
+  "partners": [
+   5,
+   90,
+   47,
+   58
+  ]
+ },
+ {
+  "value": "Doing",
+  "level": "medium",
+  "text": "each spend a day doing an activity they love",
+  "p8": 0,
+  "u": -0.5096483649894668,
+  "rating": 7.0032,
+  "partners": [
+   5,
+   90,
+   47,
+   58
+  ]
+ },
+ {
+  "value": "Doing",
+  "level": "medium",
+  "text": "each get to spend time on a hobby they are passionate about",
+  "p8": 1,
+  "u": 0.33369694794824445,
+  "rating": 7.2019,
+  "partners": [
+   71,
+   74,
+   3,
+   9
+  ]
+ },
+ {
+  "value": "Doing",
+  "level": "large",
+  "text": "each get to spend the rest of their working life doing the work they love most",
+  "p8": null,
+  "u": 3.3494852484912805,
+  "rating": 8.6899,
+  "partners": [
+   38,
+   53,
+   77,
+   59
+  ]
+ },
+ {
+  "value": "Embodying",
+  "level": "small",
+  "text": "each keep a small promise they made to themselves",
+  "p8": null,
+  "u": -6.039866389487667,
+  "rating": 5.1516,
+  "partners": [
+   92,
+   28,
+   40,
+   64
+  ]
+ },
+ {
+  "value": "Embodying",
+  "level": "medium",
+  "text": "each manage to act according to their ideals in a hard situation",
+  "p8": 0,
+  "u": 1.9966409250300543,
+  "rating": 7.1641,
+  "partners": [
+   91,
+   15,
+   37,
+   49
+  ]
+ },
+ {
+  "value": "Embodying",
+  "level": "medium",
+  "text": "each live up to the kind of person they want to be when it is difficult",
+  "p8": 1,
+  "u": 1.1725657768770632,
+  "rating": 7.884,
+  "partners": [
+   83,
+   10,
+   7,
+   54
+  ]
+ },
+ {
+  "value": "Embodying",
+  "level": "large",
+  "text": "each become, over the years, exactly the kind of person they always wanted to be",
+  "p8": null,
+  "u": 4.184594873174543,
+  "rating": 8.8915,
+  "partners": [
+   51,
+   87,
+   79,
+   35
+  ]
+ },
+ {
+  "value": "Experiencing",
+  "level": "small",
+  "text": "each taste a fruit they have never tried before",
+  "p8": null,
+  "u": -6.473371926543289,
+  "rating": 5.0186,
+  "partners": [
+   24,
+   92,
+   40,
+   64
+  ]
+ },
+ {
+  "value": "Experiencing",
+  "level": "medium",
+  "text": "each have a new, memorable experience they have never had before",
+  "p8": 0,
+  "u": 0.014591391055187954,
+  "rating": 7.04,
+  "partners": [
+   70,
+   46,
+   34,
+   58
+  ]
+ },
+ {
+  "value": "Experiencing",
+  "level": "medium",
+  "text": "each try something exciting they have always wanted to experience",
+  "p8": 1,
+  "u": 0.7053277519622176,
+  "rating": 7.049,
+  "partners": [
+   13,
+   61,
+   2,
+   50
+  ]
+ },
+ {
+  "value": "Experiencing",
+  "level": "large",
+  "text": "each go on the journey of a lifetime that they had dreamed of for decades",
+  "p8": null,
+  "u": 2.7961451736802427,
+  "rating": 8.7152,
+  "partners": [
+   6,
+   75,
+   18,
+   59
+  ]
+ },
+ {
+  "value": "Fairness",
+  "level": "small",
+  "text": "each get back a small amount they were overcharged on a bill",
+  "p8": null,
+  "u": -3.8277277079486987,
+  "rating": 5.195,
+  "partners": [
+   12,
+   68,
+   16,
+   56
+  ]
+ },
+ {
+  "value": "Fairness",
+  "level": "medium",
+  "text": "each have an unfair decision against them reversed",
+  "p8": 0,
+  "u": -1.2888267711810637,
+  "rating": 6.9965,
+  "partners": [
+   36,
+   85,
+   94,
+   8
+  ]
+ },
+ {
+  "value": "Fairness",
+  "level": "medium",
+  "text": "each receive the fair share they had wrongly been denied",
+  "p8": 1,
+  "u": 0.17391461128372535,
+  "rating": 8.175,
+  "partners": [
+   3,
+   74,
+   71,
+   70
+  ]
+ },
+ {
+  "value": "Fairness",
+  "level": "large",
+  "text": "each have years of unfair treatment finally set right and fully compensated",
+  "p8": null,
+  "u": 3.908661649767058,
+  "rating": 8.9865,
+  "partners": [
+   79,
+   11,
+   65,
+   27
+  ]
+ },
+ {
+  "value": "Freedom",
+  "level": "small",
+  "text": "each get to choose which film to watch tonight",
+  "p8": null,
+  "u": -1.4170376436007808,
+  "rating": 5.11,
+  "partners": [
+   45,
+   33,
+   85,
+   17
+  ]
+ },
+ {
+  "value": "Freedom",
+  "level": "medium",
+  "text": "each gain the freedom to decide how they spend their own time",
+  "p8": 0,
+  "u": 2.0917949751005693,
+  "rating": 7.0082,
+  "partners": [
+   15,
+   25,
+   49,
+   89
+  ]
+ },
+ {
+  "value": "Freedom",
+  "level": "medium",
+  "text": "are each no longer prevented from making their own choices about their lives",
+  "p8": 1,
+  "u": 3.3338580353745573,
+  "rating": 8.156,
+  "partners": [
+   23,
+   53,
+   77,
+   59
+  ]
+ },
+ {
+  "value": "Freedom",
+  "level": "large",
+  "text": "are each freed after years of being wrongly imprisoned",
+  "p8": null,
+  "u": 5.225023441362385,
+  "rating": 9.0,
+  "partners": [
+   19,
+   67,
+   87,
+   51
+  ]
+ },
+ {
+  "value": "Happiness",
+  "level": "small",
+  "text": "each smile at a funny joke",
+  "p8": null,
+  "u": -5.011188509326156,
+  "rating": 6.2093,
+  "partners": [
+   64,
+   0,
+   92,
+   88
+  ]
+ },
+ {
+  "value": "Happiness",
+  "level": "medium",
+  "text": "each feel happier for a week",
+  "p8": 0,
+  "u": -3.2434190354226207,
+  "rating": 6.1185,
+  "partners": [
+   72,
+   60,
+   32,
+   12
+  ]
+ },
+ {
+  "value": "Happiness",
+  "level": "medium",
+  "text": "are each in a noticeably better mood for several days",
+  "p8": 1,
+  "u": -0.9543151670892412,
+  "rating": 6.7723,
+  "partners": [
+   52,
+   76,
+   8,
+   94
+  ]
+ },
+ {
+  "value": "Happiness",
+  "level": "large",
+  "text": "each become deeply happy for the rest of their lives",
+  "p8": null,
+  "u": 2.4838764650724046,
+  "rating": 8.983,
+  "partners": [
+   86,
+   63,
+   73,
+   75
+  ]
+ },
+ {
+  "value": "Justice",
+  "level": "small",
+  "text": "each see someone who cut in line sent to the back",
+  "p8": null,
+  "u": -8.411892022758822,
+  "rating": 4.4791,
+  "partners": [
+   80,
+   28,
+   24,
+   92
+  ]
+ },
+ {
+  "value": "Justice",
+  "level": "medium",
+  "text": "each see someone who wronged them held accountable",
+  "p8": 0,
+  "u": -1.5345602294523015,
+  "rating": 7.0282,
+  "partners": [
+   36,
+   17,
+   81,
+   33
+  ]
+ },
+ {
+  "value": "Justice",
+  "level": "medium",
+  "text": "each see a person who harmed them face fair consequences",
+  "p8": 1,
+  "u": -0.10024350655875604,
+  "rating": 7.0119,
+  "partners": [
+   29,
+   58,
+   70,
+   34
+  ]
+ },
+ {
+  "value": "Justice",
+  "level": "large",
+  "text": "each see the person who ruined their life brought to justice",
+  "p8": null,
+  "u": -0.6583325560056461,
+  "rating": 7.7572,
+  "partners": [
+   90,
+   21,
+   5,
+   20
+  ]
+ },
+ {
+  "value": "Knowing",
+  "level": "small",
+  "text": "each learn a fun fact",
+  "p8": null,
+  "u": -4.279227783629695,
+  "rating": 5.3274,
+  "partners": [
+   4,
+   56,
+   88,
+   16
+  ]
+ },
+ {
+  "value": "Knowing",
+  "level": "medium",
+  "text": "each come to understand something important about the world",
+  "p8": 0,
+  "u": 2.1948548798956056,
+  "rating": 7.0017,
+  "partners": [
+   89,
+   73,
+   37,
+   15
+  ]
+ },
+ {
+  "value": "Knowing",
+  "level": "medium",
+  "text": "each finally learn the answer to a question that has long puzzled them",
+  "p8": 1,
+  "u": 0.5017262488892268,
+  "rating": 6.9945,
+  "partners": [
+   14,
+   9,
+   22,
+   61
+  ]
+ },
+ {
+  "value": "Knowing",
+  "level": "large",
+  "text": "each gain a deep understanding that transforms how they see the world",
+  "p8": null,
+  "u": 4.378709039189008,
+  "rating": 7.8022,
+  "partners": [
+   87,
+   27,
+   79,
+   35
+  ]
+ },
+ {
+  "value": "Legacy",
+  "level": "small",
+  "text": "each leave a kind note that someone finds years later",
+  "p8": null,
+  "u": -0.9712448261595948,
+  "rating": 7.048,
+  "partners": [
+   42,
+   76,
+   8,
+   94
+  ]
+ },
+ {
+  "value": "Legacy",
+  "level": "medium",
+  "text": "each create something that will outlast them",
+  "p8": 0,
+  "u": 3.1643457649097395,
+  "rating": 7.0452,
+  "partners": [
+   77,
+   59,
+   38,
+   23
+  ]
+ },
+ {
+  "value": "Legacy",
+  "level": "medium",
+  "text": "each leave behind something that will be remembered after they are gone",
+  "p8": 1,
+  "u": 1.3452169233895435,
+  "rating": 7.0003,
+  "partners": [
+   7,
+   82,
+   26,
+   66
+  ]
+ },
+ {
+  "value": "Legacy",
+  "level": "large",
+  "text": "each create a lasting work that helps people for generations after they are gone",
+  "p8": null,
+  "u": 6.412070237918018,
+  "rating": 9.0,
+  "partners": [
+   67,
+   19,
+   39,
+   87
+  ]
+ },
+ {
+  "value": "Longevity",
+  "level": "small",
+  "text": "each live one day longer",
+  "p8": null,
+  "u": -4.250968498960641,
+  "rating": 2.9273,
+  "partners": [
+   48,
+   4,
+   16,
+   88
+  ]
+ },
+ {
+  "value": "Longevity",
+  "level": "medium",
+  "text": "each live a year longer",
+  "p8": 0,
+  "u": -2.276774048136031,
+  "rating": 4.2036,
+  "partners": [
+   95,
+   93,
+   69,
+   84
+  ]
+ },
+ {
+  "value": "Longevity",
+  "level": "medium",
+  "text": "each have their life extended by a year",
+  "p8": 1,
+  "u": -0.21927206637822536,
+  "rating": 4.9379,
+  "partners": [
+   46,
+   20,
+   29,
+   5
+  ]
+ },
+ {
+  "value": "Longevity",
+  "level": "large",
+  "text": "each live twenty more years in good health",
+  "p8": null,
+  "u": 3.044245904700587,
+  "rating": 7.0572,
+  "partners": [
+   18,
+   77,
+   53,
+   31
+  ]
+ },
+ {
+  "value": "Loyalty",
+  "level": "small",
+  "text": "each get a message from a friend checking in on them",
+  "p8": null,
+  "u": -3.291053060231399,
+  "rating": 6.8681,
+  "partners": [
+   41,
+   72,
+   32,
+   12
+  ]
+ },
+ {
+  "value": "Loyalty",
+  "level": "medium",
+  "text": "each have a friend stand by them through a hard time",
+  "p8": 0,
+  "u": 0.6736871800328237,
+  "rating": 7.3481,
+  "partners": [
+   30,
+   13,
+   50,
+   14
+  ]
+ },
+ {
+  "value": "Loyalty",
+  "level": "medium",
+  "text": "each find that the people close to them stay faithful when it matters",
+  "p8": 1,
+  "u": 1.550756069525106,
+  "rating": 6.9973,
+  "partners": [
+   1,
+   66,
+   82,
+   78
+  ]
+ },
+ {
+  "value": "Loyalty",
+  "level": "large",
+  "text": "each have a friend who stands by them through the worst crisis of their life",
+  "p8": null,
+  "u": 2.3662053518952293,
+  "rating": 8.1255,
+  "partners": [
+   73,
+   43,
+   89,
+   86
+  ]
+ },
+ {
+  "value": "Nurturing",
+  "level": "small",
+  "text": "each help a child tie their shoes",
+  "p8": null,
+  "u": -4.551449907834201,
+  "rating": 6.8254,
+  "partners": [
+   0,
+   88,
+   4,
+   48
+  ]
+ },
+ {
+  "value": "Nurturing",
+  "level": "medium",
+  "text": "each help a young person grow and flourish",
+  "p8": 0,
+  "u": 3.7160249023072565,
+  "rating": 8.4631,
+  "partners": [
+   11,
+   35,
+   79,
+   23
+  ]
+ },
+ {
+  "value": "Nurturing",
+  "level": "medium",
+  "text": "each get to guide a child through an important stage of growing up",
+  "p8": 1,
+  "u": 1.530030934400208,
+  "rating": 6.9647,
+  "partners": [
+   62,
+   1,
+   82,
+   78
+  ]
+ },
+ {
+  "value": "Nurturing",
+  "level": "large",
+  "text": "each raise a child who grows up healthy, kind and happy",
+  "p8": null,
+  "u": 5.707290261719112,
+  "rating": 8.9935,
+  "partners": [
+   19,
+   39,
+   55,
+   87
+  ]
+ },
+ {
+  "value": "Pleasure",
+  "level": "small",
+  "text": "each enjoy a piece of chocolate",
+  "p8": null,
+  "u": -4.046673238222298,
+  "rating": 5.1108,
+  "partners": [
+   12,
+   16,
+   56,
+   32
+  ]
+ },
+ {
+  "value": "Pleasure",
+  "level": "medium",
+  "text": "each enjoy a delicious meal",
+  "p8": 0,
+  "u": -1.9173382991567762,
+  "rating": 6.9187,
+  "partners": [
+   84,
+   81,
+   17,
+   93
+  ]
+ },
+ {
+  "value": "Pleasure",
+  "level": "medium",
+  "text": "each have a thoroughly enjoyable evening",
+  "p8": 1,
+  "u": 0.029644521193398502,
+  "rating": 7.4677,
+  "partners": [
+   29,
+   46,
+   34,
+   3
+  ]
+ },
+ {
+  "value": "Pleasure",
+  "level": "large",
+  "text": "each enjoy a perfect week of rest, good food and fun",
+  "p8": null,
+  "u": 0.29357625985022967,
+  "rating": 7.7714,
+  "partners": [
+   74,
+   3,
+   22,
+   34
+  ]
+ },
+ {
+  "value": "Preserving",
+  "level": "small",
+  "text": "each see an old bench in their park repaired",
+  "p8": null,
+  "u": -3.2120177548505215,
+  "rating": 5.2458,
+  "partners": [
+   41,
+   60,
+   32,
+   12
+  ]
+ },
+ {
+  "value": "Preserving",
+  "level": "medium",
+  "text": "each see a place they love protected from destruction",
+  "p8": 0,
+  "u": 2.2872890828216232,
+  "rating": 7.0282,
+  "partners": [
+   89,
+   63,
+   49,
+   37
+  ]
+ },
+ {
+  "value": "Preserving",
+  "level": "medium",
+  "text": "each see an old tradition they cherish kept alive",
+  "p8": 1,
+  "u": 0.2879909700949603,
+  "rating": 7.2313,
+  "partners": [
+   71,
+   3,
+   22,
+   34
+  ]
+ },
+ {
+  "value": "Preserving",
+  "level": "large",
+  "text": "each see their hometown saved from being destroyed by a flood",
+  "p8": null,
+  "u": 2.6904929994547184,
+  "rating": 8.2182,
+  "partners": [
+   6,
+   31,
+   86,
+   43
+  ]
+ },
+ {
+  "value": "Protection",
+  "level": "small",
+  "text": "are each warned about a slippery step before they reach it",
+  "p8": null,
+  "u": -0.9094494524594181,
+  "rating": 7.3915,
+  "partners": [
+   42,
+   52,
+   8,
+   94
+  ]
+ },
+ {
+  "value": "Protection",
+  "level": "medium",
+  "text": "are each kept safe from a danger that threatened them",
+  "p8": 0,
+  "u": 3.1256124606026634,
+  "rating": 8.9905,
+  "partners": [
+   53,
+   59,
+   18,
+   38
+  ]
+ },
+ {
+  "value": "Protection",
+  "level": "medium",
+  "text": "are each shielded from a threat to their safety",
+  "p8": 1,
+  "u": 1.6473525655424797,
+  "rating": 8.3914,
+  "partners": [
+   1,
+   62,
+   66,
+   82
+  ]
+ },
+ {
+  "value": "Protection",
+  "level": "large",
+  "text": "are each saved from being killed in a fire",
+  "p8": null,
+  "u": 3.938972910951783,
+  "rating": 8.7675,
+  "partners": [
+   35,
+   11,
+   65,
+   27
+  ]
+ },
+ {
+  "value": "Respect",
+  "level": "small",
+  "text": "each get a polite nod from a stranger",
+  "p8": null,
+  "u": -9.100953790863564,
+  "rating": 4.9539,
+  "partners": [
+   44,
+   28,
+   24,
+   92
+  ]
+ },
+ {
+  "value": "Respect",
+  "level": "medium",
+  "text": "are each treated with respect by people who looked down on them",
+  "p8": 0,
+  "u": -1.7706591533795226,
+  "rating": 7.1173,
+  "partners": [
+   17,
+   84,
+   69,
+   45
+  ]
+ },
+ {
+  "value": "Respect",
+  "level": "medium",
+  "text": "each finally receive the recognition and respect they deserve",
+  "p8": 1,
+  "u": 1.4764068308695537,
+  "rating": 8.821,
+  "partners": [
+   66,
+   62,
+   1,
+   54
+  ]
+ },
+ {
+  "value": "Respect",
+  "level": "large",
+  "text": "each finally earn the lasting respect of everyone who once looked down on them",
+  "p8": null,
+  "u": 1.1298937693344508,
+  "rating": 7.9729,
+  "partners": [
+   26,
+   10,
+   7,
+   54
+  ]
+ },
+ {
+  "value": "Spirituality",
+  "level": "small",
+  "text": "each feel a brief sense of awe while looking at the stars",
+  "p8": null,
+  "u": -1.886105792077888,
+  "rating": 5.1806,
+  "partners": [
+   69,
+   81,
+   17,
+   93
+  ]
+ },
+ {
+  "value": "Spirituality",
+  "level": "medium",
+  "text": "each have a deeply meaningful spiritual experience",
+  "p8": 0,
+  "u": -1.103970474846782,
+  "rating": 6.9963,
+  "partners": [
+   94,
+   8,
+   52,
+   42
+  ]
+ },
+ {
+  "value": "Spirituality",
+  "level": "medium",
+  "text": "each feel a profound connection to something greater than themselves",
+  "p8": 1,
+  "u": 2.518966217595431,
+  "rating": 7.0042,
+  "partners": [
+   43,
+   63,
+   75,
+   73
+  ]
+ },
+ {
+  "value": "Spirituality",
+  "level": "large",
+  "text": "each find a deep sense of meaning and peace that stays with them for the rest of their lives",
+  "p8": null,
+  "u": 4.418045008565472,
+  "rating": 8.9989,
+  "partners": [
+   51,
+   27,
+   79,
+   35
+  ]
+ },
+ {
+  "value": "Non-suffering",
+  "level": "small",
+  "text": "are each spared a mild headache",
+  "p8": null,
+  "u": -4.348479840658255,
+  "rating": 5.4538,
+  "partners": [
+   4,
+   48,
+   56,
+   16
+  ]
+ },
+ {
+  "value": "Non-suffering",
+  "level": "medium",
+  "text": "are each spared a week of pain",
+  "p8": 0,
+  "u": 2.2182902872843306,
+  "rating": 7.0266,
+  "partners": [
+   49,
+   73,
+   37,
+   63
+  ]
+ },
+ {
+  "value": "Non-suffering",
+  "level": "medium",
+  "text": "are each relieved of a painful condition for a week",
+  "p8": 1,
+  "u": -0.623386607442811,
+  "rating": 6.9948,
+  "partners": [
+   47,
+   21,
+   5,
+   20
+  ]
+ },
+ {
+  "value": "Non-suffering",
+  "level": "large",
+  "text": "are each cured of a severe pain they have suffered from for years",
+  "p8": null,
+  "u": 1.9292278645378627,
+  "rating": 8.2421,
+  "partners": [
+   25,
+   15,
+   37,
+   49
+  ]
+ },
+ {
+  "value": "Truth",
+  "level": "small",
+  "text": "each learn the real reason a meeting was moved",
+  "p8": null,
+  "u": -5.65740082094094,
+  "rating": 4.8898,
+  "partners": [
+   24,
+   40,
+   28,
+   64
+  ]
+ },
+ {
+  "value": "Truth",
+  "level": "medium",
+  "text": "are each told the truth instead of being lied to",
+  "p8": 0,
+  "u": -2.129018297214417,
+  "rating": 6.9819,
+  "partners": [
+   57,
+   69,
+   84,
+   81
+  ]
+ },
+ {
+  "value": "Truth",
+  "level": "medium",
+  "text": "each learn the truth about something they had been deceived about",
+  "p8": 1,
+  "u": -1.0657770799246777,
+  "rating": 6.9391,
+  "partners": [
+   8,
+   85,
+   52,
+   42
+  ]
+ },
+ {
+  "value": "Truth",
+  "level": "large",
+  "text": "each finally learn the truth about a lie that shaped their whole life",
+  "p8": null,
+  "u": -2.345584019889726,
+  "rating": 6.9427,
+  "partners": [
+   57,
+   69,
+   84,
+   81
+  ]
+ }
+]
