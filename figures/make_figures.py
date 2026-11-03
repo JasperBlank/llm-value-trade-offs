@@ -11,6 +11,7 @@ fig5_price_list.png         pilot 8: the price of each of 24 intrinsic values in
 fig6_sentences_not_values.png  pilot 8 (exploratory): prices are stable per sentence, not per value
 fig7_pilot8_tests.png       pilot 8: the pre-registered tests against their bars
 fig8_vibe_check.png         pilot 9: the direct 'how good' rating of each sentence against its menu price
+fig9_full_range.png         pilot 10: rating against menu over the full range of goodness, and the log-scale readout
 """
 import json
 from pathlib import Path
@@ -27,6 +28,7 @@ P6 = ROOT / "pilot6-value-subspace/results/real"
 P7 = ROOT / "pilot7-value-route/results/real"
 P8 = ROOT / "pilot8-intrinsic-values/results/real"
 P9 = ROOT / "pilot9-vibe-check/results/real"
+P10 = ROOT / "pilot10-full-range/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -400,6 +402,47 @@ def fig8(p9=None):
     fig.savefig(OUT / "fig8_vibe_check.png", dpi=200)
     plt.close(fig)
 
+def fig9(p10=None, title=None, subtitle=None):
+    """Pilot 10: the 'how good' rating against the menu price over the full range, and pilot 9's sentences on a log scale."""
+    p10 = Path(p10) if p10 else P10
+    V = load(p10 / "verdicts10.json")
+    prices = load(p10 / "prices10.json")
+    R = load(p10 / "ratings10.json")
+    S = load(ROOT / "pilot10-full-range/sentences10.json")["sentences"]
+    ex = load(P8 / "exploratory_sentences.json")
+    p8u = {(s["value"], s["phrasing"]): s["u"] for s in ex["sentences"]}
+    fig, axs = plt.subplots(1, 2, figsize=(12.5, 5.6), gridspec_kw={"width_ratios": [1.2, 1]})
+    fig.subplots_adjust(left=0.065, right=0.98, top=0.8, bottom=0.15, wspace=0.22)
+    ax = axs[0]
+    col = {"small": AQUA, "medium": BLUE, "large": ORANGE}
+    for lev in ("small", "medium", "large"):
+        pts = [d for d in prices if d["level"] == lev]
+        ax.plot([d["u"] for d in pts], [d["rating_W0_8"] for d in pts], "o", color=col[lev], markersize=6,
+                label={"small": "small version", "medium": "pilot 8's sentences", "large": "large version"}[lev])
+    ax.set_xlabel("Menu price (log-odds per person, 45,600 choices)")
+    ax.set_ylabel("'How good would it be if …?' (0-9, 8 people)")
+    ax.set_title(f"All 96 sentences: r = {V['F1']['r']:.2f}")
+    ax.legend(loc="upper left")
+    ax = axs[1]
+    sc = {(k[0], k[1], k[2]): x for k, x in zip(R["keys"], R["score"])}
+    mid = [i for i, s in enumerate(S) if s["level"] == "medium"]
+    x = [p8u[(S[i]["value"], S[i]["p8"])] for i in mid]
+    y = [sc[(i, 4, 0)] for i in mid]
+    ax.plot(x, y, "o", color=BLUE, markersize=6)
+    ax.set_xlabel("Pilot 8's menu price of the sentence")
+    ax.set_ylabel("Log-scale score of 'How good …' (4 people)")
+    ax.set_title(f"Pilot 9's 48 sentences on a log scale: r = {V['F2']['r']:.2f}")
+    for a in axs:
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    suptitle(fig, title or "Rating and menu over the full range of goodness",
+             subtitle or f"Pilot 10, Qwen3-14B. F1 r = {V['F1']['r']:.2f} (bar 0.8); F2 r = {V['F2']['r']:.2f} (bar 0.7); "
+             f"32 people rated {V['F3']['gain_2_to_32']:+.2f} above 2 people.")
+    note(fig, "Right: the log-scale score keeps the ratios between small probabilities (0.1% against 0.4% on '8') that the expected rating flattens.")
+    fig.savefig(OUT / "fig9_full_range.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -417,4 +460,6 @@ if __name__ == "__main__":
     fig7()
     if (P9 / "verdicts9.json").exists():
         fig8()
+    if (P10 / "verdicts10.json").exists():
+        fig9()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))

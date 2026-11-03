@@ -1,0 +1,152 @@
+{
+ "F1": {
+  "r": 0.8102966759226905,
+  "pass": true
+ },
+ "F2": {
+  "r": 0.501044437186892,
+  "pass": false
+ },
+ "F3": {
+  "gain_2_to_32": 0.7376125,
+  "size_sensitive": false
+ },
+ "menu": {
+  "b": 1.4543268130427793,
+  "bias_towards_A": 1.0584379715444212,
+  "fit_r": 0.8415094824714694,
+  "split_half_r": 0.9966680990736781
+ },
+ "designed_order": {
+  "menu": 17.0,
+  "rating_W0_8": 17.0,
+  "of": 24
+ },
+ "variance_explained": {
+  "menu": {
+   "stakes_level": 0.6311291062793832,
+   "value": 0.20219060086244134,
+   "both": 0.8333197071418246
+  },
+  "rating_W0_8": {
+   "stakes_level": 0.574810388469811,
+   "value": 0.25578724020338317,
+   "both": 0.8305976286731941
+  }
+ },
+ "context": {
+  "medium_prices_vs_pilot8_r": 0.9759851481905786,
+  "pair_same_as_pilot8": 22
+ },
+ "by_readout": {
+  "rating|W0 how good": {
+   "all96_r": 0.8102966759226905,
+   "within_level_r": 0.5397759560827122,
+   "medium48_new_menu_r": 0.507812345542582,
+   "medium48_pilot8_r": 0.5463343253229882,
+   "pairs_same_as_new_menu": 18
+  },
+  "rating|W1 how much better the world": {
+   "all96_r": 0.7496139543464707,
+   "within_level_r": 0.5006059708266913,
+   "medium48_new_menu_r": 0.5223680668640878,
+   "medium48_pilot8_r": 0.4843874761915742,
+   "pairs_same_as_new_menu": 21
+  },
+  "rating|W2 how bad or good": {
+   "all96_r": 0.7386200417614881,
+   "within_level_r": 0.5019581946199018,
+   "medium48_new_menu_r": 0.42477806516184874,
+   "medium48_pilot8_r": 0.4701655334305758,
+   "pairs_same_as_new_menu": 16
+  },
+  "rating|W3 how much it matters to you": {
+   "all96_r": 0.7416207449283323,
+   "within_level_r": 0.4583520992817098,
+   "medium48_new_menu_r": 0.48141864925023037,
+   "medium48_pilot8_r": 0.4004602040834917,
+   "pairs_same_as_new_menu": 17
+  },
+  "score|W0 how good": {
+   "all96_r": 0.8298727764678254,
+   "within_level_r": 0.5852816297593609,
+   "medium48_new_menu_r": 0.5234531596649713,
+   "medium48_pilot8_r": 0.501044437186892,
+   "pairs_same_as_new_menu": 18
+  },
+  "score|W1 how much better the world": {
+   "all96_r": 0.8003116470910034,
+   "within_level_r": 0.5668076715795966,
+   "medium48_new_menu_r": 0.6250346141375654,
+   "medium48_pilot8_r": 0.5666117468203491,
+   "pairs_same_as_new_menu": 18
+  },
+  "score|W2 how bad or good": {
+   "all96_r": 0.754122002077192,
+   "within_level_r": 0.4909231802149291,
+   "medium48_new_menu_r": 0.3637897742258342,
+   "medium48_pilot8_r": 0.3882628799810487,
+   "pairs_same_as_new_menu": 16
+  },
+  "score|W3 how much it matters to you": {
+   "all96_r": 0.7635692571036887,
+   "within_level_r": 0.5030068417937359,
+   "medium48_new_menu_r": 0.4815548713605538,
+   "medium48_pilot8_r": 0.44590629738472176,
+   "pairs_same_as_new_menu": 18
+  },
+  "lean7|W0 how good": {
+   "all96_r": 0.8301446950125939,
+   "within_level_r": 0.5833849767628397,
+   "medium48_new_menu_r": 0.538605591578115,
+   "medium48_pilot8_r": 0.5578509641255228,
+   "pairs_same_as_new_menu": 18
+  },
+  "lean7|W1 how much better the world": {
+   "all96_r": 0.8129320007401362,
+   "within_level_r": 0.6430626120649402,
+   "medium48_new_menu_r": 0.6457480003130182,
+   "medium48_pilot8_r": 0.6543526242343384,
+   "pairs_same_as_new_menu": 19
+  },
+  "lean7|W2 how bad or good": {
+   "all96_r": 0.7297021074587146,
+   "within_level_r": 0.4730718106108806,
+   "medium48_new_menu_r": 0.37288358487807993,
+   "medium48_pilot8_r": 0.43110308927821106,
+   "pairs_same_as_new_menu": 16
+  },
+  "lean7|W3 how much it matters to you": {
+   "all96_r": 0.697904189998775,
+   "within_level_r": 0.4796786655742342,
+   "medium48_new_menu_r": 0.48079971530420834,
+   "medium48_pilot8_r": 0.4212871035893554,
+   "pairs_same_as_new_menu": 17
+  }
+ },
+ "size": {
+  "gain_by_level": {
+   "small": 0.7632374999999998,
+   "medium": 0.6862291666666668,
+   "large": 0.8147541666666669
+  },
+  "slope_per_log_person": 0.2656898531568372,
+  "slope_in_menu_units": 0.6591828468372223,
+  "menu_b": 1.4543268130427793
+ },
+ "ratings_at_level": {
+  "small": {
+   "mean": 5.673679166666667,
+   "sd": 1.035743529217524
+  },
+  "medium": {
+   "mean": 7.20984375,
+   "sd": 0.7981795978209443
+  },
+  "large": {
+   "mean": 8.371829166666666,
+   "sd": 0.6094862245361297
+  }
+ },
+ "share_near_7": 0.3098958333333333
+}

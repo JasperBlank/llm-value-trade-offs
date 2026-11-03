@@ -1,6 +1,6 @@
 # Pilot 10: the full range of goodness
 
-Pilot 9's ratings piled up at 7 because pilot 8's sentences are all moderately good outcomes. This pilot adds a small and a large version of each value (96 sentences), prices them all in one menu, and reads the ratings on a log scale too. **Read [`DESIGN.md`](DESIGN.md) first.**
+Pilot 9's ratings piled up at 7 because pilot 8's sentences are all moderately good outcomes. This pilot adds a small and a large version of each value (96 sentences), prices them all in one menu, and reads the ratings on a log scale too. **Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/real/README.md`](results/real/README.md) (run 3 Nov 2026).
 
 | File | What it does |
 |---|---|
