@@ -31,6 +31,8 @@ h2 { font-size:19px; font-weight:650; margin-top:20px; }
     .num { width:38px; height:38px; border-radius:19px; background:var(--ink); color:#fff; font-size:21px;
            font-weight:700; display:flex; align-items:center; justify-content:center; }
     .q { font-size:20px; color:var(--ink2); margin:14px 0 14px; font-style:italic; line-height:1.3; }
+    .ctx { font-size:16px; color:var(--muted); margin-top:12px; line-height:1.3; }
+    .ctx + .q { margin-top:6px; margin-bottom:12px; }
     .opt { display:flex; gap:12px; align-items:flex-start; font-size:21px; line-height:1.32; margin-bottom:12px; }
     .tag { flex:none; width:34px; height:34px; border-radius:9px; color:#fff; font-weight:750; font-size:19px;
            display:flex; align-items:center; justify-content:center; margin-top:-2px; }
@@ -68,8 +70,9 @@ h2 { font-size:19px; font-weight:650; margin-top:20px; }
     <div class='pipe'>
       <div class='card c1'>
         <div class='step'><span class='num'>1</span>Read the options</div>
+        <div class='ctx'>The people involved are strangers in your town whom you will never meet.</div>
         <div class='q'>Which of these two outcomes would you rather happen?</div>
-        <div class='opt'><span class='tag a'>A</span><span>8 people each feel a brief sense of awe while looking at the stars <span class='emo'>✨</span></span></div>
+        <div class='opt'><span class='tag a'>A</span><span>8 people each get to make a cup of tea for someone they care about <span class='emo'>☕</span></span></div>
         <div class='opt'><span class='tag b'>B</span><span>8 people each get to decide where to go for lunch <span class='emo'>🥪</span></span></div>
         <div class='reply'>Reply with only the letter A or B.</div>
       </div>
@@ -77,30 +80,31 @@ h2 { font-size:19px; font-weight:650; margin-top:20px; }
       <div class='card c2'>
         <div class='step'><span class='num'>2</span>Vibe check</div>
         <div class='q'>How big a deal is each?</div>
-        <div class='gauge'><span class='emo'>✨</span><div class='track'><div class='fill a' style='width:47%'></div></div></div>
+        <div class='gauge'><span class='emo'>☕</span><div class='track'><div class='fill a' style='width:52%'></div></div></div>
         <div class='gauge'><span class='emo'>🥪</span><div class='track'><div class='fill b' style='width:39%'></div></div></div>
-        <div class='cap'>Rough while reading each option, finished after both: about ¼ depends on the alternative.</div>
+        <div class='cap'>Rough after the first option, finished after both. About ¼ of its variation depends on the
+          alternative.</div>
       </div>
       <div class='arrow'>→</div>
       <div class='card c3'>
         <div class='step'><span class='num'>3</span>Compare</div>
         <div class='q'>Which is bigger?</div>
-        <div class='cmp'><span class='emo win'>✨</span><i>vs</i><span class='emo'>🥪</span></div>
-        <div class='cmp'><span class='emo win'>🍎<span class='num2'>30</span></span><i>vs</i><span class='emo'>🍎<span class='num2'>12</span></span></div>
+        <div class='cmp'><span class='emo win'>☕</span><i>vs</i><span class='emo'>🥪</span></div>
+        <div class='cmp'><span class='emo win'>🍎<span class='num2'>28</span></span><i>vs</i><span class='emo'>🍎<span class='num2'>10</span></span></div>
         <div class='cmp'><span class='emo win'>🐘</span><i>vs</i><span class='emo'>🐭</span></div>
         <div class='cap'>One comparator for all three.</div>
       </div>
       <div class='arrow'>→</div>
-      <div class='out'><div class='ans'>A</div><div class='cap'>Qwen3-14B's<br>answer</div></div>
+      <div class='out'><div class='ans'>A</div><div class='cap'>all three<br>models' answer</div></div>
     </div>
     <div class='finds'>
-      <div class='f1'><b>Priced as worded, not by value</b>One word can flip a choice: “saved” in “saved from being
-        killed in a fire” is worth 35 log-odds.</div>
-      <div class='f2'><b>A gut-feel price</b>“How good would it be?” predicts the price about as well as anything
-        we tried (r ≈ 0.8).</div>
-      <div class='f3'><b>A generic comparator</b>The parts that write the decision also carry “which pile has more
-        apples?”, in all three models.</div>
+      <div class='f1'><b>Wording over value</b>Which value an outcome serves explains 20% of its price.
+        One word can flip a choice: “saved” in “saved from being killed in a fire”.</div>
+      <div class='f2'><b>A gut-feel price</b>Asking how good it would be predicts the price about as well as
+        anything we tried (r ≈ 0.8).</div>
+      <div class='f3'><b>A generic comparator</b>The parts that write the decision carry outcome and apple decisions
+        alike, in all three models.</div>
     </div>
-    <div class='foot'><span>Qwen3-14B; the relative prices and the comparator also in Qwen3-32B and Llama 3.1 8B</span>
-      <span>forced choices · word deletions · activation patching</span></div>
+    <div class='foot'><span>Bars and findings 1-2: Qwen3-14B. Relative prices and the comparator: also Qwen3-32B and
+      Llama 3.1 8B</span><span>forced choices · word deletions · activation patching</span></div>
     </div></body></html>

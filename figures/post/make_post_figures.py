@@ -34,9 +34,11 @@ P16 = ROOT / "pilot16-relative-or-absolute/results/real"
 P17 = ROOT / "pilot17-three-models/results"
 HTML_DIR = HERE / "html"
 
-# The menu as the models saw it (pilot 10's build_prompts10.py).
+# The menu as the models saw it (pilot 10's build_prompts10.py), and the rating's three wordings (pilot 9).
+CONTEXT = "The people involved are strangers in your town whom you will never meet."
 QUESTION = "Which of these two outcomes would you rather happen?"
 REPLY = "Reply with only the letter A or B."
+SIZE_Q = "How big a difference would this make to each person's life?"     # pilot 13's F1
 
 # Reference palette (dataviz skill, light mode).
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -117,7 +119,7 @@ def legend_dots(ax_or_fig, colors, labels, **kw):
 # ---------------------------------------------------------------- F1: one value, many prices
 F1_ROWS = ["Respect", "Nurturing", "Embodying", "Experiencing", "Happiness", "Justice"]
 F1_LABEL = {  # the cheapest and the dearest outcome of each value ("8 people each ..."); one is shortened (…)
-    "each get a polite nod from a stranger": "a polite nod from a stranger",
+    "each get a polite nod from a stranger": "get a polite nod from a stranger",
     "each finally receive the recognition and respect they deserve": "finally receive the recognition and respect they deserve",
     "each help a child tie their shoes": "help a child tie their shoes",
     "each raise a child who grows up healthy, kind and happy": "raise a child who grows up healthy, kind and happy",
@@ -178,10 +180,12 @@ def fig_f1():
     sub = (f"Qwen3-14B priced 96 outcomes, four for each of 24 values, from 45,600 forced choices between them. The "
            f"averages of the 24 values span only {mean_range:.1f} price units. The four outcomes inside a single value "
            f"span {med_span:.1f} at the median, and up to {max_span:.1f}.")
-    note = ("<b>How big the outcome is explains 63% of the spread in prices; which value it serves, 20%.</b> Each row "
-            "shows a value's cheapest outcome (below the line) and its dearest (above), as in the prompt “8 people each "
-            "…”. Prices: P(A) = σ(u<sub>A</sub> − u<sub>B</sub> + b·log(n<sub>A</sub>/n<sub>B</sub>) + c), fitted by "
-            "maximum likelihood. Data: pilot 10.")
+    note = ("<b>How big the outcome is explains 63% of the spread in prices; which value it serves, 20%.</b> Each value "
+            "came in a small, two medium and a large version, so part of the spread is by design. But the wording "
+            "counts too: in 7 of the 24 values a bigger version is priced below a smaller one (here Respect and "
+            "Justice). Each row shows a value's cheapest outcome (below the line) and its dearest (above), as worded "
+            "after “8 people each …”. Prices: P(A) = σ(u<sub>A</sub> − u<sub>B</sub> + b·log(n<sub>A</sub>/n<sub>B</sub>) "
+            "+ c), fitted by maximum likelihood. Data: pilot 10.")
     body = header("💸", "Prices", "Same value, wildly different prices", sub) + \
         f"<div class='chart'>{svg_of(fig)}</div><div class='note'>{note}</div>"
     return page(body)
@@ -206,8 +210,8 @@ def f2_predictors():
     old = [d for d in D if d["set"] == "old"]
     r_rating_old = float(np.corrcoef([d["Rbar"] for d in old], [d["u"] for d in old])[0, 1])
     o = V["P4"]["other_predictors_r"]
-    return [("Qwen's answer to “How good would it be?”", r_rating_old, o["how_good_rating"]),
-            ("One question: “How big a difference would this make?”", V["P1"]["r_F1_alone"], o["F1_alone"]),
+    return [("Qwen's “how good would it be?” rating", r_rating_old, o["how_good_rating"]),
+            (f"One question: “{SIZE_Q.replace(' to each', chr(10) + 'to each')}”", V["P1"]["r_F1_alone"], o["F1_alone"]),
             ("Nine named features, Qwen's own answers", V["P1"]["r"], V["P4"]["r"]),
             ("Nine named features, rated blind by Claude", E["claude"]["P1_r"], E["claude"]["P4_r"]),
             ("Qwen's internal state (readout at layer 20)", V["P4"]["ridge_heldout_r_on_old"], o["states_ridge_layer20"])]
@@ -234,7 +238,7 @@ def fig_f2():
                     arrowprops=dict(arrowstyle="-", color=AXIS, lw=0.9, shrinkA=2, shrinkB=6 if hl else 4))
     ax.set_xlim(4.0, 9.25)
     ax.set_ylim(-10, 7.5)
-    ax.set_xlabel("Qwen's answer: “How good would it be if …?”  (0-9)")
+    ax.set_xlabel("Qwen's rating: how good would it be?  (0-9, mean of three wordings)")
     ax.set_ylabel("Price in forced choices")
     ax.set_title(f"r = {r_set['old']:.2f} on the 96, {r_set['new']:.2f} on the 24 new", fontsize=13)
     ax.grid(color=GRID, linewidth=0.7)
@@ -243,8 +247,8 @@ def fig_f2():
     pred = f2_predictors()
     yy = np.arange(len(pred))[::-1] * 1.0
     for i, (yi, (lab, r_old, r_new)) in enumerate(zip(yy, pred)):
-        ax.text(0.44, yi + 0.4, lab, ha="left", va="center", fontsize=11.5, color=INK if i == 0 else INK2,
-                fontweight="semibold" if i == 0 else "normal")
+        ax.text(0.44, yi + 0.24, lab, ha="left", va="bottom", fontsize=11.5, linespacing=1.2,
+                color=INK if i == 0 else INK2, fontweight="semibold" if i == 0 else "normal")
         ax.plot([r_new, r_old], [yi, yi], color=GRID, lw=5, solid_capstyle="round", zorder=1)
         ax.scatter([r_old], [yi], s=95, color=BLUE, edgecolors=SURFACE, linewidths=1.5, zorder=3)
         ax.scatter([r_new], [yi], s=95, color=ORANGE, edgecolors=SURFACE, linewidths=1.5, zorder=3)
@@ -261,16 +265,16 @@ def fig_f2():
     ax.set_title("Nothing we tried does clearly better", fontsize=13)
     legend_dots(fig, [BLUE, ORANGE], ["96 outcomes (the predictors were fitted on these)", "24 new outcomes"],
                 loc="upper left", bbox_to_anchor=(0.06, 1.0), ncol=2, fontsize=12)
-    sub = ("Asked “How good would it be if 8 people each …?”, Qwen3-14B's answer tracks the price it pays for the "
-           "outcome in forced choices. Breaking the outcome into nine named features (how serious, how lasting, how "
-           "meaningful …) or reading the model's internal state does no better. And every one of them leaves a good "
-           "part of the price unexplained.")
-    note = ("<b>Rated higher, priced lower:</b> a week of travel somewhere new against deciding where to go for lunch. "
-            "Right: on the 96, r is held out by value (each predictor fitted with one value left out at a time), except "
-            "for the “how good” answer, a plain correlation. The 24 new outcomes were priced in 13,824 new choices and "
-            "predicted from fits on the 96. Qwen's answers are its expected digit (weighted by probability); “how "
-            "good” is averaged over three wordings. Data: pilot 13.")
-    body = header("🌡️", "The vibe check", "It's a vibe check", sub) + \
+    sub = ("Asked how good it would be if 8 people each …, Qwen3-14B's rating tracks the price it pays for the outcome "
+           "in forced choices. Breaking the outcome into nine named features (how serious, how lasting, how meaningful "
+           "…) or reading the model's internal state does no better. And every one of them leaves a good part of the "
+           "price unexplained.")
+    note = ("<b>Rated about the same, priced far apart:</b> a week of travel somewhere new and deciding where to go for "
+            "lunch. Right: on the 96, r is held out by value (each predictor fitted with one value left out at a time), "
+            "except for the “how good” rating, a plain correlation. The 24 new outcomes were priced in 13,824 new choices "
+            "and predicted from fits on the 96. Ratings are Qwen's expected digit; “how good” averages “How good would it "
+            "be if …”, “How much better would the world be if …” and “How bad or good would it be if …”. Data: pilot 13.")
+    body = header("🌡️", "The vibe check", "The price tracks a vibe check", sub) + \
         f"<div class='chart'>{svg_of(fig)}</div><div class='note'>{note}</div>"
     return page(body)
 
@@ -315,9 +319,10 @@ def fig_f3():
     stops = ", ".join(f"{chip_color(c)[0]} {(c + 12) / 24 * 100:.0f}%" for c in np.linspace(-12, 12, 9))
     tick_html = "".join(f"<span style='left:{(c + 12) / 24 * 100:.1f}%'>{c:+d}</span>".replace("+0", "0").replace("-", "−")
                         for c in ticks)
-    legend = (f"<div class='legend'><span>lowers the price</span><div class='rampwrap'><div class='ramp' "
+    legend = (f"<div class='legend'><span>less likely to be chosen</span><div class='rampwrap'><div class='ramp' "
               f"style='background:linear-gradient(90deg,{stops})'></div><div class='rticks'>{tick_html}</div></div>"
-              f"<span>raises the price</span><span class='lnote'>log-odds; darkest beyond ±24</span></div>")
+              f"<span>more likely to be chosen</span><span class='lnote'>log-odds; the scale stops at ±12, and the "
+              f"darkest shade marks effects beyond ±24</span></div>")
     css = """
     .rows { margin-top:30px; display:flex; flex-direction:column; gap:16px; }
     .row { display:grid; grid-template-columns:44px 96px 1fr; column-gap:10px; align-items:start; }
@@ -334,15 +339,15 @@ def fig_f3():
     .ramp { height:14px; border-radius:7px; margin-top:2px; }
     .rticks { position:relative; height:18px; font-size:12.5px; color:var(--muted); }
     .rticks span { position:absolute; transform:translateX(-50%); top:2px; font-variant-numeric:tabular-nums; }
-    .lnote { color:var(--muted); font-size:14px; margin-left:8px; }
+    .lnote { color:var(--muted); font-size:14px; margin-left:8px; max-width:300px; line-height:1.35; }
     """
     sub = ("Each word is coloured by what it adds to Qwen3-14B's log-odds of choosing the outcome: deleting the word "
            "takes it away (averaged over 8 alternatives). The effects follow what the words mean, not just which words "
            "are there.")
     note = (f"<b>Over all {len(allc)} single-word deletions, the median moves the choice {np.median(allc):.1f} log-odds; "
-            f"{np.mean(allc > 5) * 100:.0f}% move it more than 5.</b> “each” adds {np.median(each):+.1f} at the median: "
-            "“8 people each save a stranger” is eight rescues, not one. Numbers shown for effects of 1.5 or more. "
-            "Data: pilot 14.")
+            f"{np.mean(allc > 5) * 100:.0f}% move it more than 5.</b> “each” adds {np.median(each):+.1f} at the median. "
+            "Deleting “saved” flips all 8 menus. These are log-odds of the choice itself, about 2.4 times the price "
+            "units of the other figures. Numbers shown for effects of 1.5 or more. Data: pilot 14.")
     body = header("🔤", "Words", "One word can flip the choice", sub) + \
         f"<div class='rows'>{''.join(rows)}</div>{legend}<div class='note'>{note}</div>"
     return page(body, extra_css=css)
@@ -365,9 +370,26 @@ def f4_data():
     f, y, j, p = T.index(F4_FILM), T.index(F4_YEAR), B.index(F4_JOB), B.index(F4_PAY)
     e = {"film>job": sig(L[f, j]), "job>year": sig(-L[y, j]), "year>pay": sig(L[y, p]), "pay>film": sig(-L[f, p])}
     assert min(e.values()) > 0.5
-    V = {m: load(P17 / sub / "verdicts17.json") for m, sub in
-         [("Qwen3-14B", "real2/qwen14"), ("Qwen3-32B", "real2/qwen32"), ("Llama 3.1 8B", "real2_llama/llama8")]}
+    V = {}
+    for m, sub in [("Qwen3-14B", "real2/qwen14"), ("Qwen3-32B", "real2/qwen32"), ("Llama 3.1 8B", "real2_llama/llama8")]:
+        V[m] = load(P17 / sub / "verdicts17.json")
+        V[m]["cycles"], V[m]["could"] = cycle_sets(np.load(P17 / sub / "effects17.npz")["logits_intact"])
+        assert V[m]["cycles"] == V[m]["cycles_margin2"]
     return e, V
+
+
+def cycle_sets(L, gap=2.0):
+    """Sets of two outcomes and two alternatives where each alternative clearly beats one outcome and loses to the
+    other (every margin above `gap`): a cycle when the two alternatives split the pair in opposite directions."""
+    win, lose = L > gap, L < -gap
+    cyc = could = 0
+    for k in range(L.shape[1]):
+        for l in range(k + 1, L.shape[1]):
+            up_k = win[:, k][:, None] & lose[:, k][None, :]      # outcome i beats k, outcome j loses to k
+            up_l = win[:, l][:, None] & lose[:, l][None, :]
+            same, opp = int((up_k & up_l).sum()), int((up_k & up_l.T).sum())
+            cyc, could = cyc + opp, could + same + opp
+    return cyc, could
 
 
 def pct(p):
@@ -408,9 +430,9 @@ def fig_f4():
     diagram = f"<div class='diagram'>{''.join(svg)}{cards}{''.join(labels)}{center}</div>"
     m = ["Qwen3-14B", "Qwen3-32B", "Llama 3.1 8B"]
     stats = "".join(f"<div class='stat'><div class='sm'>{k}</div><div class='srow'><div><div class='sv'>"
-                    f"{V[k]['cycles_margin2']}</div><div class='sl'>cycles like this</div></div><div><div class='sv'>"
-                    f"{V[k]['order_flips'] * 100:.0f}%</div><div class='sl'>of clearly separated pairs<br>swap order"
-                    f"</div></div></div></div>" for k in m)
+                    f"{V[k]['cycles']}</div><div class='sl'>cycles like this, of<br>{V[k]['could']:,} sets that could "
+                    f"cycle</div></div><div><div class='sv'>{V[k]['order_flips'] * 100:.0f}%</div><div class='sl'>of "
+                    f"clearly separated<br>pairs swap order</div></div></div></div>" for k in m)
     css = """
     .diagram { position:relative; width:1104px; height:540px; margin-top:28px; }
     .node { position:absolute; width:360px; height:160px; background:var(--card); border:1px solid var(--grid);
@@ -436,13 +458,15 @@ def fig_f4():
           font-variant-numeric:tabular-nums; }
     .sl { font-size:14px; color:var(--ink2); line-height:1.3; margin-top:2px; }
     """
-    sub = (f"Four real menus put to Qwen3-14B (“{QUESTION} A) … B) …”). Each arrow points from the outcome it picks to "
-           "the one it passes over, with the probability of its answer.")
-    note = ("<b>Fixed values allow no cycle, however the choices are squeezed or stretched.</b> Below, the same 96 "
-            "outcomes against 9 alternatives in each model: four-way cycles with every margin above 2 log-odds, and the "
-            "share of outcome pairs more than 2 log-odds apart under at least two alternatives that different "
-            "alternatives order differently. Data: pilots 16 and 17.")
-    body = header("🔁", "Relative prices", "Qwen's preferences go in circles", sub) + diagram + \
+    sub = (f"Four real menus put to Qwen3-14B (“{CONTEXT} {QUESTION} A) … B) …”). Each arrow points from the outcome "
+           "it picks to the one it passes over, with the probability of its answer.")
+    note = ("<b>Fixed values allow no cycle, however the choices are squeezed or stretched. Cycles are rare; order "
+            "flips are not.</b> Below, the same 96 outcomes against 9 alternatives in each model. A set that could "
+            "cycle is two outcomes and two alternatives where each alternative beats one outcome and loses to the other; "
+            "it cycles when the alternatives split the pair in opposite directions. Order flips: pairs of outcomes more "
+            "than 2 log-odds apart under at least two alternatives that different alternatives order differently. Every "
+            "margin above 2 log-odds. Data: pilots 16 and 17.")
+    body = header("🔁", "Relative prices", "Qwen's preferences can go in circles", sub) + diagram + \
         f"<div class='stats'>{stats}</div><div class='note'>{note}</div>"
     return page(body, extra_css=css)
 
@@ -466,7 +490,7 @@ def fig_f5():
                     markersize=5, label=lab, zorder=3, markeredgecolor=SURFACE, markeredgewidth=0.8)
         dl = V["decision_layer"] / nb * 100
         ax.axvline(dl, color=AXIS, lw=1.2, ls="--", zorder=1)
-        ax.text(dl + 1.6, 0.04, f"decision\nlayer {V['decision_layer']}\nof {nb}", ha="left", va="bottom", fontsize=10.5,
+        ax.text(dl + 1.6, 0.04, f"layer {V['decision_layer']}\nof {nb}", ha="left", va="bottom", fontsize=10.5,
                 color=INK2, linespacing=1.15)
         ax.set_xlim(30, 100)
         ax.set_ylim(-0.05, 1.05)
@@ -501,15 +525,18 @@ def fig_f5():
     axs[1].set_xlabel("Share of a swap carried by swapping only these 20 parts")
     bottom = svg_of(fig)
     sub = ("We swap the model's internal state at the answer between two prompts and measure how much of the change in "
-           f"the answer comes along. In all three models the decision arrives at the same depth for “{QUESTION}”, for "
-           "“Which of these two piles has more apples?” and for “Which of these two is heavier?”. The parts that write "
-           "it carry all three.")
+           f"the answer comes along. In all three models the decision arrives at about the same depth for “{QUESTION}”, "
+           "for “Which of these two piles has more apples?” and for “Which of these two is heavier?”. The parts that "
+           "write it carry a similar share of all three.")
     q = Vs["Qwen3-14B"]["pilot5_pieces"]
-    note = ("<b>The 20 parts were chosen on half of the outcomes, then tested on the other half and on apples and "
-            "weight, which they were never chosen on.</b> They are the attention heads and MLPs that write the "
-            "decision's direction in the blocks just before it arrives. Random sets of 20 parts from the same blocks "
-            f"carry almost nothing. In Qwen3-14B the 20 include {q['overlap_with_decision_writers']} of the 20 "
-            "comparator parts found earlier with a different method (pilot 5). Data: pilot 17.")
+    note = ("<b>Apples and weight played no part in choosing the 20 parts.</b> They are the attention heads and MLPs "
+            "that write the decision's direction in the blocks before the dashed line, ranked on the outcomes of half "
+            "the values and tested on the other half (the dashed line was set on that other half's swaps, the direction "
+            "on all outcomes). Random "
+            "sets of 20 parts from the same blocks carry almost nothing. In Qwen3-14B the 20 include "
+            f"{q['overlap_with_decision_writers']} of the 20 comparator parts found earlier with a different method "
+            "(pilot 5). Dashed line: the first layer tested at which swapping the state carries at least half of an "
+            "outcome swap; layers were tested on a coarse grid. Data: pilot 17.")
     body = header("🍎", "The comparator", "Outcomes are compared like piles of apples", sub) + \
         f"<h2>When the decision reaches the answer</h2><div class='chart' style='margin-top:6px'>{top}</div>" \
         f"<h2>What the 20 parts that write the decision carry</h2><div class='chart' style='margin-top:10px'>{bottom}</div>" \
@@ -556,7 +583,7 @@ def fig_f6():
     ax.grid(axis="x", color=GRID, linewidth=0.7)
     ax.set_axisbelow(True)
     ax.set_xlabel("How well the internal price follows the choice's word effects (r)")
-    strip = (f"<div class='prompt'><div class='pl'>{esc(QUESTION)}</div>"
+    strip = (f"<div class='prompt'><div class='pl dim'>{esc(CONTEXT)}</div><div class='pl'>{esc(QUESTION)}</div>"
              f"<div class='pl'><b>A)</b> 8 people each feel a brief sense of awe while looking at the stars<span class='mk a'>"
              f"<span class='dot'></span>end of option A: B not read yet</span></div>"
              f"<div class='pl'><b>B)</b> 8 people {esc(B_MID)}<span class='mk b'><span class='dot'></span>end of option B"
@@ -573,8 +600,8 @@ def fig_f6():
     sub = ("A readout of the price, trained on whole outcomes, follows the effect of deleting single words only roughly "
            "at the end of option A. At the end of option B, after the alternative has been read, it follows them "
            "closely. The price is finished in context.")
-    note = ("<b>About a quarter of the price the choice uses depends on the alternative</b> (in all three models, "
-            "70-82% of its variation is common to all 9 alternatives). Ridge readout of the state at the line break after each option, "
+    note = ("<b>A fifth to a third of the variation in the choice's prices depends on the alternative</b> (70-82% is "
+            "common to all 9 alternatives, depending on the model). Ridge readout of the state at the line break after each option, "
             "trained on the 96 whole outcomes, tested on their 994 single-word deletions against the choice's own word "
             "effects. Layer chosen on half of the values, r on the other half. Data: pilot 17.")
     body = header("⏱️", "Timing", "A rough price while reading, finished after the alternative", sub) + strip + \
@@ -588,16 +615,20 @@ def hero():
     D13 = load(P13 / "features13.json")
     new = {d["text"]: d["u"] for d in D13 if d["set"] == "new"}
     lo, hi = min(P.values()), max(P.values())
-    A_TXT, B_TXT = "each feel a brief sense of awe while looking at the stars", "each get to decide where to go for lunch"
+    A_TXT, B_TXT = "each get to make a cup of tea for someone they care about", "each get to decide where to go for lunch"
     fa, fb = (P[A_TXT] - lo) / (hi - lo) * 100, (new[B_TXT] - lo) / (hi - lo) * 100
-    Z = np.load(P16 / "effects16.npz")
+    # the example must agree on every count: price, Qwen's "how good" rating, its "how big a difference" answer,
+    # and every model's answer to this very menu
+    F = {d["text"]: d for d in D13}
+    assert F[A_TXT]["u"] > F[B_TXT]["u"] and F[A_TXT]["Rbar"] > F[B_TXT]["Rbar"]
+    assert F[A_TXT]["features"]["size"] > F[B_TXT]["features"]["size"]
     S = [s["text"] for s in load(P10 / "sentences10.json")["sentences"]]
-    assert Z["logits_intact"][S.index(A_TXT), load(P16 / "verdicts16.json")["B"].index(B_TXT)] > 5   # Qwen3-14B: A
-    W = {s["text"]: s for s in load(P14 / "words14.json")}
-    sv = W["are each saved from being killed in a fire"]
-    saved = sv["contribution"][sv["words"].index("saved")]
+    for _, sub in F5_MODELS:
+        V17 = load(P17 / sub / "verdicts17.json")
+        assert np.load(P17 / sub / "effects17.npz")["logits_intact"][S.index(A_TXT), V17["B"].index(B_TXT)] > 2
     old = [d for d in D13 if d["set"] == "old"]
     r_good = float(np.corrcoef([d["Rbar"] for d in old], [d["u"] for d in old])[0, 1])
+    v10 = load(P10 / "results/real/verdicts10.json")["variance_explained"]["menu"]["value"]
     css = """
     #fig.hero { width:1600px; height:900px; padding:56px 72px 0; position:relative; overflow:hidden; }
     .hero .eyebrow { font-size:19px; margin-bottom:14px; }
@@ -612,6 +643,8 @@ def hero():
     .num { width:38px; height:38px; border-radius:19px; background:var(--ink); color:#fff; font-size:21px;
            font-weight:700; display:flex; align-items:center; justify-content:center; }
     .q { font-size:20px; color:var(--ink2); margin:14px 0 14px; font-style:italic; line-height:1.3; }
+    .ctx { font-size:16px; color:var(--muted); margin-top:12px; line-height:1.3; }
+    .ctx + .q { margin-top:6px; margin-bottom:12px; }
     .opt { display:flex; gap:12px; align-items:flex-start; font-size:21px; line-height:1.32; margin-bottom:12px; }
     .tag { flex:none; width:34px; height:34px; border-radius:9px; color:#fff; font-weight:750; font-size:19px;
            display:flex; align-items:center; justify-content:center; margin-top:-2px; }
@@ -650,8 +683,9 @@ def hero():
     <div class='pipe'>
       <div class='card c1'>
         <div class='step'><span class='num'>1</span>Read the options</div>
+        <div class='ctx'>{esc(CONTEXT)}</div>
         <div class='q'>{esc(QUESTION)}</div>
-        <div class='opt'><span class='tag a'>A</span><span>8 people {esc(A_TXT)} <span class='emo'>✨</span></span></div>
+        <div class='opt'><span class='tag a'>A</span><span>8 people {esc(A_TXT)} <span class='emo'>☕</span></span></div>
         <div class='opt'><span class='tag b'>B</span><span>8 people {esc(B_TXT)} <span class='emo'>🥪</span></span></div>
         <div class='reply'>{esc(REPLY)}</div>
       </div>
@@ -659,32 +693,33 @@ def hero():
       <div class='card c2'>
         <div class='step'><span class='num'>2</span>Vibe check</div>
         <div class='q'>How big a deal is each?</div>
-        <div class='gauge'><span class='emo'>✨</span><div class='track'><div class='fill a' style='width:{fa:.0f}%'></div></div></div>
+        <div class='gauge'><span class='emo'>☕</span><div class='track'><div class='fill a' style='width:{fa:.0f}%'></div></div></div>
         <div class='gauge'><span class='emo'>🥪</span><div class='track'><div class='fill b' style='width:{fb:.0f}%'></div></div></div>
-        <div class='cap'>Rough while reading each option, finished after both: about ¼ depends on the alternative.</div>
+        <div class='cap'>Rough after the first option, finished after both. About ¼ of its variation depends on the
+          alternative.</div>
       </div>
       <div class='arrow'>→</div>
       <div class='card c3'>
         <div class='step'><span class='num'>3</span>Compare</div>
         <div class='q'>Which is bigger?</div>
-        <div class='cmp'><span class='emo win'>✨</span><i>vs</i><span class='emo'>🥪</span></div>
-        <div class='cmp'><span class='emo win'>🍎<span class='num2'>30</span></span><i>vs</i><span class='emo'>🍎<span class='num2'>12</span></span></div>
+        <div class='cmp'><span class='emo win'>☕</span><i>vs</i><span class='emo'>🥪</span></div>
+        <div class='cmp'><span class='emo win'>🍎<span class='num2'>28</span></span><i>vs</i><span class='emo'>🍎<span class='num2'>10</span></span></div>
         <div class='cmp'><span class='emo win'>🐘</span><i>vs</i><span class='emo'>🐭</span></div>
         <div class='cap'>One comparator for all three.</div>
       </div>
       <div class='arrow'>→</div>
-      <div class='out'><div class='ans'>A</div><div class='cap'>Qwen3-14B's<br>answer</div></div>
+      <div class='out'><div class='ans'>A</div><div class='cap'>all three<br>models' answer</div></div>
     </div>
     <div class='finds'>
-      <div class='f1'><b>Priced as worded, not by value</b>One word can flip a choice: “saved” in “saved from being
-        killed in a fire” is worth {saved:.0f} log-odds.</div>
-      <div class='f2'><b>A gut-feel price</b>“How good would it be?” predicts the price about as well as anything
-        we tried (r ≈ {r_good:.1f}).</div>
-      <div class='f3'><b>A generic comparator</b>The parts that write the decision also carry “which pile has more
-        apples?”, in all three models.</div>
+      <div class='f1'><b>Wording over value</b>Which value an outcome serves explains {v10 * 100:.0f}% of its price.
+        One word can flip a choice: “saved” in “saved from being killed in a fire”.</div>
+      <div class='f2'><b>A gut-feel price</b>Asking how good it would be predicts the price about as well as
+        anything we tried (r ≈ {r_good:.1f}).</div>
+      <div class='f3'><b>A generic comparator</b>The parts that write the decision carry outcome and apple decisions
+        alike, in all three models.</div>
     </div>
-    <div class='foot'><span>Qwen3-14B; the relative prices and the comparator also in Qwen3-32B and Llama 3.1 8B</span>
-      <span>forced choices · word deletions · activation patching</span></div>
+    <div class='foot'><span>Bars and findings 1-2: Qwen3-14B. Relative prices and the comparator: also Qwen3-32B and
+      Llama 3.1 8B</span><span>forced choices · word deletions · activation patching</span></div>
     """
     return ("<!doctype html><html><head><meta charset='utf-8'><style>" + CSS + css + "</style></head><body>"
             "<div id='fig' class='hero'>" + body + "</div></body></html>")
