@@ -1,0 +1,92 @@
+[13:35:27] Loading Qwen/Qwen3-32B on cuda ...
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files:   6%|▌         | 1/17 [00:11<03:02, 11.42s/it]Fetching 17 files:  12%|█▏        | 2/17 [00:12<01:24,  5.61s/it]Fetching 17 files:  18%|█▊        | 3/17 [00:21<01:39,  7.10s/it]Fetching 17 files:  24%|██▎       | 4/17 [00:33<01:57,  9.02s/it]Fetching 17 files:  29%|██▉       | 5/17 [00:38<01:29,  7.47s/it]Fetching 17 files:  35%|███▌      | 6/17 [00:45<01:19,  7.20s/it]Fetching 17 files:  41%|████      | 7/17 [00:45<00:49,  4.99s/it]Fetching 17 files:  47%|████▋     | 8/17 [00:45<00:31,  3.51s/it]Fetching 17 files:  53%|█████▎    | 9/17 [00:46<00:21,  2.69s/it]Fetching 17 files:  65%|██████▍   | 11/17 [00:47<00:09,  1.51s/it]Fetching 17 files:  71%|███████   | 12/17 [00:48<00:07,  1.50s/it]Fetching 17 files:  76%|███████▋  | 13/17 [00:55<00:12,  3.00s/it]Fetching 17 files:  82%|████████▏ | 14/17 [01:01<00:11,  3.73s/it]Fetching 17 files:  88%|████████▊ | 15/17 [01:04<00:06,  3.44s/it]Fetching 17 files:  94%|█████████▍| 16/17 [01:04<00:02,  2.50s/it]Fetching 17 files: 100%|██████████| 17/17 [01:05<00:00,  2.10s/it]Fetching 17 files: 100%|██████████| 17/17 [01:05<00:00,  3.85s/it]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  86%|████████▋ | 611/707 [00:00<00:00, 6105.58it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5809.26it/s]
+[13:36:53] qwen32 (Qwen/Qwen3-32B, 64 blocks, 64 heads): 96 outcomes, 994 deletions, 9 alternatives; layers [26, 32, 38, 45, 51]
+[13:39:01] qwen32 price: common share words 0.715, outcomes 0.821; order flips 0.18 (4442 pairs; 0.15 within ±8); cycles 12; |logit| > 10 in 11%
+[13:39:34] qwen32 comparator: decision reaches the answer position at layer 51; logit writers carry 0.75 (random -0.11, -0.03, -0.00); decision writers (blocks < 51) carry 0.46 (random -0.01, -0.01, -0.00); answer position: END@26 0.00, END@32 0.00, END@38 0.01, END@42 0.01, END@45 0.00, END@48 0.03, END@51 0.51, END@58 0.91
+[13:39:53] qwen32 quantity: logit writers 0.83, decision writers 0.47 (random 0.00, 0.01, -0.01)
+[13:40:11] qwen32 weight: logit writers 0.81, decision writers 0.38 (random 0.00, 0.00, -0.01)
+[13:40:11] qwen32 done in 4.8 min: Q1 relative, Q2 True, Q3 True, Q2b True, Q3b True
+[13:40:12] Loading Qwen/Qwen3-14B on cuda ...
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:28<03:22, 28.96s/it]Fetching 8 files:  50%|█████     | 4/8 [00:29<00:22,  5.65s/it]Fetching 8 files:  62%|██████▎   | 5/8 [00:30<00:12,  4.29s/it]Fetching 8 files:  88%|████████▊ | 7/8 [00:32<00:02,  2.78s/it]Fetching 8 files: 100%|██████████| 8/8 [00:40<00:00,  4.22s/it]Fetching 8 files: 100%|██████████| 8/8 [00:40<00:00,  5.11s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 5522.40it/s]
+[13:41:02] qwen14 (Qwen/Qwen3-14B, 40 blocks, 40 heads): 96 outcomes, 994 deletions, 9 alternatives; layers [16, 20, 24, 28, 32]
+[13:42:04] qwen14 price: common share words 0.752, outcomes 0.768; order flips 0.34 (4559 pairs; 0.38 within ±8); cycles 96; |logit| > 10 in 55%
+[13:42:33] qwen14 comparator: decision reaches the answer position at layer 28; logit writers carry 0.96 (random 0.07, 0.10, 0.01); decision writers (blocks < 28) carry 0.71 (random 0.01, -0.01, -0.01); answer position: END@16 0.00, END@20 0.00, END@24 0.01, END@26 0.20, END@28 0.73, END@30 0.80, END@32 0.90, END@36 0.95
+[13:42:43] qwen14 quantity: logit writers 0.94, decision writers 0.81 (random -0.00, -0.00, -0.00)
+[13:42:53] qwen14 weight: logit writers 0.96, decision writers 0.76 (random 0.00, -0.00, -0.00)
+[13:42:53] qwen14 method check: 14 of pilot 5's 20 pieces among the decision writers (logit writers: 1); pilot 5's pieces carry 0.57
+[13:42:53] qwen14 done in 2.7 min: Q1 relative, Q2 False, Q3 True, Q2b True, Q3b True
+[13:42:53] Loading meta-llama/Llama-3.1-8B-Instruct on cuda ...
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:   0%|          | 0/4 [00:15<?, ?it/s]
+Traceback (most recent call last):
+  File "/workspace/llm-value-trade-offs/pilot17-three-models/pilot17.py", line 380, in main
+    Vs[key] = run(key, a.quick, a.out)
+              ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-value-trade-offs/pilot17-three-models/pilot17.py", line 182, in run
+    M = Runner17(MODELS[key])
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-value-trade-offs/pilot17-three-models/pilot17.py", line 49, in __init__
+    super().__init__(name)
+  File "/workspace/llm-value-trade-offs/pilot14-price-writers/pilot14.py", line 59, in __init__
+    super().__init__(name)
+  File "/workspace/llm-value-trade-offs/pilot11-vibe-direction/pilot11.py", line 83, in __init__
+    self.tok, self.model, self.dev = load_model({"model": name, "dtype": "bfloat16"})
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/llm-value-trade-offs/pilot5-value-circuit/common.py", line 167, in load_model
+    model = AutoModelForCausalLM.from_pretrained(cfg["model"], dtype=dtype, **kw)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/models/auto/auto_factory.py", line 406, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py", line 4251, in from_pretrained
+    checkpoint_files, sharded_metadata = _get_resolved_checkpoint_files(
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/modeling_utils.py", line 791, in _get_resolved_checkpoint_files
+    checkpoint_files, sharded_metadata = get_checkpoint_shard_files(
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 980, in get_checkpoint_shard_files
+    cached_filenames = cached_files(
+                       ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 634, in cached_files
+    raise e
+  File "/usr/local/lib/python3.12/dist-packages/transformers/utils/hub.py", line 552, in cached_files
+    snapshot_download(
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+    hf_thread_map(
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+    results[future_to_index[future]] = future.result()
+                                       ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+    hf_hub_download(  # type: ignore
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/file_download.py", line 2017, in _download_to_tmp_and_move
+    xet_get(
+  File "/usr/local/lib/python3.12/dist-packages/huggingface_hub/file_download.py", line 589, in xet_get
+    with session.new_file_download_group(
+RuntimeError: Task error: File reconstruction error: IO Error: Disk quota exceeded (os error 122)
+[13:43:11] llama8 FAILED: RuntimeError('Task error: File reconstruction error: IO Error: Disk quota exceeded (os error 122)')
