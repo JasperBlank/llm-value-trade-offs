@@ -1,0 +1,43 @@
+# Pilot 8 settings. Everything under `prereg` is PRE-REGISTERED (DESIGN.md, section 4).
+models:
+  qwen: {path: Qwen/Qwen3-14B, map_layers: [4, 8, 12, 16, 20, 24, 28, 32, 36, 40]}
+dtype: bfloat16
+batch_size: 16
+results_dir: results/real
+
+fit: {bootstrap: 200, seed: 8}
+
+sites:
+  a_sites: [A_end, A_nl]         # option A's own words, before B (the source)
+  compare_site: after_B          # the text after B's line (the comparison)
+
+das:
+  k: 1
+  epochs: 2
+  batch_size: 32
+  lr: 0.002
+  seed: 8
+  a_layer_max: 24                # the source rule searches layers up to here
+  arrival_from: 16               # the arrival sweep of the answer position starts here
+  sweep_pairs: 96                # training pairs used by the sweeps
+
+prereg:
+  arrival_min: 0.5               # arrival layer: first layer where the answer position carries >= 0.5 of a value swap
+  q2a_corr: 0.7                  # Q2a: the source direction orders the 12 held-out values with r >= 0.7
+  q2b_share: 0.5                 # Q2b: the comparison direction carries >= 0.5 of the site's effect on held-out trade-offs
+  q3_onescale_r: 0.8             # Q3 one scale: prices from one wording predict the other with r >= 0.8 (log-odds)
+  q3_cyclic_max: 0.05            # Q3 transitivity: at most 5% of triads cyclic
+  q3_menu_factor: 1.5            # Q3 menu invariance: median factor change of the A:B odds from a third option <= 1.5
+  q4a_corr: 0.7                  # Q4a: stated ratings correlate >= 0.7 with trade-off worth
+  q4b_corr: 0.7                  # Q4b: in the rating prompt the source direction orders the held-out values with r >= 0.7
+  q4c_share: 0.3                 # Q4c: swapping only that direction carries >= 0.3 of the site's effect on the rating (95% CI above 0) ...
+  q4c_site_min: 0.1              # ... testable only if the whole site carries >= 0.1 of the difference between the two ratings
+
+quick:
+  models:
+    qwen: {path: Qwen/Qwen3-0.6B, map_layers: [4, 8, 12, 16, 20, 24, 28]}
+  results_dir: results/quick
+  batch_size: 8
+  fit: {bootstrap: 10}
+  das: {epochs: 1, batch_size: 16, sweep_pairs: 16}
+  limit: {behaviour: 1200, menus: 80, rating_pairs: 64, das_train: 96, das_test: 48}

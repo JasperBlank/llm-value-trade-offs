@@ -16,3 +16,6 @@ direction on the outcome's own words tests whether the worth is already assemble
 | `run_pod.sh` | The pod's script: install, quick test, the real run, print, then the pod stops itself |
 | `print_results8.py` | Prints the report and the result files to the pod's log |
 | `predictions/` | The questions, Claude's sealed predictions, Jasper's |
+
+**Superseded before running (3 Nov 2026):** Jasper redirected pilot 8 to trade-offs between intrinsic
+values; see [`../pilot8-intrinsic-values/`](../pilot8-intrinsic-values/). Nothing in this folder was run.
