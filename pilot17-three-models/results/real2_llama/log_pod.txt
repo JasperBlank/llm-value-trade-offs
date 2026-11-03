@@ -1,0 +1,50 @@
+PILOT17 START 2026-11-03T13:58:25Z
+NVIDIA H100 80GB HBM3, 81559 MiB
+mfs#us-mo-1.runpod.net:9421  448T  338T  110T  76% /workspace
+PILOT17 commit 6735635: Pilot 17 results so far: three models, the same story (relative prices; the decision reaches the answer with apples; the generic comparator in both Qwens, method check 14 of 20); Llama's decision writers pending; fig16
+PILOT17 Llama access OK: qwen32,qwen14,llama8
+PILOT17 models: llama8; results/real2_llama
+PILOT17 QUICK TEST (Qwen3-0.6B) 2026-11-03T13:59:15Z
+[13:59:56] qwen06 price: common share words 0.637, outcomes 0.799; order flips 0.02 (85 pairs; 0.02 within ±8); cycles 0; |logit| > 10 in 0%
+[13:59:58] qwen06 comparator: decision reaches the answer position at layer 20; logit writers carry 1.00 (random 0.10, 0.02, 0.05); decision writers (blocks < 20) carry 0.52 (random -0.03, -0.14, -0.04); answer position: END@11 0.00, END@14 0.01, END@17 0.05, END@18 0.42, END@20 0.51, END@21 0.51, END@22 0.90, END@25 1.02
+[14:00:00] qwen06 done in 0.7 min: Q1 relative, Q2 False, Q3 False, Q2b True, Q3b False
+PILOT17 REAL RUN 2026-11-03T14:00:02Z
+[14:01:23] llama8 (meta-llama/Llama-3.1-8B-Instruct, 32 blocks, 32 heads): 96 outcomes, 994 deletions, 9 alternatives; layers [13, 16, 19, 22, 26]
+[14:02:08] llama8 price: common share words 0.783, outcomes 0.703; order flips 0.21 (3956 pairs; 0.16 within ±8); cycles 0; |logit| > 10 in 3%
+[14:02:25] llama8 comparator: decision reaches the answer position at layer 19; logit writers carry 0.82 (random 0.01, 0.06, 0.04); decision writers (blocks < 19) carry 0.86 (random 0.00, 0.02, 0.01); answer position: END@13 0.01, END@16 0.43, END@19 0.89, END@21 0.89, END@22 0.90, END@24 0.93, END@26 0.93, END@29 0.95
+[14:02:33] llama8 quantity: logit writers 0.87, decision writers 0.90 (random 0.00, 0.06, -0.01)
+[14:02:40] llama8 weight: logit writers 0.88, decision writers 0.95 (random 0.02, 0.04, -0.00)
+[14:02:40] llama8 done in 2.6 min: Q1 relative, Q2 True, Q3 True, Q2b True, Q3b True
+PILOT17 REPORT BEGIN
+# Pilot 17 results
+
+## The questions, per model
+
+| | llama8 (Llama-3.1-8B-Instruct) |
+|---|---|
+| **Q1** fixed price? (words / outcomes; bar 0.9) | no: 0.78 / 0.70 |
+| **Q2** compact comparator? (top 20 on held-out sentence swaps; bar 0.5) | yes: 0.82 (random ≤ 0.06) |
+| **Q3** generic? (apples / weight; bar 0.3) | yes: 0.87 / 0.88 |
+| layer where the decision reaches the answer position (whole-state swap ≥ 0.5) | 19 |
+| **Q2b** decision writers before that layer (held-out sentence swaps; bar 0.4) | yes: 0.86 (random ≤ 0.02) |
+| **Q3b** the same on apples / weight (bar 0.3) | yes: 0.90 / 0.95 (random ≤ 0.06) |
+
+## Also
+
+| | llama8 |
+|---|---|
+| without the two extreme alternatives (words / outcomes) | 0.79 / 0.73 |
+| order flips (clear pairs; within ±8 logits) | 0.21 (3956); 0.16 |
+| cycles (all gaps > 2 logits) | 0 |
+| menus with \|logit\| > 10 | 3% |
+| inside: common share at the line break after B, by layer | 13: 0.79, 16: 0.76, 19: 0.73, 22: 0.70, 26: 0.64 |
+| check: line break after A (must be 1) | 1.000, 0.999, 0.999, 0.999, 0.999 |
+| price before B is read: best line break after A (held out) | A_nl@13 r 0.45 |
+| price at the line break after B (mid B), by layer | 13: 0.80, 16: 0.78, 19: 0.70, 22: 0.67, 26: 0.70 |
+| decision at the answer position: whole-state swap by layer (sentences) | 13: 0.01, 16: 0.43, 19: 0.89, 21: 0.89, 22: 0.90, 24: 0.93, 26: 0.93, 29: 0.95 |
+| the same for apples | 13: -0.02, 16: 0.58, 19: 0.90, 21: 0.91, 22: 0.92, 24: 0.94, 26: 0.94, 29: 0.96 |
+| top 20 pieces | MLP 29 (+0.499); head 30.27 (+0.374); MLP 28 (+0.167); head 30.26 (+0.160); MLP 26 (+0.136); head 31.1 (+0.134); MLP 22 (+0.110); head 24.24 (+0.101) … |
+| pilot 5's 20 pieces (qwen14 only): transfer on sentences / apples / weight; shared with the logit writers / decision writers |  |
+| decision writers | head 17.24 (+0.084); MLP 18 (+0.052); MLP 17 (+0.038); head 16.1 (+0.027); MLP 16 (+0.025); head 18.20 (+0.021); head 18.28 (+0.018); head 18.16 (+0.016) … |
+| run time (min) | 2.6 |
+PILOT17 REPORT END
