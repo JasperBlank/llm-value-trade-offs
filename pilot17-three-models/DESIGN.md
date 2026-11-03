@@ -52,7 +52,7 @@ Each model is run separately; thinking is off for the Qwen models.
 
 ## 5. Running it
 
-- **One GPU pod:** the RTX PRO 6000 (96 GB, $2.49/h), since Qwen3-32B needs about 66 GB. A 160 GB volume holds all three models.
+- **One GPU pod:** the RTX PRO 6000 (96 GB, $2.49/h), since Qwen3-32B needs about 66 GB. A 100 GB volume is enough, since each model is deleted from disk after its run.
 - **Order:** Llama first, then Qwen3-14B, then Qwen3-32B. If one model fails, the run moves on to the next.
 - **Time and cost:** about 30 minutes, about $1.25.
 - **Llama access:** Llama is gated. The pod checks access first and skips it if the Hugging Face token has none.

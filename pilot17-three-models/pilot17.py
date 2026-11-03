@@ -316,6 +316,11 @@ def main():
         if Vs:
             report(Vs, res)
             json.dump(Vs, open(res / "verdicts17.json", "w"), indent=1)
+        if not a.quick:                     # free the disk for the next model
+            import os
+            import shutil
+            hub = Path(os.environ.get("HF_HOME", Path.home() / ".cache/huggingface")) / "hub"
+            shutil.rmtree(hub / ("models--" + MODELS[key].replace("/", "--")), ignore_errors=True)
 
 
 if __name__ == "__main__":
