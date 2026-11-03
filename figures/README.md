@@ -1,5 +1,7 @@
 # Figures
 
+**For the post:** see [`post/`](post/) (a hero image for X and six figures, rendered from HTML).
+
 Drawn by `make_figures.py` straight from the committed result files of pilots 6 to 12
 (`python figures/make_figures.py`). Colours: the reference palette of the dataviz guidance
 (categorical slots 1-3 validated for colour-blind separation; a single-hue blue ramp for the maps).
