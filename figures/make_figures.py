@@ -1,4 +1,4 @@
-"""The figures for pilots 6 and 7, drawn straight from the committed result files.
+"""The figures for pilots 6, 7 and 8, drawn straight from the committed result files.
 
   python figures/make_figures.py          writes figures/fig*.png
 
@@ -7,6 +7,9 @@ fig2_generic_stage.png      pilot 6: value, apples and weight reach the answer p
 fig3_route_qwen.png         pilot 7: where option A's (and B's) information sits, layer by layer (Qwen3-14B)
 fig3b_route_llama.png       pilot 7: the same for Llama 3.1 8B
 fig4_monkey_test.png        pilot 7: what one value direction carries, before and after option B (Qwen3-14B)
+fig5_price_list.png         pilot 8: the price of each of 24 intrinsic values in trade-offs, and its stated rating
+fig6_sentences_not_values.png  pilot 8 (exploratory): prices are stable per sentence, not per value
+fig7_pilot8_tests.png       pilot 8: the pre-registered tests against their bars
 """
 import json
 from pathlib import Path
@@ -21,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = Path(__file__).resolve().parent
 P6 = ROOT / "pilot6-value-subspace/results/real"
 P7 = ROOT / "pilot7-value-route/results/real"
+P8 = ROOT / "pilot8-intrinsic-values/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -208,6 +212,128 @@ def fig4():
     plt.close(fig)
 
 
+# --------------------------------------------------------------------------
+# Pilot 8: trade-offs between 24 intrinsic values (Qwen3-14B)
+# --------------------------------------------------------------------------
+def fig5():
+    beh = load(P8 / "qwen/behave.json")
+    b = beh["b"]
+    names = sorted(beh["worth"], key=lambda v: beh["worth"][v]["u"])
+    ppl = [beh["worth"][v]["people_vs_mean"] for v in names]
+    lo = [np.exp(beh["worth"][v]["ci95"][0] / b) for v in names]
+    hi = [np.exp(beh["worth"][v]["ci95"][1] / b) for v in names]
+    rate = [beh["ratings"][v] for v in names]
+    y = np.arange(len(names))
+    fig, axs = plt.subplots(1, 2, figsize=(11, 7.4), sharey=True, gridspec_kw={"width_ratios": [1.6, 1]})
+    fig.subplots_adjust(left=0.13, right=0.97, top=0.86, bottom=0.12, wspace=0.08)
+    ax = axs[0]
+    ax.hlines(y, lo, hi, color=BLUE_LIGHT, linewidth=3)
+    ax.plot(ppl, y, "o", color=BLUE, markersize=6)
+    ax.axvline(1, color=AXIS, linewidth=1)
+    ax.set_xscale("log")
+    ax.set_xticks([0.25, 0.5, 1, 2, 3], ["¼", "½", "1", "2", "3"])
+    ax.minorticks_off()
+    ax.set_xlim(0.25, 3.6)
+    ax.set_yticks(y, names)
+    ax.tick_params(axis="y", length=0)
+    ax.grid(axis="x", color=GRID, linewidth=0.6)
+    ax.set_axisbelow(True)
+    ax.set_title("In trade-offs: one person counts as … people of an average value")
+    ax2 = axs[1]
+    ax2.barh(y, rate, color=ORANGE, height=0.56, edgecolor=SURFACE, linewidth=1.5)
+    for yi, r in zip(y, rate):
+        ax2.text(r + 0.1, yi, f"{r:.1f}", va="center", fontsize=8.5, color=INK2)
+    ax2.set_xlim(0, 9)
+    ax2.tick_params(axis="y", length=0)
+    ax2.grid(axis="x", color=GRID, linewidth=0.6)
+    ax2.set_axisbelow(True)
+    ax2.set_title("Asked directly: how much it matters (0-9)")
+    suptitle(fig, "Qwen3-14B's price list for 24 intrinsic values",
+             f"Pilot 8. Left: fitted from 13,248 choices ('A) 2 people each …  B) 8 people each …'), 95% intervals. "
+             f"Right: stated rating. They agree only r = {beh['ratings_vs_worth_r']:.2f}.")
+    note(fig, "Values from the Clearer Thinking intrinsic-values list, two sentences each. The two sentences written for one value agree\n"
+              f"only r = {beh['phrasing_reliability_r']:.2f} (see the next figure), so read these as prices of the sentences used, not of the value in general.")
+    fig.savefig(OUT / "fig5_price_list.png", dpi=200)
+    plt.close(fig)
+
+
+def fig6():
+    ex = load(P8 / "exploratory_sentences.json")
+    S = ex["sentences"]
+    fig, axs = plt.subplots(1, 2, figsize=(11, 5.2))
+    fig.subplots_adjust(left=0.07, right=0.98, top=0.78, bottom=0.14, wspace=0.1)
+    lim = (-4.2, 3.9)
+    ax = axs[0]
+    ax.plot(lim, lim, color=AXIS, linewidth=1)
+    ax.plot([s["u_wording0"] for s in S], [s["u_wording1"] for s in S], "o", color=BLUE, markersize=5, alpha=0.85)
+    ax.set_title(f"Same sentence, two question wordings\nr = {ex['same_sentence_across_wordings_r']:.2f}")
+    ax.set_xlabel("Price, asked 'Which … would you rather happen?'")
+    ax.set_ylabel("Price, asked 'Which … do you prefer?'")
+    ax = axs[1]
+    ax.plot(lim, lim, color=AXIS, linewidth=1)
+    by = {}
+    for s in S:
+        by.setdefault(s["value"], {})[s["phrasing"]] = s["u"]
+    xs = np.array([by[v][0] for v in by])
+    ys = np.array([by[v][1] for v in by])
+    ax.plot(xs, ys, "o", color=ORANGE, markersize=5.5)
+    gap = sorted(by, key=lambda v: -abs(by[v][0] - by[v][1]))[:5]
+    for v in gap:
+        ax.annotate(v, (by[v][0], by[v][1]), xytext=(5, 3), textcoords="offset points", fontsize=8.5, color=INK2)
+    ax.set_title(f"Two sentences written for the same value\nr = {ex['two_sentences_of_a_value_r']:.2f}")
+    ax.set_xlabel("Price of the value's first sentence")
+    ax.set_ylabel("Price of its second sentence")
+    for a in axs:
+        a.set_xlim(lim)
+        a.set_ylim(lim)
+        a.set_aspect("equal")
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    suptitle(fig, "The model has stable prices for situations, not for value categories",
+             "Pilot 8, exploratory (after the results). Price = worth per person in log-odds, fitted per sentence from the same 13,248 choices.")
+    note(fig, "Example: Diversity 'each become part of a community made up of many different kinds of people' +2.2, but "
+              "'each get to know someone very different from themselves' −2.6.")
+    fig.savefig(OUT / "fig6_sentences_not_values.png", dpi=200)
+    plt.close(fig)
+
+
+def fig7():
+    V = load(P8 / "verdicts8.json")
+    beh = load(P8 / "qwen/behave.json")
+    src = load(P8 / "qwen/source.json")
+    rat = load(P8 / "qwen/rating.json")
+    rows = [
+        ("Q2b  One comparison direction (after option B, layer 24)\n       carries trade-offs between 12 values it never saw", V["Q2b"]["share"], 0.5, "share"),
+        ("Q2a  A worth direction on option A's own words (layer 20)\n       orders 12 values it never saw", V["Q2a"]["r"], 0.7, "r"),
+        ("Q4b  The same direction, in 'how much does it matter?'\n       prompts, orders those 12 values", V["Q4b"]["r"], 0.7, "r"),
+        ("Q4c  Swapping only that direction carries the rating", V["Q4c"]["share"], 0.3, "share"),
+        ("Q4a  Stated ratings match the trade-off prices", V["Q4a"]["r"], 0.7, "r"),
+        ("Q3   Prices from one question wording predict the other", beh["one_scale"]["heldout_wording_r"], 0.8, "r"),
+        ("Q3   Choices are transitive (share of triads not cyclic)", 1 - beh["transitivity"]["share"], 0.95, "share"),
+    ]
+    fig, ax = plt.subplots(figsize=(11, 5.6))
+    fig.subplots_adjust(left=0.43, right=0.86, top=0.84, bottom=0.15)
+    y = np.arange(len(rows))[::-1]
+    for yi, (lab, v, bar, unit) in zip(y, rows):
+        ok = v >= bar
+        ax.barh(yi, v, color=BLUE if ok else ORANGE, height=0.55, edgecolor=SURFACE, linewidth=2)
+        ax.plot([bar, bar], [yi - 0.38, yi + 0.38], color=INK, linewidth=1.6)
+        ax.text(1.03, yi, f"{unit} {v:.2f}  {'pass' if ok else 'fail'}", va="center", fontsize=9, color=INK,
+                transform=ax.get_yaxis_transform(), fontweight="bold" if ok else "normal")
+    ax.set_yticks(y, [r[0] for r in rows], fontsize=8.8)
+    ax.tick_params(axis="y", length=0)
+    ax.set_xlim(0, 1)
+    ax.grid(axis="x", color=GRID, linewidth=0.6)
+    ax.set_axisbelow(True)
+    suptitle(fig, "A shared comparison step, but no per-value worth code before it",
+             "Pilot 8, Qwen3-14B: the pre-registered tests. Black tick = the bar set before the run; blue = passed, orange = failed.")
+    note(fig, f"Not shown: adding a third option moved the A:B odds by a median factor of {beh['menu']['median_factor']:.0f} (bar 1.5), likely a "
+              f"position effect of the 3-option format.\nOption A's own words carry only {src['site_swap_share']:.2f} of a value swap; "
+              f"the rating prompt's site {rat['site_swap_of_donor']['value']:.2f} of a rating difference.")
+    fig.savefig(OUT / "fig7_pilot8_tests.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -220,4 +346,7 @@ if __name__ == "__main__":
           "fig3b_route_llama.png", "The same route in Llama 3.1 8B, earlier",
           "Llama 3.1 8B (pilot 7). Line breaks at layers 8-12, answer position from layer 16 (of 32).")
     fig4()
+    fig5()
+    fig6()
+    fig7()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))

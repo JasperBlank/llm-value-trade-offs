@@ -4,7 +4,7 @@ Jasper's four questions: how Qwen3-14B trades 24 intrinsic values off against ea
 Thinking's 22 categories plus Non-suffering and Truth); whether the same internal thing lights up
 across different trade-offs; whether the menu is consistent; and whether the value the model reports
 when asked about one value on its own is the same internal quantity it uses before comparing.
-**Read [`DESIGN.md`](DESIGN.md) first.**
+**Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/real/README.md`](results/real/README.md) (run 3 Nov 2026).
 
 | File | What it does |
 |---|---|
@@ -15,3 +15,5 @@ when asked about one value on its own is the same internal quantity it uses befo
 | `run_pod.sh` | The pod's script: install, quick test, real run, print, then the pod stops itself |
 | `print_results8.py` | Prints the report and the result files to the pod's log |
 | `predictions/` | The questions, Claude's sealed predictions, Jasper's |
+| `score_predictions.py` | Scores both prediction sets against the results |
+| `explore_sentences.py` | Exploratory, after the results: a price for each sentence instead of each value |

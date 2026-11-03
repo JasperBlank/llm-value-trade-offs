@@ -1,6 +1,6 @@
 # Figures
 
-Drawn by `make_figures.py` straight from the committed result files of pilots 6 and 7
+Drawn by `make_figures.py` straight from the committed result files of pilots 6, 7 and 8
 (`python figures/make_figures.py`). Colours: the reference palette of the dataviz guidance
 (categorical slots 1-3 validated for colour-blind separation; a single-hue blue ramp for the maps).
 
@@ -11,3 +11,6 @@ Drawn by `make_figures.py` straight from the committed result files of pilots 6 
 | `fig3_route_qwen.png` | Pilot 7: where the options' information sits, layer by layer (Qwen3-14B) |
 | `fig3b_route_llama.png` | Pilot 7: the same for Llama 3.1 8B |
 | `fig4_monkey_test.png` | Pilot 7: what one value direction carries before and after option B (Qwen3-14B) |
+| `fig5_price_list.png` | Pilot 8: Qwen3-14B's price for each of 24 intrinsic values in trade-offs, next to its stated rating |
+| `fig6_sentences_not_values.png` | Pilot 8 (exploratory): prices are stable per sentence (r 0.91) but not per value (r 0.20) |
+| `fig7_pilot8_tests.png` | Pilot 8: the pre-registered tests against their bars |

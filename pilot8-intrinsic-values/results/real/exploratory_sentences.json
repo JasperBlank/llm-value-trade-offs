@@ -1,0 +1,394 @@
+{
+ "b": 2.1051148072972774,
+ "bias_towards_A": 1.2946561882512544,
+ "same_sentence_across_wordings_r": 0.906525848284349,
+ "two_sentences_of_a_value_r": 0.20289480452660888,
+ "spread_sd_sentences": 1.5769175326529123,
+ "spread_sd_values_mean_of_two": 1.1915556564244978,
+ "sentences": [
+  {
+   "value": "Protection",
+   "phrasing": 0,
+   "text": "are each kept safe from a danger that threatened them",
+   "u": 3.026592623389865,
+   "u_wording0": 2.697883199894055,
+   "u_wording1": 3.9099657094941676
+  },
+  {
+   "value": "Nurturing",
+   "phrasing": 0,
+   "text": "each help a young person grow and flourish",
+   "u": 2.967291733563124,
+   "u_wording0": 3.580340800444084,
+   "u_wording1": 2.8085785983721556
+  },
+  {
+   "value": "Freedom",
+   "phrasing": 1,
+   "text": "are each no longer prevented from making their own choices about their lives",
+   "u": 2.946659278115096,
+   "u_wording0": 2.7022129736402154,
+   "u_wording1": 3.707207869163397
+  },
+  {
+   "value": "Non-suffering",
+   "phrasing": 0,
+   "text": "are each spared a week of pain",
+   "u": 2.464118030396297,
+   "u_wording0": 1.8830472973226096,
+   "u_wording1": 3.549231024930079
+  },
+  {
+   "value": "Diversity",
+   "phrasing": 1,
+   "text": "each become part of a community made up of many different kinds of people",
+   "u": 2.1613119882431358,
+   "u_wording0": 2.820784480155333,
+   "u_wording1": 1.841385403459495
+  },
+  {
+   "value": "Beauty",
+   "phrasing": 1,
+   "text": "each get to see something so beautiful it moves them deeply",
+   "u": 2.1379671112456706,
+   "u_wording0": 2.5754412339214667,
+   "u_wording1": 2.0217751928907997
+  },
+  {
+   "value": "Legacy",
+   "phrasing": 0,
+   "text": "each create something that will outlast them",
+   "u": 2.023442035948488,
+   "u_wording0": 2.3612405036070747,
+   "u_wording1": 1.9849497899263964
+  },
+  {
+   "value": "Preserving",
+   "phrasing": 0,
+   "text": "each see a place they love protected from destruction",
+   "u": 1.8152904422794034,
+   "u_wording0": 1.7411561934822246,
+   "u_wording1": 2.1639731216518747
+  },
+  {
+   "value": "Freedom",
+   "phrasing": 0,
+   "text": "each gain the freedom to decide how they spend their own time",
+   "u": 1.563137966213223,
+   "u_wording0": 1.5988807999192778,
+   "u_wording1": 1.7531000803742862
+  },
+  {
+   "value": "Spirituality",
+   "phrasing": 1,
+   "text": "each feel a profound connection to something greater than themselves",
+   "u": 1.3958025671274474,
+   "u_wording0": 2.2356487318751244,
+   "u_wording1": 0.7974078501527708
+  },
+  {
+   "value": "Protection",
+   "phrasing": 1,
+   "text": "are each shielded from a threat to their safety",
+   "u": 1.3379573399059597,
+   "u_wording0": 0.8597922482658544,
+   "u_wording1": 2.0291477308502026
+  },
+  {
+   "value": "Knowing",
+   "phrasing": 0,
+   "text": "each come to understand something important about the world",
+   "u": 1.196401237038894,
+   "u_wording0": 1.4921605885231544,
+   "u_wording1": 1.0739849443989962
+  },
+  {
+   "value": "Embodying",
+   "phrasing": 0,
+   "text": "each manage to act according to their ideals in a hard situation",
+   "u": 1.0350807022018615,
+   "u_wording0": 1.7081606806099012,
+   "u_wording1": 0.5295010778375837
+  },
+  {
+   "value": "Achievement",
+   "phrasing": 0,
+   "text": "each achieve a goal they have worked towards for a long time",
+   "u": 0.7464258564068914,
+   "u_wording0": 1.1056451766208462,
+   "u_wording1": 0.4937946892129031
+  },
+  {
+   "value": "Nurturing",
+   "phrasing": 1,
+   "text": "each get to guide a child through an important stage of growing up",
+   "u": 0.6772277216373925,
+   "u_wording0": 0.9421098219883702,
+   "u_wording1": 0.5043243539953303
+  },
+  {
+   "value": "Defending",
+   "phrasing": 1,
+   "text": "each protect a stranger from being bullied",
+   "u": 0.6446128962252314,
+   "u_wording0": 0.34031274848279836,
+   "u_wording1": 1.03172793462829
+  },
+  {
+   "value": "Loyalty",
+   "phrasing": 1,
+   "text": "each find that the people close to them stay faithful when it matters",
+   "u": 0.6444474760733129,
+   "u_wording0": 0.7142494725798613,
+   "u_wording1": 0.6586438452721959
+  },
+  {
+   "value": "Caring",
+   "phrasing": 1,
+   "text": "are each able to look after a loved one who needs them",
+   "u": 0.5375983027640968,
+   "u_wording0": 0.14975553365966565,
+   "u_wording1": 0.9917500248711314
+  },
+  {
+   "value": "Respect",
+   "phrasing": 1,
+   "text": "each finally receive the recognition and respect they deserve",
+   "u": 0.49963910377340015,
+   "u_wording0": 1.0348220625475681,
+   "u_wording1": 0.038056058046909425
+  },
+  {
+   "value": "Embodying",
+   "phrasing": 1,
+   "text": "each live up to the kind of person they want to be when it is difficult",
+   "u": 0.24900553345763843,
+   "u_wording0": 0.8269611675811754,
+   "u_wording1": -0.29633983961881977
+  },
+  {
+   "value": "Defending",
+   "phrasing": 0,
+   "text": "each successfully stand up for someone who was being mistreated",
+   "u": 0.209094503340299,
+   "u_wording0": 0.541822459264447,
+   "u_wording1": -0.10230895752085839
+  },
+  {
+   "value": "Achievement",
+   "phrasing": 1,
+   "text": "each finally succeed at something they have spent years trying to do",
+   "u": 0.0025405892170879962,
+   "u_wording0": 0.49859763590445794,
+   "u_wording1": -0.5017202875485018
+  },
+  {
+   "value": "Experiencing",
+   "phrasing": 1,
+   "text": "each try something exciting they have always wanted to experience",
+   "u": -0.06476164201925938,
+   "u_wording0": -0.002945791307663148,
+   "u_wording1": -0.1477995323697499
+  },
+  {
+   "value": "Knowing",
+   "phrasing": 1,
+   "text": "each finally learn the answer to a question that has long puzzled them",
+   "u": -0.07169325831172457,
+   "u_wording0": 0.09303869196528969,
+   "u_wording1": -0.25870611789600956
+  },
+  {
+   "value": "Legacy",
+   "phrasing": 1,
+   "text": "each leave behind something that will be remembered after they are gone",
+   "u": -0.12518551223529983,
+   "u_wording0": 0.40414157342234147,
+   "u_wording1": -0.6817117917934443
+  },
+  {
+   "value": "Loyalty",
+   "phrasing": 0,
+   "text": "each have a friend stand by them through a hard time",
+   "u": -0.221274755459124,
+   "u_wording0": -0.08163872211334833,
+   "u_wording1": -0.4054816134890636
+  },
+  {
+   "value": "Doing",
+   "phrasing": 1,
+   "text": "each get to spend time on a hobby they are passionate about",
+   "u": -0.31030476689703523,
+   "u_wording0": -0.18232658221165288,
+   "u_wording1": -0.4955016274682718
+  },
+  {
+   "value": "Fairness",
+   "phrasing": 1,
+   "text": "each receive the fair share they had wrongly been denied",
+   "u": -0.3120620625969196,
+   "u_wording0": -0.6335549748205773,
+   "u_wording1": -0.052130128758495486
+  },
+  {
+   "value": "Experiencing",
+   "phrasing": 0,
+   "text": "each have a new, memorable experience they have never had before",
+   "u": -0.4085336644320444,
+   "u_wording0": -0.14388434357458602,
+   "u_wording1": -0.7451448816490474
+  },
+  {
+   "value": "Caring",
+   "phrasing": 0,
+   "text": "each get the chance to help someone they care about",
+   "u": -0.41719974544747485,
+   "u_wording0": -0.21659586661420205,
+   "u_wording1": -0.6916017290154208
+  },
+  {
+   "value": "Pleasure",
+   "phrasing": 1,
+   "text": "each have a thoroughly enjoyable evening",
+   "u": -0.4602630119611487,
+   "u_wording0": -0.45623670524538706,
+   "u_wording1": -0.5441383632316368
+  },
+  {
+   "value": "Justice",
+   "phrasing": 1,
+   "text": "each see a person who harmed them face fair consequences",
+   "u": -0.5472090043835521,
+   "u_wording0": -0.61911176155102,
+   "u_wording1": -0.5680708648534465
+  },
+  {
+   "value": "Preserving",
+   "phrasing": 1,
+   "text": "each see an old tradition they cherish kept alive",
+   "u": -0.6004079528538976,
+   "u_wording0": -0.6031649802716399,
+   "u_wording1": -0.6972321829601544
+  },
+  {
+   "value": "Non-suffering",
+   "phrasing": 1,
+   "text": "are each relieved of a painful condition for a week",
+   "u": -0.7426594550646489,
+   "u_wording0": -1.4242053278178999,
+   "u_wording1": -0.20020069343137487
+  },
+  {
+   "value": "Longevity",
+   "phrasing": 1,
+   "text": "each have their life extended by a year",
+   "u": -0.7588387697062032,
+   "u_wording0": -1.593092015665132,
+   "u_wording1": -0.07272297269095657
+  },
+  {
+   "value": "Doing",
+   "phrasing": 0,
+   "text": "each spend a day doing an activity they love",
+   "u": -0.8580409710630602,
+   "u_wording0": -1.0808091456331563,
+   "u_wording1": -0.7746018506251893
+  },
+  {
+   "value": "Beauty",
+   "phrasing": 0,
+   "text": "each spend an afternoon somewhere breathtakingly beautiful",
+   "u": -0.8709863364257021,
+   "u_wording0": -1.0648512719693553,
+   "u_wording1": -0.8189560792472508
+  },
+  {
+   "value": "Happiness",
+   "phrasing": 1,
+   "text": "are each in a noticeably better mood for several days",
+   "u": -1.3649402429240571,
+   "u_wording0": -1.6549081872372955,
+   "u_wording1": -1.2893390879114952
+  },
+  {
+   "value": "Truth",
+   "phrasing": 0,
+   "text": "are each told the truth instead of being lied to",
+   "u": -1.5465881399021448,
+   "u_wording0": -2.202507799418666,
+   "u_wording1": -1.1517375400445444
+  },
+  {
+   "value": "Truth",
+   "phrasing": 1,
+   "text": "each learn the truth about something they had been deceived about",
+   "u": -1.5699573590493636,
+   "u_wording0": -1.754068855337852,
+   "u_wording1": -1.626271836576072
+  },
+  {
+   "value": "Fairness",
+   "phrasing": 0,
+   "text": "each have an unfair decision against them reversed",
+   "u": -1.6038691540627408,
+   "u_wording0": -1.9644162435396473,
+   "u_wording1": -1.4938430236061304
+  },
+  {
+   "value": "Spirituality",
+   "phrasing": 0,
+   "text": "each have a deeply meaningful spiritual experience",
+   "u": -1.8803292064144292,
+   "u_wording0": -1.8053430193002347,
+   "u_wording1": -2.2454339105693726
+  },
+  {
+   "value": "Justice",
+   "phrasing": 0,
+   "text": "each see someone who wronged them held accountable",
+   "u": -1.9536436759032294,
+   "u_wording0": -2.158409537330029,
+   "u_wording1": -2.0432116946915317
+  },
+  {
+   "value": "Pleasure",
+   "phrasing": 0,
+   "text": "each enjoy a delicious meal",
+   "u": -2.279944485359589,
+   "u_wording0": -2.6627249671923643,
+   "u_wording1": -2.2409471016074707
+  },
+  {
+   "value": "Respect",
+   "phrasing": 0,
+   "text": "are each treated with respect by people who looked down on them",
+   "u": -2.3796535773838277,
+   "u_wording0": -2.5303440657962684,
+   "u_wording1": -2.5845458002331623
+  },
+  {
+   "value": "Diversity",
+   "phrasing": 0,
+   "text": "each get to know someone very different from themselves",
+   "u": -2.602525003396053,
+   "u_wording0": -2.5634923558753533,
+   "u_wording1": -3.0440437419858024
+  },
+  {
+   "value": "Longevity",
+   "phrasing": 0,
+   "text": "each live a year longer",
+   "u": -2.7112346576743613,
+   "u_wording0": -3.408809472495382,
+   "u_wording1": -2.440707978331182
+  },
+  {
+   "value": "Happiness",
+   "phrasing": 0,
+   "text": "each feel happier for a week",
+   "u": -3.6195386276369224,
+   "u_wording0": -4.1007640833584835,
+   "u_wording1": -3.6740540698045114
+  }
+ ]
+}
