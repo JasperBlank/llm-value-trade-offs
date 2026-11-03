@@ -16,6 +16,7 @@ fig10_vibe_direction.png    pilot 11: where the price direction can be read, and
 fig11_recipes.png           pilot 12: the disagreement is readable from the sentence, and pushing it moves the rating beyond the choice
 fig12_recipe_in_words.png   pilot 13: the two recipes in named features, how well each predictor prices outcomes, the pushes against random ones
 fig13_price_writers.png     pilot 14: which parts write the price readout, silencing them block by block, and word deletions
+fig14_price_route.png       pilot 15: where the price is finished, the route to the answer, and the generic comparator
 """
 import json
 from pathlib import Path
@@ -37,6 +38,7 @@ P11 = ROOT / "pilot11-vibe-direction/results/real"
 P12 = ROOT / "pilot12-recipes/results/real"
 P13 = ROOT / "pilot13-recipe-in-words/results/real"
 P14 = ROOT / "pilot14-price-writers/results/real"
+P15 = ROOT / "pilot15-price-route/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -737,6 +739,71 @@ def fig13(p14=None):
     plt.close(fig)
 
 
+def fig14(p15=None):
+    """Pilot 15: where a price that follows the words is readable (positions x layers), which single position carries a
+    swap of A's sentence to the answer, and pilot 5's comparator pieces at the answer."""
+    p15 = Path(p15) if p15 else P15
+    V = load(p15 / "verdicts15.json")
+    fig, axs = plt.subplots(1, 3, figsize=(16.5, 5.4), gridspec_kw={"width_ratios": [1.1, 1.1, 0.9]})
+    fig.subplots_adjust(left=0.05, right=0.985, top=0.77, bottom=0.15, wspace=0.3)
+    L = V["layers"]
+    lab = {"A_mean": "A's words (mean)", "A_end": "A's last word", "A_nl": "line break after A", "B_end": "B's last word",
+           "B_nl": "line break after B", "END": "answer position"}
+    col = {"A_mean": BLUE_LIGHT, "A_end": AQUA, "A_nl": BLUE, "B_end": MUTED, "B_nl": ORANGE, "END": INK}
+    ax = axs[0]
+    for pname in ["A_mean", "A_end", "A_nl", "B_end", "B_nl", "END"]:
+        ys = [V["readout_T"][f"{pname}@{x}"] for x in L]
+        ax.plot(L[1:], ys[1:], "-o", color=col[pname], markersize=3.5, label=lab[pname], linewidth=2 if pname in ("A_nl", "B_nl") else 1.3)
+    ax.axhline(0.6, color=AXIS, linewidth=1, linestyle="--")
+    ax.text(L[-1], 0.615, "Q1 bar (A's side)", ha="right", fontsize=8, color=INK2)
+    ax.set_ylim(0, 1.05)
+    ax.set_xlabel("Layer")
+    ax.set_ylabel("r with the choice's change over 994 word deletions")
+    ax.set_title("A price that follows the words appears only\nat the line break after B")
+    ax.legend(loc="upper left", fontsize=8)
+    ax = axs[1]
+    R = V["route"]
+    for pname in ["A_end", "A_nl", "B_nl", "END"]:
+        xs = sorted(int(k.split("@")[1]) for k in R if k.startswith(pname + "@"))
+        ax.plot(xs, [R[f"{pname}@{x}"]["transfer"] for x in xs], "-o", color=col[pname], markersize=4, label=lab[pname])
+    ax.axhline(0.5, color=AXIS, linewidth=1, linestyle="--")
+    ax.text(8, 0.515, "Q2 bar", fontsize=8, color=INK2)
+    ax.set_ylim(-0.05, 1.0)
+    ax.set_xlabel("Layer swapped")
+    ax.set_ylabel("Share of a swap of A's sentence carried")
+    ax.set_title("The route: A's last word early, the line break\nafter B at layer 24, the answer from layer 28")
+    ax.legend(loc="upper left", fontsize=8)
+    ax = axs[2]
+    C = V["comparator"]
+    rows = [("top-20 pieces", C["top-20"]["transfer"], BLUE), ("their 14 heads", C["top-20 heads"]["transfer"], BLUE_LIGHT),
+            ("their 6 MLPs", C["top-20 MLPs"]["transfer"], BLUE_LIGHT)] + [
+           (f"random 20, set {k + 1}", C[f"random-20 #{k + 1}"]["transfer"], MUTED) for k in range(3)]
+    y = np.arange(len(rows))[::-1]
+    ax.barh(y, [r[1] for r in rows], color=[r[2] for r in rows], height=0.6)
+    for yi, r in zip(y, rows):
+        ax.text(max(r[1], 0) + 0.015, yi, f"{r[1]:.2f}", va="center", fontsize=9, color=INK)
+    for x, t in ((0.65, "goods (pilot 5)"), (0.54, "apples (pilot 6)"), (0.39, "weight (pilot 6)")):
+        ax.axvline(x, color=AXIS, linewidth=1, linestyle=":")
+        ax.text(x - 0.008, -0.45, t, rotation=90, fontsize=7.5, color=INK2, ha="right", va="bottom")
+    ax.set_yticks(y, [r[0] for r in rows])
+    ax.tick_params(axis="y", length=0)
+    ax.set_xlim(0, 0.8)
+    ax.set_ylim(-0.6, len(rows) - 0.4)
+    ax.set_xlabel("Share of a swap of A's sentence carried")
+    ax.set_title("The comparator: the same 20 pieces\nthat compare goods and piles of apples")
+    for a in axs:
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    q = V
+    suptitle(fig, "Where the price is finished, and how it is compared",
+             f"Pilot 15, Qwen3-14B, 96 sentences and 994 word deletions as option A against one mid-priced B. Q1 no (r {q['Q1']['r']:.2f}, bar 0.6); "
+             f"Q2 no ({q['Q2']['transfer']:.2f} at the line break after B, bar 0.5); Q3 yes ({q['Q3']['transfer']:.2f}; random ≤ {q['Q3']['random_max']:.2f}).")
+    note(fig, "Left: a readout trained on the 96 intact sentences, tested on the deletions; layer 0 is left out (those positions are the same token "
+              "in every prompt). Middle and right: one position's state, or the pieces' outputs, taken from a menu with a different A sentence.")
+    fig.savefig(OUT / "fig14_price_route.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -764,4 +831,6 @@ if __name__ == "__main__":
         fig12()
     if (P14 / "verdicts14.json").exists():
         fig13()
+    if (P15 / "verdicts15.json").exists():
+        fig14()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))
