@@ -1,0 +1,33 @@
+{
+ "Q3": {
+  "one_scale": false,
+  "transitive": true,
+  "menu_invariant": false,
+  "verdict": "not consistent: one_scale, menu_invariant"
+ },
+ "Q4a": {
+  "r": 0.5430197855624038,
+  "pass": false
+ },
+ "Q4b": {
+  "r": 0.11963466024579582,
+  "pass": false
+ },
+ "Q4c": {
+  "share": 0.10195254053266542,
+  "ci95": [
+   0.07831803580271642,
+   0.1279965801160482
+  ],
+  "testable": true,
+  "pass": false
+ },
+ "Q2a": {
+  "r": 0.2585026634622546,
+  "pass": false
+ },
+ "Q2b": {
+  "share": 0.8211781153461662,
+  "pass": true
+ }
+}
