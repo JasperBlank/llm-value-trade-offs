@@ -18,6 +18,7 @@ fig12_recipe_in_words.png   pilot 13: the two recipes in named features, how wel
 fig13_price_writers.png     pilot 14: which parts write the price readout, silencing them block by block, and word deletions
 fig14_price_route.png       pilot 15: where the price is finished, the route to the answer, and the generic comparator
 fig15_relative.png          pilot 16: how much of an outcome's price is the same whatever the alternative, and an example of order flips
+fig16_three_models.png      pilot 17: Llama 3.1 8B, Qwen3-14B and Qwen3-32B: relative prices, the decision's timing, the comparator
 """
 import json
 from pathlib import Path
@@ -41,6 +42,7 @@ P13 = ROOT / "pilot13-recipe-in-words/results/real"
 P14 = ROOT / "pilot14-price-writers/results/real"
 P15 = ROOT / "pilot15-price-route/results/real"
 P16 = ROOT / "pilot16-relative-or-absolute/results/real"
+P17 = ROOT / "pilot17-three-models/results"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -877,6 +879,92 @@ def fig15(p16=None):
     plt.close(fig)
 
 
+def p17_load(p17=None):
+    """Each model's verdicts: the rerun where there is one (decision writers), else the first run."""
+    base = Path(p17) if p17 else P17
+    out = {}
+    for key, cands in (("llama8", ["real2_llama/llama8", "real2/llama8", "real/llama8"]), ("qwen14", ["real2/qwen14", "real/qwen14"]),
+                       ("qwen32", ["real2/qwen32"])):
+        for c in cands:
+            f = base / c / "verdicts17.json"
+            if f.exists():
+                out[key] = load(f)
+                break
+    return out
+
+
+def fig16(p17=None):
+    """Pilot 17: the same tests on Llama 3.1 8B, Qwen3-14B and Qwen3-32B."""
+    V = p17_load(p17)
+    names = {"llama8": "Llama 3.1 8B", "qwen14": "Qwen3-14B", "qwen32": "Qwen3-32B"}
+    keys = [k for k in ("llama8", "qwen14", "qwen32") if k in V]
+    col = {"llama8": AQUA, "qwen14": BLUE, "qwen32": ORANGE}
+    fig, axs = plt.subplots(1, 3, figsize=(16.5, 5.4), gridspec_kw={"width_ratios": [1.0, 1.15, 1.0]})
+    fig.subplots_adjust(left=0.055, right=0.985, top=0.77, bottom=0.15, wspace=0.3)
+    ax = axs[0]
+    x = np.arange(len(keys))
+    w = 0.36
+    ax.bar(x - w / 2, [V[k]["Q1"]["common_share_words"] for k in keys], width=w, color=[col[k] for k in keys], label="single words")
+    ax.bar(x + w / 2, [V[k]["Q1"]["common_share_outcomes"] for k in keys], width=w, color=[col[k] for k in keys], alpha=0.55, label="whole outcomes")
+    for i, k in enumerate(keys):
+        ax.text(i, 0.93, f"{V[k]['order_flips']:.0%} of clear pairs\nswap order", ha="center", fontsize=8, color=INK2)
+    ax.axhline(0.9, color=INK2, linewidth=1, linestyle="--")
+    ax.set_xticks(x, [names[k] for k in keys])
+    ax.set_ylim(0.4, 1.05)
+    ax.set_ylabel("Share that is the same whatever the alternative is")
+    ax.set_title("No model gives outcomes a fixed price\n(dashed: the bar for \"fixed\")")
+    ax.legend(loc="lower right", fontsize=8.5)
+    ax = axs[1]
+    for k in keys:
+        n = V[k]["blocks"]
+        t = V[k]["answer_position_sentences"]
+        xs = [int(a.split("@")[1]) / n for a in t]
+        ax.plot(xs, list(t.values()), "-o", color=col[k], markersize=4, label=f"{names[k]}: value menus")
+        ta = V[k]["generic"]["quantity"]["answer_position"]
+        ax.plot([int(a.split("@")[1]) / n for a in ta], list(ta.values()), "--", color=col[k], linewidth=1.2, label=f"{names[k]}: apples")
+    ax.set_xlabel("Depth (fraction of the model's blocks)")
+    ax.set_ylabel("Share of a swap carried by the answer position's whole state")
+    ax.set_title("The decision reaches the answer at the same depth\nfor values and for piles of apples")
+    ax.legend(loc="upper left", fontsize=7.5, ncol=1)
+    ax = axs[2]
+    tasks = [("sentences", "value menus"), ("apples", "apples"), ("weight", "weight")]
+    w = 0.25
+    for j, (t, lab) in enumerate(tasks):
+        vals = []
+        for k in keys:
+            if "Q2b" not in V[k]:
+                vals.append(np.nan)
+            elif t == "sentences":
+                vals.append(V[k]["Q2b"]["transfer"])
+            else:
+                vals.append(V[k]["Q3b"][t])
+        ax.bar(x + (j - 1) * w, vals, width=w, color=[col[k] for k in keys], alpha=[1.0, 0.6, 0.35][j], label=lab)
+        for i, v in enumerate(vals):
+            ax.text(i + (j - 1) * w, (0 if np.isnan(v) else v) + 0.015, "–" if np.isnan(v) else f"{v:.2f}", ha="center", fontsize=8, color=INK)
+    for i, k in enumerate(keys):
+        if "Q2b" not in V[k]:
+            ax.text(i, 0.3, "not run yet", ha="center", fontsize=8.5, color=INK2, rotation=90)
+    ax.axhline(0.4, color=AXIS, linewidth=1, linestyle=":")
+    ax.axhline(0.3, color=AXIS, linewidth=1, linestyle="--")
+    ax.set_xticks(x, [names[k] for k in keys])
+    ax.set_ylim(0, 1.0)
+    ax.set_ylabel("Share of a swap carried by 20 pieces")
+    ax.set_title("The comparator: 20 pieces that write\nthe decision before the answer")
+    ax.legend(loc="upper right", fontsize=8.5)
+    for a in axs:
+        a.grid(axis="y", color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    axs[1].grid(color=GRID, linewidth=0.6)
+    q = V.get("qwen14", {}).get("pilot5_pieces") or {}
+    suptitle(fig, "Three models, the same story: relative prices, a shared decision stage, a generic comparator",
+             "Pilot 17: 96 outcomes and 994 word deletions against 9 alternatives per model; swaps of one outcome at the answer position. "
+             + (f"Method check on Qwen3-14B: {q.get('overlap_with_decision_writers')} of pilot 5's 20 comparator pieces recovered." if q else ""))
+    note(fig, "Right: the 20 pieces are chosen on half the values and tested on the other half and on pilot 6's apples and weight pairs; "
+              "random sets of 20 pieces from the same blocks carry at most 0.01. Dotted: the bar for value menus (0.4); dashed: for apples and weight (0.3).")
+    fig.savefig(OUT / "fig16_three_models.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -908,4 +996,6 @@ if __name__ == "__main__":
         fig14()
     if (P16 / "verdicts16.json").exists():
         fig15()
+    if (P17 / "real2" / "qwen14" / "verdicts17.json").exists():
+        fig16()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))
