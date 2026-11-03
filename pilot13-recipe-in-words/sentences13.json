@@ -1,0 +1,186 @@
+{
+ "new": [
+  {
+   "value": "Achievement",
+   "level": "small",
+   "text": "each solve a tricky puzzle they had been stuck on"
+  },
+  {
+   "value": "Beauty",
+   "level": "medium",
+   "text": "each watch a spectacular sunset over the sea"
+  },
+  {
+   "value": "Caring",
+   "level": "large",
+   "text": "are each able to give a seriously ill family member the care they need to recover"
+  },
+  {
+   "value": "Defending",
+   "level": "small",
+   "text": "each speak up when a waiter is treated rudely"
+  },
+  {
+   "value": "Diversity",
+   "level": "medium",
+   "text": "each spend a month living with a family from another culture"
+  },
+  {
+   "value": "Doing",
+   "level": "large",
+   "text": "each turn the activity they love into their full-time job"
+  },
+  {
+   "value": "Embodying",
+   "level": "small",
+   "text": "each stick to a small resolution they made"
+  },
+  {
+   "value": "Experiencing",
+   "level": "medium",
+   "text": "each spend a week travelling somewhere they have never been"
+  },
+  {
+   "value": "Fairness",
+   "level": "large",
+   "text": "each have a decade of unequal pay made up to them in full"
+  },
+  {
+   "value": "Freedom",
+   "level": "small",
+   "text": "each get to decide where to go for lunch"
+  },
+  {
+   "value": "Happiness",
+   "level": "medium",
+   "text": "each have a month in which they feel truly content"
+  },
+  {
+   "value": "Justice",
+   "level": "large",
+   "text": "each see the company that poisoned their town held fully responsible"
+  },
+  {
+   "value": "Knowing",
+   "level": "small",
+   "text": "each find out how a magic trick works"
+  },
+  {
+   "value": "Legacy",
+   "level": "medium",
+   "text": "each plant a tree that will stand for a hundred years"
+  },
+  {
+   "value": "Longevity",
+   "level": "large",
+   "text": "each gain ten more years of healthy life"
+  },
+  {
+   "value": "Loyalty",
+   "level": "small",
+   "text": "each get a birthday call from an old friend"
+  },
+  {
+   "value": "Nurturing",
+   "level": "medium",
+   "text": "each help a teenager get through a difficult school year"
+  },
+  {
+   "value": "Pleasure",
+   "level": "large",
+   "text": "each enjoy a month-long holiday doing everything they love"
+  },
+  {
+   "value": "Preserving",
+   "level": "small",
+   "text": "each see a favourite old shop stay open another year"
+  },
+  {
+   "value": "Protection",
+   "level": "medium",
+   "text": "are each protected from a burglary"
+  },
+  {
+   "value": "Respect",
+   "level": "large",
+   "text": "each be honoured publicly for a lifetime of quiet work"
+  },
+  {
+   "value": "Spirituality",
+   "level": "small",
+   "text": "each feel a moment of peace during a quiet prayer or meditation"
+  },
+  {
+   "value": "Non-suffering",
+   "level": "medium",
+   "text": "are each spared a month of back pain"
+  },
+  {
+   "value": "Truth",
+   "level": "large",
+   "text": "each finally learn the truth about what happened to a parent they never knew"
+  }
+ ],
+ "features": [
+  {
+   "name": "size",
+   "question": "How big a difference would this make to each person's life?",
+   "low": "almost none",
+   "high": "life-changing"
+  },
+  {
+   "name": "severity",
+   "question": "How serious is the problem or need that this outcome deals with?",
+   "low": "there is no problem",
+   "high": "extremely serious"
+  },
+  {
+   "name": "duration",
+   "question": "How long would the effect of this outcome last?",
+   "low": "a few minutes",
+   "high": "the rest of their lives"
+  },
+  {
+   "name": "health_safety",
+   "question": "How much does this outcome concern people's physical health or safety?",
+   "low": "not at all",
+   "high": "entirely"
+  },
+  {
+   "name": "moral",
+   "question": "How much does this outcome involve putting right something that was morally wrong?",
+   "low": "not at all",
+   "high": "entirely"
+  },
+  {
+   "name": "relationships",
+   "question": "How much is this outcome about relationships and caring for other people?",
+   "low": "not at all",
+   "high": "entirely"
+  },
+  {
+   "name": "meaning",
+   "question": "How much does this outcome add meaning or purpose to people's lives?",
+   "low": "not at all",
+   "high": "a great deal"
+  },
+  {
+   "name": "pleasure",
+   "question": "How much is this outcome about pleasure or fun?",
+   "low": "not at all",
+   "high": "entirely"
+  },
+  {
+   "name": "legacy",
+   "question": "How much would this outcome leave something lasting for other people or future generations?",
+   "low": "nothing",
+   "high": "a great deal"
+  },
+  {
+   "name": "concreteness",
+   "question": "How concrete and certain is this outcome?",
+   "low": "vague",
+   "high": "completely concrete"
+  }
+ ]
+}
