@@ -13,6 +13,7 @@ fig7_pilot8_tests.png       pilot 8: the pre-registered tests against their bars
 fig8_vibe_check.png         pilot 9: the direct 'how good' rating of each sentence against its menu price
 fig9_full_range.png         pilot 10: rating against menu over the full range of goodness, and the log-scale readout
 fig10_vibe_direction.png    pilot 11: where the price direction can be read, and what pushing along it does
+fig11_recipes.png           pilot 12: the disagreement is readable from the sentence, and pushing it moves the rating beyond the choice
 """
 import json
 from pathlib import Path
@@ -31,6 +32,7 @@ P8 = ROOT / "pilot8-intrinsic-values/results/real"
 P9 = ROOT / "pilot9-vibe-check/results/real"
 P10 = ROOT / "pilot10-full-range/results/real"
 P11 = ROOT / "pilot11-vibe-direction/results/real"
+P12 = ROOT / "pilot12-recipes/results/real"
 
 # Reference palette (dataviz skill, light mode); slots 1-3 validated as a set.
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
@@ -488,6 +490,56 @@ def fig10(p11=None):
     plt.close(fig)
 
 
+def fig11(p12=None):
+    """Pilot 12: the disagreement between rating and price can be read from the sentence, and pushing along it moves
+    the rating beyond what one shared variable would allow."""
+    p12 = Path(p12) if p12 else P12
+    V = load(p12 / "verdicts12.json")
+    fig, axs = plt.subplots(1, 2, figsize=(12.5, 5.0), gridspec_kw={"width_ratios": [1, 1.1]})
+    fig.subplots_adjust(left=0.065, right=0.98, top=0.78, bottom=0.15, wspace=0.25)
+    ax = axs[0]
+    q1 = V["Q1"]
+    L = sorted(int(k) for k in q1["r_by_layer_menu"])
+    ax.axhspan(-0.1, q1["null_95"], color=GRID, alpha=0.6, linewidth=0)
+    ax.text(L[-1], q1["null_95"] - 0.012, "95% of runs with a shuffled target fall in this band", fontsize=8.5, color=INK2, va="top", ha="right")
+    ax.plot(L, [q1["r_by_layer_menu"][str(x)] for x in L], "-o", color=BLUE, markersize=4, label="read as option A (no rating question)")
+    ax.plot(L, [q1["r_by_layer_rating_ctx"][str(x)] for x in L], "-o", color=AQUA, markersize=4, label="read in the rating prompt")
+    ax.set_ylim(-0.1, 0.6)
+    ax.set_xlabel("Layer")
+    ax.set_ylabel("Held-out r (one value left out)")
+    ax.set_title("Where the rating disagrees with the price\ncan be read from the sentence")
+    ax.legend(loc="upper left")
+    ax = axs[1]
+    P = V["pushes"]
+    sr = V["Q2"]["rating_per_logit_price_direction"]
+    xmax = 0.9
+    ax.plot([0, xmax], [0, sr * xmax], color=AXIS, linewidth=1.2, linestyle="--")
+    ax.text(0.42, sr * 0.42 - 0.012, "one shared vibe:\nevery push on this line", fontsize=8.5, color=INK2, ha="left", va="top")
+    col = {"price": BLUE, "rating": AQUA, "disagreement": ORANGE, "random": INK2}
+    lab = {"price": "price direction", "rating": "rating direction", "disagreement": "disagreement direction", "random": "random direction"}
+    for k, v in P.items():
+        x, y = v["choice_logit_per_2_price_units"], v["rating_points_per_2_price_units"]
+        ax.plot([x], [y], "o", color=col[k], markersize=8)
+        right = x > 0.6
+        ax.annotate(lab[k], (x, y), xytext=(-9 if right else 8, 4 if k != "random" else -12), textcoords="offset points",
+                    fontsize=9, color=INK, ha="right" if right else "left")
+    ax.axhline(0, color=AXIS, linewidth=0.8)
+    ax.set_xlim(-0.05, xmax)
+    ax.set_ylim(-0.03, 0.16)
+    ax.set_xlabel("Change in the choice (logit of picking the sentence), per push")
+    ax.set_ylabel("Change in the stated rating (points), per push")
+    ax.set_title("Pushing along the disagreement moves the rating\nfar more than its small effect on the choice would")
+    for a in axs:
+        a.grid(color=GRID, linewidth=0.6)
+        a.set_axisbelow(True)
+    suptitle(fig, "Shared ingredients, different recipes",
+             f"Pilot 12, Qwen3-14B, 96 sentences. Q1: held-out r {q1['r']:.2f} at layer {q1['layer']}, permutation p {q1['p']:.3f}. "
+             f"Q2: the disagreement push lies above the shared-vibe line (95% interval above 0).")
+    note(fig, "Pushes at layer 20, all by the same distance. The random direction also falls off the line (below it), so the line is a rough benchmark.")
+    fig.savefig(OUT / "fig11_recipes.png", dpi=200)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig1()
     fig2()
@@ -509,4 +561,6 @@ if __name__ == "__main__":
         fig9()
     if (P11 / "report.md").exists():
         fig10()
+    if (P12 / "verdicts12.json").exists():
+        fig11()
     print("written:", sorted(p.name for p in OUT.glob("*.png")))

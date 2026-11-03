@@ -1,6 +1,6 @@
 # Figures
 
-Drawn by `make_figures.py` straight from the committed result files of pilots 6 to 11
+Drawn by `make_figures.py` straight from the committed result files of pilots 6 to 12
 (`python figures/make_figures.py`). Colours: the reference palette of the dataviz guidance
 (categorical slots 1-3 validated for colour-blind separation; a single-hue blue ramp for the maps).
 
@@ -17,3 +17,4 @@ Drawn by `make_figures.py` straight from the committed result files of pilots 6 
 | `fig8_vibe_check.png` | Pilot 9: the direct 'how good would it be' rating of each sentence against its menu price, and within each value |
 | `fig9_full_range.png` | Pilot 10: the 'how good' rating against the menu price over the full range of goodness (96 sentences), and pilot 9's sentences on a log scale |
 | `fig10_vibe_direction.png` | Pilot 11: where the price direction can be read from a sentence (held out), and what pushing along it does to the choice and the rating |
+| `fig11_recipes.png` | Pilot 12: where the rating disagrees with the price can be read from the sentence, and pushing along it moves the rating beyond what a shared variable would |

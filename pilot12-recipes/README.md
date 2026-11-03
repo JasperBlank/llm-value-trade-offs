@@ -1,6 +1,6 @@
 # Pilot 12: one vibe, or shared ingredients with different recipes?
 
-Price and stated rating overlap strongly (r 0.81), but pilot 11's single direction could not show whether they share one variable. Here: can the place where the rating disagrees with the price be read from the sentence itself, and does pushing along that disagreement move the rating beyond what it moves the choice? **Read [`DESIGN.md`](DESIGN.md) first.**
+Price and stated rating overlap strongly (r 0.81), but pilot 11's single direction could not show whether they share one variable. Here: can the place where the rating disagrees with the price be read from the sentence itself, and does pushing along that disagreement move the rating beyond what it moves the choice? **Read [`DESIGN.md`](DESIGN.md) first.** Results: [`results/real/README.md`](results/real/README.md) (run 3 Nov 2026).
 
 | File | What it does |
 |---|---|
