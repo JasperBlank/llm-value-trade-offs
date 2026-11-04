@@ -44,6 +44,8 @@ fi
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader
 df -h /workspace | tail -1
 python3 --version
+python3 -c "import torch; assert torch.cuda.is_available(); x = torch.randn(4096, 4096, device='cuda'); print('PILOT18 GPU OK:', torch.cuda.get_device_name(0), float((x @ x).abs().mean()) > 0)" \
+  || { echo "PILOT18 FAILED: the GPU does not work"; finish FAILED; }
 
 # ---- 1. dependencies, their repo, their environment
 python3 -m pip install -q --break-system-packages -r $REPO/pilot5-value-circuit/requirements.txt pymupdf huggingface_hub \
@@ -72,8 +74,8 @@ fi
 
 # ---- 3. quick test of our code (synthetic utilities, 40 outcomes)
 echo "PILOT18 QUICK TEST $(date -u +%FT%TZ)"
-python3 pilot18.py --model $MODEL --quick --ue_repo $UE > /workspace/log_p18_quick.txt 2>&1 || fail "quick test" /workspace/log_p18_quick.txt
-grep -E "step|pipeline|cycles|done in" /workspace/log_p18_quick.txt
+timeout 1200 python3 pilot18.py --model $MODEL --quick --ue_repo $UE 2>&1 | tee /workspace/log_p18_quick.txt \
+  | grep --line-buffered -E "step|pipeline|cycles|probe layer (0|8|16|24|32):|done in|Error|Traceback" || fail "quick test (or its 20-minute limit)" /workspace/log_p18_quick.txt
 
 # ---- 4. their code
 wait $SETUP_PID || fail "their environment" /workspace/log_ue_setup.txt
@@ -93,23 +95,23 @@ cd $UE/utility_analysis/experiments/compute_utilities
 for cfg in thurstonian_active_learning thurstonian_active_learning_logprobs; do
   sub=ue_k10; [ $cfg = thurstonian_active_learning_logprobs ] && sub=ue_logprobs
   echo "PILOT18 THEIR UTILITIES ($cfg) $(date -u +%FT%TZ)"
-  $VPY optimize_utility_model.py --model_key $KEY --save_dir $RES/$sub --save_suffix $KEY --compute_utilities_config_key $cfg $COMMON \
-    > /workspace/log_ue_$sub.txt 2>&1 || fail "their utilities ($cfg)" /workspace/log_ue_$sub.txt
-  grep -E -A3 "Holdout Set Metrics|Total time" /workspace/log_ue_$sub.txt | head -8
+  timeout 5400 $VPY optimize_utility_model.py --model_key $KEY --save_dir $RES/$sub --save_suffix $KEY --compute_utilities_config_key $cfg $COMMON \
+    2>&1 | tee /workspace/log_ue_$sub.txt | grep --line-buffered -E "^Iteration (1|5|10|15|18)/|Holdout Set|^Accuracy|^Log Loss|Total time|Error|Traceback" \
+    || fail "their utilities ($cfg, or its 90-minute limit)" /workspace/log_ue_$sub.txt
 done
 echo "PILOT18 THEIR TRANSITIVITY $(date -u +%FT%TZ)"
 cd $UE/utility_analysis/experiments/transitivity
-$VPY evaluate_transitivity.py --model_key $KEY --K 10 --save_suffix $KEY --save_dir $RES/ue_transitivity --system_message "You are a helpful assistant." \
+timeout 3600 $VPY evaluate_transitivity.py --model_key $KEY --K 10 --save_suffix $KEY --save_dir $RES/ue_transitivity --system_message "You are a helpful assistant." \
   --sample_size 1000 --seed 42 --options_path ../../shared_options/options_hierarchical.json \
   --create_agent_config_path ../../compute_utilities/create_agent.yaml --create_agent_config_key default \
-  > /workspace/log_ue_transitivity.txt 2>&1 || fail "their transitivity" /workspace/log_ue_transitivity.txt
+  > /workspace/log_ue_transitivity.txt 2>&1 || fail "their transitivity (or its 60-minute limit)" /workspace/log_ue_transitivity.txt
 grep -E "Saved|Total time" /workspace/log_ue_transitivity.txt
 
 # ---- 5. our steps
 echo "PILOT18 REAL RUN $(date -u +%FT%TZ)"
 cd $P18
-python3 pilot18.py --model $MODEL --ue $RES --out $RES --ue_repo $UE 2>&1 | tee /workspace/log_p18_real.txt \
-  | grep --line-buffered -E "step|pipeline|cycles|sweep|done in|Error|Traceback"
+timeout 5400 python3 pilot18.py --model $MODEL --ue $RES --out $RES --ue_repo $UE 2>&1 | tee /workspace/log_p18_real.txt \
+  | grep --line-buffered -E "step|pipeline|cycles|probe layer|sweep|done in|Error|Traceback"
 [ -f $RES/report.md ] || fail "real run" /workspace/log_p18_real.txt
 echo "PILOT18 REPORT BEGIN"
 cat $RES/report.md
